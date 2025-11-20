@@ -7,15 +7,12 @@
                     <img src="../assets/NovaGoLogo.png" alt="NovaGO logo" class="brand-logo" />
                 </router-link>
 
-
-
                 <nav class="nav-links">
                     <!-- PRODUCTS mega-menu -->
                     <div class="nav-item has-mega" @mouseenter="openMenu('products')">
                         <button class="nav-link" :class="{ active: activeMenu === 'products' }">
                             Products
                         </button>
-
 
                         <div v-if="activeMenu === 'products'" class="mega-wrapper" @mouseleave="closeMenu">
                             <div class="mega">
@@ -71,8 +68,6 @@
                                             SMEs
                                             <span>Day-to-day finance for growing businesses.</span>
                                         </router-link>
-
-
                                     </div>
 
                                     <!-- 3. PRODUCT -->
@@ -205,7 +200,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <!-- PRICING mega-menu -->
                     <div class="nav-item has-mega" @mouseenter="openMenu('pricing')">
@@ -502,7 +496,6 @@
             </div>
         </section>
 
-        <!-- Why NovaGO -->
         <!-- Who We Are -->
         <section id="who-we-are" class="section">
             <div class="section-inner narrow">
@@ -580,12 +573,19 @@
                 </div>
             </div>
         </footer>
+
+        <!-- ✅ Floating WhatsApp button -->
+        <a href="https://wa.me/6591234567" class="whatsapp-float" target="_blank" rel="noopener">
+            <img :src="whatsappIcon" alt="Chat with us on WhatsApp" class="whatsapp-icon-img" />
+        </a>
+
     </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import whatsappIcon from '../assets/whatsapp_icon.png' // ⬅ add this
 
 const router = useRouter()
 
@@ -685,9 +685,7 @@ const fakeSubmit = () => {
     align-items: center;
     gap: 1rem;
     position: relative;
-    /* ⬅ add this */
 }
-
 
 .brand {
     display: flex;
@@ -699,11 +697,9 @@ const fakeSubmit = () => {
 
 .brand-logo {
     height: 56px;
-    /* adjust this if you want it bigger/smaller */
     width: auto;
     display: block;
 }
-
 
 .nav-links {
     margin-left: 2rem;
@@ -712,7 +708,6 @@ const fakeSubmit = () => {
     gap: 1.25rem;
 }
 
-
 .nav-link.active {
     color: #1d4ed8;
 }
@@ -720,7 +715,6 @@ const fakeSubmit = () => {
 .nav-link.active::after {
     width: 100%;
 }
-
 
 .nav-right-actions {
     margin-left: auto;
@@ -773,22 +767,17 @@ const fakeSubmit = () => {
 /* Mega menu */
 .nav-item {
     position: static;
-    /* so it doesn’t become the positioning parent */
 }
-
 
 .mega-wrapper {
     position: absolute;
     left: 50%;
     top: 100%;
-    /* sits just below the navbar row */
     transform: translateX(-50%);
-    /* center under the navbar */
     width: 860px;
     max-width: 90vw;
     z-index: 30;
 }
-
 
 .mega {
     display: grid;
@@ -804,7 +793,6 @@ const fakeSubmit = () => {
 /* variants */
 .mega--narrow {
     grid-template-columns: 1fr;
-    /* only left side */
 }
 
 .mega--small {
@@ -827,7 +815,6 @@ const fakeSubmit = () => {
 
 .mega-column {
     font-size: 0.84rem;
-
 }
 
 .mega-heading {
@@ -926,11 +913,9 @@ const fakeSubmit = () => {
 
 .hero-logo {
     height: 95px;
-    /* tweak size here */
     width: auto;
     display: block;
 }
-
 
 .hero-tagline {
     font-size: 1.2rem;
@@ -1413,6 +1398,29 @@ const fakeSubmit = () => {
     color: #1d4ed8;
 }
 
+/* ✅ Floating WhatsApp button styles */
+.whatsapp-float {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 54px;
+    height: 54px;
+    border-radius: 999px;
+    background: #25d366;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    z-index: 50;
+    text-decoration: none;
+}
+
+.whatsapp-icon {
+    font-size: 26px;
+    color: #ffffff;
+}
+
 /* Responsive */
 @media (max-width: 960px) {
     .nav-inner {
@@ -1420,7 +1428,6 @@ const fakeSubmit = () => {
         padding: 0.8rem 1rem;
     }
 
-    /* Show the nav items as a scrollable row */
     .nav-links {
         display: flex;
         width: 100%;
@@ -1430,7 +1437,6 @@ const fakeSubmit = () => {
         overflow-x: auto;
     }
 
-    /* Disable mega menu panels on mobile (hover doesn't make sense) */
     .mega-wrapper {
         display: none;
     }
@@ -1469,6 +1475,17 @@ const fakeSubmit = () => {
     .showcase-content {
         min-height: 200px;
     }
+
+    .whatsapp-float {
+        right: 16px;
+        bottom: 16px;
+        width: 48px;
+        height: 48px;
+    }
+
+    .whatsapp-icon {
+        font-size: 22px;
+    }
 }
 
 .brand {
@@ -1482,4 +1499,12 @@ const fakeSubmit = () => {
 .brand:hover {
     text-decoration: none;
 }
+
+.whatsapp-icon-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
 </style>
