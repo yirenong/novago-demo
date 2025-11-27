@@ -8,19 +8,87 @@
                 </router-link>
 
                 <nav class="nav-links">
-                    <!-- PRODUCTS mega-menu -->
+                    <!-- 1st NAV: PRODUCTS -->
                     <div class="nav-item has-mega" @mouseenter="openMenu('products')">
                         <button class="nav-link" :class="{ active: activeMenu === 'products' }">
                             Products
                         </button>
 
                         <div v-if="activeMenu === 'products'" class="mega-wrapper" @mouseleave="closeMenu">
-                            <div class="mega">
-                                <!-- LEFT: 4 columns = Solution / Industry / Product / Benefit -->
-                                <div class="mega-left">
-                                    <!-- 1. SOLUTIONS -->
+                            <div class="mega mega--narrow">
+                                <div class="mega-left mega-left--2">
+                                    <!-- Business banking -->
                                     <div class="mega-column">
-                                        <p class="mega-heading">Solutions</p>
+                                        <p class="mega-heading">Business banking</p>
+
+                                        <router-link class="mega-link" to="/global-multi-currency-account">
+                                            Global Multi Currency Account
+                                            <span>Multi-currency accounts to receive funds.</span>
+                                        </router-link>
+
+                                        <router-link class="mega-link" to="/global-card-issuance">
+                                            Global Card Issuance
+                                            <span>Physical and virtual cards for real-time payments.</span>
+                                        </router-link>
+
+                                        <router-link class="mega-link" to="/global-payout">
+                                            Global Payout
+                                            <span>Send payouts to 190+ countries via local currencies and
+                                                methods.</span>
+                                        </router-link>
+
+                                        <router-link class="mega-link" to="/fx-conversion-acceptance">
+                                            FX Conversion &amp; Acceptance
+                                            <span>Multi-currency, borderless transactions.</span>
+                                        </router-link>
+                                    </div>
+
+                                    <!-- Spend -->
+                                    <div class="mega-column">
+                                        <p class="mega-heading">Spend</p>
+
+                                        <router-link class="mega-link" to="/corporate-cards">
+                                            Corporate Cards
+                                            <span>Multi-currency company and employee cards.</span>
+                                        </router-link>
+
+                                        <router-link class="mega-link" to="/expense-management">
+                                            Expense Management
+                                            <span>Expense and reimbursement management.</span>
+                                        </router-link>
+
+                                        <router-link class="mega-link" to="/bill-pay">
+                                            Bill Pay
+                                            <span>Automated accounts payable management.</span>
+                                        </router-link>
+
+                                        <router-link class="mega-link" to="/payouts">
+                                            Payouts
+                                            <span>Programmatic, cost-effective global payouts.</span>
+                                        </router-link>
+
+                                        <router-link class="mega-link" to="/remittance">
+                                            Remittance
+                                            <span>Cross-border payments.</span>
+                                        </router-link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2nd NAV: SOLUTIONS -->
+                    <div class="nav-item has-mega" @mouseenter="openMenu('solutions')">
+                        <button class="nav-link" :class="{ active: activeMenu === 'solutions' }">
+                            Solutions
+                        </button>
+
+                        <div v-if="activeMenu === 'solutions'" class="mega-wrapper" @mouseleave="closeMenu">
+                            <div class="mega mega--narrow">
+                                <div class="mega-left mega-left--2">
+                                    <!-- By use case -->
+                                    <div class="mega-column">
+                                        <p class="mega-heading">By use case</p>
 
                                         <router-link class="mega-link" to="/dashboard">
                                             Corporate booking &amp; jobs
@@ -36,164 +104,35 @@
                                             Payroll
                                             <span>Automate monthly salary runs and approvals.</span>
                                         </router-link>
+
                                         <router-link class="mega-link" to="/">
                                             CMS
-                                            <span>
-                                                Centralise incoming rentals, payroll outflows and account balances in
-                                                one view.
-                                            </span>
+                                            <span>Centralise rentals, payroll and account balances in one view.</span>
                                         </router-link>
                                     </div>
 
-                                    <!-- 2. INDUSTRIES -->
+                                    <!-- By industry -->
                                     <div class="mega-column">
-                                        <p class="mega-heading">Industries</p>
-
-                                        <router-link class="mega-link" to="/">
-                                            Automotive &amp; fleets
-                                            <span>Built for car leasing and ride-hailing fleets.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/">
-                                            Transport &amp; logistics
-                                            <span>Support multi-route, multi-vehicle operations.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/">
-                                            Travel &amp; mobility
-                                            <span>Corporate trips and expense tracking in sync.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/">
-                                            SMEs
-                                            <span>Day-to-day finance for growing businesses.</span>
-                                        </router-link>
-                                    </div>
-
-                                    <!-- 3. PRODUCT -->
-                                    <div class="mega-column">
-                                        <p class="mega-heading">Product</p>
-
-                                        <router-link class="mega-link" to="/corporate-banking">
-                                            Business banking
-                                            <span>Accounts, cards and payouts in one dashboard.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/">
-                                            Virtual debit cards
-                                            <span>Issue cards with spend limits and controls.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/">
-                                            Embedded accounts (API)
-                                            <span>Plug NovaGO into your own platform.</span>
-                                        </router-link>
-                                    </div>
-
-                                    <!-- 4. BENEFITS -->
-                                    <div class="mega-column">
-                                        <p class="mega-heading">Benefits</p>
-
-                                        <router-link class="mega-link" to="/">
-                                            Curated partner perks
-                                            <span>Hand-picked deals from ecosystem partners.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/">
-                                            Petrol discounts (Shell)
-                                            <span>Reward high-mileage drivers at the pump.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/">
-                                            Traditional banking support
-                                            <span>Works alongside your existing bank setup.</span>
-                                        </router-link>
-                                    </div>
-                                </div>
-
-                                <!-- RIGHT: partnership CTA -->
-                                <div class="mega-right">
-                                    <div class="mega-feature">
-                                        <p class="mega-feature-title">Partnerships</p>
-                                        <p class="mega-feature-text">
-                                            Interested to bundle NovaGO with your product or offer
-                                            Shell petrol discounts? Talk to our partnerships team.
-                                        </p>
-                                        <button class="btn-primary" type="button"
-                                            @click="scrollToSection('contact'); closeMenu()">
-                                            Become a partner
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- SOLUTIONS mega-menu -->
-                    <div class="nav-item has-mega" @mouseenter="openMenu('solutions')">
-                        <button class="nav-link" :class="{ active: activeMenu === 'solutions' }">
-                            Solutions
-                        </button>
-
-                        <div v-if="activeMenu === 'solutions'" class="mega-wrapper" @mouseleave="closeMenu">
-                            <div class="mega mega--narrow">
-                                <div class="mega-left mega-left--2">
-                                    <!-- Solutions column -->
-                                    <div class="mega-column">
-                                        <p class="mega-heading">Solutions</p>
-
-                                        <router-link class="mega-link" to="/">
-                                            Corporate booking
-                                            <span>
-                                                Manage corporate jobs, bookings and payouts in one place.
-                                            </span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/rental-collection">
-                                            Rental collection
-                                            <span>
-                                                Track invoices, rental status and overdue payments.
-                                            </span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/payroll">
-                                            Payroll
-                                            <span>
-                                                Automate salary runs, approvals and audit trails.
-                                            </span>
-                                        </router-link>
-                                    </div>
-
-                                    <!-- Industries column -->
-                                    <div class="mega-column">
-                                        <p class="mega-heading">Industries</p>
+                                        <p class="mega-heading">By industry</p>
 
                                         <router-link class="mega-link" to="/">
                                             Transport
-                                            <span>
-                                                For fleets, delivery and ride-hailing operations.
-                                            </span>
+                                            <span>For fleets, delivery and ride-hailing operations.</span>
                                         </router-link>
 
                                         <router-link class="mega-link" to="/">
                                             Travel
-                                            <span>
-                                                Support business travel and trip-linked spending.
-                                            </span>
+                                            <span>Support business travel and trip-linked spending.</span>
                                         </router-link>
 
                                         <router-link class="mega-link" to="/">
                                             Automotive
-                                            <span>
-                                                Leasing, workshops and vehicle management.
-                                            </span>
+                                            <span>Leasing, workshops and vehicle management.</span>
                                         </router-link>
 
                                         <router-link class="mega-link" to="/">
                                             SMEs
-                                            <span>
-                                                Everyday financial workflows for growing businesses.
-                                            </span>
+                                            <span>Everyday financial workflows for growing businesses.</span>
                                         </router-link>
                                     </div>
                                 </div>
@@ -201,67 +140,62 @@
                         </div>
                     </div>
 
-                    <!-- PRICING mega-menu -->
-                    <div class="nav-item has-mega" @mouseenter="openMenu('pricing')">
-                        <button class="nav-link" :class="{ active: activeMenu === 'pricing' }">
+                    <!-- 3rd NAV: BENEFITS -->
+                    <div class="nav-item has-mega" @mouseenter="openMenu('benefits')">
+                        <button class="nav-link" :class="{ active: activeMenu === 'benefits' }">
                             Benefits
                         </button>
 
-                        <div v-if="activeMenu === 'pricing'" class="mega-wrapper" @mouseleave="closeMenu">
+                        <div v-if="activeMenu === 'benefits'" class="mega-wrapper" @mouseleave="closeMenu">
                             <div class="mega mega--small">
                                 <div class="mega-left mega-left--2">
                                     <div class="mega-column">
-                                        <p class="mega-heading">Plans</p>
+                                        <p class="mega-heading">Benefits marketplace</p>
 
-                                        <button class="mega-link" type="button"
-                                            @click="scrollToSection('contact'); closeMenu()">
-                                            SME starter
-                                            <span>Simple pricing for small, growing teams.</span>
-                                        </button>
-
-                                        <button class="mega-link" type="button"
-                                            @click="scrollToSection('contact'); closeMenu()">
-                                            Growth
-                                            <span>Volume-based pricing for larger fleets.</span>
-                                        </button>
-
-                                        <button class="mega-link" type="button"
-                                            @click="scrollToSection('contact'); closeMenu()">
-                                            Enterprise
-                                            <span>Custom pricing for platforms &amp; partners.</span>
-                                        </button>
-                                    </div>
-
-                                    <div class="mega-column">
-                                        <p class="mega-heading">Add-ons</p>
-
-                                        <button class="mega-link" type="button"
-                                            @click="scrollToSection('contact'); closeMenu()">
-                                            Rewards &amp; NGS
-                                            <span>Activate NovaDollar rewards for your team.</span>
-                                        </button>
-
-                                        <button class="mega-link" type="button"
-                                            @click="scrollToSection('contact'); closeMenu()">
-                                            Shell fuel discounts
-                                            <span>Bundle Shell petrol benefits for drivers.</span>
-                                        </button>
-
-                                        <button class="mega-link" type="button"
-                                            @click="scrollToSection('contact'); closeMenu()">
-                                            Priority support
-                                            <span>Dedicated account manager and onboarding.</span>
-                                        </button>
+                                        <router-link class="mega-link" to="/benefits/shell">
+                                            Shell
+                                            <span>Fuel benefits and rewards for your drivers.</span>
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- COMPANY mega-menu -->
+                    <!-- 4th NAV: PARTNERSHIPS -->
+                    <div class="nav-item has-mega" @mouseenter="openMenu('partnerships')">
+                        <button class="nav-link" :class="{ active: activeMenu === 'partnerships' }">
+                            Partnerships
+                        </button>
+
+                        <div v-if="activeMenu === 'partnerships'" class="mega-wrapper" @mouseleave="closeMenu">
+                            <div class="mega mega--small mega--partnership">
+                                <div class="partnership-card">
+                                    <p class="mega-heading">Partnership programme</p>
+
+                                    <h3 class="partnership-title">Work with NovaGO</h3>
+
+                                    <p class="partnership-text">
+                                        Bundle NovaGO with your product or offer Shell fuel benefits to your
+                                        users. Talk to our partnership department to explore co-created
+                                        solutions.
+                                    </p>
+
+                                    <!-- if you want a link instead of scroll, put <a> here -->
+                                    <button class="btn-primary partnership-btn" type="button"
+                                        @click="scrollToSection('contact'); closeMenu()">
+                                        Talk to our partnership team
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- 5th NAV: ABOUT US -->
                     <div class="nav-item has-mega" @mouseenter="openMenu('company')">
                         <button class="nav-link" :class="{ active: activeMenu === 'company' }">
-                            Industries
+                            About Us
                         </button>
 
                         <div v-if="activeMenu === 'company'" class="mega-wrapper" @mouseleave="closeMenu">
@@ -271,37 +205,15 @@
                                         <p class="mega-heading">About NovaGO</p>
 
                                         <button class="mega-link" type="button"
-                                            @click="scrollToSection('who-we-are'); closeMenu()">
-                                            Who we are
-                                            <span>Fintech &amp; rewards platform built for SMEs.</span>
-                                        </button>
-
-                                        <button class="mega-link" type="button"
                                             @click="scrollToSection('why'); closeMenu()">
-                                            Why NovaGO
-                                            <span>See how we reduce payroll and payment hassle.</span>
+                                            Why NovaGO?
+                                            <span>See how we simplify financial operations for SMEs.</span>
                                         </button>
 
                                         <button class="mega-link" type="button"
-                                            @click="scrollToSection('contact'); closeMenu()">
-                                            Talk to us
-                                            <span>Reach our team for demos and questions.</span>
-                                        </button>
-                                    </div>
-
-                                    <div class="mega-column">
-                                        <p class="mega-heading">Partners</p>
-
-                                        <button class="mega-link" type="button"
-                                            @click="scrollToSection('contact'); closeMenu()">
-                                            Partnership programme
-                                            <span>Co-create solutions for fleets and SMEs.</span>
-                                        </button>
-
-                                        <button class="mega-link" type="button"
-                                            @click="scrollToSection('contact'); closeMenu()">
-                                            Become a rewards partner
-                                            <span>List your perks in the NovaGO ecosystem.</span>
+                                            @click="scrollToSection('testimonies'); closeMenu()">
+                                            Testimonies
+                                            <span>Hear from businesses using NovaGO.</span>
                                         </button>
                                     </div>
                                 </div>
@@ -317,6 +229,7 @@
                 </div>
             </div>
         </header>
+
 
         <!-- Hero -->
         <section class="hero">
@@ -1507,4 +1420,37 @@ const fakeSubmit = () => {
     display: block;
 }
 
+/* Partnerships mega – nicer spacing and card layout */
+.mega--partnership {
+    grid-template-columns: 1fr;
+    justify-content: center;
+}
+
+.partnership-card {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 1.6rem 1.9rem 1.8rem;
+    border-radius: 1rem;
+    background: #ffffff;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.15);
+}
+
+.partnership-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #111827;
+}
+
+.partnership-text {
+    font-size: 0.9rem;
+    color: #4b5563;
+    line-height: 1.55;
+    margin-bottom: 1.2rem;
+}
+
+.partnership-btn {
+    align-self: flex-start;
+    padding-inline: 1.8rem;
+}
 </style>
