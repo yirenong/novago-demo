@@ -1,202 +1,150 @@
 <template>
     <div class="landing">
-        <!-- Top navbar (identical structure as LandingView.vue) -->
-        <header class="top-nav">
+        <!-- Top navbar (same structure & behaviour as Landing page) -->
+        <header class="top-nav" @mouseleave="closeMenuDesktop">
             <div class="nav-inner">
-                <router-link to="/" class="brand" @click="activeMenu = null">
+                <router-link to="/" class="brand" @click="resetNav">
                     <img src="../assets/NovaGoLogo.png" alt="NovaGO logo" class="brand-logo" />
                 </router-link>
 
+                <!-- Mobile hamburger -->
+                <button class="nav-toggle" type="button" @click="toggleMobileMenu" aria-label="Toggle navigation">
+                    <span :class="['nav-toggle-bar', { open: isMobileMenuOpen }]"></span>
+                    <span :class="['nav-toggle-bar', { open: isMobileMenuOpen }]"></span>
+                    <span :class="['nav-toggle-bar', { open: isMobileMenuOpen }]"></span>
+                </button>
 
-
-                <nav class="nav-links">
-                    <!-- PRODUCTS mega-menu -->
-                    <div class="nav-item has-mega" @mouseenter="openMenu('products')">
-                        <button class="nav-link" :class="{ active: activeMenu === 'products' }">
+                <nav class="nav-links" :class="{ 'nav-links--open': isMobileMenuOpen }">
+                    <!-- 1st NAV: PRODUCTS -->
+                    <div class="nav-item has-mega" @mouseenter="openMenuDesktop('products')">
+                        <button class="nav-link" :class="{ active: activeMenu === 'products' }" type="button"
+                            @click="toggleDropdown('products')">
                             Products
                         </button>
 
-                        <div v-if="activeMenu === 'products'" class="mega-wrapper" @mouseleave="closeMenu">
-                            <div class="mega">
-                                <!-- LEFT: 4 columns = Solution / Industry / Product / Benefit -->
-                                <div class="mega-left">
-                                    <!-- 1. SOLUTIONS -->
+                        <div v-if="activeMenu === 'products'" class="mega-wrapper">
+                            <div class="mega mega--narrow">
+                                <div class="mega-left mega-left--2">
+                                    <!-- Business banking -->
                                     <div class="mega-column">
-                                        <p class="mega-heading">Solutions</p>
+                                        <p class="mega-heading">Business banking</p>
 
-                                        <router-link class="mega-link" to="/dashboard">
+                                        <router-link class="mega-link" to="/global-multi-currency-account"
+                                            @click="closeAllNav">
+                                            Global Multi Currency Account
+                                            <span>Multi-currency accounts to receive funds.</span>
+                                        </router-link>
+
+                                        <router-link class="mega-link" to="/global-card-issuance" @click="closeAllNav">
+                                            Global Card Issuance
+                                            <span>Physical and virtual cards for real-time payments.</span>
+                                        </router-link>
+
+                                        <router-link class="mega-link" to="/global-payout" @click="closeAllNav">
+                                            Global Payout
+                                            <span>Send payouts to 190+ countries via local currencies and
+                                                methods.</span>
+                                        </router-link>
+
+                                        <router-link class="mega-link" to="/fx-conversion-acceptance"
+                                            @click="closeAllNav">
+                                            FX Conversion &amp; Acceptance
+                                            <span>Multi-currency, borderless transactions.</span>
+                                        </router-link>
+                                    </div>
+
+                                    <!-- Spend -->
+                                    <div class="mega-column">
+                                        <p class="mega-heading">Spend</p>
+
+                                        <router-link class="mega-link" to="/corporate-cards" @click="closeAllNav">
+                                            Corporate Cards
+                                            <span>Multi-currency company and employee cards.</span>
+                                        </router-link>
+
+                                        <router-link class="mega-link" to="/expense-management" @click="closeAllNav">
+                                            Expense Management
+                                            <span>Expense and reimbursement management.</span>
+                                        </router-link>
+
+                                        <router-link class="mega-link" to="/bill-pay" @click="closeAllNav">
+                                            Bill Pay
+                                            <span>Automated accounts payable management.</span>
+                                        </router-link>
+
+                                        <router-link class="mega-link" to="/payouts" @click="closeAllNav">
+                                            Payouts
+                                            <span>Programmatic, cost-effective global payouts.</span>
+                                        </router-link>
+
+                                        <router-link class="mega-link" to="/remittance" @click="closeAllNav">
+                                            Remittance
+                                            <span>Cross-border payments.</span>
+                                        </router-link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2nd NAV: SOLUTIONS -->
+                    <div class="nav-item has-mega" @mouseenter="openMenuDesktop('solutions')">
+                        <button class="nav-link" :class="{ active: activeMenu === 'solutions' }" type="button"
+                            @click="toggleDropdown('solutions')">
+                            Solutions
+                        </button>
+
+                        <div v-if="activeMenu === 'solutions'" class="mega-wrapper">
+                            <div class="mega mega--narrow">
+                                <div class="mega-left mega-left--2">
+                                    <!-- By use case -->
+                                    <div class="mega-column">
+                                        <p class="mega-heading">By use case</p>
+
+                                        <router-link class="mega-link" to="/dashboard" @click="closeAllNav">
                                             Corporate booking &amp; jobs
                                             <span>Manage bookings, jobs and driver payouts.</span>
                                         </router-link>
 
-                                        <router-link class="mega-link" to="/rental-collection-summary">
+                                        <router-link class="mega-link" to="/rental-collection-summary" @click="closeAllNav">
                                             Rental collection
                                             <span>Track invoices and incoming rental payments.</span>
                                         </router-link>
 
-                                        <router-link class="mega-link" to="/payroll">
+                                        <router-link class="mega-link" to="/payroll" @click="closeAllNav">
                                             Payroll
                                             <span>Automate monthly salary runs and approvals.</span>
                                         </router-link>
 
-                                        <router-link class="mega-link" to="/">
+                                        <button class="mega-link" type="button"
+                                            @click="() => { scrollToSection('overview'); closeAllNav(); }">
                                             CMS
-                                            <span>
-                                                Centralise incoming rentals, payroll outflows and account
-                                                balances in one view.
-                                            </span>
-                                        </router-link>
-                                    </div>
-
-                                    <!-- 2. INDUSTRIES -->
-                                    <div class="mega-column">
-                                        <p class="mega-heading">Industries</p>
-
-                                        <router-link class="mega-link" to="/">
-                                            Automotive &amp; fleets
-                                            <span>Built for car leasing and ride-hailing fleets.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/">
-                                            Transport &amp; logistics
-                                            <span>Support multi-route, multi-vehicle operations.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/">
-                                            Travel &amp; mobility
-                                            <span>Corporate trips and expense tracking in sync.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/">
-                                            SMEs
-                                            <span>Day-to-day finance for growing businesses.</span>
-                                        </router-link>
-                                    </div>
-
-                                    <!-- 3. PRODUCT -->
-                                    <div class="mega-column">
-                                        <p class="mega-heading">Product</p>
-
-                                        <router-link class="mega-link" to="/corporate-banking">
-                                            Business banking
-                                            <span>Accounts, cards and payouts in one dashboard.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/">
-                                            Virtual debit cards
-                                            <span>Issue cards with spend limits and controls.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/">
-                                            Embedded accounts (API)
-                                            <span>Plug NovaGO into your own platform.</span>
-                                        </router-link>
-                                    </div>
-
-                                    <!-- 4. BENEFITS -->
-                                    <div class="mega-column">
-                                        <p class="mega-heading">Benefits</p>
-
-                                        <router-link class="mega-link" to="/">
-                                            Curated partner perks
-                                            <span>Hand-picked deals from ecosystem partners.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/">
-                                            Petrol discounts (Shell)
-                                            <span>Reward high-mileage drivers at the pump.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/">
-                                            Traditional banking support
-                                            <span>Works alongside your existing bank setup.</span>
-                                        </router-link>
-                                    </div>
-                                </div>
-
-                                <!-- RIGHT: partnership CTA -->
-                                <div class="mega-right">
-                                    <div class="mega-feature">
-                                        <p class="mega-feature-title">Partnerships</p>
-                                        <p class="mega-feature-text">
-                                            Interested to bundle NovaGO with your product or offer
-                                            Shell petrol discounts? Talk to our partnerships team.
-                                        </p>
-                                        <button class="btn-primary" type="button"
-                                            @click="scrollToSection('contact'); closeMenu()">
-                                            Become a partner
+                                            <span>Centralise rentals, payroll and account balances in one view.</span>
                                         </button>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- SOLUTIONS mega-menu -->
-                    <div class="nav-item has-mega" @mouseenter="openMenu('solutions')">
-                        <button class="nav-link" :class="{ active: activeMenu === 'solutions' }">
-                            Solutions
-                        </button>
-
-                        <div v-if="activeMenu === 'solutions'" class="mega-wrapper" @mouseleave="closeMenu">
-                            <div class="mega mega--narrow">
-                                <div class="mega-left mega-left--2">
-                                    <!-- Solutions column -->
+                                    <!-- By industry -->
                                     <div class="mega-column">
-                                        <p class="mega-heading">Solutions</p>
+                                        <p class="mega-heading">By industry</p>
 
-                                        <router-link class="mega-link" to="/">
-                                            Corporate booking
-                                            <span>
-                                                Manage corporate jobs, bookings and payouts in one place.
-                                            </span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/rental-collection">
-                                            Rental collection
-                                            <span>
-                                                Track invoices, rental status and overdue payments.
-                                            </span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/payroll">
-                                            Payroll
-                                            <span>
-                                                Automate salary runs, approvals and audit trails.
-                                            </span>
-                                        </router-link>
-                                    </div>
-
-                                    <!-- Industries column -->
-                                    <div class="mega-column">
-                                        <p class="mega-heading">Industries</p>
-
-                                        <router-link class="mega-link" to="/">
+                                        <router-link class="mega-link" to="/" @click="closeAllNav">
                                             Transport
-                                            <span>
-                                                For fleets, delivery and ride-hailing operations.
-                                            </span>
+                                            <span>For fleets, delivery and ride-hailing operations.</span>
                                         </router-link>
 
-                                        <router-link class="mega-link" to="/">
+                                        <router-link class="mega-link" to="/" @click="closeAllNav">
                                             Travel
-                                            <span>
-                                                Support business travel and trip-linked spending.
-                                            </span>
+                                            <span>Support business travel and trip-linked spending.</span>
                                         </router-link>
 
-                                        <router-link class="mega-link" to="/">
+                                        <router-link class="mega-link" to="/" @click="closeAllNav">
                                             Automotive
-                                            <span>
-                                                Leasing, workshops and vehicle management.
-                                            </span>
+                                            <span>Leasing, workshops and vehicle management.</span>
                                         </router-link>
 
-                                        <router-link class="mega-link" to="/">
+                                        <router-link class="mega-link" to="/" @click="closeAllNav">
                                             SMEs
-                                            <span>
-                                                Everyday financial workflows for growing businesses.
-                                            </span>
+                                            <span>Everyday financial workflows for growing businesses.</span>
                                         </router-link>
                                     </div>
                                 </div>
@@ -204,116 +152,98 @@
                         </div>
                     </div>
 
-                    <!-- PRICING mega-menu -->
-                    <div class="nav-item has-mega" @mouseenter="openMenu('pricing')">
-                        <button class="nav-link" :class="{ active: activeMenu === 'pricing' }">
-                            Pricing
+                    <!-- 3rd NAV: BENEFITS -->
+                    <div class="nav-item has-mega" @mouseenter="openMenuDesktop('benefits')">
+                        <button class="nav-link" :class="{ active: activeMenu === 'benefits' }" type="button"
+                            @click="toggleDropdown('benefits')">
+                            Benefits
                         </button>
 
-                        <div v-if="activeMenu === 'pricing'" class="mega-wrapper" @mouseleave="closeMenu">
+                        <div v-if="activeMenu === 'benefits'" class="mega-wrapper">
                             <div class="mega mega--small">
                                 <div class="mega-left mega-left--2">
                                     <div class="mega-column">
-                                        <p class="mega-heading">Plans</p>
+                                        <p class="mega-heading">Benefits marketplace</p>
 
-                                        <button class="mega-link" type="button"
-                                            @click="scrollToSection('contact'); closeMenu()">
-                                            SME starter
-                                            <span>Simple pricing for small, growing teams.</span>
-                                        </button>
-
-                                        <button class="mega-link" type="button"
-                                            @click="scrollToSection('contact'); closeMenu()">
-                                            Growth
-                                            <span>Volume-based pricing for larger fleets.</span>
-                                        </button>
-
-                                        <button class="mega-link" type="button"
-                                            @click="scrollToSection('contact'); closeMenu()">
-                                            Enterprise
-                                            <span>Custom pricing for platforms &amp; partners.</span>
-                                        </button>
-                                    </div>
-
-                                    <div class="mega-column">
-                                        <p class="mega-heading">Add-ons</p>
-
-                                        <button class="mega-link" type="button"
-                                            @click="scrollToSection('contact'); closeMenu()">
-                                            Rewards &amp; NGS
-                                            <span>Activate NovaDollar rewards for your team.</span>
-                                        </button>
-
-                                        <button class="mega-link" type="button"
-                                            @click="scrollToSection('contact'); closeMenu()">
-                                            Shell fuel discounts
-                                            <span>Bundle Shell petrol benefits for drivers.</span>
-                                        </button>
-
-                                        <button class="mega-link" type="button"
-                                            @click="scrollToSection('contact'); closeMenu()">
-                                            Priority support
-                                            <span>Dedicated account manager and onboarding.</span>
-                                        </button>
+                                        <router-link class="mega-link" to="/benefits/shell" @click="closeAllNav">
+                                            Shell
+                                            <span>Fuel benefits and rewards for your drivers.</span>
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- COMPANY mega-menu -->
-                    <div class="nav-item has-mega" @mouseenter="openMenu('company')">
-                        <button class="nav-link" :class="{ active: activeMenu === 'company' }">
-                            Company
+                    <!-- 4th NAV: PARTNERSHIPS -->
+                    <div class="nav-item has-mega" @mouseenter="openMenuDesktop('partnerships')">
+                        <button class="nav-link" :class="{ active: activeMenu === 'partnerships' }" type="button"
+                            @click="toggleDropdown('partnerships')">
+                            Partnerships
                         </button>
 
-                        <div v-if="activeMenu === 'company'" class="mega-wrapper" @mouseleave="closeMenu">
+                        <div v-if="activeMenu === 'partnerships'" class="mega-wrapper">
+                            <div class="mega mega--small mega--partnership">
+                                <div class="partnership-card">
+                                    <p class="mega-heading">Partnership programme</p>
+
+                                    <h3 class="partnership-title">Work with NovaGO</h3>
+
+                                    <p class="partnership-text">
+                                        Bundle NovaGO with your product or offer Shell fuel benefits to your
+                                        users. Talk to our partnership department to explore co-created
+                                        solutions.
+                                    </p>
+
+                                    <button class="btn-primary partnership-btn" type="button"
+                                        @click="() => { scrollToSection('contact'); closeAllNav(); }">
+                                        Talk to our partnership team
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5th NAV: ABOUT US -->
+                    <div class="nav-item has-mega" @mouseenter="openMenuDesktop('company')">
+                        <button class="nav-link" :class="{ active: activeMenu === 'company' }" type="button"
+                            @click="toggleDropdown('company')">
+                            About Us
+                        </button>
+
+                        <div v-if="activeMenu === 'company'" class="mega-wrapper">
                             <div class="mega mega--small">
                                 <div class="mega-left mega-left--2">
                                     <div class="mega-column">
                                         <p class="mega-heading">About NovaGO</p>
 
                                         <button class="mega-link" type="button"
-                                            @click="scrollToSection('who-we-are'); closeMenu()">
-                                            Who we are
-                                            <span>Fintech &amp; rewards platform built for SMEs.</span>
+                                            @click="() => { scrollToSection('overview'); closeAllNav(); }">
+                                            Why NovaGO?
+                                            <span>See how we simplify rental and financial operations.</span>
                                         </button>
 
                                         <button class="mega-link" type="button"
-                                            @click="scrollToSection('why'); closeMenu()">
-                                            Why NovaGO
-                                            <span>See how we reduce payroll and payment hassle.</span>
-                                        </button>
-
-                                        <button class="mega-link" type="button"
-                                            @click="scrollToSection('contact'); closeMenu()">
-                                            Talk to us
-                                            <span>Reach our team for demos and questions.</span>
-                                        </button>
-                                    </div>
-
-                                    <div class="mega-column">
-                                        <p class="mega-heading">Partners</p>
-
-                                        <button class="mega-link" type="button"
-                                            @click="scrollToSection('contact'); closeMenu()">
-                                            Partnership programme
-                                            <span>Co-create solutions for fleets and SMEs.</span>
-                                        </button>
-
-                                        <button class="mega-link" type="button"
-                                            @click="scrollToSection('contact'); closeMenu()">
-                                            Become a rewards partner
-                                            <span>List your perks in the NovaGO ecosystem.</span>
+                                            @click="() => { scrollToSection('features'); closeAllNav(); }">
+                                            Features
+                                            <span>Explore how Rental Collection supports your team.</span>
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Mobile inline login -->
+                    <div class="nav-right-actions nav-right-actions--inline">
+                        <button class="nav-link login-link" @click="handleLoginClick">
+                            Log in
+                        </button>
+                    </div>
                 </nav>
 
-                <div class="nav-right-actions">
+                <!-- Desktop-only login button -->
+                <div class="nav-right-actions nav-right-actions--desktop">
                     <button class="nav-link login-link" @click="goToLogin">
                         Log in
                     </button>
@@ -321,7 +251,7 @@
             </div>
         </header>
 
-        <!-- Hero (rental-specific) -->
+        <!-- HERO -->
         <section class="hero">
             <div class="hero-inner">
                 <div class="hero-left">
@@ -340,25 +270,22 @@
                         <button class="btn-primary" @click="scrollToSection('contact')">
                             Talk to us
                         </button>
-                        <button class="btn-secondary" @click="scrollToSection('showcase')">
-                            See how it works
-                        </button>
                     </div>
 
                     <div class="hero-chips">
-                        <div class="hero-chip">
-                            <span>Driver &amp; tenant profiles</span>
-                        </div>
-                        <div class="hero-chip">
-                            <span>Overdue alerts</span>
-                        </div>
-                        <div class="hero-chip">
-                            <span>Cash flow visibility</span>
-                        </div>
+                        <button class="hero-chip" type="button" @click="scrollToSection('overview')">
+                            <span>Overview</span>
+                        </button>
+                        <button class="hero-chip" type="button" @click="scrollToSection('how-it-works')">
+                            <span>How it works</span>
+                        </button>
+                        <button class="hero-chip" type="button" @click="scrollToSection('features')">
+                            <span>Features</span>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Right: reuse abstract art -->
+                <!-- Right: abstract art -->
                 <div class="hero-right">
                     <div class="hero-art">
                         <div class="hero-art-card hero-art-card--one">
@@ -390,168 +317,180 @@
             </div>
         </section>
 
-        <!-- Who We Are (still needed for Company dropdown scroll) -->
-        <section id="who-we-are" class="section section-muted">
+        <!-- OVERVIEW -->
+        <section id="overview" class="section section-muted">
             <div class="section-inner narrow">
-                <h2 class="section-title">Built for rental-heavy operations</h2>
+                <h2 class="section-title">Overview</h2>
                 <p class="section-text">
-                    NovaGO’s Rental Collection module is designed for fleets, leasing
-                    companies and SMEs with recurring rental income. Instead of juggling
-                    spreadsheets, bank statements and WhatsApp chats, you get a single
-                    view of every contract, outstanding amount and payment history.
+                    NovaGO’s Rental Collection module gives you one place to manage contracts,
+                    invoices and rental payments. Instead of checking bank portals, WhatsApp
+                    chats and spreadsheets separately, your team sees a single, updated view of
+                    who has paid, who is overdue, and what is coming up next.
                 </p>
+
+                <div class="card-grid overview-grid">
+                    <div class="info-card">
+                        <h4>Single source of truth</h4>
+                        <p>
+                            Every contract, vehicle or unit and rental schedule lives in one system,
+                            so operations and finance work off the same data.
+                        </p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Clear status for every contract</h4>
+                        <p>
+                            Each due rental is tracked as paid, partially paid or overdue, making it
+                            easy to see where follow-up is needed.
+                        </p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Built for rental-heavy businesses</h4>
+                        <p>
+                            Designed for fleets, leasing companies and SMEs that rely on recurring
+                            rental income, not just one-off invoices.
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- How it works (simple “summary” section) -->
-        <section id="showcase" class="section">
+        <!-- HOW IT WORKS (with visuals) -->
+        <section id="how-it-works" class="section">
             <div class="section-inner">
-                <h2 class="section-title">How Rental Collection works</h2>
+                <h2 class="section-title">How it works</h2>
                 <p class="section-text">
                     From onboarding a driver to closing the month, NovaGO keeps your rental
                     lifecycle structured and traceable.
                 </p>
 
-                <div class="card-grid two-col" style="margin-top: 2rem;">
-                    <div class="info-card">
-                        <div class="card-icon">01</div>
-                        <h4>Set up contracts once</h4>
-                        <p>
-                            Create driver or tenant profiles, link vehicles or units, define
-                            rental amount, frequency and deposits. The system generates the
-                            rental schedule for you.
-                        </p>
+                <div class="how-grid">
+                    <!-- Steps -->
+                    <div class="how-steps">
+                        <div class="how-step">
+                            <div class="how-step-number">1</div>
+                            <h4>Set up contracts once</h4>
+                            <p>
+                                Create profiles, link vehicles or units, set rental amount and frequency.
+                                NovaGO generates the schedule for you.
+                            </p>
+                        </div>
+                        <div class="how-step">
+                            <div class="how-step-number">2</div>
+                            <h4>Track invoices &amp; payments</h4>
+                            <p>
+                                Each due date becomes an invoice with live status – paid, partially paid or
+                                overdue – so your team knows who is up to date.
+                            </p>
+                        </div>
+                        <div class="how-step">
+                            <div class="how-step-number">3</div>
+                            <h4>Act on overdue items</h4>
+                            <p>
+                                Log reminders and follow-up actions in one view, so chasing payments is
+                                structured instead of ad-hoc.
+                            </p>
+                        </div>
                     </div>
-                    <div class="info-card">
-                        <div class="card-icon">02</div>
-                        <h4>Track invoices &amp; payments</h4>
-                        <p>
-                            Each due date turns into an invoice with live status – paid,
-                            partially paid or overdue – so your team always knows who is up to
-                            date.
-                        </p>
-                    </div>
-                    <div class="info-card">
-                        <div class="card-icon">03</div>
-                        <h4>Automated reminders</h4>
-                        <p>
-                            When payments are missed, NovaGO helps you log reminders and
-                            follow-up actions, reducing manual chasing and miscommunication.
-                        </p>
-                    </div>
-                    <div class="info-card">
-                        <div class="card-icon">04</div>
-                        <h4>Better visibility for finance</h4>
-                        <p>
-                            Operations and finance see the same view of expected vs. collected
-                            rental, making cash flow planning and reporting much easier.
-                        </p>
+
+                    <!-- Visual mock dashboard -->
+                    <div class="how-visual">
+                        <div class="how-card how-card--top">
+                            <div class="how-card-header">
+                                <span class="how-card-title">Rental dashboard</span>
+                                <span class="how-card-pill">This month</span>
+                            </div>
+                            <div class="how-card-metrics">
+                                <div class="how-metric">
+                                    <span class="how-metric-label">Expected</span>
+                                    <span class="how-metric-value">$120,500</span>
+                                </div>
+                                <div class="how-metric">
+                                    <span class="how-metric-label">Collected</span>
+                                    <span class="how-metric-value how-metric-value--ok">$110,060</span>
+                                </div>
+                                <div class="how-metric">
+                                    <span class="how-metric-label">Overdue</span>
+                                    <span class="how-metric-value how-metric-value--warn">$10,440</span>
+                                </div>
+                            </div>
+                            <div class="how-card-bars">
+                                <div class="how-bar-row">
+                                    <span class="how-bar-label">On-time</span>
+                                    <div class="how-bar">
+                                        <div class="how-bar-fill how-bar-fill--ok" style="width: 78%;"></div>
+                                    </div>
+                                    <span class="how-bar-value">78%</span>
+                                </div>
+                                <div class="how-bar-row">
+                                    <span class="how-bar-label">Overdue</span>
+                                    <div class="how-bar">
+                                        <div class="how-bar-fill how-bar-fill--warn" style="width: 22%;"></div>
+                                    </div>
+                                    <span class="how-bar-value">22%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="how-card how-card--bottom">
+                            <p class="how-card-subtitle">Overdue contracts</p>
+                            <div class="how-table-row">
+                                <span class="how-table-name">Driver 102 - Car #SFP1234G</span>
+                                <span class="how-table-tag how-table-tag--overdue">7 days overdue</span>
+                            </div>
+                            <div class="how-table-row">
+                                <span class="how-table-name">Driver 214 - Car #SMD8891K</span>
+                                <span class="how-table-tag how-table-tag--overdue">14 days overdue</span>
+                            </div>
+                            <div class="how-table-row">
+                                <span class="how-table-name">Driver 341 - Car #SLX4412P</span>
+                                <span class="how-table-tag how-table-tag--due">Due this week</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- What We Can Offer (tuned for rental) -->
-        <section id="offer" class="section section-muted">
+        <!-- FEATURES -->
+        <section id="features" class="section section-muted">
             <div class="section-inner">
-                <h2 class="section-title">What Rental Collection can help with</h2>
+                <h2 class="section-title">Features</h2>
+                <p class="section-text">
+                    Key capabilities that make rental collection clearer and easier to manage.
+                </p>
 
-                <div class="section-block">
-                    <h3 class="subheading">Operational control</h3>
-                    <div class="card-grid">
-                        <div class="info-card">
-                            <div class="card-icon">OV</div>
-                            <h4>One-screen overview</h4>
-                            <p>
-                                See all active rental contracts, amounts due and overdue in a
-                                single, filterable dashboard.
-                            </p>
-                        </div>
-                        <div class="info-card">
-                            <div class="card-icon">DR</div>
-                            <h4>Driver &amp; tenant history</h4>
-                            <p>
-                                Pull up payment history, reminders and notes for each driver or
-                                tenant when making decisions.
-                            </p>
-                        </div>
-                        <div class="info-card">
-                            <div class="card-icon">FX</div>
-                            <h4>Multi-bank friendly</h4>
-                            <p>
-                                Keep using your existing banks. NovaGO helps you structure the
-                                rental side without forcing a bank switch.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="section-block">
-                    <h3 class="subheading">Finance &amp; reporting</h3>
-                    <div class="card-grid business-grid">
-                        <div class="info-card">
-                            <div class="card-icon">CF</div>
-                            <h4>Cash flow planning</h4>
-                            <p>
-                                Forecast expected rental and compare it against collected income
-                                to plan payouts and expenses.
-                            </p>
-                        </div>
-                        <div class="info-card">
-                            <div class="card-icon">EX</div>
-                            <h4>Export-ready data</h4>
-                            <p>
-                                Export rental data for accounting, audits or management
-                                reporting without manual cleanup.
-                            </p>
-                        </div>
-                        <div class="info-card">
-                            <div class="card-icon">RC</div>
-                            <h4>Reconciliation support</h4>
-                            <p>
-                                Match bank transactions with rental schedules faster by knowing
-                                exactly what should have been paid.
-                            </p>
-                        </div>
-                        <div class="info-card">
-                            <div class="card-icon">NG</div>
-                            <h4>NGS rewards-ready</h4>
-                            <p>
-                                Optionally plug into NovaDollar (NGS) to reward good payment
-                                behaviour for eligible users.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Why NovaGO (still linked from navbar) -->
-        <section id="why" class="section">
-            <div class="section-inner">
-                <h2 class="section-title">Why NovaGO for rental-heavy businesses?</h2>
-                <div class="card-grid two-col">
+                <div class="card-grid features-grid">
                     <div class="info-card">
-                        <div class="card-icon">TI</div>
-                        <h4>Less time chasing, more time running ops</h4>
+                        <h4>Real-time visibility</h4>
                         <p>
-                            Your team spends less time tracking who has paid and more time on
-                            driver management, safety and service quality.
+                            See, at a glance, how much rental is expected, collected and overdue.
+                            Filter by driver, vehicle, or contract type so everyone works off the
+                            same live numbers.
                         </p>
                     </div>
+
                     <div class="info-card">
-                        <div class="card-icon">TR</div>
-                        <h4>Transparent for everyone</h4>
+                        <h4>Structured follow-up</h4>
                         <p>
-                            Management, operations and finance see the same source of truth,
-                            reducing confusion over “who still owes what”.
+                            Log calls, messages and reminders against each contract. Your team can
+                            see what has already been done and what next step is needed, instead of
+                            guessing from chats.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h4>Finance-ready data</h4>
+                        <p>
+                            Export clean rental data for reconciliation, month-end closing and
+                            management reports. No more rebuilding spreadsheets from scratch every
+                            cycle.
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact / Demo (reused structure) -->
+        <!-- CONTACT -->
         <section id="contact" class="section section-muted">
             <div class="section-inner narrow">
                 <h2 class="section-title">Interested in the Rental Collection module?</h2>
@@ -620,13 +559,40 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const activeMenu = ref(null)
 
-const openMenu = (name) => {
-    activeMenu.value = name
+const activeMenu = ref(null)
+const isMobileMenuOpen = ref(false)
+
+const openMenuDesktop = (name) => {
+    if (typeof window !== 'undefined' && window.innerWidth >= 960) {
+        activeMenu.value = name
+    }
 }
-const closeMenu = () => {
+const closeMenuDesktop = () => {
+    if (typeof window !== 'undefined' && window.innerWidth >= 960) {
+        activeMenu.value = null
+    }
+}
+
+const toggleDropdown = (name) => {
+    activeMenu.value = activeMenu.value === name ? null : name
+}
+
+const toggleMobileMenu = () => {
+    isMobileMenuOpen.value = !isMobileMenuOpen.value
+    if (!isMobileMenuOpen.value) {
+        activeMenu.value = null
+    }
+}
+
+const resetNav = () => {
     activeMenu.value = null
+    isMobileMenuOpen.value = false
+}
+
+const closeAllNav = () => {
+    activeMenu.value = null
+    isMobileMenuOpen.value = false
 }
 
 const scrollToSection = (id) => {
@@ -637,8 +603,12 @@ const scrollToSection = (id) => {
 }
 
 const goToLogin = () => {
-    activeMenu.value = null
+    closeAllNav()
     router.push('/login')
+}
+
+const handleLoginClick = () => {
+    goToLogin()
 }
 
 const fakeSubmit = () => {
@@ -676,19 +646,57 @@ const fakeSubmit = () => {
 }
 
 .brand {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-  color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: inherit;
 }
 
 .brand-logo {
-  height: 56px;      /* adjust this if you want it bigger/smaller */
-  width: auto;
-  display: block;
+    height: 56px;
+    width: auto;
+    display: block;
 }
 
+.brand:hover {
+    text-decoration: none;
+}
+
+/* Mobile hamburger */
+.nav-toggle {
+    display: none;
+    margin-left: auto;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0.25rem;
+}
+
+.nav-toggle-bar {
+    display: block;
+    width: 20px;
+    height: 2px;
+    border-radius: 999px;
+    background: #4b5563;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-toggle-bar+.nav-toggle-bar {
+    margin-top: 4px;
+}
+
+.nav-toggle-bar.open:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.nav-toggle-bar.open:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle-bar.open:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
 
 .nav-links {
     margin-left: 2rem;
@@ -710,6 +718,14 @@ const fakeSubmit = () => {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+}
+
+.nav-right-actions--inline {
+    display: none;
+}
+
+.nav-right-actions--desktop {
+    display: flex;
 }
 
 .nav-link {
@@ -779,6 +795,7 @@ const fakeSubmit = () => {
     box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
 }
 
+/* variants */
 .mega--narrow {
     grid-template-columns: 1fr;
 }
@@ -862,6 +879,43 @@ const fakeSubmit = () => {
     color: #4b5563;
 }
 
+/* Partnerships mega */
+.mega--partnership {
+    grid-template-columns: 1fr;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.partnership-card {
+    width: 100%;
+    margin: 0 auto;
+    padding: 1.6rem 1.9rem 1.8rem;
+    border-radius: 1rem;
+    background: #ffffff;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.15);
+}
+
+.partnership-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #111827;
+}
+
+.partnership-text {
+    font-size: 0.9rem;
+    color: #4b5563;
+    line-height: 1.55;
+    margin-bottom: 1.2rem;
+}
+
+.partnership-btn {
+    align-self: flex-start;
+    padding-inline: 1.8rem;
+}
+
 /* Hero */
 .hero {
     padding: 4.2rem 1.25rem 4rem;
@@ -929,7 +983,10 @@ const fakeSubmit = () => {
     font-size: 0.92rem;
     cursor: pointer;
     border: 1px solid transparent;
-    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease,
+    transition:
+        transform 0.12s ease,
+        box-shadow 0.12s ease,
+        background 0.12s ease,
         color 0.12s ease;
 }
 
@@ -955,7 +1012,7 @@ const fakeSubmit = () => {
     background: #e5edff;
 }
 
-/* Small hero chips */
+/* Hero chips */
 .hero-chips {
     display: flex;
     flex-wrap: wrap;
@@ -969,6 +1026,7 @@ const fakeSubmit = () => {
     background: #ffffff;
     font-size: 0.8rem;
     color: #4b5563;
+    cursor: pointer;
 }
 
 /* Hero right abstract art */
@@ -1127,30 +1185,15 @@ const fakeSubmit = () => {
     text-align: center;
 }
 
-/* Offer blocks */
-.section-block {
-    margin-top: 2rem;
-}
-
-.subheading {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    color: #111827;
-}
-
 /* Cards */
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.2rem;
 }
 
-.business-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.card-grid.two-col {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+.overview-grid {
+    margin-top: 2rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .info-card {
@@ -1159,12 +1202,14 @@ const fakeSubmit = () => {
     padding: 1.4rem 1.4rem;
     border: 1px solid #e5e7eb;
     box-shadow: 0 14px 30px rgba(148, 163, 184, 0.35);
-    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        border-color 0.15s ease;
     min-height: 160px;
 }
 
-.info-card h4,
-.info-card h3 {
+.info-card h4 {
     font-size: 0.98rem;
     margin-bottom: 0.5rem;
     color: #111827;
@@ -1181,18 +1226,210 @@ const fakeSubmit = () => {
     border-color: #c7d2fe;
 }
 
-/* Card icon – all white text */
-.card-icon {
-    width: 34px;
-    height: 34px;
+/* HOW IT WORKS layout */
+.how-grid {
+    margin-top: 2.2rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.how-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.how-step {
+    background: #ffffff;
+    border-radius: 0.9rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 10px 22px rgba(148, 163, 184, 0.25);
+}
+
+.how-step-number {
+    width: 26px;
+    height: 26px;
     border-radius: 999px;
-    background: linear-gradient(135deg, #2563eb, #38bdf8);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.78rem;
+    font-weight: 600;
     color: #ffffff;
-    margin-bottom: 0.9rem;
+    background: linear-gradient(135deg, #2563eb, #38bdf8);
+    margin-bottom: 0.5rem;
+}
+
+.how-step h4 {
+    font-size: 0.98rem;
+    margin-bottom: 0.35rem;
+    color: #111827;
+}
+
+.how-step p {
+    font-size: 0.86rem;
+    color: #4b5563;
+}
+
+/* Visual mockups */
+.how-visual {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+}
+
+.how-card {
+    border-radius: 1rem;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 16px 32px rgba(148, 163, 184, 0.45);
+    padding: 1rem 1.1rem;
+}
+
+.how-card--top {
+    margin-bottom: 1rem;
+}
+
+.how-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.7rem;
+}
+
+.how-card-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.how-card-pill {
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    background: #eef2ff;
+    font-size: 0.72rem;
+    color: #4f46e5;
+}
+
+.how-card-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.7rem;
+    margin-bottom: 0.8rem;
+}
+
+.how-metric-label {
+    display: block;
+    font-size: 0.7rem;
+    color: #6b7280;
+}
+
+.how-metric-value {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.how-metric-value--ok {
+    color: #15803d;
+}
+
+.how-metric-value--warn {
+    color: #b45309;
+}
+
+.how-card-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.how-bar-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.how-bar-label {
+    font-size: 0.76rem;
+    color: #4b5563;
+}
+
+.how-bar {
+    height: 6px;
+    border-radius: 999px;
+    background: #e5e7eb;
+    overflow: hidden;
+}
+
+.how-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+}
+
+.how-bar-fill--ok {
+    background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+.how-bar-fill--warn {
+    background: linear-gradient(90deg, #f97316, #ea580c);
+}
+
+.how-bar-value {
+    font-size: 0.76rem;
+    color: #4b5563;
+}
+
+/* Overdue list card */
+.how-card--bottom {
+    margin-top: 0.4rem;
+}
+
+.how-card-subtitle {
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.5rem;
+}
+
+.how-table-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    padding: 0.35rem 0;
+}
+
+.how-table-name {
+    color: #374151;
+}
+
+.how-table-tag {
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+}
+
+.how-table-tag--overdue {
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+.how-table-tag--due {
+    background: #eff6ff;
+    color: #1d4ed8;
+}
+
+/* Features */
+.features-grid {
+    margin-top: 2rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 /* Contact form */
@@ -1284,25 +1521,93 @@ const fakeSubmit = () => {
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+
+    .overview-grid,
+    .features-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
 @media (max-width: 960px) {
     .nav-inner {
-        flex-wrap: wrap;
         padding: 0.8rem 1rem;
     }
 
-    /* Show the nav items as a scrollable row */
-    .nav-links {
-        display: flex;
-        width: 100%;
-        margin-left: 0;
-        margin-top: 0.4rem;
-        gap: 1rem;
-        overflow-x: auto;
+    .nav-toggle {
+        display: block;
     }
 
-    /* Disable mega menu panels on mobile (hover doesn't make sense) */
-    .mega-wrapper {
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        margin-left: 0;
+        padding: 0.75rem 1rem 1rem;
+        background: #ffffff;
+        border-bottom: 1px solid #e5e7eb;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-4px);
+        transition:
+            max-height 0.22s ease,
+            opacity 0.18s ease,
+            transform 0.18s ease;
+    }
+
+    .nav-links--open {
+        max-height: 75vh;
+        overflow-y: auto;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .nav-item {
+        width: 100%;
+    }
+
+    .nav-link {
+        width: 100%;
+        text-align: left;
+        padding: 0.4rem 0;
+    }
+
+    .nav-link::after {
         display: none;
+    }
+
+    .mega-wrapper {
+        position: static;
+        transform: none;
+        width: 100%;
+        margin-top: 0.25rem;
+    }
+
+    .mega {
+        box-shadow: none;
+        border-radius: 0.6rem;
+        padding: 0.9rem 0.9rem 0.95rem;
+    }
+
+    .mega-left {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-right-actions--desktop {
+        display: none;
+    }
+
+    .nav-right-actions--inline {
+        display: flex;
+        margin-left: 0;
+        margin-top: 0.4rem;
+        justify-content: flex-start;
     }
 
     .hero {
@@ -1311,6 +1616,7 @@ const fakeSubmit = () => {
 
     .hero-inner {
         grid-template-columns: 1fr;
+        gap: 2rem;
     }
 
     .hero-right {
@@ -1318,26 +1624,38 @@ const fakeSubmit = () => {
         margin-bottom: 1.5rem;
     }
 
-    .card-grid,
-    .business-grid,
-    .card-grid.two-col {
+    .overview-grid,
+    .features-grid {
         grid-template-columns: 1fr;
+    }
+
+    .how-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .how-visual {
+        max-width: 100%;
     }
 
     .form-row {
         flex-direction: column;
     }
+
+    .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
 }
 
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    color: inherit;
-}
+@media (max-width: 480px) {
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
 
-.brand:hover {
-    text-decoration: none;
+    .section {
+        padding-inline: 1rem;
+    }
 }
 </style>
