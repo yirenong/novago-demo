@@ -25,24 +25,24 @@
                         <div v-if="activeMenu === 'solutions'" class="mega-wrapper" @mouseleave="closeMenuDesktop">
                             <div class="mega mega--narrow">
                                 <div class="mega-left mega-left--2">
-                                    <!-- By use case -->
+
+                                    <!-- For SMEs -->
                                     <div class="mega-column">
-                                        <p class="mega-heading">By use case</p>
+                                        <p class="mega-heading">For SMEs</p>
 
                                         <router-link class="mega-link" to="/dashboard" @click="closeAllNav">
                                             Corporate booking
                                             <span>Seamlessly book corporate rides from your portal.</span>
                                         </router-link>
 
-                                        <router-link class="mega-link" to="/rental-collection-summary"
-                                            @click="closeAllNav">
-                                            Rental collection
-                                            <span>Track rental payments in 1 view. Invoice generation.</span>
+                                        <router-link class="mega-link" to="/expense-management" @click="closeAllNav">
+                                            Expense management
+                                            <span>Track and manage business expenses with ease.</span>
                                         </router-link>
 
                                         <router-link class="mega-link" to="/payroll" @click="closeAllNav">
                                             Payroll
-                                            <span>Simplified/view all salary related payments in one.</span>
+                                            <span>Simplified salary-related payments in one place.</span>
                                         </router-link>
 
                                         <router-link class="mega-link" to="/" @click="closeAllNav">
@@ -51,30 +51,23 @@
                                         </router-link>
                                     </div>
 
-                                    <!-- By industry -->
+                                    <!-- By use cases -->
                                     <div class="mega-column">
-                                        <p class="mega-heading">By industry</p>
+                                        <p class="mega-heading">By use cases</p>
 
-                                        <router-link class="mega-link" to="/" @click="closeAllNav">
-                                            Transport
-                                            <span>For fleets, delivery and ride-hailing operations.</span>
+                                        <router-link class="mega-link" to="/toms" @click="closeAllNav">
+                                            Transport Operator Management System (TOMs)
+                                            <span>Simplify the management of vehicles, drivers and jobs — moving beyond
+                                                manual processes.</span>
                                         </router-link>
 
-                                        <router-link class="mega-link" to="/" @click="closeAllNav">
-                                            Travel
-                                            <span>Support business travel and trip-linked spending.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/" @click="closeAllNav">
-                                            Automotive
-                                            <span>Leasing, workshops and vehicle management.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/" @click="closeAllNav">
-                                            SMEs
-                                            <span>Everyday financial workflows for growing businesses.</span>
+                                        <router-link class="mega-link" to="/rental-collection-summary"
+                                            @click="closeAllNav">
+                                            Rental collection
+                                            <span>Track rental payments in one view. Invoice generation.</span>
                                         </router-link>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -179,60 +172,62 @@
                         </div>
                     </div>
 
-                    <div class="nav-item has-mega" @mouseenter="openMenuDesktop('partnerships')">
+                    <!-- PARTNERSHIPS -->
+                    <div class="nav-item has-mega nav-item--partnerships" @mouseenter="openMenuDesktop('partnerships')">
                         <button class="nav-link" :class="{ active: activeMenu === 'partnerships' }" type="button"
                             @click="toggleDropdown('partnerships')">
                             Partnerships
                         </button>
 
                         <div v-if="activeMenu === 'partnerships'" class="mega-wrapper" @mouseleave="closeMenuDesktop">
-                            <div class="mega mega--small mega--partnership">
-                                <div class="partnership-card">
-                                    <p class="mega-heading">Partnership programme</p>
+                            <div class="mega mega--small mega--partnerships">
+                                <div class="mega-left mega-left--partnerships">
+                                    <div class="mega-column">
+                                        <p class="mega-heading">Partnership programme</p>
 
-                                    <h3 class="partnership-title">Work with NovaGO</h3>
+                                        <h3 class="partnership-title">Work with NovaGO</h3>
 
-                                    <p class="partnership-text">
-                                        Bundle NovaGO with your product or offer Shell fuel benefits to your
-                                        users. Talk to our partnership department to explore co-created
-                                        solutions.
-                                    </p>
+                                        <p class="partnership-text">
+                                            Bundle NovaGO with your product or offer Shell fuel benefits to your
+                                            users. <br>Talk to our partnership department to explore co-created
+                                            solutions.
+                                        </p>
 
-                                    <button class="btn-primary partnership-btn" type="button"
-                                        @click="() => { scrollToSection('contact'); closeAllNav(); }">
-                                        Talk to our partnership team
-                                    </button>
+                                        <button class="btn-primary partnership-btn" type="button"
+                                            @click="() => { scrollToSection('contact'); closeAllNav(); }">
+                                            Talk to our partnership team
+                                        </button>
 
-                                    <!-- ✅ Current partners with scrolling logos -->
-                                    <div class="partners-section">
-                                        <p class="partners-label">Current partners</p>
+                                        <!-- ✅ Current partners with scrolling logos -->
+                                        <div class="partners-section">
+                                            <p class="partners-label">Current partners</p>
 
-                                        <div class="partners-marquee">
-                                            <div class="partners-track">
-                                                <!-- First loop -->
-                                                <div class="partner-item" v-for="partner in partners"
-                                                    :key="'a-' + partner.name">
-                                                    <img v-if="partner.logo" :src="partner.logo"
-                                                        :alt="partner.name + ' logo'" class="partner-logo" />
-                                                    <span class="partner-name">{{ partner.name }}</span>
-                                                </div>
+                                            <div class="partners-marquee">
+                                                <div class="partners-track">
+                                                    <!-- First loop -->
+                                                    <div class="partner-item" v-for="partner in partners"
+                                                        :key="'a-' + partner.name">
+                                                        <img v-if="partner.logo" :src="partner.logo"
+                                                            :alt="partner.name + ' logo'" class="partner-logo" />
+                                                        <span class="partner-name">{{ partner.name }}</span>
+                                                    </div>
 
-                                                <!-- Duplicate loop for seamless scroll -->
-                                                <div class="partner-item" v-for="partner in partners"
-                                                    :key="'b-' + partner.name">
-                                                    <img v-if="partner.logo" :src="partner.logo"
-                                                        :alt="partner.name + ' logo'" class="partner-logo" />
-                                                    <span class="partner-name">{{ partner.name }}</span>
+                                                    <!-- Duplicate loop for seamless scroll -->
+                                                    <div class="partner-item" v-for="partner in partners"
+                                                        :key="'b-' + partner.name">
+                                                        <img v-if="partner.logo" :src="partner.logo"
+                                                            :alt="partner.name + ' logo'" class="partner-logo" />
+                                                        <span class="partner-name">{{ partner.name }}</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- end partners-section -->
                                     </div>
-                                    <!-- end partners-section -->
                                 </div>
                             </div>
                         </div>
                     </div>
-
 
                     <!-- Move login inside nav for mobile -->
                     <div class="nav-right-actions nav-right-actions--inline">
@@ -395,7 +390,7 @@
                                 <h4>Shell: Petrol discount</h4>
                             </div>
                             <p>
-                                Give your drivers access to Shell fuel discounts and rewards.
+                                Unlock exclusive Shell fuel discounts and rewards for your drivers.
                             </p>
                         </div>
                         <div class="info-card">
@@ -406,7 +401,8 @@
                                 <h4>Curated benefits</h4>
                             </div>
                             <p>
-                                Offer employees a range of curated perks and rewards all in one place.
+                                Provide employees with a variety of curated perks and rewards, conveniently in one
+                                platform.
                             </p>
                         </div>
                     </div>
@@ -649,7 +645,6 @@ import shellLogo from '../assets/partners/shell.png'
 import bestPetrolLogo from '../assets/partners/best-petrol.png'
 import zoqqLogo from '../assets/partners/zoqq.png'
 
-
 const router = useRouter()
 
 const activeMenu = ref(null)
@@ -698,7 +693,6 @@ const partners = [
     { name: 'Best Petrol', logo: bestPetrolLogo },
     { name: 'ZOQQ', logo: zoqqLogo }
 ]
-
 
 const showcaseSlides = [
     {
@@ -929,19 +923,28 @@ const fakeSubmit = () => {
     box-shadow: 0 8px 18px rgba(37, 99, 235, 0.3);
 }
 
-/* Mega menu */
+/* ========== Mega menu ========== */
 .nav-item {
-    position: static;
+    position: relative;
 }
 
+/* default mega: align left with nav item */
 .mega-wrapper {
     position: absolute;
-    left: 50%;
     top: 100%;
-    transform: translateX(-50%);
+    margin-top: 0.5rem;
     width: 860px;
     max-width: 90vw;
     z-index: 30;
+    left: 0;
+    right: auto;
+    transform: none;
+}
+
+/* Partnerships (last mega item) – align panel to the right so it stays in view */
+.nav-item.has-mega:last-of-type .mega-wrapper {
+    left: auto;
+    right: 0;
 }
 
 .mega {
@@ -976,6 +979,11 @@ const fakeSubmit = () => {
 
 .mega-left--2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* ✅ Partnerships: use full width, one column */
+.mega-left--partnership {
+    grid-template-columns: 1fr;
 }
 
 .mega-column {
@@ -1467,16 +1475,11 @@ const fakeSubmit = () => {
     .business-layout {
         grid-template-columns: 1fr;
     }
-}
 
-@media (max-width: 960px) {
-
-    .card-grid--banking,
-    .card-grid--processes {
-        grid-template-columns: 1fr;
+    .card-grid--3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
-
 
 .offer-group-title {
     font-size: 0.8rem;
@@ -1511,7 +1514,6 @@ const fakeSubmit = () => {
     grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
-
 /* New cleaner card design */
 .info-card {
     background: #ffffff;
@@ -1522,7 +1524,6 @@ const fakeSubmit = () => {
     transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
     min-height: 150px;
 }
-
 
 .info-card p {
     font-size: 0.86rem;
@@ -1539,7 +1540,6 @@ const fakeSubmit = () => {
 .info-card-header {
     display: flex;
     align-items: center;
-    /* vertically center icon + title */
     justify-content: space-between;
     gap: 0.75rem;
     margin-bottom: 0.4rem;
@@ -1552,7 +1552,6 @@ const fakeSubmit = () => {
     color: #111827;
     text-align: left;
     flex: 1;
-    /* take remaining space */
 }
 
 /* Icon stays on the left, no extra bottom margin */
@@ -1569,7 +1568,6 @@ const fakeSubmit = () => {
     color: #2563eb;
     margin: 0;
 }
-
 
 /* Contact form */
 .contact-form {
@@ -1684,28 +1682,7 @@ const fakeSubmit = () => {
     display: block;
 }
 
-/* Partnerships mega – full card look */
-/* Partnerships mega – keep it centered but not full-width */
-.mega--partnership {
-    grid-template-columns: 1fr;
-    justify-content: center;
-    padding: 0;              /* keep this if you like the card spacing */
-    background: transparent;
-    border: none;
-    box-shadow: none;
-}
-
-/* ⬇️ This is the main change: make the card narrower */
-.partnership-card {
-    max-width: 520px;        /* tweak this number to taste: 480 / 520 / 560 etc */
-    width: 100%;
-    margin: 0 auto;
-    padding: 1.6rem 1.9rem 1.8rem;
-    border-radius: 1rem;
-    background: #ffffff;
-    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.15);
-}
-
+/* Partnership text styles */
 .partnership-title {
     font-size: 1.05rem;
     font-weight: 600;
@@ -1723,42 +1700,6 @@ const fakeSubmit = () => {
 .partnership-btn {
     align-self: flex-start;
     padding-inline: 1.8rem;
-}
-
-.partners-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-}
-
-.partners-pill {
-    font-size: 0.8rem;
-    padding: 0.25rem 0.6rem;
-    border-radius: 999px;
-    background: #eef2ff;
-    color: #111827;
-    border: 1px solid #e5e7eb;
-    white-space: nowrap;
-}
-
-.partners-label {
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #9ca3af;
-    margin-bottom: 0.4rem;
-}
-
-.partners-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 0.75rem;
 }
 
 .partners-section {
@@ -1788,7 +1729,6 @@ const fakeSubmit = () => {
     display: inline-flex;
     align-items: center;
     gap: 1.5rem;
-    /* Adjust duration for speed – higher = slower */
     animation: partners-scroll 25s linear infinite;
 }
 
@@ -1826,21 +1766,13 @@ const fakeSubmit = () => {
     0% {
         transform: translateX(0);
     }
+
     100% {
-        /* because we duplicated the list, -50% gives a seamless loop */
         transform: translateX(-50%);
     }
 }
 
-
-
 /* Responsive */
-@media (max-width: 1024px) {
-    .card-grid--3 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
 @media (max-width: 960px) {
     .nav-inner {
         padding: 0.8rem 1rem;
@@ -1891,11 +1823,14 @@ const fakeSubmit = () => {
         display: none;
     }
 
+    /* Mega behaviour on mobile: full width, stacked */
     .mega-wrapper {
         position: static;
         transform: none;
         width: 100%;
         margin-top: 0.25rem;
+        left: 0;
+        right: auto;
     }
 
     .mega {
@@ -1983,4 +1918,42 @@ const fakeSubmit = () => {
         padding-inline: 1rem;
     }
 }
+
+/* 🔧 1) Make the Partnerships panel use one column (full width of the card) */
+.nav-item.has-mega:last-of-type .mega-left {
+    grid-template-columns: 1fr;
+    /* instead of the default 2 columns */
+}
+
+/* 🔧 2) Prevent any content (logos track) from sticking out of the white card */
+.nav-item.has-mega:last-of-type .mega {
+    overflow: hidden;
+    /* clips the scrolling partner chips */
+}
+
+/* (optional but nice) keep the card inside the viewport on smaller screens */
+.nav-item.has-mega:last-of-type .mega-wrapper {
+    right: 0;
+    left: auto;
+}
+
+/* ✅ Partnerships dropdown: use a single full-width column */
+.mega-left--partnerships {
+    display: grid;
+    grid-template-columns: 1fr;   /* no empty second column */
+}
+
+/* ✅ Partnerships mega: same width as others & clip scroller inside */
+.mega--partnerships {
+    width: 860px;
+    max-width: 90vw;
+    overflow: hidden;             /* stops the partner chips from hanging out */
+}
+
+/* ✅ Keep the partnerships dropdown aligned with the tab */
+.nav-item--partnerships .mega-wrapper {
+    left: 0;
+    right: auto;
+}
+
 </style>
