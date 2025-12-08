@@ -15,11 +15,75 @@
                 </button>
 
                 <nav class="nav-links" :class="{ 'nav-links--open': isMobileMenuOpen }">
+                    <!-- 2nd NAV: SOLUTIONS -->
+                    <div class="nav-item has-mega" @mouseenter="openMenuDesktop('solutions')">
+                        <button class="nav-link" :class="{ active: activeMenu === 'solutions' }" type="button"
+                            @click="toggleDropdown('solutions')">
+                            Custom Solutions
+                        </button>
+
+                        <div v-if="activeMenu === 'solutions'" class="mega-wrapper" @mouseleave="closeMenuDesktop">
+                            <div class="mega mega--narrow">
+                                <div class="mega-left mega-left--2">
+                                    <!-- By use case -->
+                                    <div class="mega-column">
+                                        <p class="mega-heading">By use case</p>
+
+                                        <router-link class="mega-link" to="/dashboard" @click="closeAllNav">
+                                            Corporate booking
+                                            <span>Seamlessly book corporate rides from your portal.</span>
+                                        </router-link>
+
+                                        <router-link class="mega-link" to="/rental-collection-summary"
+                                            @click="closeAllNav">
+                                            Rental collection
+                                            <span>Track rental payments in 1 view. Invoice generation.</span>
+                                        </router-link>
+
+                                        <router-link class="mega-link" to="/payroll" @click="closeAllNav">
+                                            Payroll
+                                            <span>Simplified/view all salary related payments in one.</span>
+                                        </router-link>
+
+                                        <router-link class="mega-link" to="/" @click="closeAllNav">
+                                            CMS
+                                            <span>Customize your very own web design with our CMS.</span>
+                                        </router-link>
+                                    </div>
+
+                                    <!-- By industry -->
+                                    <div class="mega-column">
+                                        <p class="mega-heading">By industry</p>
+
+                                        <router-link class="mega-link" to="/" @click="closeAllNav">
+                                            Transport
+                                            <span>For fleets, delivery and ride-hailing operations.</span>
+                                        </router-link>
+
+                                        <router-link class="mega-link" to="/" @click="closeAllNav">
+                                            Travel
+                                            <span>Support business travel and trip-linked spending.</span>
+                                        </router-link>
+
+                                        <router-link class="mega-link" to="/" @click="closeAllNav">
+                                            Automotive
+                                            <span>Leasing, workshops and vehicle management.</span>
+                                        </router-link>
+
+                                        <router-link class="mega-link" to="/" @click="closeAllNav">
+                                            SMEs
+                                            <span>Everyday financial workflows for growing businesses.</span>
+                                        </router-link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- 1st NAV: PRODUCTS -->
                     <div class="nav-item has-mega" @mouseenter="openMenuDesktop('products')">
                         <button class="nav-link" :class="{ active: activeMenu === 'products' }" type="button"
                             @click="toggleDropdown('products')">
-                            Products
+                            Business Banking
                         </button>
 
                         <div v-if="activeMenu === 'products'" class="mega-wrapper" @mouseleave="closeMenuDesktop">
@@ -86,72 +150,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- 2nd NAV: SOLUTIONS -->
-                    <div class="nav-item has-mega" @mouseenter="openMenuDesktop('solutions')">
-                        <button class="nav-link" :class="{ active: activeMenu === 'solutions' }" type="button"
-                            @click="toggleDropdown('solutions')">
-                            Solutions
-                        </button>
-
-                        <div v-if="activeMenu === 'solutions'" class="mega-wrapper" @mouseleave="closeMenuDesktop">
-                            <div class="mega mega--narrow">
-                                <div class="mega-left mega-left--2">
-                                    <!-- By use case -->
-                                    <div class="mega-column">
-                                        <p class="mega-heading">By use case</p>
-
-                                        <router-link class="mega-link" to="/dashboard" @click="closeAllNav">
-                                            Corporate booking &amp; jobs
-                                            <span>Manage bookings, jobs and driver payouts.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/rental-collection-summary"
-                                            @click="closeAllNav">
-                                            Rental collection
-                                            <span>Track invoices and incoming rental payments.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/payroll" @click="closeAllNav">
-                                            Payroll
-                                            <span>Automate monthly salary runs and approvals.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/" @click="closeAllNav">
-                                            CMS
-                                            <span>Centralise rentals, payroll and account balances in one view.</span>
-                                        </router-link>
-                                    </div>
-
-                                    <!-- By industry -->
-                                    <div class="mega-column">
-                                        <p class="mega-heading">By industry</p>
-
-                                        <router-link class="mega-link" to="/" @click="closeAllNav">
-                                            Transport
-                                            <span>For fleets, delivery and ride-hailing operations.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/" @click="closeAllNav">
-                                            Travel
-                                            <span>Support business travel and trip-linked spending.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/" @click="closeAllNav">
-                                            Automotive
-                                            <span>Leasing, workshops and vehicle management.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/" @click="closeAllNav">
-                                            SMEs
-                                            <span>Everyday financial workflows for growing businesses.</span>
-                                        </router-link>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- 3rd NAV: BENEFITS -->
                     <div class="nav-item has-mega" @mouseenter="openMenuDesktop('benefits')">
                         <button class="nav-link" :class="{ active: activeMenu === 'benefits' }" type="button"
@@ -262,10 +260,10 @@
                         <img src="../assets/NovaGoLogo.png" alt="NovaGO" class="hero-logo" />
                     </h1>
 
-                    <p class="hero-tagline">Transact. Reward. Grow.</p>
+                    <p class="hero-tagline">Operate. Bank. Get Rewarded. </p>
                     <p class="hero-subtitle">
-                        NovaGo integrates your day to day biz functions and operations
-                        with banking into one platform.
+                        Scale smarter: manage operations, control finances, and reward your team with ease — all with
+                        NovaGo.
                     </p>
 
                     <div class="hero-actions">
@@ -315,6 +313,9 @@
             <div class="section-inner">
                 <h2 class="section-title">How NovaGO helps you</h2>
                 <p class="section-text">
+                    We custom solutions for you to operate, bank, and get rewarded all in one platform.
+                </p>
+                <p class="section-text">
                     Switch between views to see how NovaGO supports payroll, rental collection,
                     and corporate banking operations.
                 </p>
@@ -359,30 +360,20 @@
 
                 <!-- Employee Benefits -->
                 <div class="section-block">
-                    <h3 class="subheading">Employee Benefits</h3>
+                    <h3 class="subheading">Employee benefits</h3>
                     <div class="card-grid">
                         <div class="info-card">
-                            <div class="card-icon">NGS</div>
-                            <h4>Earn NovaDollar (NGS)</h4>
+                            <div class="card-icon">SH</div>
+                            <h4>Shell: Petrol discount</h4>
                             <p>
-                                Earn 1 NGS for every $1 transacted, turning everyday business
-                                spending into valuable rewards.
+                                Give your drivers access to Shell fuel discounts and rewards.
                             </p>
                         </div>
                         <div class="info-card">
-                            <div class="card-icon">RW</div>
-                            <h4>Redeem Rewards</h4>
+                            <div class="card-icon">CB</div>
+                            <h4>Curated benefits</h4>
                             <p>
-                                Access exclusive vouchers, Shell fuel discounts (up to 28%),
-                                and curated services for employees.
-                            </p>
-                        </div>
-                        <div class="info-card">
-                            <div class="card-icon">RM</div>
-                            <h4>Rewards Marketplace</h4>
-                            <p>
-                                Discover a wide range of redemption options through our
-                                NovaGO Rewards Marketplace tailored for SMEs.
+                                Offer employees a range of curated perks and rewards all in one place.
                             </p>
                         </div>
                     </div>
@@ -390,8 +381,16 @@
 
                 <!-- Business Benefits -->
                 <div class="section-block">
-                    <h3 class="subheading">Business Benefits</h3>
+                    <h3 class="subheading">Business benefits</h3>
                     <div class="card-grid business-grid">
+                        <div class="info-card">
+                            <div class="card-icon">CB</div>
+                            <h4>Corporate banking</h4>
+                            <p>
+                                Get full control of your business accounts, payments, and transactions
+                                from a unified dashboard.
+                            </p>
+                        </div>
                         <div class="info-card">
                             <div class="card-icon">VA</div>
                             <h4>Virtual Debit Cards &amp; Accounts</h4>
@@ -405,7 +404,7 @@
                             <h4>Payroll &amp; Payments</h4>
                             <p>
                                 Automate payroll, payments, and reconciliation to save time
-                                and minimize errors.
+                                and minimise errors.
                             </p>
                         </div>
                         <div class="info-card">
@@ -421,26 +420,53 @@
                             <h4>Automated Reconciliation</h4>
                             <p>
                                 Gain full cash flow visibility with smart reconciliation tools
-                                integrated into your business operations.
+                                integrated into your operations.
                             </p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Who We Are -->
-        <section id="who-we-are" class="section">
-            <div class="section-inner narrow">
-                <h2 class="section-title">Why NovaGo?</h2>
-                <p class="section-text">
-                    NovaGO is a fintech and rewards platform designed for SMEs.
-                    We simplify how businesses handle financial operations by embedding
-                    banking directly into their workflows. From virtual debit cards and
-                    multi-currency accounts to a powerful rewards ecosystem powered by
-                    NovaDollar (NGS), we help SMEs manage, transact, and grow
-                    with confidence.
-                </p>
+                <!-- Corporate Processes -->
+                <div class="section-block">
+                    <h3 class="subheading">Corporate processes</h3>
+                    <div class="card-grid business-grid">
+                        <div class="info-card">
+                            <div class="card-icon">CB</div>
+                            <h4>Corporate booking</h4>
+                            <p>
+                                Manage ride and trip bookings from a single portal with no manual claims.
+                            </p>
+                        </div>
+                        <div class="info-card">
+                            <div class="card-icon">RC</div>
+                            <h4>Rental collection</h4>
+                            <p>
+                                Track rentals, invoices, and payment status to keep cash flow predictable.
+                            </p>
+                        </div>
+                        <div class="info-card">
+                            <div class="card-icon">PY</div>
+                            <h4>Payroll</h4>
+                            <p>
+                                Run payroll with approvals, automated payouts, and better cost visibility.
+                            </p>
+                        </div>
+                        <div class="info-card">
+                            <div class="card-icon">CMS</div>
+                            <h4>CMS</h4>
+                            <p>
+                                Centralise rentals, payroll, and balances into a single control centre.
+                            </p>
+                        </div>
+                        <div class="info-card">
+                            <div class="card-icon">TM</div>
+                            <h4>TOMs</h4>
+                            <p>
+                                Standardise and streamline your Target Operating Models with NovaGO.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -562,23 +588,49 @@ const closeAllNav = () => {
 const showcaseSlides = [
     {
         tag: 'Payroll',
-        title: 'Run payroll in a few clicks',
-        text: 'Set up approval flows, schedule salary runs, and see total payroll cost before you commit.',
-        points: ['Bulk upload salary files', 'Role-based approvals', 'Automatic payslip generation']
+        title: 'Goodbye to multiple platforms. Hello to one unified, seamless platform.',
+        text: 'Run salaries, set approval flows, view total payroll costs, and generate payslips.',
+        points: [
+            'Bulk upload salary files',
+            'Role-based approvals',
+            'Holistic financial visibility',
+            'Automatic payslip generation'
+        ]
     },
     {
-        tag: 'Rental collection',
-        title: 'Keep rental cash flow predictable',
+        tag: 'Rental Collection',
+        title: 'Get rent paid on time, every time.',
         text: 'Track every vehicle, invoice, and payment status from a single view.',
-        points: ['Overdue rental alerts', 'Automated reminders to drivers', 'Live paid / unpaid status']
+        points: [
+            'Overdue rental alerts',
+            'Automated reminders to drivers',
+            'Live paid/unpaid status',
+            'Generate statement of accounts'
+        ]
+    },
+    {
+        tag: 'Corporate booking',
+        title: 'Frictionless ride bookings',
+        text: 'Book ahead and manage every business trip from your own portal—using your corporate card with no claims required.',
+        points: [
+            'In-portal booking and payment',
+            'Seamless approval flow',
+            'Centralized booking records'
+        ]
     },
     {
         tag: 'Corporate banking',
-        title: 'One view of all business accounts',
-        text: 'Connect multiple corporate accounts and keep balances, FX and payouts in sync.',
-        points: ['Multi-currency balances', 'Scheduled vendor payouts', 'Export-ready reports for finance']
+        title: 'For your business and the people behind it.',
+        text: 'Get full control of your corporate accounts, payments, and transactions.',
+        points: [
+            'Unified dashboard',
+            'Multi-account management',
+            'Corporate card issuance',
+            'Instant payment tracking'
+        ]
     }
 ]
+
 
 const currentSlide = ref(0)
 
@@ -1140,7 +1192,7 @@ const fakeSubmit = () => {
 
 .showcase-content {
     position: relative;
-    min-height: 190px;
+    min-height: 210px;
 }
 
 .showcase-slide {
@@ -1249,7 +1301,7 @@ const fakeSubmit = () => {
 }
 
 .business-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .card-grid.two-col {
