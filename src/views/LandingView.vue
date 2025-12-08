@@ -79,6 +79,7 @@
                             </div>
                         </div>
                     </div>
+
                     <!-- 1st NAV: PRODUCTS -->
                     <div class="nav-item has-mega" @mouseenter="openMenuDesktop('products')">
                         <button class="nav-link" :class="{ active: activeMenu === 'products' }" type="button"
@@ -150,6 +151,7 @@
                             </div>
                         </div>
                     </div>
+
                     <!-- 3rd NAV: BENEFITS -->
                     <div class="nav-item has-mega" @mouseenter="openMenuDesktop('benefits')">
                         <button class="nav-link" :class="{ active: activeMenu === 'benefits' }" type="button"
@@ -167,13 +169,16 @@
                                             Shell
                                             <span>Fuel benefits and rewards for your drivers.</span>
                                         </router-link>
+                                        <router-link class="mega-link" to="/benefits/shell" @click="closeAllNav">
+                                            Curated Benefits
+                                            <span>Customize benefits specific to your company.</span>
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 4th NAV: PARTNERSHIPS -->
                     <div class="nav-item has-mega" @mouseenter="openMenuDesktop('partnerships')">
                         <button class="nav-link" :class="{ active: activeMenu === 'partnerships' }" type="button"
                             @click="toggleDropdown('partnerships')">
@@ -197,10 +202,37 @@
                                         @click="() => { scrollToSection('contact'); closeAllNav(); }">
                                         Talk to our partnership team
                                     </button>
+
+                                    <!-- ✅ Current partners with scrolling logos -->
+                                    <div class="partners-section">
+                                        <p class="partners-label">Current partners</p>
+
+                                        <div class="partners-marquee">
+                                            <div class="partners-track">
+                                                <!-- First loop -->
+                                                <div class="partner-item" v-for="partner in partners"
+                                                    :key="'a-' + partner.name">
+                                                    <img v-if="partner.logo" :src="partner.logo"
+                                                        :alt="partner.name + ' logo'" class="partner-logo" />
+                                                    <span class="partner-name">{{ partner.name }}</span>
+                                                </div>
+
+                                                <!-- Duplicate loop for seamless scroll -->
+                                                <div class="partner-item" v-for="partner in partners"
+                                                    :key="'b-' + partner.name">
+                                                    <img v-if="partner.logo" :src="partner.logo"
+                                                        :alt="partner.name + ' logo'" class="partner-logo" />
+                                                    <span class="partner-name">{{ partner.name }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end partners-section -->
                                 </div>
                             </div>
                         </div>
                     </div>
+
 
                     <!-- Move login inside nav for mobile -->
                     <div class="nav-right-actions nav-right-actions--inline">
@@ -323,25 +355,56 @@
             </div>
         </section>
 
-        <!-- What We Can Offer -->
-        <section id="offer" class="section section-muted">
+        <!-- What We Can Offer (TABBED) -->
+        <section id="offer" class="section section-offer">
             <div class="section-inner">
                 <h2 class="section-title">What We Can Offer</h2>
+                <p class="section-text">
+                    Support your people and your operations with one connected platform.
+                </p>
 
-                <!-- Employee Benefits -->
-                <div class="section-block">
-                    <h3 class="subheading">Employee benefits</h3>
-                    <div class="card-grid">
+                <!-- Tabs -->
+                <div class="offer-tabs">
+                    <button type="button" class="offer-tab"
+                        :class="{ 'offer-tab--active': activeOfferTab === 'employee' }"
+                        @click="activeOfferTab = 'employee'">
+                        Employee benefits
+                    </button>
+                    <button type="button" class="offer-tab"
+                        :class="{ 'offer-tab--active': activeOfferTab === 'business' }"
+                        @click="activeOfferTab = 'business'">
+                        Business benefits
+                    </button>
+                </div>
+
+                <!-- Employee benefits panel -->
+                <div v-if="activeOfferTab === 'employee'" class="offer-panel">
+                    <h3 class="subheading subheading--center">
+                        Employee benefits
+                    </h3>
+                    <p class="offer-panel-text">
+                        Reward and retain your teams with fuel savings and curated perks.
+                    </p>
+
+                    <div class="card-grid card-grid--2">
                         <div class="info-card">
-                            <div class="card-icon">SH</div>
-                            <h4>Shell: Petrol discount</h4>
+                            <div class="info-card-header">
+                                <div class="card-icon" aria-hidden="true">
+                                    <i class="fa-solid fa-gas-pump"></i>
+                                </div>
+                                <h4>Shell: Petrol discount</h4>
+                            </div>
                             <p>
                                 Give your drivers access to Shell fuel discounts and rewards.
                             </p>
                         </div>
                         <div class="info-card">
-                            <div class="card-icon">CB</div>
-                            <h4>Curated benefits</h4>
+                            <div class="info-card-header">
+                                <div class="card-icon" aria-hidden="true">
+                                    <i class="fa-solid fa-gift"></i>
+                                </div>
+                                <h4>Curated benefits</h4>
+                            </div>
                             <p>
                                 Offer employees a range of curated perks and rewards all in one place.
                             </p>
@@ -349,94 +412,158 @@
                     </div>
                 </div>
 
-                <!-- Business Benefits -->
-                <div class="section-block">
-                    <h3 class="subheading">Business benefits</h3>
-                    <div class="card-grid business-grid">
-                        <div class="info-card">
-                            <div class="card-icon">CB</div>
-                            <h4>Corporate banking</h4>
-                            <p>
-                                Get full control of your business accounts, payments, and transactions
-                                from a unified dashboard.
-                            </p>
+                <!-- Business benefits panel -->
+                <div v-else class="offer-panel">
+                    <h3 class="subheading subheading--center">
+                        Business benefits
+                    </h3>
+                    <p class="offer-panel-text">
+                        Run banking, payments, and key corporate processes from one control centre.
+                    </p>
+
+                    <div class="business-layout">
+                        <!-- Column 1: Corporate banking -->
+                        <div class="business-column">
+                            <p class="offer-group-title offer-group-title--left">Corporate banking</p>
+                            <div class="card-grid card-grid--banking">
+                                <div class="info-card">
+                                    <div class="info-card-header">
+                                        <div class="card-icon" aria-hidden="true">
+                                            <i class="fa-solid fa-building-columns"></i>
+                                        </div>
+                                        <h4>Global Multi Currency Account</h4>
+                                    </div>
+                                    <p>
+                                        Streamline cross-border finance, helping your business move with agility and act
+                                        locally anywhere.
+                                    </p>
+                                </div>
+
+                                <div class="info-card">
+                                    <div class="info-card-header">
+                                        <div class="card-icon" aria-hidden="true">
+                                            <i class="fa-solid fa-credit-card"></i>
+                                        </div>
+                                        <h4>Global Card Issuance</h4>
+                                    </div>
+                                    <p>
+                                        Transform your expense management and empower your teams with a flexible card
+                                        issuance platform.
+                                    </p>
+                                </div>
+
+                                <div class="info-card">
+                                    <div class="info-card-header">
+                                        <div class="card-icon" aria-hidden="true">
+                                            <i class="fa-solid fa-sack-dollar"></i>
+                                        </div>
+                                        <h4>Global Payouts</h4>
+                                    </div>
+                                    <p>
+                                        Simplify your entire payout process with automated, accurate, and globally
+                                        scalable
+                                        payments.
+                                    </p>
+                                </div>
+
+                                <div class="info-card">
+                                    <div class="info-card-header">
+                                        <div class="card-icon" aria-hidden="true">
+                                            <i class="fa-solid fa-globe"></i>
+                                        </div>
+                                        <h4>Foreign Exchange (FX)</h4>
+                                    </div>
+                                    <p>
+                                        Enjoy seamless currency conversion with low fees, live rates, and multi-currency
+                                        holding. Accept international payments with ease and simplify your global
+                                        operations.
+                                    </p>
+                                </div>
+
+                                <div class="info-card">
+                                    <div class="info-card-header">
+                                        <div class="card-icon" aria-hidden="true">
+                                            <i class="fa-solid fa-chart-line"></i>
+                                        </div>
+                                        <h4>Automated Reconciliation</h4>
+                                    </div>
+                                    <p>
+                                        Achieve instant, accurate reconciliation with automated matching and live data
+                                        syncing, streamlining your financial workflows end-to-end.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="info-card">
-                            <div class="card-icon">VA</div>
-                            <h4>Virtual Debit Cards &amp; Accounts</h4>
-                            <p>
-                                Simplify operations with virtual debit cards and dedicated
-                                corporate accounts for your business.
-                            </p>
-                        </div>
-                        <div class="info-card">
-                            <div class="card-icon">PR</div>
-                            <h4>Payroll &amp; Payments</h4>
-                            <p>
-                                Automate payroll, payments, and reconciliation to save time
-                                and minimise errors.
-                            </p>
-                        </div>
-                        <div class="info-card">
-                            <div class="card-icon">FX</div>
-                            <h4>Foreign Exchange (FX)</h4>
-                            <p>
-                                Conduct seamless multi-currency transactions with competitive
-                                exchange rates.
-                            </p>
-                        </div>
-                        <div class="info-card">
-                            <div class="card-icon">AR</div>
-                            <h4>Automated Reconciliation</h4>
-                            <p>
-                                Gain full cash flow visibility with smart reconciliation tools
-                                integrated into your operations.
-                            </p>
+
+                        <!-- Column 2: Corporate processes -->
+                        <div class="business-column">
+                            <p class="offer-group-title offer-group-title--left">Corporate processes</p>
+                            <div class="card-grid card-grid--processes">
+                                <div class="info-card">
+                                    <div class="info-card-header">
+                                        <div class="card-icon" aria-hidden="true">
+                                            <i class="fa-solid fa-car-side"></i>
+                                        </div>
+                                        <h4>Corporate booking</h4>
+                                    </div>
+                                    <p>
+                                        Seamlessly book corporate rides directly from your portal.
+                                    </p>
+                                </div>
+
+                                <div class="info-card">
+                                    <div class="info-card-header">
+                                        <div class="card-icon" aria-hidden="true">
+                                            <i class="fa-solid fa-file-invoice-dollar"></i>
+                                        </div>
+                                        <h4>Rental collection</h4>
+                                    </div>
+                                    <p>
+                                        Track all rental payments in one place and generate invoices with ease.
+                                    </p>
+                                </div>
+
+                                <div class="info-card">
+                                    <div class="info-card-header">
+                                        <div class="card-icon" aria-hidden="true">
+                                            <i class="fa-solid fa-people-group"></i>
+                                        </div>
+                                        <h4>Payroll</h4>
+                                    </div>
+                                    <p>
+                                        Run payroll with approvals, automated payouts, and better cost visibility.
+                                    </p>
+                                </div>
+
+                                <div class="info-card">
+                                    <div class="info-card-header">
+                                        <div class="card-icon" aria-hidden="true">
+                                            <i class="fa-solid fa-table-columns"></i>
+                                        </div>
+                                        <h4>CMS</h4>
+                                    </div>
+                                    <p>
+                                        Customize your very own web design with our CMS.
+                                    </p>
+                                </div>
+
+                                <div class="info-card">
+                                    <div class="info-card-header">
+                                        <div class="card-icon" aria-hidden="true">
+                                            <i class="fa-solid fa-gears"></i>
+                                        </div>
+                                        <h4>TOMs</h4>
+                                    </div>
+                                    <p>
+                                        Track, assign, and oversee vehicles, drivers, and jobs seamlessly — reducing
+                                        operational friction.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Corporate Processes -->
-                <div class="section-block">
-                    <h3 class="subheading">Corporate processes</h3>
-                    <div class="card-grid business-grid">
-                        <div class="info-card">
-                            <div class="card-icon">CB</div>
-                            <h4>Corporate booking</h4>
-                            <p>
-                                Manage ride and trip bookings from a single portal with no manual claims.
-                            </p>
-                        </div>
-                        <div class="info-card">
-                            <div class="card-icon">RC</div>
-                            <h4>Rental collection</h4>
-                            <p>
-                                Track rentals, invoices, and payment status to keep cash flow predictable.
-                            </p>
-                        </div>
-                        <div class="info-card">
-                            <div class="card-icon">PY</div>
-                            <h4>Payroll</h4>
-                            <p>
-                                Run payroll with approvals, automated payouts, and better cost visibility.
-                            </p>
-                        </div>
-                        <div class="info-card">
-                            <div class="card-icon">CMS</div>
-                            <h4>CMS</h4>
-                            <p>
-                                Centralise rentals, payroll, and balances into a single control centre.
-                            </p>
-                        </div>
-                        <div class="info-card">
-                            <div class="card-icon">TM</div>
-                            <h4>TOMs</h4>
-                            <p>
-                                Standardise and streamline your Target Operating Models with NovaGO.
-                            </p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -514,14 +641,22 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import whatsappIcon from '../assets/whatsapp_icon.png'
+import primeGroupLogo from '../assets/partners/prime-group.png'
+import veepLogo from '../assets/partners/veep.png'
+import gojekLogo from '../assets/partners/gojek.png'
+import transtarLogo from '../assets/partners/transtar.png'
+import shellLogo from '../assets/partners/shell.png'
+import bestPetrolLogo from '../assets/partners/best-petrol.png'
+import zoqqLogo from '../assets/partners/zoqq.png'
+
 
 const router = useRouter()
 
 const activeMenu = ref(null)
 const isMobileMenuOpen = ref(false)
+const activeOfferTab = ref('employee')
 
 const openMenuDesktop = (name) => {
-    // Only use hover behaviour on larger screens
     if (window.innerWidth >= 960) {
         activeMenu.value = name
     }
@@ -534,7 +669,6 @@ const closeMenuDesktop = () => {
 }
 
 const toggleDropdown = (name) => {
-    // Works for both desktop (click) and mobile (accordion-style)
     activeMenu.value = activeMenu.value === name ? null : name
 }
 
@@ -554,6 +688,17 @@ const closeAllNav = () => {
     activeMenu.value = null
     isMobileMenuOpen.value = false
 }
+
+const partners = [
+    { name: 'Prime Group', logo: primeGroupLogo },
+    { name: 'Veep', logo: veepLogo },
+    { name: 'Gojek', logo: gojekLogo },
+    { name: 'Transtar', logo: transtarLogo },
+    { name: 'Shell', logo: shellLogo },
+    { name: 'Best Petrol', logo: bestPetrolLogo },
+    { name: 'ZOQQ', logo: zoqqLogo }
+]
+
 
 const showcaseSlides = [
     {
@@ -600,7 +745,6 @@ const showcaseSlides = [
         ]
     }
 ]
-
 
 const currentSlide = ref(0)
 
@@ -652,7 +796,7 @@ const fakeSubmit = () => {
 }
 
 .nav-inner {
-    max-width: 1100px;
+    max-width: 1300px;
     margin: 0 auto;
     padding: 0.9rem 1.25rem;
     display: flex;
@@ -719,10 +863,6 @@ const fakeSubmit = () => {
     display: flex;
     align-items: center;
     gap: 1.25rem;
-}
-
-.nav-links--open {
-    /* used only on mobile via media query */
 }
 
 .nav-link.active {
@@ -874,31 +1014,6 @@ const fakeSubmit = () => {
     background: #f3f4ff;
 }
 
-.mega-right {
-    display: flex;
-    align-items: stretch;
-}
-
-.mega-feature {
-    padding: 1rem 1.1rem 1.1rem;
-    border-radius: 0.9rem;
-    background: #f3f4ff;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.mega-feature-title {
-    font-size: 0.88rem;
-    font-weight: 600;
-    margin-bottom: 0.3rem;
-}
-
-.mega-feature-text {
-    font-size: 0.8rem;
-    color: #4b5563;
-}
-
 /* Hero */
 .hero {
     padding: 4.2rem 1.25rem 4rem;
@@ -906,7 +1021,7 @@ const fakeSubmit = () => {
 }
 
 .hero-inner {
-    max-width: 1100px;
+    max-width: 1300px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
@@ -1130,7 +1245,7 @@ const fakeSubmit = () => {
 }
 
 .section-inner {
-    max-width: 1100px;
+    max-width: 1300px;
     margin: 0 auto;
 }
 
@@ -1252,47 +1367,162 @@ const fakeSubmit = () => {
     background: #2563eb;
 }
 
-/* Offer blocks */
-.section-block {
-    margin-top: 2rem;
+/* ===== What We Can Offer – tabs & panels ===== */
+
+.section-offer {
+    background: radial-gradient(circle at top, #eef2ff, #f9fafb 65%);
+}
+
+.offer-tabs {
+    margin-top: 1.4rem;
+    display: inline-flex;
+    padding: 0.2rem;
+    border-radius: 999px;
+    background: #e5e7eb80;
+    gap: 0.2rem;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.offer-tab {
+    border: none;
+    background: transparent;
+    padding: 0.4rem 1.5rem;
+    font-size: 0.86rem;
+    border-radius: 999px;
+    cursor: pointer;
+    color: #4b5563;
+    transition: background 0.16s ease, color 0.16s ease, box-shadow 0.16s ease;
+    white-space: nowrap;
+}
+
+.offer-tab--active {
+    background: #ffffff;
+    color: #1d4ed8;
+    box-shadow: 0 6px 14px rgba(148, 163, 184, 0.45);
+}
+
+.offer-panel {
+    max-width: 1300px;
+    margin: 2rem auto 0;
+}
+
+.offer-panel-text {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #4b5563;
+    margin-bottom: 1.6rem;
 }
 
 .subheading {
     font-size: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     color: #111827;
 }
 
-/* Cards */
+.subheading--center {
+    text-align: center;
+}
+
+/* Business sections */
+.business-section {
+    margin-top: 2rem;
+}
+
+.business-layout {
+    display: grid;
+    grid-template-columns: 3fr 3fr;
+    gap: 2rem;
+    align-items: flex-start;
+    margin-top: 2rem;
+}
+
+.business-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Reuse existing style but left-align for columns */
+.offer-group-title--left {
+    text-align: left;
+}
+
+/* 2-column grids inside each column on desktop */
+.card-grid--banking {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.4rem;
+}
+
+.card-grid--processes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.4rem;
+}
+
+/* Responsiveness */
+@media (max-width: 1024px) {
+    .business-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 960px) {
+
+    .card-grid--banking,
+    .card-grid--processes {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.offer-group-title {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #6b7280;
+    margin-bottom: 0.9rem;
+    text-align: center;
+}
+
+/* Cards & grid */
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.2rem;
+    gap: 1.4rem;
+    max-width: 960px;
+    margin: 0 auto;
 }
 
-.business-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.card-grid.two-col {
+.card-grid--2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.card-grid--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.card-grid--4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.card-grid--5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+
+/* New cleaner card design */
 .info-card {
     background: #ffffff;
     border-radius: 1rem;
-    padding: 1.4rem 1.4rem;
+    padding: 1.3rem 1.2rem;
     border: 1px solid #e5e7eb;
-    box-shadow: 0 14px 30px rgba(148, 163, 184, 0.35);
+    box-shadow: 0 12px 30px rgba(148, 163, 184, 0.3);
     transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-    min-height: 160px;
+    min-height: 150px;
 }
 
-.info-card h4 {
-    font-size: 0.98rem;
-    margin-bottom: 0.5rem;
-    color: #111827;
-}
 
 .info-card p {
     font-size: 0.86rem;
@@ -1300,24 +1530,46 @@ const fakeSubmit = () => {
 }
 
 .info-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 38px rgba(148, 163, 184, 0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(148, 163, 184, 0.45);
     border-color: #c7d2fe;
 }
 
-/* Card icon – all white text */
+/* Header row: icon left, title pushed to right side of the card */
+.info-card-header {
+    display: flex;
+    align-items: center;
+    /* vertically center icon + title */
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.4rem;
+}
+
+/* Make the title hug the right and stay on one line if needed */
+.info-card h4 {
+    font-size: 0.98rem;
+    margin: 0;
+    color: #111827;
+    text-align: left;
+    flex: 1;
+    /* take remaining space */
+}
+
+/* Icon stays on the left, no extra bottom margin */
 .card-icon {
-    width: 34px;
-    height: 34px;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #2563eb, #38bdf8);
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    border: 1px solid #d1e0ff;
+    background: #eff6ff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.78rem;
-    color: #ffffff;
-    margin-bottom: 0.9rem;
+    font-size: 1.2rem;
+    color: #2563eb;
+    margin: 0;
 }
+
 
 /* Contact form */
 .contact-form {
@@ -1384,7 +1636,7 @@ const fakeSubmit = () => {
 }
 
 .footer-inner {
-    max-width: 1100px;
+    max-width: 1300px;
     margin: 0 auto;
     font-size: 0.8rem;
     color: #6b7280;
@@ -1425,11 +1677,6 @@ const fakeSubmit = () => {
     text-decoration: none;
 }
 
-.whatsapp-icon {
-    font-size: 26px;
-    color: #ffffff;
-}
-
 .whatsapp-icon-img {
     width: 100%;
     height: 100%;
@@ -1438,18 +1685,19 @@ const fakeSubmit = () => {
 }
 
 /* Partnerships mega – full card look */
+/* Partnerships mega – keep it centered but not full-width */
 .mega--partnership {
     grid-template-columns: 1fr;
     justify-content: center;
-
-    /* make the mega container “invisible” */
-    padding: 0;
+    padding: 0;              /* keep this if you like the card spacing */
     background: transparent;
     border: none;
     box-shadow: none;
 }
 
+/* ⬇️ This is the main change: make the card narrower */
 .partnership-card {
+    max-width: 520px;        /* tweak this number to taste: 480 / 520 / 560 etc */
     width: 100%;
     margin: 0 auto;
     padding: 1.6rem 1.9rem 1.8rem;
@@ -1477,13 +1725,118 @@ const fakeSubmit = () => {
     padding-inline: 1.8rem;
 }
 
+.partners-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.partners-pill {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    background: #eef2ff;
+    color: #111827;
+    border: 1px solid #e5e7eb;
+    white-space: nowrap;
+}
+
+.partners-label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #9ca3af;
+    margin-bottom: 0.4rem;
+}
+
+.partners-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+}
+
+.partners-section {
+    margin-top: 1.2rem;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 0.9rem;
+}
+
+.partners-label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #9ca3af;
+    margin-bottom: 0.4rem;
+}
+
+/* Outer container – hides overflow */
+.partners-marquee {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding: 0.2rem 0;
+}
+
+/* Inner track – scrolls horizontally */
+.partners-track {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.5rem;
+    /* Adjust duration for speed – higher = slower */
+    animation: partners-scroll 25s linear infinite;
+}
+
+/* Pause scroll on hover */
+.partners-marquee:hover .partners-track {
+    animation-play-state: paused;
+}
+
+.partner-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    background: #eef2ff;
+    border: 1px solid #e5e7eb;
+    white-space: nowrap;
+}
+
+/* ✅ Bigger logos */
+.partner-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+.partner-name {
+    font-size: 0.82rem;
+    color: #111827;
+}
+
+/* Infinite scroll keyframes */
+@keyframes partners-scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* because we duplicated the list, -50% gives a seamless loop */
+        transform: translateX(-50%);
+    }
+}
+
+
+
 /* Responsive */
 @media (max-width: 1024px) {
-    .card-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .business-grid {
+    .card-grid--3 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
@@ -1538,7 +1891,6 @@ const fakeSubmit = () => {
         display: none;
     }
 
-    /* Mega menus become inline under each nav item */
     .mega-wrapper {
         position: static;
         transform: none;
@@ -1581,9 +1933,8 @@ const fakeSubmit = () => {
         margin-bottom: 0.5rem;
     }
 
-    .card-grid,
-    .business-grid,
-    .card-grid.two-col {
+    .card-grid--3,
+    .card-grid--2 {
         grid-template-columns: 1fr;
     }
 
@@ -1600,7 +1951,7 @@ const fakeSubmit = () => {
     }
 
     .showcase-content {
-        min-height: 220px;
+        min-height: 255px;
     }
 
     .whatsapp-float {
@@ -1610,14 +1961,15 @@ const fakeSubmit = () => {
         height: 48px;
     }
 
-    .whatsapp-icon {
-        font-size: 22px;
-    }
-
     .footer-inner {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.5rem;
+    }
+
+    .offer-tabs {
+        flex-wrap: wrap;
+        max-width: 100%;
     }
 }
 
