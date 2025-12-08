@@ -202,36 +202,6 @@
                         </div>
                     </div>
 
-                    <!-- 5th NAV: ABOUT US -->
-                    <div class="nav-item has-mega" @mouseenter="openMenuDesktop('company')">
-                        <button class="nav-link" :class="{ active: activeMenu === 'company' }" type="button"
-                            @click="toggleDropdown('company')">
-                            About Us
-                        </button>
-
-                        <div v-if="activeMenu === 'company'" class="mega-wrapper" @mouseleave="closeMenuDesktop">
-                            <div class="mega mega--small">
-                                <div class="mega-left mega-left--2">
-                                    <div class="mega-column">
-                                        <p class="mega-heading">About NovaGO</p>
-
-                                        <button class="mega-link" type="button"
-                                            @click="() => { scrollToSection('who-we-are'); closeAllNav(); }">
-                                            Why NovaGO?
-                                            <span>See how we simplify financial operations for SMEs.</span>
-                                        </button>
-
-                                        <button class="mega-link" type="button"
-                                            @click="() => { scrollToSection('testimonies'); closeAllNav(); }">
-                                            Testimonies
-                                            <span>Hear from businesses using NovaGO.</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Move login inside nav for mobile -->
                     <div class="nav-right-actions nav-right-actions--inline">
                         <button class="nav-link login-link" @click="handleLoginClick">
