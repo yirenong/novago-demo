@@ -189,7 +189,7 @@
 
                                         <p class="partnership-text">
                                             Bundle NovaGO with your product or offer Shell fuel benefits to your
-                                            users. <br>Talk to our partnership department to explore co-created
+                                            users. Talk to our partnership department to explore co-created
                                             solutions.
                                         </p>
 
@@ -923,29 +923,50 @@ const fakeSubmit = () => {
     box-shadow: 0 8px 18px rgba(37, 99, 235, 0.3);
 }
 
-/* ========== Mega menu ========== */
+/* ⬇️ Nav items no longer control dropdown position */
 .nav-item {
-    position: relative;
+    position: static;
 }
 
-/* default mega: align left with nav item */
+/* ✅ DESKTOP: centred and stuck to the navbar */
+/* Mega menu sits inside the nav, pushes content down, and is centered */
 .mega-wrapper {
-    position: absolute;
-    top: 100%;
-    margin-top: 0.5rem;
-    width: 860px;
-    max-width: 90vw;
-    z-index: 30;
-    left: 0;
-    right: auto;
-    transform: none;
+    position: static;
+    /* ⬅ back in normal layout, no overlap */
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    /* center the white card */
 }
+
+
+/* ✅ MOBILE / SMALL WIDTHS: no overlap, just push content down */
+@media (max-width: 960px) {
+    .mega-wrapper {
+        position: static;
+        /* back in normal flow */
+        top: auto;
+        left: auto;
+        transform: none;
+        margin-top: 0.5rem;
+        width: 100%;
+        max-width: 100%;
+        z-index: auto;
+    }
+
+    .mega-column[data-v-6b7d1e37] {
+        font-size: 0.84rem;
+        width: 368px;
+    }
+}
+
 
 /* Partnerships (last mega item) – align panel to the right so it stays in view */
-.nav-item.has-mega:last-of-type .mega-wrapper {
+/* .nav-item.has-mega:last-of-type .mega-wrapper {
     left: auto;
     right: 0;
-}
+} */
 
 .mega {
     display: grid;
@@ -956,7 +977,13 @@ const fakeSubmit = () => {
     border-radius: 0.9rem;
     border: 1px solid #e5e7eb;
     box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+
+    width: 860px;
+    /* fixed max width */
+    max-width: 90vw;
+    /* shrink nicely on smaller screens */
 }
+
 
 /* variants */
 .mega--narrow {
@@ -988,6 +1015,7 @@ const fakeSubmit = () => {
 
 .mega-column {
     font-size: 0.84rem;
+    width: 840px;
 }
 
 .mega-heading {
@@ -1932,28 +1960,60 @@ const fakeSubmit = () => {
 }
 
 /* (optional but nice) keep the card inside the viewport on smaller screens */
-.nav-item.has-mega:last-of-type .mega-wrapper {
+/* .nav-item.has-mega:last-of-type .mega-wrapper {
     right: 0;
     left: auto;
-}
+} */
 
 /* ✅ Partnerships dropdown: use a single full-width column */
 .mega-left--partnerships {
     display: grid;
-    grid-template-columns: 1fr;   /* no empty second column */
+    grid-template-columns: 1fr;
+    /* no empty second column */
 }
 
 /* ✅ Partnerships mega: same width as others & clip scroller inside */
 .mega--partnerships {
     width: 860px;
     max-width: 90vw;
-    overflow: hidden;             /* stops the partner chips from hanging out */
+    overflow: hidden;
+    /* stops the partner chips from hanging out */
 }
 
 /* ✅ Keep the partnerships dropdown aligned with the tab */
-.nav-item--partnerships .mega-wrapper {
+/* .nav-item--partnerships .mega-wrapper {
     left: 0;
     right: auto;
+} */
+
+/* ✅ Desktop: center + stick to navbar */
+@media (min-width: 961px) {
+    .mega-wrapper {
+        position: absolute;
+        top: 100%;
+        /* just under the navbar */
+        margin-top: -1px;
+        /* remove the visible gap / border */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 860px;
+        max-width: 90vw;
+        z-index: 30;
+    }
 }
 
+/* ✅ Mobile: normal stacked dropdown, no overlap */
+@media (max-width: 960px) {
+    .mega-wrapper {
+        position: static;
+        top: auto;
+        left: auto;
+        right: auto;
+        transform: none;
+        margin-top: 0.25rem;
+        width: 100%;
+        max-width: 100%;
+        z-index: 1;
+    }
+}
 </style>
