@@ -409,6 +409,7 @@
                 </div>
 
                 <!-- Business benefits panel -->
+                <!-- Business benefits panel -->
                 <div v-else class="offer-panel">
                     <h3 class="subheading subheading--center">
                         Business benefits
@@ -417,11 +418,26 @@
                         Run banking, payments, and key corporate processes from one control centre.
                     </p>
 
+                    <!-- 🔹 NEW: Sub-tabs for Business panel -->
+                    <div class="offer-subtabs">
+                        <button type="button" class="offer-subtab"
+                            :class="{ 'offer-subtab--active': activeBusinessTab === 'banking' }"
+                            @click="activeBusinessTab = 'banking'">
+                            Corporate banking
+                        </button>
+                        <button type="button" class="offer-subtab"
+                            :class="{ 'offer-subtab--active': activeBusinessTab === 'processes' }"
+                            @click="activeBusinessTab = 'processes'">
+                            Corporate processes
+                        </button>
+                    </div>
+
                     <div class="business-layout">
                         <!-- Column 1: Corporate banking -->
-                        <div class="business-column">
+                        <div v-if="activeBusinessTab === 'banking'" class="business-column">
                             <p class="offer-group-title offer-group-title--left">Corporate banking</p>
                             <div class="card-grid card-grid--banking">
+                                <!-- keep your existing banking cards here -->
                                 <div class="info-card">
                                     <div class="info-card-header">
                                         <div class="card-icon" aria-hidden="true">
@@ -457,8 +473,7 @@
                                     </div>
                                     <p>
                                         Simplify your entire payout process with automated, accurate, and globally
-                                        scalable
-                                        payments.
+                                        scalable payments.
                                     </p>
                                 </div>
 
@@ -492,9 +507,10 @@
                         </div>
 
                         <!-- Column 2: Corporate processes -->
-                        <div class="business-column">
+                        <div v-if="activeBusinessTab === 'processes'" class="business-column">
                             <p class="offer-group-title offer-group-title--left">Corporate processes</p>
                             <div class="card-grid card-grid--processes">
+                                <!-- keep your existing processes cards here -->
                                 <div class="info-card">
                                     <div class="info-card-header">
                                         <div class="card-icon" aria-hidden="true">
@@ -559,6 +575,7 @@
                         </div>
                     </div>
                 </div>
+
 
             </div>
         </section>
@@ -650,6 +667,7 @@ const router = useRouter()
 const activeMenu = ref(null)
 const isMobileMenuOpen = ref(false)
 const activeOfferTab = ref('employee')
+const activeBusinessTab = ref('banking')
 
 const openMenuDesktop = (name) => {
     if (window.innerWidth >= 960) {
@@ -1468,7 +1486,6 @@ const fakeSubmit = () => {
 
 .business-layout {
     display: grid;
-    grid-template-columns: 3fr 3fr;
     gap: 2rem;
     align-items: flex-start;
     margin-top: 2rem;
@@ -1485,18 +1502,27 @@ const fakeSubmit = () => {
     text-align: left;
 }
 
-/* 2-column grids inside each column on desktop */
-.card-grid--banking {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.4rem;
-}
-
+/* 3×3-style centred grids for Business benefits */
+.card-grid--banking,
 .card-grid--processes {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 310px));
+    /* 3 columns */
     gap: 1.4rem;
+    justify-content: center;
+    /* center the whole grid */
 }
+
+/* On smaller screens, fall back to 1 column (stacked) */
+@media (max-width: 960px) {
+
+    .card-grid--banking,
+    .card-grid--processes {
+        grid-template-columns: 1fr;
+        justify-content: stretch;
+    }
+}
+
 
 /* Responsiveness */
 @media (max-width: 1024px) {
@@ -2014,6 +2040,44 @@ const fakeSubmit = () => {
         width: 100%;
         max-width: 100%;
         z-index: 1;
+    }
+}
+
+/* Sub-tabs inside the Business benefits panel */
+.offer-subtabs {
+    margin-top: 1.4rem;
+    display: inline-flex;
+    padding: 0.18rem;
+    border-radius: 999px;
+    background: #e5e7eb80;
+    gap: 0.2rem;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.offer-subtab {
+    border: none;
+    background: transparent;
+    padding: 0.35rem 1.4rem;
+    font-size: 0.82rem;
+    border-radius: 999px;
+    cursor: pointer;
+    color: #4b5563;
+    transition: background 0.16s ease, color 0.16s ease, box-shadow 0.16s ease;
+    white-space: nowrap;
+}
+
+.offer-subtab--active {
+    background: #ffffff;
+    color: #0f172a;
+    box-shadow: 0 5px 12px rgba(148, 163, 184, 0.4);
+}
+
+@media (max-width: 960px) {
+    .offer-subtabs {
+        flex-wrap: wrap;
+        max-width: 100%;
     }
 }
 </style>
