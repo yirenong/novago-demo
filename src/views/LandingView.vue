@@ -1,250 +1,7 @@
 <template>
     <div class="landing">
-        <!-- Top navbar -->
-        <header class="top-nav">
-            <div class="nav-inner">
-                <router-link to="/" class="brand" @click="resetNav">
-                    <img src="../assets/NovaGoLogo.png" alt="NovaGO logo" class="brand-logo" />
-                </router-link>
-
-                <!-- Mobile hamburger -->
-                <button class="nav-toggle" type="button" @click="toggleMobileMenu" aria-label="Toggle navigation">
-                    <span :class="['nav-toggle-bar', { open: isMobileMenuOpen }]"></span>
-                    <span :class="['nav-toggle-bar', { open: isMobileMenuOpen }]"></span>
-                    <span :class="['nav-toggle-bar', { open: isMobileMenuOpen }]"></span>
-                </button>
-
-                <nav class="nav-links" :class="{ 'nav-links--open': isMobileMenuOpen }">
-                    <!-- 2nd NAV: SOLUTIONS -->
-                    <div class="nav-item has-mega" @mouseenter="openMenuDesktop('solutions')">
-                        <button class="nav-link" :class="{ active: activeMenu === 'solutions' }" type="button"
-                            @click="toggleDropdown('solutions')">
-                            Custom Solutions
-                        </button>
-
-                        <div v-if="activeMenu === 'solutions'" class="mega-wrapper" @mouseleave="closeMenuDesktop">
-                            <div class="mega mega--narrow">
-                                <div class="mega-left mega-left--2">
-
-                                    <!-- For SMEs -->
-                                    <div class="mega-column">
-                                        <p class="mega-heading">For SMEs</p>
-
-                                        <router-link class="mega-link" to="/dashboard" @click="closeAllNav">
-                                            Corporate booking
-                                            <span>Seamlessly book corporate rides from your portal.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/expense-management" @click="closeAllNav">
-                                            Expense management
-                                            <span>Track and manage business expenses with ease.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/payroll" @click="closeAllNav">
-                                            Payroll
-                                            <span>Simplified salary-related payments in one place.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/" @click="closeAllNav">
-                                            CMS
-                                            <span>Customize your very own web design with our CMS.</span>
-                                        </router-link>
-                                    </div>
-
-                                    <!-- By use cases -->
-                                    <div class="mega-column">
-                                        <p class="mega-heading">By use cases</p>
-
-                                        <router-link class="mega-link" to="/toms" @click="closeAllNav">
-                                            Transport Operator Management System (TOMs)
-                                            <span>Simplify the management of vehicles, drivers and jobs — moving beyond
-                                                manual processes.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/rental-collection-summary"
-                                            @click="closeAllNav">
-                                            Rental collection
-                                            <span>Track rental payments in one view. Invoice generation.</span>
-                                        </router-link>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 1st NAV: PRODUCTS -->
-                    <div class="nav-item has-mega" @mouseenter="openMenuDesktop('products')">
-                        <button class="nav-link" :class="{ active: activeMenu === 'products' }" type="button"
-                            @click="toggleDropdown('products')">
-                            Business Banking
-                        </button>
-
-                        <div v-if="activeMenu === 'products'" class="mega-wrapper" @mouseleave="closeMenuDesktop">
-                            <div class="mega mega--narrow">
-                                <div class="mega-left mega-left--2">
-                                    <!-- Business banking -->
-                                    <div class="mega-column">
-                                        <p class="mega-heading">Business banking</p>
-
-                                        <router-link class="mega-link" to="/global-multi-currency-account"
-                                            @click="closeAllNav">
-                                            Global Multi Currency Account
-                                            <span>Multi-currency accounts to receive funds.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/global-card-issuance" @click="closeAllNav">
-                                            Global Card Issuance
-                                            <span>Physical and virtual cards for real-time payments.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/global-payout" @click="closeAllNav">
-                                            Global Payout
-                                            <span>Send payouts to 190+ countries via local currencies and
-                                                methods.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/fx-conversion-acceptance"
-                                            @click="closeAllNav">
-                                            FX Conversion &amp; Acceptance
-                                            <span>Multi-currency, borderless transactions.</span>
-                                        </router-link>
-                                    </div>
-
-                                    <!-- Spend -->
-                                    <div class="mega-column">
-                                        <p class="mega-heading">Spend</p>
-
-                                        <router-link class="mega-link" to="/corporate-cards" @click="closeAllNav">
-                                            Corporate Cards
-                                            <span>Multi-currency company and employee cards.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/expense-management" @click="closeAllNav">
-                                            Expense Management
-                                            <span>Expense and reimbursement management.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/bill-pay" @click="closeAllNav">
-                                            Bill Pay
-                                            <span>Automated accounts payable management.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/payouts" @click="closeAllNav">
-                                            Payouts
-                                            <span>Programmatic, cost-effective global payouts.</span>
-                                        </router-link>
-
-                                        <router-link class="mega-link" to="/remittance" @click="closeAllNav">
-                                            Remittance
-                                            <span>Cross-border payments.</span>
-                                        </router-link>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 3rd NAV: BENEFITS -->
-                    <div class="nav-item has-mega" @mouseenter="openMenuDesktop('benefits')">
-                        <button class="nav-link" :class="{ active: activeMenu === 'benefits' }" type="button"
-                            @click="toggleDropdown('benefits')">
-                            Benefits
-                        </button>
-
-                        <div v-if="activeMenu === 'benefits'" class="mega-wrapper" @mouseleave="closeMenuDesktop">
-                            <div class="mega mega--small">
-                                <div class="mega-left mega-left--2">
-                                    <div class="mega-column">
-                                        <p class="mega-heading">Benefits marketplace</p>
-
-                                        <router-link class="mega-link" to="/benefits/shell" @click="closeAllNav">
-                                            Shell
-                                            <span>Fuel benefits and rewards for your drivers.</span>
-                                        </router-link>
-                                        <router-link class="mega-link" to="/benefits/shell" @click="closeAllNav">
-                                            Curated Benefits
-                                            <span>Customize benefits specific to your company.</span>
-                                        </router-link>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- PARTNERSHIPS -->
-                    <div class="nav-item has-mega nav-item--partnerships" @mouseenter="openMenuDesktop('partnerships')">
-                        <button class="nav-link" :class="{ active: activeMenu === 'partnerships' }" type="button"
-                            @click="toggleDropdown('partnerships')">
-                            Partnerships
-                        </button>
-
-                        <div v-if="activeMenu === 'partnerships'" class="mega-wrapper" @mouseleave="closeMenuDesktop">
-                            <div class="mega mega--small mega--partnerships">
-                                <div class="mega-left mega-left--partnerships">
-                                    <div class="mega-column">
-                                        <p class="mega-heading">Partnership programme</p>
-
-                                        <h3 class="partnership-title">Work with NovaGO</h3>
-
-                                        <p class="partnership-text">
-                                            Bundle NovaGO with your product or offer Shell fuel benefits to your
-                                            users. Talk to our partnership department to explore co-created
-                                            solutions.
-                                        </p>
-
-                                        <button class="btn-primary partnership-btn" type="button"
-                                            @click="() => { scrollToSection('contact'); closeAllNav(); }">
-                                            Talk to our partnership team
-                                        </button>
-
-                                        <!-- ✅ Current partners with scrolling logos -->
-                                        <div class="partners-section">
-                                            <p class="partners-label">Current partners</p>
-
-                                            <div class="partners-marquee">
-                                                <div class="partners-track">
-                                                    <!-- First loop -->
-                                                    <div class="partner-item" v-for="partner in partners"
-                                                        :key="'a-' + partner.name">
-                                                        <img v-if="partner.logo" :src="partner.logo"
-                                                            :alt="partner.name + ' logo'" class="partner-logo" />
-                                                        <span class="partner-name">{{ partner.name }}</span>
-                                                    </div>
-
-                                                    <!-- Duplicate loop for seamless scroll -->
-                                                    <div class="partner-item" v-for="partner in partners"
-                                                        :key="'b-' + partner.name">
-                                                        <img v-if="partner.logo" :src="partner.logo"
-                                                            :alt="partner.name + ' logo'" class="partner-logo" />
-                                                        <span class="partner-name">{{ partner.name }}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- end partners-section -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Move login inside nav for mobile -->
-                    <div class="nav-right-actions nav-right-actions--inline">
-                        <button class="nav-link login-link" @click="handleLoginClick">
-                            Log in
-                        </button>
-                    </div>
-                </nav>
-
-                <!-- Desktop-only login button -->
-                <div class="nav-right-actions nav-right-actions--desktop">
-                    <button class="nav-link login-link" @click="goToLogin">
-                        Log in
-                    </button>
-                </div>
-            </div>
-        </header>
+        <!-- Modular nav -->
+        <NavBar :is-logged-in="isLoggedIn" @scrollTo="scrollToSection" @logout="handleLogout" />
 
         <!-- Hero -->
         <section class="hero">
@@ -259,8 +16,8 @@
 
                     <p class="hero-tagline">Operate. Bank. Get Rewarded. </p>
                     <p class="hero-subtitle">
-                        Scale smarter: manage operations, control finances, and reward your team with ease — all with
-                        NovaGo.
+                        Scale smarter: manage operations, control finances, and reward your team with ease — all
+                        with NovaGo.
                     </p>
 
                     <div class="hero-actions">
@@ -313,8 +70,8 @@
                     We custom solutions for you to operate, bank, and get rewarded all in one platform.
                 </p>
                 <p class="section-text">
-                    Switch between views to see how NovaGO supports payroll, rental collection,
-                    and corporate banking operations.
+                    Switch between views to see how NovaGO supports payroll, rental collection, and corporate
+                    banking operations.
                 </p>
 
                 <div class="showcase">
@@ -409,7 +166,6 @@
                 </div>
 
                 <!-- Business benefits panel -->
-                <!-- Business benefits panel -->
                 <div v-else class="offer-panel">
                     <h3 class="subheading subheading--center">
                         Business benefits
@@ -418,7 +174,7 @@
                         Run banking, payments, and key corporate processes from one control centre.
                     </p>
 
-                    <!-- 🔹 NEW: Sub-tabs for Business panel -->
+                    <!-- Sub-tabs for Business panel -->
                     <div class="offer-subtabs">
                         <button type="button" class="offer-subtab"
                             :class="{ 'offer-subtab--active': activeBusinessTab === 'banking' }"
@@ -437,7 +193,6 @@
                         <div v-if="activeBusinessTab === 'banking'" class="business-column">
                             <p class="offer-group-title offer-group-title--left">Corporate banking</p>
                             <div class="card-grid card-grid--banking">
-                                <!-- keep your existing banking cards here -->
                                 <div class="info-card">
                                     <div class="info-card-header">
                                         <div class="card-icon" aria-hidden="true">
@@ -510,7 +265,6 @@
                         <div v-if="activeBusinessTab === 'processes'" class="business-column">
                             <p class="offer-group-title offer-group-title--left">Corporate processes</p>
                             <div class="card-grid card-grid--processes">
-                                <!-- keep your existing processes cards here -->
                                 <div class="info-card">
                                     <div class="info-card-header">
                                         <div class="card-icon" aria-hidden="true">
@@ -575,8 +329,6 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </section>
 
@@ -643,7 +395,7 @@
             </div>
         </footer>
 
-        <!-- ✅ Floating WhatsApp button -->
+        <!-- Floating WhatsApp button -->
         <a href="https://wa.me/6591234567" class="whatsapp-float" target="_blank" rel="noopener">
             <img :src="whatsappIcon" alt="Chat with us on WhatsApp" class="whatsapp-icon-img" />
         </a>
@@ -651,66 +403,24 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import NavBar from '../components/MainscreenNarBar.vue'
 import whatsappIcon from '../assets/whatsapp_icon.png'
-import primeGroupLogo from '../assets/partners/prime-group.png'
-import veepLogo from '../assets/partners/veep.png'
-import gojekLogo from '../assets/partners/gojek.png'
-import transtarLogo from '../assets/partners/transtar.png'
-import shellLogo from '../assets/partners/shell.png'
-import bestPetrolLogo from '../assets/partners/best-petrol.png'
-import zoqqLogo from '../assets/partners/zoqq.png'
 
+/** Simple login state example – adjust to your real auth setup */
 const router = useRouter()
+const token = ref(localStorage.getItem('access_token') || null)
+const isLoggedIn = computed(() => !!token.value)
 
-const activeMenu = ref(null)
-const isMobileMenuOpen = ref(false)
+const handleLogout = () => {
+    token.value = null
+    localStorage.removeItem('access_token')
+    router.push('/') // optional redirect on logout
+}
+
 const activeOfferTab = ref('employee')
 const activeBusinessTab = ref('banking')
-
-const openMenuDesktop = (name) => {
-    if (window.innerWidth >= 960) {
-        activeMenu.value = name
-    }
-}
-
-const closeMenuDesktop = () => {
-    if (window.innerWidth >= 960) {
-        activeMenu.value = null
-    }
-}
-
-const toggleDropdown = (name) => {
-    activeMenu.value = activeMenu.value === name ? null : name
-}
-
-const toggleMobileMenu = () => {
-    isMobileMenuOpen.value = !isMobileMenuOpen.value
-    if (!isMobileMenuOpen.value) {
-        activeMenu.value = null
-    }
-}
-
-const resetNav = () => {
-    activeMenu.value = null
-    isMobileMenuOpen.value = false
-}
-
-const closeAllNav = () => {
-    activeMenu.value = null
-    isMobileMenuOpen.value = false
-}
-
-const partners = [
-    { name: 'Prime Group', logo: primeGroupLogo },
-    { name: 'Veep', logo: veepLogo },
-    { name: 'Gojek', logo: gojekLogo },
-    { name: 'Transtar', logo: transtarLogo },
-    { name: 'Shell', logo: shellLogo },
-    { name: 'Best Petrol', logo: bestPetrolLogo },
-    { name: 'ZOQQ', logo: zoqqLogo }
-]
 
 const showcaseSlides = [
     {
@@ -774,15 +484,6 @@ const scrollToSection = (id) => {
     }
 }
 
-const goToLogin = () => {
-    closeAllNav()
-    router.push('/login')
-}
-
-const handleLoginClick = () => {
-    goToLogin()
-}
-
 const fakeSubmit = () => {
     alert('Demo request submitted. (Placeholder action)')
 }
@@ -795,277 +496,6 @@ const fakeSubmit = () => {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     color: #0f172a;
     background: #f3f4fd;
-}
-
-/* Top nav */
-.top-nav {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid #e5e7eb;
-}
-
-.nav-inner {
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 0.9rem 1.25rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    position: relative;
-}
-
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    color: inherit;
-}
-
-.brand-logo {
-    height: 56px;
-    width: auto;
-    display: block;
-}
-
-.brand:hover {
-    text-decoration: none;
-}
-
-/* Mobile hamburger */
-.nav-toggle {
-    display: none;
-    margin-left: auto;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    padding: 0.25rem;
-}
-
-.nav-toggle-bar {
-    display: block;
-    width: 20px;
-    height: 2px;
-    border-radius: 999px;
-    background: #4b5563;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.nav-toggle-bar+.nav-toggle-bar {
-    margin-top: 4px;
-}
-
-.nav-toggle-bar.open:nth-child(1) {
-    transform: translateY(6px) rotate(45deg);
-}
-
-.nav-toggle-bar.open:nth-child(2) {
-    opacity: 0;
-}
-
-.nav-toggle-bar.open:nth-child(3) {
-    transform: translateY(-6px) rotate(-45deg);
-}
-
-.nav-links {
-    margin-left: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-}
-
-.nav-link.active {
-    color: #1d4ed8;
-}
-
-.nav-link.active::after {
-    width: 100%;
-}
-
-.nav-right-actions {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.nav-right-actions--inline {
-    display: none;
-}
-
-.nav-right-actions--desktop {
-    display: flex;
-}
-
-.nav-link {
-    border: none;
-    background: none;
-    padding: 0;
-    font-size: 0.88rem;
-    color: #4b5563;
-    cursor: pointer;
-    position: relative;
-}
-
-.nav-link::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(to right, #2563eb, #38bdf8);
-    border-radius: 999px;
-    transition: width 0.15s ease;
-}
-
-.nav-link:hover::after {
-    width: 100%;
-}
-
-.login-link {
-    font-size: 0.86rem;
-}
-
-.nav-cta {
-    padding: 0.55rem 1.1rem;
-    border-radius: 999px;
-    border: 1px solid #2563eb;
-    background: #2563eb;
-    color: #ffffff;
-    font-size: 0.82rem;
-    cursor: pointer;
-    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.3);
-}
-
-/* ⬇️ Nav items no longer control dropdown position */
-.nav-item {
-    position: static;
-}
-
-/* ✅ DESKTOP: centred and stuck to the navbar */
-/* Mega menu sits inside the nav, pushes content down, and is centered */
-.mega-wrapper {
-    position: static;
-    /* ⬅ back in normal layout, no overlap */
-    width: 100%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    /* center the white card */
-}
-
-
-/* ✅ MOBILE / SMALL WIDTHS: no overlap, just push content down */
-@media (max-width: 960px) {
-    .mega-wrapper {
-        position: static;
-        /* back in normal flow */
-        top: auto;
-        left: auto;
-        transform: none;
-        margin-top: 0.5rem;
-        width: 100%;
-        max-width: 100%;
-        z-index: auto;
-    }
-
-    .mega-column[data-v-6b7d1e37] {
-        font-size: 0.84rem;
-        width: 368px;
-    }
-}
-
-
-/* Partnerships (last mega item) – align panel to the right so it stays in view */
-/* .nav-item.has-mega:last-of-type .mega-wrapper {
-    left: auto;
-    right: 0;
-} */
-
-.mega {
-    display: grid;
-    grid-template-columns: 4fr 2fr;
-    gap: 1.5rem;
-    padding: 1.4rem 1.6rem;
-    background: #ffffff;
-    border-radius: 0.9rem;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
-
-    width: 860px;
-    /* fixed max width */
-    max-width: 90vw;
-    /* shrink nicely on smaller screens */
-}
-
-
-/* variants */
-.mega--narrow {
-    grid-template-columns: 1fr;
-}
-
-.mega--small {
-    grid-template-columns: 1fr;
-}
-
-.mega-left {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1.2rem;
-}
-
-.mega-left--3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.mega-left--2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-/* ✅ Partnerships: use full width, one column */
-.mega-left--partnership {
-    grid-template-columns: 1fr;
-}
-
-.mega-column {
-    font-size: 0.84rem;
-    width: 840px;
-}
-
-.mega-heading {
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #9ca3af;
-    margin-bottom: 0.4rem;
-}
-
-.mega-link {
-    display: block;
-    width: 100%;
-    text-align: left;
-    border: none;
-    background: none;
-    padding: 0.45rem 0.4rem;
-    border-radius: 0.6rem;
-    cursor: pointer;
-    color: #111827;
-    font-size: 0.86rem;
-    text-decoration: none;
-}
-
-.mega-link span {
-    display: block;
-    font-size: 0.76rem;
-    color: #6b7280;
-}
-
-.mega-link:hover {
-    background: #f3f4ff;
 }
 
 /* Hero */
@@ -1421,10 +851,9 @@ const fakeSubmit = () => {
     background: #2563eb;
 }
 
-/* ===== What We Can Offer – tabs & panels ===== */
-
+/* What We Can Offer */
 .section-offer {
-    background: radial-gradient(circle at top, #eef2ff, #f9fafb 65%);
+    background: radial-gradient(circle at top, #eef2ff, #f9fafb 85%);
 }
 
 .offer-tabs {
@@ -1479,11 +908,6 @@ const fakeSubmit = () => {
     text-align: center;
 }
 
-/* Business sections */
-.business-section {
-    margin-top: 2rem;
-}
-
 .business-layout {
     display: grid;
     gap: 2rem;
@@ -1497,44 +921,6 @@ const fakeSubmit = () => {
     gap: 1rem;
 }
 
-/* Reuse existing style but left-align for columns */
-.offer-group-title--left {
-    text-align: left;
-}
-
-/* 3×3-style centred grids for Business benefits */
-.card-grid--banking,
-.card-grid--processes {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 310px));
-    /* 3 columns */
-    gap: 1.4rem;
-    justify-content: center;
-    /* center the whole grid */
-}
-
-/* On smaller screens, fall back to 1 column (stacked) */
-@media (max-width: 960px) {
-
-    .card-grid--banking,
-    .card-grid--processes {
-        grid-template-columns: 1fr;
-        justify-content: stretch;
-    }
-}
-
-
-/* Responsiveness */
-@media (max-width: 1024px) {
-    .business-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .card-grid--3 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
 .offer-group-title {
     font-size: 0.8rem;
     text-transform: uppercase;
@@ -1544,7 +930,11 @@ const fakeSubmit = () => {
     text-align: center;
 }
 
-/* Cards & grid */
+.offer-group-title--left {
+    text-align: center;
+}
+
+/* Business grids */
 .card-grid {
     display: grid;
     gap: 1.4rem;
@@ -1560,15 +950,15 @@ const fakeSubmit = () => {
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.card-grid--4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+.card-grid--banking,
+.card-grid--processes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 310px));
+    gap: 1.4rem;
+    justify-content: center;
 }
 
-.card-grid--5 {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-}
-
-/* New cleaner card design */
+/* Cards */
 .info-card {
     background: #ffffff;
     border-radius: 1rem;
@@ -1590,7 +980,6 @@ const fakeSubmit = () => {
     border-color: #c7d2fe;
 }
 
-/* Header row: icon left, title pushed to right side of the card */
 .info-card-header {
     display: flex;
     align-items: center;
@@ -1599,7 +988,6 @@ const fakeSubmit = () => {
     margin-bottom: 0.4rem;
 }
 
-/* Make the title hug the right and stay on one line if needed */
 .info-card h4 {
     font-size: 0.98rem;
     margin: 0;
@@ -1608,7 +996,6 @@ const fakeSubmit = () => {
     flex: 1;
 }
 
-/* Icon stays on the left, no extra bottom margin */
 .card-icon {
     width: 44px;
     height: 44px;
@@ -1711,7 +1098,7 @@ const fakeSubmit = () => {
     color: #1d4ed8;
 }
 
-/* ✅ Floating WhatsApp button styles */
+/* Floating WhatsApp button */
 .whatsapp-float {
     position: fixed;
     right: 24px;
@@ -1736,178 +1123,49 @@ const fakeSubmit = () => {
     display: block;
 }
 
-/* Partnership text styles */
-.partnership-title {
-    font-size: 1.05rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    color: #111827;
-}
-
-.partnership-text {
-    font-size: 0.9rem;
-    color: #4b5563;
-    line-height: 1.55;
-    margin-bottom: 1.2rem;
-}
-
-.partnership-btn {
-    align-self: flex-start;
-    padding-inline: 1.8rem;
-}
-
-.partners-section {
-    margin-top: 1.2rem;
-    border-top: 1px solid #e5e7eb;
-    padding-top: 0.9rem;
-}
-
-.partners-label {
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #9ca3af;
-    margin-bottom: 0.4rem;
-}
-
-/* Outer container – hides overflow */
-.partners-marquee {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    padding: 0.2rem 0;
-}
-
-/* Inner track – scrolls horizontally */
-.partners-track {
+/* Business sub-tabs */
+.offer-subtabs {
+    margin-top: 1.4rem;
     display: inline-flex;
-    align-items: center;
-    gap: 1.5rem;
-    animation: partners-scroll 25s linear infinite;
-}
-
-/* Pause scroll on hover */
-.partners-marquee:hover .partners-track {
-    animation-play-state: paused;
-}
-
-.partner-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.4rem 0.9rem;
+    padding: 0.18rem;
     border-radius: 999px;
-    background: #eef2ff;
-    border: 1px solid #e5e7eb;
+    background: #e5e7eb80;
+    gap: 0.2rem;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.offer-subtab {
+    border: none;
+    background: transparent;
+    padding: 0.35rem 1.4rem;
+    font-size: 0.82rem;
+    border-radius: 999px;
+    cursor: pointer;
+    color: #4b5563;
+    transition: background 0.16s ease, color 0.16s ease, box-shadow 0.16s ease;
     white-space: nowrap;
 }
 
-/* ✅ Bigger logos */
-.partner-logo {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    border-radius: 6px;
-}
-
-.partner-name {
-    font-size: 0.82rem;
-    color: #111827;
-}
-
-/* Infinite scroll keyframes */
-@keyframes partners-scroll {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(-50%);
-    }
+.offer-subtab--active {
+    background: #ffffff;
+    color: #0f172a;
+    box-shadow: 0 5px 12px rgba(148, 163, 184, 0.4);
 }
 
 /* Responsive */
-@media (max-width: 960px) {
-    .nav-inner {
-        padding: 0.8rem 1rem;
-    }
-
-    .nav-toggle {
-        display: block;
-    }
-
-    .nav-links {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        margin-left: 0;
-        padding: 0.75rem 1rem 1rem;
-        background: #ffffff;
-        border-bottom: 1px solid #e5e7eb;
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-        transform: translateY(-4px);
-        transition: max-height 0.22s ease, opacity 0.18s ease, transform 0.18s ease;
-    }
-
-    .nav-links--open {
-        max-height: 75vh;
-        overflow-y: auto;
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .nav-item {
-        width: 100%;
-    }
-
-    .nav-link {
-        width: 100%;
-        text-align: left;
-        padding: 0.4rem 0;
-    }
-
-    .nav-link::after {
-        display: none;
-    }
-
-    /* Mega behaviour on mobile: full width, stacked */
-    .mega-wrapper {
-        position: static;
-        transform: none;
-        width: 100%;
-        margin-top: 0.25rem;
-        left: 0;
-        right: auto;
-    }
-
-    .mega {
-        box-shadow: none;
-        border-radius: 0.6rem;
-        padding: 0.9rem 0.9rem 0.95rem;
-    }
-
-    .mega-left {
+@media (max-width: 1024px) {
+    .business-layout {
         grid-template-columns: 1fr;
     }
 
-    .nav-right-actions--desktop {
-        display: none;
+    .card-grid--3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+}
 
-    .nav-right-actions--inline {
-        display: flex;
-        margin-left: 0;
-        margin-top: 0.4rem;
-        justify-content: flex-start;
-    }
-
+@media (max-width: 960px) {
     .hero {
         padding-top: 3.4rem;
     }
@@ -1960,6 +1218,11 @@ const fakeSubmit = () => {
         flex-wrap: wrap;
         max-width: 100%;
     }
+
+    .offer-subtabs {
+        flex-wrap: wrap;
+        max-width: 100%;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1970,114 +1233,6 @@ const fakeSubmit = () => {
 
     .section {
         padding-inline: 1rem;
-    }
-}
-
-/* 🔧 1) Make the Partnerships panel use one column (full width of the card) */
-.nav-item.has-mega:last-of-type .mega-left {
-    grid-template-columns: 1fr;
-    /* instead of the default 2 columns */
-}
-
-/* 🔧 2) Prevent any content (logos track) from sticking out of the white card */
-.nav-item.has-mega:last-of-type .mega {
-    overflow: hidden;
-    /* clips the scrolling partner chips */
-}
-
-/* (optional but nice) keep the card inside the viewport on smaller screens */
-/* .nav-item.has-mega:last-of-type .mega-wrapper {
-    right: 0;
-    left: auto;
-} */
-
-/* ✅ Partnerships dropdown: use a single full-width column */
-.mega-left--partnerships {
-    display: grid;
-    grid-template-columns: 1fr;
-    /* no empty second column */
-}
-
-/* ✅ Partnerships mega: same width as others & clip scroller inside */
-.mega--partnerships {
-    width: 860px;
-    max-width: 90vw;
-    overflow: hidden;
-    /* stops the partner chips from hanging out */
-}
-
-/* ✅ Keep the partnerships dropdown aligned with the tab */
-/* .nav-item--partnerships .mega-wrapper {
-    left: 0;
-    right: auto;
-} */
-
-/* ✅ Desktop: center + stick to navbar */
-@media (min-width: 961px) {
-    .mega-wrapper {
-        position: absolute;
-        top: 100%;
-        /* just under the navbar */
-        margin-top: -1px;
-        /* remove the visible gap / border */
-        left: 50%;
-        transform: translateX(-50%);
-        width: 860px;
-        max-width: 90vw;
-        z-index: 30;
-    }
-}
-
-/* ✅ Mobile: normal stacked dropdown, no overlap */
-@media (max-width: 960px) {
-    .mega-wrapper {
-        position: static;
-        top: auto;
-        left: auto;
-        right: auto;
-        transform: none;
-        margin-top: 0.25rem;
-        width: 100%;
-        max-width: 100%;
-        z-index: 1;
-    }
-}
-
-/* Sub-tabs inside the Business benefits panel */
-.offer-subtabs {
-    margin-top: 1.4rem;
-    display: inline-flex;
-    padding: 0.18rem;
-    border-radius: 999px;
-    background: #e5e7eb80;
-    gap: 0.2rem;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.offer-subtab {
-    border: none;
-    background: transparent;
-    padding: 0.35rem 1.4rem;
-    font-size: 0.82rem;
-    border-radius: 999px;
-    cursor: pointer;
-    color: #4b5563;
-    transition: background 0.16s ease, color 0.16s ease, box-shadow 0.16s ease;
-    white-space: nowrap;
-}
-
-.offer-subtab--active {
-    background: #ffffff;
-    color: #0f172a;
-    box-shadow: 0 5px 12px rgba(148, 163, 184, 0.4);
-}
-
-@media (max-width: 960px) {
-    .offer-subtabs {
-        flex-wrap: wrap;
-        max-width: 100%;
     }
 }
 </style>
