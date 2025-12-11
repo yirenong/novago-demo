@@ -25,6 +25,23 @@
                     <div v-if="activeMenu === 'solutions'" class="mega-wrapper" @mouseleave="closeMenuDesktop">
                         <div class="mega mega--narrow">
                             <div class="mega-left mega-left--2">
+                                <!-- By use cases -->
+                                <div class="mega-column">
+                                    <p class="mega-heading">By use cases</p>
+
+                                    <router-link class="mega-link" to="/toms" @click="closeAllNav">
+                                        Transport Operator Management System (TOMs)
+                                        <span>
+                                            Simplify the management of vehicles, drivers and jobs — moving beyond manual
+                                            processes.
+                                        </span>
+                                    </router-link>
+
+                                    <router-link class="mega-link" to="/rental-collection-summary" @click="closeAllNav">
+                                        Rental collection
+                                        <span>Track rental payments in one view. Invoice generation.</span>
+                                    </router-link>
+                                </div>
                                 <!-- For SMEs -->
                                 <div class="mega-column">
                                     <p class="mega-heading">For SMEs</p>
@@ -47,24 +64,6 @@
                                     <router-link class="mega-link" to="/" @click="closeAllNav">
                                         CMS
                                         <span>Customize your very own web design with our CMS.</span>
-                                    </router-link>
-                                </div>
-
-                                <!-- By use cases -->
-                                <div class="mega-column">
-                                    <p class="mega-heading">By use cases</p>
-
-                                    <router-link class="mega-link" to="/toms" @click="closeAllNav">
-                                        Transport Operator Management System (TOMs)
-                                        <span>
-                                            Simplify the management of vehicles, drivers and jobs — moving beyond manual
-                                            processes.
-                                        </span>
-                                    </router-link>
-
-                                    <router-link class="mega-link" to="/rental-collection-summary" @click="closeAllNav">
-                                        Rental collection
-                                        <span>Track rental payments in one view. Invoice generation.</span>
                                     </router-link>
                                 </div>
                             </div>
@@ -705,17 +704,21 @@ const handleLogoutClick = () => {
 @media (min-width: 961px) {
     .mega-wrapper {
         position: absolute;
-        top: 100%;                 /* directly under nav-inner */
+        top: 100%;
+        /* directly under nav-inner */
         left: 50%;
         transform: translateX(-50%);
-        width: 100%;               /* match nav-inner width */
-        max-width: 1300px;         /* same as .nav-inner */
+        width: 100%;
+        /* match nav-inner width */
+        max-width: 1300px;
+        /* same as .nav-inner */
         margin-top: 0;
     }
 
     .mega {
         width: 100%;
-        max-width: 1040px;         /* card itself stays nice and narrow */
+        max-width: 1040px;
+        /* card itself stays nice and narrow */
         margin: 0 auto;
     }
 }

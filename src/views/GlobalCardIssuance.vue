@@ -1,0 +1,880 @@
+<template>
+    <div class="gci-page">
+        <!-- NavBar -->
+        <NavBar :is-logged-in="isLoggedIn" @scrollTo="scrollToSection" @logout="handleLogout" />
+
+        <!-- Hero -->
+        <section class="hero hero--gci">
+            <div class="hero-inner">
+                <div class="hero-left">
+                    <p class="hero-pill">NovaGO • Global Card Issuance</p>
+                    <h1 class="hero-title-text">Build card programs that move your business</h1>
+                    <p class="hero-subtitle">
+                        Our Global Card Issuance platform gives you control of your payment ecosystem, letting you
+                        design card programs that boost loyalty, streamline payouts, and unlock new revenue.
+                    </p>
+                    <div class="hero-actions">
+                        <button class="btn-primary" @click="scrollToSection('contact')">
+                            Talk to our team
+                        </button>
+                        <button class="btn-secondary" @click="scrollToSection('contact')">
+                            View features
+                        </button>
+                    </div>
+                </div>
+
+                <div class="hero-right">
+                    <div class="hero-art">
+                        <div class="hero-art-card hero-art-card--one">
+                            <div class="hero-art-header">
+                                <span class="hero-art-dot"></span>
+                                <span class="hero-art-dot"></span>
+                                <span class="hero-art-dot"></span>
+                            </div>
+                            <div class="hero-art-bars">
+                                <div class="hero-art-bar hero-art-bar--1"></div>
+                                <div class="hero-art-bar hero-art-bar--2"></div>
+                                <div class="hero-art-bar hero-art-bar--3"></div>
+                            </div>
+                            <div class="hero-art-badge">Active cards: 4,382</div>
+                        </div>
+
+                        <div class="hero-art-card hero-art-card--two">
+                            <div class="hero-art-pill"></div>
+                            <div class="hero-art-meta">
+                                <span>Spend this month</span>
+                                <span class="hero-art-meta-value">$1.2M processed</span>
+                            </div>
+                        </div>
+
+                        <div class="hero-art-glow hero-art-glow--a"></div>
+                        <div class="hero-art-glow hero-art-glow--b"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Overview / Value pillars -->
+        <section id="overview" class="section section-muted">
+            <div class="section-inner">
+                <h2 class="section-title section-title--left">Overview</h2>
+                <p class="section-text section-text--left">
+                    Our Global Card Issuance platform gives you full control of your payment ecosystem—so you can build
+                    card programs that drive loyalty, efficiency, and new revenue.
+                </p>
+
+                <div class="card-grid card-grid--4">
+                    <div v-for="pill in overviewPillars" :key="pill.title" class="info-card overview-card">
+                        <div class="overview-icon">
+                            <i :class="pill.icon" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="info-card-title">{{ pill.title }}</h3>
+                        <p>{{ pill.text }}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Features (tabs) -->
+        <section id="features" class="section">
+            <div class="section-inner">
+                <h2 class="section-title section-title--left">Key Features</h2>
+
+                <!-- Tabs -->
+                <div class="feature-tabs">
+                    <button v-for="tab in featureTabs" :key="tab.id" type="button" class="feature-tab"
+                        :class="{ 'feature-tab--active': tab.id === activeFeatureTab }"
+                        @click="activeFeatureTab = tab.id">
+                        {{ tab.label }}
+                    </button>
+                </div>
+
+                <!-- Active feature panel -->
+                <div v-if="activeFeature" class="feature-panel">
+                    <h3 class="feature-heading">
+                        {{ activeFeature.heading }}
+                    </h3>
+
+                    <div class="card-grid card-grid--2">
+                        <div v-for="card in activeFeature.cards" :key="card.subtitle" class="info-card">
+                            <h4 class="info-card-subtitle">{{ card.subtitle }}</h4>
+                            <p>{{ card.text }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact / Demo -->
+        <section id="contact" class="section section-muted">
+            <div class="section-inner narrow">
+                <h2 class="section-title">Interested? Demo with Us Now</h2>
+                <p class="section-text">
+                    Ready to design your own global card program?
+                    Fill in your details below, and our team will reach out to schedule
+                    a personalized demo.
+                </p>
+
+                <form class="contact-form" @submit.prevent="fakeSubmit">
+                    <div class="form-row">
+                        <div class="field">
+                            <label for="name">Full name</label>
+                            <input id="name" type="text" placeholder="Jane Tan" />
+                        </div>
+                        <div class="field">
+                            <label for="company">Company</label>
+                            <input id="company" type="text" placeholder="Nova Logistics Pte Ltd" />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="field">
+                            <label for="email">Work email</label>
+                            <input id="email" type="email" placeholder="you@company.com" />
+                        </div>
+                        <div class="field">
+                            <label for="size">Company size</label>
+                            <select id="size">
+                                <option value="">Select</option>
+                                <option>1–10 employees</option>
+                                <option>11–50 employees</option>
+                                <option>51–200 employees</option>
+                                <option>200+ employees</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="message">What would you like to explore?</label>
+                        <textarea id="message" rows="4"
+                            placeholder="e.g. Virtual cards for gig payouts, branded corporate cards, spend controls for teams..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary form-submit">
+                        Submit interest
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <span>© {{ new Date().getFullYear() }} NovaGO. All rights reserved.</span>
+                <div class="footer-links">
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</template>
+
+<script setup>
+import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import NavBar from '../components/MainscreenNavBar.vue'
+
+const router = useRouter()
+const token = ref(localStorage.getItem('access_token') || null)
+const isLoggedIn = computed(() => !!token.value)
+
+const handleLogout = () => {
+    token.value = null
+    localStorage.removeItem('access_token')
+    router.push('/')
+}
+
+const scrollToSection = (id) => {
+    const el = document.getElementById(id)
+    if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+}
+
+const fakeSubmit = () => {
+    alert('Demo request submitted. (Placeholder action)')
+}
+
+/** Overview – value pillars */
+const overviewPillars = [
+    {
+        title: 'Brand Elevation',
+        text: 'Place your brand logo in wallets worldwide, reinforcing your brand identity with every transaction.',
+        icon: 'fa-solid fa-star'
+    },
+    {
+        title: 'Worldwide Acceptance',
+        text: 'Empower users to spend in local currencies wherever major card networks are accepted.',
+        icon: 'fa-solid fa-globe'
+    },
+    {
+        title: 'Expanded Revenue Streams',
+        text: 'Monetize transactions or offer premium card benefits to grow new revenue lines.',
+        icon: 'fa-solid fa-arrow-trend-up'
+    },
+    {
+        title: 'Operational Precision',
+        text: 'Automate disbursements, manage expenses, and streamline financial flows end-to-end.',
+        icon: 'fa-solid fa-sliders'
+    }
+]
+
+
+/** Features – tabbed */
+const featureTabs = ref([
+    {
+        id: 'virtual',
+        label: 'Virtual Cards',
+        heading: 'Virtual Cards',
+        cards: [
+            {
+                subtitle: 'Instant issuance',
+                text: 'Generate secure digital cards in seconds for immediate use—perfect for on-demand payouts and fast onboarding.'
+            },
+            {
+                subtitle: 'Online purchases',
+                text: 'Ideal for e-commerce and digital transactions, with tight controls over where and how cards are used.'
+            }
+        ]
+    },
+    {
+        id: 'physical',
+        label: 'Physical Cards',
+        heading: 'Physical Cards',
+        cards: [
+            {
+                subtitle: 'Branded cards',
+                text: 'Issue custom plastic cards with your brand identity, designed for in-store purchases and ATM withdrawals.'
+            },
+            {
+                subtitle: 'Team & employee spend',
+                text: 'Equip employees, contractors, or drivers with physical cards to simplify everyday operational spending.'
+            }
+        ]
+    },
+    {
+        id: 'multi-currency',
+        label: 'Multi-currency & FX',
+        heading: 'Multi-currency support',
+        cards: [
+            {
+                subtitle: 'Global currencies',
+                text: 'Support major world currencies and local payment methods for smoother cross-border spending.'
+            },
+            {
+                subtitle: 'Minimized FX fees',
+                text: 'Benefit from competitive exchange rates and reduced foreign transaction costs to protect your margins.'
+            }
+        ]
+    },
+    {
+        id: 'controls',
+        label: 'Controls & Policies',
+        heading: 'Customizable controls',
+        cards: [
+            {
+                subtitle: 'Spending limits',
+                text: 'Set daily, monthly, or transaction-specific spending caps so every card stays within budget.'
+            },
+            {
+                subtitle: 'Category control',
+                text: 'Restrict spending by merchant category or type, aligning card usage with your internal policies.'
+            }
+        ]
+    }
+])
+
+const activeFeatureTab = ref(featureTabs.value[0].id)
+
+const activeFeature = computed(() =>
+    featureTabs.value.find((t) => t.id === activeFeatureTab.value)
+)
+</script>
+
+<style scoped>
+.gci-page {
+    min-height: 100vh;
+    width: 100%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #0f172a;
+    background: #f3f4fd;
+}
+
+/* Hero */
+.hero {
+    padding: 4.2rem 1.25rem 4rem;
+    background: radial-gradient(circle at top left, #e0ecff, #f9fafb 55%);
+}
+
+.hero-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: 2.6rem;
+    align-items: center;
+}
+
+.hero-left {
+    max-width: 540px;
+}
+
+.hero-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid #c7d2fe;
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #4f46e5;
+    background: #eef2ff;
+    margin-bottom: 1rem;
+}
+
+.hero-title-text {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #111827;
+}
+
+.hero-tagline {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.7rem;
+    color: #111827;
+}
+
+.hero-subtitle {
+    font-size: 0.98rem;
+    color: #4b5563;
+    margin-bottom: 1.8rem;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-secondary {
+    border-radius: 999px;
+    padding: 0.7rem 1.6rem;
+    font-size: 0.92rem;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition:
+        transform 0.12s ease,
+        box-shadow 0.12s ease,
+        background 0.12s ease,
+        color 0.12s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #2563eb, #38bdf8);
+    color: #ffffff;
+    border-color: #2563eb;
+    box-shadow: 0 14px 30px rgba(37, 99, 235, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 18px 36px rgba(37, 99, 235, 0.55);
+}
+
+.btn-secondary {
+    background: #ffffff;
+    color: #2563eb;
+    border-color: #2563eb;
+}
+
+.btn-secondary:hover {
+    background: #e5edff;
+}
+
+/* Hero right art */
+.hero-right {
+    display: flex;
+    justify-content: center;
+}
+
+.hero-art {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    height: 260px;
+}
+
+.hero-art-card {
+    position: absolute;
+    border-radius: 1.1rem;
+    background: #ffffff;
+    border: 1px solid #dbe3ff;
+    box-shadow: 0 18px 40px rgba(148, 163, 184, 0.4);
+    padding: 1rem 1.1rem;
+}
+
+.hero-art-card--one {
+    top: 0;
+    left: 0;
+    right: 70px;
+}
+
+.hero-art-card--two {
+    bottom: 0;
+    right: 0;
+    left: 120px;
+    padding: 0.9rem 1rem;
+}
+
+.hero-art-header {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 0.6rem;
+}
+
+.hero-art-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: #e5e7eb;
+}
+
+.hero-art-bars {
+    margin-bottom: 0.5rem;
+}
+
+.hero-art-bar {
+    height: 8px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #2563eb, #38bdf8);
+    margin-bottom: 0.3rem;
+}
+
+.hero-art-bar--1 {
+    width: 70%;
+}
+
+.hero-art-bar--2 {
+    width: 50%;
+}
+
+.hero-art-bar--3 {
+    width: 35%;
+}
+
+.hero-art-badge {
+    display: inline-flex;
+    margin-top: 0.2rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    background: #e0ebff;
+    font-size: 0.76rem;
+    color: #1d4ed8;
+}
+
+.hero-art-pill {
+    width: 46px;
+    height: 46px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #2563eb, #38bdf8);
+    margin-bottom: 0.5rem;
+}
+
+.hero-art-meta {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
+    color: #4b5563;
+}
+
+.hero-art-meta-value {
+    font-weight: 600;
+    color: #1d4ed8;
+}
+
+/* Glows */
+.hero-art-glow {
+    position: absolute;
+    border-radius: 999px;
+    filter: blur(24px);
+    opacity: 0.8;
+}
+
+.hero-art-glow--a {
+    width: 140px;
+    height: 140px;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.55), transparent 60%);
+    top: -40px;
+    right: -30px;
+}
+
+.hero-art-glow--b {
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(147, 197, 253, 0.6), transparent 60%);
+    bottom: -30px;
+    left: -20px;
+}
+
+/* Sections */
+.section {
+    padding: 3.2rem 1.25rem;
+}
+
+.section-muted {
+    background: #f9fafb;
+}
+
+.section-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.section-inner.narrow {
+    max-width: 720px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 1.7rem;
+    color: #1d4ed8;
+    margin-bottom: 1.4rem;
+}
+
+.section-title--left {
+    text-align: center;
+}
+
+.section-text {
+    font-size: 1rem;
+    color: #4b5563;
+    text-align: center;
+}
+
+.section-text--left {
+    text-align: center;
+}
+
+/* Grids & cards */
+.card-grid {
+    display: grid;
+    gap: 1.4rem;
+    max-width: 1100px;
+    margin: 1.6rem auto 0;
+}
+
+.card-grid--2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.card-grid--4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.info-card {
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 1.3rem 1.2rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 12px 30px rgba(148, 163, 184, 0.3);
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        border-color 0.15s ease;
+    min-height: 150px;
+}
+
+.info-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px rgba(148, 163, 184, 0.4);
+    border-color: #c7d2fe;
+}
+
+.info-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: #111827;
+}
+
+.info-card-subtitle {
+    font-size: 0.94rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    color: #111827;
+}
+
+.info-card p {
+    font-size: 0.88rem;
+    color: #4b5563;
+}
+
+/* Overview cards */
+.overview-card {
+    min-height: 160px;
+}
+
+/* Feature tabs */
+.feature-tabs {
+    margin-top: 1.4rem;
+    display: inline-flex;
+    padding: 0.22rem;
+    border-radius: 999px;
+    background: #e5e7eb80;
+    gap: 0.25rem;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.feature-tab {
+    border: none;
+    background: transparent;
+    padding: 0.4rem 1.4rem;
+    font-size: 0.86rem;
+    border-radius: 999px;
+    cursor: pointer;
+    color: #4b5563;
+    white-space: nowrap;
+    transition:
+        background 0.16s ease,
+        color 0.16s ease,
+        box-shadow 0.16s ease;
+}
+
+.feature-tab--active {
+    background: #ffffff;
+    color: #1d4ed8;
+    box-shadow: 0 6px 14px rgba(148, 163, 184, 0.45);
+}
+
+.feature-panel {
+    max-width: 1100px;
+    margin: 2rem auto 0;
+}
+
+.feature-heading {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1e293b;
+    text-align: center;
+    margin-bottom: 1.4rem;
+}
+
+/* Contact form */
+.contact-form {
+    margin-top: 2.1rem;
+    background: #ffffff;
+    border-radius: 1.1rem;
+    padding: 1.8rem 1.8rem 2rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 18px 40px rgba(148, 163, 184, 0.4);
+}
+
+.form-row {
+    display: flex;
+    gap: 1.2rem;
+    margin-bottom: 1.1rem;
+}
+
+.field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.field label {
+    font-size: 0.82rem;
+    color: #4b5563;
+}
+
+.field input,
+.field select,
+.field textarea {
+    border-radius: 0.7rem;
+    border: 1px solid #d1d5db;
+    padding: 0.65rem 0.75rem;
+    font-size: 0.9rem;
+    outline: none;
+    background: #f9fafb;
+    color: #111827;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+    color: #9ca3af;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.35);
+    background: #ffffff;
+}
+
+.form-submit {
+    margin-top: 1.1rem;
+}
+
+/* Footer */
+.site-footer {
+    border-top: 1px solid #e5e7eb;
+    background: #ffffff;
+    padding: 1rem 1.25rem;
+}
+
+.footer-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    font-size: 0.8rem;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.footer-links a {
+    color: #6b7280;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #1d4ed8;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .card-grid--4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 960px) {
+    .hero {
+        padding-top: 3.4rem;
+    }
+
+    .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .hero-right {
+        order: -1;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-grid--2,
+    .card-grid--4 {
+        grid-template-columns: 1fr;
+    }
+
+    .section {
+        padding-inline: 1rem;
+    }
+
+    .feature-tabs {
+        flex-wrap: wrap;
+        max-width: 100%;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
+
+/* Overview cards – upgraded look */
+.overview-card {
+    position: relative;
+    padding-top: 1.6rem;
+    padding-bottom: 1.4rem;
+    background: radial-gradient(circle at top left, #eef2ff, #ffffff 60%);
+    border: 1px solid #dbeafe;
+    box-shadow: 0 18px 42px rgba(129, 140, 248, 0.3);
+    overflow: hidden;
+}
+
+/* subtle top highlight bar */
+.overview-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border-top: 3px solid #2563eb;
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+/* icon bubble */
+.overview-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #2563eb, #38bdf8);
+    color: #ffffff;
+    font-size: 0.9rem;
+    margin-bottom: 0.7rem;
+}
+
+/* tighten text for these cards */
+.overview-card .info-card-title {
+    margin-bottom: 0.35rem;
+}
+
+.overview-card p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* slightly stronger hover for overview tiles */
+.overview-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 22px 52px rgba(79, 70, 229, 0.5);
+    border-color: #818cf8;
+}
+
+/* Key Features – tighter cards */
+.feature-panel .info-card {
+    /* override the generic card size */
+    min-height: auto;
+    padding: 2.1rem 1.4rem 2.1rem; /* a bit less padding, more compact */
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem; /* consistent spacing between subtitle & text */
+}
+
+/* Slightly larger gap under the subtitle */
+.feature-panel .info-card-subtitle {
+    margin-bottom: 0.2rem; /* was 0.3 but gap is now handled by `gap` */
+}
+
+/* Optional: slightly smaller body text so it feels lighter */
+.feature-panel .info-card p {
+    font-size: 0.86rem;
+    line-height: 1.5;
+}
+
+</style>

@@ -193,7 +193,8 @@
                         <div v-if="activeBusinessTab === 'banking'" class="business-column">
                             <p class="offer-group-title offer-group-title--left">Corporate banking</p>
                             <div class="card-grid card-grid--banking">
-                                <div class="info-card">
+                                <div class="info-card info-card--link"
+                                    @click="router.push('/global-multi-currency-account')">
                                     <div class="info-card-header">
                                         <div class="card-icon" aria-hidden="true">
                                             <i class="fa-solid fa-building-columns"></i>
@@ -206,7 +207,8 @@
                                     </p>
                                 </div>
 
-                                <div class="info-card">
+
+                                <div class="info-card info-card--link" @click="router.push('/global-card-issuance')">
                                     <div class="info-card-header">
                                         <div class="card-icon" aria-hidden="true">
                                             <i class="fa-solid fa-credit-card"></i>
@@ -214,10 +216,11 @@
                                         <h4>Global Card Issuance</h4>
                                     </div>
                                     <p>
-                                        Transform your expense management and empower your teams with a flexible card
-                                        issuance platform.
+                                        Transform your expense management and empower your teams with a flexible
+                                        card issuance platform.
                                     </p>
                                 </div>
+
 
                                 <div class="info-card">
                                     <div class="info-card-header">
@@ -405,7 +408,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import NavBar from '../components/MainscreenNarBar.vue'
+import NavBar from '../components/MainscreenNavBar.vue'
 import whatsappIcon from '../assets/whatsapp_icon.png'
 
 /** Simple login state example – adjust to your real auth setup */

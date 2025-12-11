@@ -6,6 +6,8 @@ import PayrollView from "./views/PayrollView.vue";
 import RentalCollectionView from "./views/RentalCollectionView.vue";
 import CorporateBankingView from "./views/CorporateBankingView.vue";
 import RentalCollectionSummary from "./views/RentalCollectionSummary.vue";
+import GlobalMultiCurrencyAccount from "./views/GlobalMultiCurrencyAccount.vue";
+import GlobalCardIssuance from "./views/GlobalCardIssuance.vue";
 
 const routes = [
   {
@@ -43,6 +45,16 @@ const routes = [
     name: "RentalCollectionSummary",
     component: RentalCollectionSummary,
   },
+  {
+    path: "/global-multi-currency-account",
+    name: "GlobalMultiCurrencyAccount",
+    component: GlobalMultiCurrencyAccount,
+  },
+  {
+    path: "/global-card-issuance",
+    name: "GlobalCardIssuance",
+    component: GlobalCardIssuance,
+  },
 ];
 
 const router = createRouter({
@@ -54,7 +66,7 @@ const router = createRouter({
 const INACTIVITY_LIMIT_MS = 30 * 60 * 1000;
 
 router.beforeEach((to, from, next) => {
-  const publicPaths = ["/", "/login", "/rental-collection-summary"]; // landing + login are public
+  const publicPaths = ["/", "/login", "/rental-collection-summary", "/global-multi-currency-account", "/global-card-issuance"]; // landing + login are public
   const authRequired = !publicPaths.includes(to.path);
 
   const loggedIn = sessionStorage.getItem("novago_loggedIn") === "true";
