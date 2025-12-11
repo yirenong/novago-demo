@@ -8,6 +8,8 @@ import CorporateBankingView from "./views/CorporateBankingView.vue";
 import RentalCollectionSummary from "./views/RentalCollectionSummary.vue";
 import GlobalMultiCurrencyAccount from "./views/GlobalMultiCurrencyAccount.vue";
 import GlobalCardIssuance from "./views/GlobalCardIssuance.vue";
+import GlobalPayouts from "./views/GlobalPayouts.vue";
+import FXConversionAndAcceptance from "./views/FXConversionAndAcceptance.vue";
 
 const routes = [
   {
@@ -55,6 +57,16 @@ const routes = [
     name: "GlobalCardIssuance",
     component: GlobalCardIssuance,
   },
+  {
+    path: "/global-payouts",
+    name: "GlobalPayouts",
+    component: GlobalPayouts,
+  },
+  {
+    path: "/fx-conversion-and-acceptance",
+    name: "FXConversionAndAcceptance",
+    component: FXConversionAndAcceptance,
+  },
 ];
 
 const router = createRouter({
@@ -66,7 +78,7 @@ const router = createRouter({
 const INACTIVITY_LIMIT_MS = 30 * 60 * 1000;
 
 router.beforeEach((to, from, next) => {
-  const publicPaths = ["/", "/login", "/rental-collection-summary", "/global-multi-currency-account", "/global-card-issuance"]; // landing + login are public
+  const publicPaths = ["/", "/login", "/rental-collection-summary", "/global-multi-currency-account", "/global-card-issuance", "/global-payouts", "/fx-conversion-and-acceptance"]; // landing + login are public
   const authRequired = !publicPaths.includes(to.path);
 
   const loggedIn = sessionStorage.getItem("novago_loggedIn") === "true";

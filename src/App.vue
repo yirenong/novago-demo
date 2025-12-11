@@ -37,7 +37,7 @@ const toggleSidebar = () => {
 
 // Routes that should NOT show sidebar/navbar (login + landing)
 const isShellRoute = computed(() => {
-  return route.name === 'login' || route.name === 'landing' || route.name === 'RentalCollectionSummary' || route.name === "GlobalMultiCurrencyAccount" || route.name === "GlobalCardIssuance"
+  return route.name === 'login' || route.name === 'landing' || route.name === 'RentalCollectionSummary' || route.name === "GlobalMultiCurrencyAccount" || route.name === "GlobalCardIssuance" || route.name === "GlobalPayouts" || route.name === "FXConversionAndAcceptance"
 })
 </script>
 

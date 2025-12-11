@@ -8,13 +8,10 @@
             <div class="hero-inner">
                 <div class="hero-left">
                     <p class="hero-pill">NovaGO • Global Multi Currency Account</p>
-                    <h1 class="hero-title-text">Unlock growth with global accounts</h1>
-                    <p class="hero-tagline">
-                        Say goodbye to financial friction and hello to new opportunities, more revenue, and unstoppable
-                        momentum.
-                    </p>
+                    <h1 class="hero-title-text">Your Borderless Financial Hub</h1>
                     <p class="hero-subtitle">
-                        Our Multi Currency Accounts aim to unlock a new level of growth for you by simplifying global
+                        NovaGo's Multi Currency Accounts aim to unlock a new level of growth for you by simplifying
+                        global
                         finances,
                         protecting your margins, and helping you operate like a local in every market.
                     </p>
@@ -65,7 +62,11 @@
                 <h2 class="section-title section-title--left">
                     Challenges of Global Businesses
                 </h2>
-
+                <!-- Added tagline below the title -->
+                <p class="section-text section-text--left" style="margin-top: -0.4rem; margin-bottom: 1.6rem;">
+                    Say goodbye to financial friction and hello to new opportunities, more revenue, and unstoppable
+                    momentum.
+                </p>
                 <!-- Interactive challenge cards -->
                 <div class="card-grid card-grid--3">
                     <div v-for="challenge in challenges" :key="challenge.id" class="info-card challenge-card"
@@ -281,25 +282,25 @@ const activeChallenge = computed(() =>
 const howItems = [
     {
         category: 'Global finances',
-        title: 'Simplify global finances',
+        title: 'Simplify Global Finances',
         text:
             'Use a single platform equipped with everything you need to manage, simplify, and scale your international operations.'
     },
     {
-        category: 'Control & pricing',
-        title: 'Better rates, better control',
+        category: 'Control & Pricing',
+        title: 'Better Rates, Better Control',
         text:
             'Accept payments in local currencies, make fast transfers, and protect margins with interbank FX rates and zero hidden fees.'
     },
     {
         category: 'Workflows',
-        title: 'AI-powered workflows',
+        title: 'AI-Powered Workflows',
         text:
             'Remove repetitive manual tasks so your team saves hours each week on bookkeeping, approvals, and reconciliation.'
     },
     {
         category: 'Operations',
-        title: 'Seamless global operations',
+        title: 'Seamless Global Operations',
         text:
             'Access local payment networks worldwide so you can open accounts and move money at high speed, operating like a local anywhere you go.'
     }

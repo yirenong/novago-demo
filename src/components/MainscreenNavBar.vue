@@ -96,12 +96,12 @@
                                         <span>Physical and virtual cards for real-time payments.</span>
                                     </router-link>
 
-                                    <router-link class="mega-link" to="/global-payout" @click="closeAllNav">
+                                    <router-link class="mega-link" to="/global-payouts" @click="closeAllNav">
                                         Global Payout
                                         <span>Send payouts to 190+ countries via local currencies and methods.</span>
                                     </router-link>
 
-                                    <router-link class="mega-link" to="/fx-conversion-acceptance" @click="closeAllNav">
+                                    <router-link class="mega-link" to="/fx-conversion-and-acceptance" @click="closeAllNav">
                                         FX Conversion &amp; Acceptance
                                         <span>Multi-currency, borderless transactions.</span>
                                     </router-link>
