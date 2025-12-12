@@ -262,7 +262,7 @@ const challenges = ref([
             'Unnecessary losses on global payments due to weak FX rates and hidden costs eat directly into your margins and slow expansion.',
         chipLabel: 'Finance',
         detail:
-            'When every cross-border payment leaks margin, your cost of expansion increases. NovaGO helps you access competitive interbank rates and remove hidden charges so more of every payout reaches the destination.'
+            'Unnecessary losses on global payments due to weak FX rates and hidden costs.'
     },
     {
         id: 'transfers',
@@ -271,7 +271,7 @@ const challenges = ref([
             'Delayed international transfers affect cash flow, disrupt operational rhythm, and make it harder to move at the speed of your business.',
         chipLabel: 'Cash flow',
         detail:
-            'Waiting days for funds to clear means delayed inventory, delayed payroll, and delayed growth. With faster settlement rails, you keep your operating rhythm tight and predictable.'
+            'Delayed international transfers affecting cash flow and operational rhythm.'
     },
     {
         id: 'reconciliation',
@@ -280,7 +280,7 @@ const challenges = ref([
             'Multiple bank accounts across markets create manual work, errors, and reconciliation headaches for your finance and operations teams.',
         chipLabel: 'Operations',
         detail:
-            'Teams end up in spreadsheets, manually matching payments and payouts. NovaGO centralises flows into one dashboard so reconciliation becomes a daily habit instead of a monthly fire-fight.'
+            'Multiple bank accounts across markets create manual work, errors, and reconciliation headaches.'
     },
     {
         id: 'local-presence',
@@ -289,7 +289,7 @@ const challenges = ref([
             'Without local payment capabilities, entering new markets becomes harder and weakens customer confidence, making global growth more expensive.',
         chipLabel: 'Market entry',
         detail:
-            'Customers prefer to pay like a local. Local accounts and rails help you feel native on day one, improving trust, reducing friction, and opening doors in each new market you enter.'
+            'Without local payment capabilities, entering new markets becomes harder and weakens customer confidence.'
     }
 ])
 

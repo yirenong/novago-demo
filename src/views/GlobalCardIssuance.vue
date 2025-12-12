@@ -10,8 +10,9 @@
                     <p class="hero-pill">NovaGO • Global Card Issuance</p>
                     <h1 class="hero-title-text">Issue Your Own Branded Cards</h1>
                     <p class="hero-subtitle">
-                        Our Global Card Issuance platform gives you control of your payment ecosystem, letting you
-                        design card programs that boost loyalty, streamline payouts, and unlock new revenue.
+                        NovaGo’s Global Card Issuance platform gives you full control of your payment ecosystem—enabling
+                        you to build custom card programs that strengthen customer loyalty, streamline payouts, and
+                        unlock new revenue opportunities.
                     </p>
                     <div class="hero-actions">
                         <button class="btn-primary" @click="scrollToSection('contact')">
@@ -1205,11 +1206,9 @@ const activeFeatureIndex = computed(() =>
     width: 42px;
     height: 30px;
     border-radius: 6px;
-    background: linear-gradient(
-        135deg,
-        #facc15,
-        #fde047
-    );
+    background: linear-gradient(135deg,
+            #facc15,
+            #fde047);
     margin-top: 1rem;
 }
 
@@ -1238,5 +1237,4 @@ const activeFeatureIndex = computed(() =>
 .gci-card-stack:hover .gci-card--back {
     transform: translate(80px, 52px) rotate(-4deg);
 }
-
 </style>

@@ -61,9 +61,11 @@
             <div class="section-inner">
                 <h2 class="section-title section-title--left">Overview</h2>
                 <p class="section-text section-text--left">
-                    NovaGO’s Global Payouts transforms mass payments into a smooth, reliable engine for your business.
-                    Move funds across borders with precision—every single time.
+                    NovaGo’s Global Payout transforms mass payments into a seamless, lightning-fast, highly precise
+                    operation.
+                    Move funds across borders with absolute confidence - every single time.
                 </p>
+
 
                 <div class="card-grid card-grid--3 overview-grid">
                     <div v-for="pill in overviewPillars" :key="pill.title" class="info-card overview-card">
@@ -84,9 +86,9 @@
             <div class="section-inner">
                 <h2 class="section-title section-title--left">How it works</h2>
                 <p class="section-text section-text--left">
-                    A payout engine that helps you pay people faster, cheaper, and with full control—no matter where
-                    they are.
+                    Mass payouts, simplified into six core advantages.
                 </p>
+
 
                 <!-- Pills row -->
                 <div class="how-tabs">
@@ -103,7 +105,6 @@
                         <div class="how-panel-main">
                             <span class="how-panel-badge">{{ activeHow.badge }}</span>
                             <h3 class="how-panel-title">{{ activeHow.title }}</h3>
-                            <p class="how-panel-lede">{{ activeHow.lede }}</p>
                         </div>
 
                         <!-- Right side: points list -->
@@ -250,108 +251,106 @@ const overviewPillars = [
     }
 ]
 
-
-/** How it works – interactive pills with grouped concepts */
 const howItems = [
     {
         id: 'cost',
-        label: 'Save on FX & fees',
-        badge: 'Cost efficiency',
-        title: 'Make every payout cost less',
-        lede: 'Cut fees without cutting corners by using smarter FX and local payment rails.',
+        label: 'Massive Cost Savings',
+        badge: 'Massive Cost Savings',
+        title: 'Massive Cost Savings',
+        lede: 'Reduce FX fees and intermediary fees by leveraging local payment networks',
         points: [
             {
-                highlight: 'Use local rails first',
-                text: 'Route payouts through local networks to avoid unnecessary correspondent and intermediary bank fees.'
+                highlight: 'Save up to 70%',
+                text: 'Save up to 70% on traditional transfer expenses through intelligent routing and localized payout rails'
             },
             {
-                highlight: 'Smarter FX paths',
-                text: 'Optimise routes and rates so you can save up to 70% compared to traditional cross-border transfers.'
+                highlight: 'Reduce FX fees and intermediary fees',
+                text: 'Reduce FX fees and intermediary fees by leveraging local payment networks'
             }
         ]
     },
     {
         id: 'speed',
-        label: 'Move money faster',
-        badge: 'Speed',
-        title: 'Money that lands in minutes',
-        lede: 'Keep your workers, partners, and vendors paid on time with near real-time payouts.',
+        label: 'Blazing Fast Delivery',
+        badge: 'Blazing Fast Delivery',
+        title: 'Blazing Fast Delivery',
+        lede: 'Deliver funds to recipients in minutes or hours, not days',
         points: [
             {
-                highlight: 'Real-time processing',
-                text: 'Adaptive routing automatically chooses the fastest available corridor for each payout.'
+                highlight: 'Delivering funds',
+                text: 'Deliver funds to recipients in minutes or hours, not days.'
             },
             {
-                highlight: 'Predictable payout times',
-                text: 'Run payroll, creator payouts, and vendor disbursements on a reliable, repeatable schedule.'
+                highlight: 'Real-time routing',
+                text: 'Real-time processing and adaptive routing ensure the fastest possible payout times.'
             }
         ]
     },
     {
         id: 'precision',
-        label: 'Reduce failed payouts',
-        badge: 'Accuracy',
-        title: 'Payouts that land right the first time',
-        lede: 'Stop money bouncing back because of small mistakes in account details.',
+        label: 'Unrivaled Precision',
+        badge: 'Unrivaled Precision',
+        title: 'Unrivaled Precision',
+        lede: 'Minimize errors and failed payments with smart routing and verification',
         points: [
             {
-                highlight: 'Upfront data checks',
-                text: 'Validate account formats and key fields before money leaves your account.'
+                highlight: 'Minimize errors and failed payments',
+                text: 'Minimize errors and failed payments with smart routing and verification.'
             },
             {
-                highlight: 'Smart routing rules',
-                text: 'Built-in logic helps reduce failed or returned payments by up to 95% across markets.'
+                highlight: '95% fewer failures',
+                text: 'Advanced validation and smart routing reduces failed payments by 95%.'
             }
         ]
     },
     {
         id: 'automation',
-        label: 'Automate workflows',
-        badge: 'Automation',
-        title: 'Workflows that run themselves',
-        lede: 'Configure once, then let NovaGO handle the repetitive payout tasks for you.',
+        label: 'Effortless Automation',
+        badge: 'Effortless Automation',
+        title: 'Effortless Automation',
+        lede: 'Automate complex payment workflows and reclaim hours of manual effort',
         points: [
             {
-                highlight: 'End-to-end automation',
-                text: 'Automate initiation, approvals, disbursements, and reconciliation in one place.'
+                highlight: 'Automated complex payment',
+                text: 'Automate complex payment workflows and reclaim hours of manual effort.'
             },
             {
-                highlight: 'Fewer manual files',
-                text: 'Replace spreadsheets and file uploads with scheduled and rules-based payouts.'
+                highlight: 'Set it and forget it',
+                text: 'Set it and forget it - automated workflows handle everything from initiation to reconciliation.'
             }
         ]
     },
     {
         id: 'scale',
-        label: 'Scale globally',
-        badge: 'Scalability',
-        title: 'Built to handle your next million payouts',
-        lede: 'Grow from one country to hundreds without rebuilding your payout stack.',
+        label: 'Global Scalability',
+        badge: 'Global Scalability',
+        title: 'Global Scalability',
+        lede: 'Confidently expand into new markets with a payout engine built to scale.',
         points: [
             {
-                highlight: '190+ countries',
-                text: 'Send payouts across global markets from a single platform as your business expands.'
+                highlight: 'Expand into new markets',
+                text: 'Confidently expand into new markets with a payout engine built to scale.'
             },
             {
-                highlight: 'Volume-ready engine',
-                text: 'Handle millions of transactions without adding extra load to your finance or ops teams.'
+                highlight: '190+ countries',
+                text: 'Handle millions of transactions across 190+ countries without breaking a sweat.'
             }
         ]
     },
     {
         id: 'transparency',
-        label: 'Track every payout',
-        badge: 'Transparency',
-        title: 'Every payout, fully traceable',
-        lede: 'Know where your money is at all times, from send to settle.',
+        label: 'Enhanced Transparency',
+        badge: 'Enhanced Transparency',
+        title: 'Enhanced Transparency',
+        lede: 'Track every payment in real-time, from initiation to delivery',
         points: [
             {
-                highlight: 'End-to-end tracking',
-                text: 'Follow each transaction with clear statuses—from created, to in-flight, to delivered.'
+                highlight: 'Track payments',
+                text: 'Track every payment in real-time, from initiation to delivery.'
             },
             {
-                highlight: 'Audit-ready reporting',
-                text: 'Detailed logs and reports give finance, compliance, and auditors exactly what they need.'
+                highlight: 'Full visibility',
+                text: 'Gain full visibility with detailed reporting, live status updates, and audit-ready trails.'
             }
         ]
     }
@@ -363,29 +362,29 @@ const activeHow = computed(() =>
     howItems.find((i) => i.id === activeHowId.value)
 )
 
-/** Features – short, non-wordy cards */
 const featureHighlights = [
-    {
-        tag: 'Speed',
-        title: 'Lightning speed',
-        text: 'Global transfers completed in minutes, not days—so you can pay workers, partners, and vendors on time.'
-    },
-    {
-        tag: 'Accuracy',
-        title: 'Precision targeting',
-        text: 'Intelligent routing and verification reduce errors and ensure payouts arrive in the right account.'
-    },
-    {
-        tag: 'Visibility',
-        title: 'Complete transparency',
-        text: 'End-to-end, real-time tracking for every transaction, with clear status at a glance.'
-    },
-    {
-        tag: 'Reach',
-        title: 'Global reach',
-        text: 'Payout to 190+ countries from a single platform, without stitching together multiple providers.'
-    }
+  {
+    tag: 'Speed',
+    title: 'Lightning speed',
+    text: 'Global transfers completed in minutes, not days'
+  },
+  {
+    tag: 'Accuracy',
+    title: 'Precision targeting',
+    text: 'intelligent routing for optimal, error free delivery'
+  },
+  {
+    tag: 'Visibility',
+    title: 'Complete transparency',
+    text: 'End to end, real time tracking for every transaction'
+  },
+  {
+    tag: 'Reach',
+    title: 'Global reach',
+    text: 'payout to 190+ countries at your fingertips'
+  }
 ]
+
 </script>
 
 <style scoped>
@@ -779,7 +778,7 @@ const featureHighlights = [
 /* How it works */
 .how-tabs {
     margin: 2rem auto 0;
-    max-width: 1000px;
+    max-width: 1200px;
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
@@ -1094,7 +1093,7 @@ const featureHighlights = [
 /* How it works */
 .how-tabs {
     margin: 2rem auto 0;
-    max-width: 1000px;
+    max-width: 1200px;
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
