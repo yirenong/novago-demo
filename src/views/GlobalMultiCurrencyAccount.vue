@@ -127,32 +127,28 @@
                 </p>
 
                 <div class="feature-grid">
-                    <div v-for="(tab, index) in featureTabs" :key="tab.id" class="feature-card"
-                        :class="{ 'feature-card--open': openFeatureId === tab.id }" @click="toggleFeature(tab.id)">
-
-                        <!-- Top row -->
-                        <div class="feature-card-header">
-                            <span class="feature-card-number">
+                    <div v-for="(tab, index) in featureTabs" :key="tab.id" class="feature-slide-card">
+                        <!-- Top (always visible) -->
+                        <div class="feature-slide-top">
+                            <div class="feature-slide-icon">
                                 {{ (index + 1).toString().padStart(2, '0') }}
-                            </span>
-                            <h3 class="feature-card-title">{{ tab.label }}</h3>
+                            </div>
+
+                            <h3 class="feature-slide-title">{{ tab.label }}</h3>
+                            <p class="feature-slide-text">{{ tab.heading }}</p>
                         </div>
 
-                        <!-- Hidden expandable content -->
-                        <div class="feature-expand">
-                            <h4 class="feature-expand-heading">
-                                {{ tab.heading }}
-                            </h4>
-
-                            <div class="feature-expand-grid">
-                                <div v-for="card in tab.cards" :key="card.subtitle" class="feature-expand-item">
-                                    <strong>{{ card.subtitle }}</strong>
-                                    <p>{{ card.text }}</p>
-                                </div>
+                        <!-- Bottom (slides down) -->
+                        <div class="feature-slide-bottom">
+                            <div v-for="card in tab.cards" :key="card.subtitle" class="feature-slide-item">
+                                <strong>{{ card.subtitle }}</strong>
+                                <p>{{ card.text }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </section>
 
@@ -1675,17 +1671,254 @@ const featureTabs = ref([
 
 /* the container that holds the 3 feature cards */
 .feature-grid {
-  align-items: start;         /* key line */
-  grid-auto-rows: min-content;/* prevents forced equal row height */
+    align-items: start;
+    /* key line */
+    grid-auto-rows: min-content;
+    /* prevents forced equal row height */
 }
 
 .feature-card {
-  align-self: start;          /* extra safety */
-  height: fit-content;        /* optional */
+    align-self: start;
+    /* extra safety */
+    height: fit-content;
+    /* optional */
 }
 
 .feature-grid {
-  align-items: flex-start;
+    align-items: flex-start;
+}
+
+/* ===== BENEFITS / FEATURES (Global Payout style) ===== */
+
+.feature-grid {
+    margin-top: 2.4rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.8rem;
+}
+
+/* Card */
+.benefit-card {
+    position: relative;
+    background: #ffffff;
+    border-radius: 1.4rem;
+    padding: 1.6rem 1.6rem 1.8rem;
+    min-height: 220px;
+    border: 1px solid #eef2ff;
+    box-shadow: 0 18px 40px rgba(148, 163, 184, 0.25);
+    overflow: hidden;
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.benefit-card:hover {
+    transform: translateY(-6px);
+    border-color: #c7d2fe;
+    box-shadow: 0 26px 60px rgba(79, 70, 229, 0.35);
+}
+
+/* Icon bubble */
+.benefit-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #2563eb, #38bdf8);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+/* Text */
+.benefit-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.35rem;
+}
+
+.benefit-text {
+    font-size: 0.9rem;
+    color: #4b5563;
+    line-height: 1.55;
+}
+
+/* ===== Hover slide-up panel ===== */
+
+.benefit-hover {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.95),
+            #ffffff);
+
+    padding: 1.2rem 1.4rem 1.4rem;
+    border-top: 1px solid #e5e7eb;
+
+    transform: translateY(100%);
+    opacity: 0;
+
+    transition:
+        transform 0.35s ease,
+        opacity 0.25s ease;
+}
+
+.benefit-card:hover .benefit-hover {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Hover items */
+.benefit-hover-item {
+    margin-bottom: 0.75rem;
+}
+
+.benefit-hover-item strong {
+    display: block;
+    font-size: 0.88rem;
+    color: #111827;
+    margin-bottom: 0.15rem;
+}
+
+.benefit-hover-item p {
+    font-size: 0.82rem;
+    color: #4b5563;
+    line-height: 1.45;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .feature-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== Sliding Feature Cards (expand downward) ===== */
+
+.feature-grid {
+  margin-top: 2.4rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.8rem;
+  align-items: start;
+}
+
+/* Card */
+.feature-slide-card {
+  background: #ffffff;
+  border-radius: 1.4rem;
+  border: 1px solid #eef2ff;
+  box-shadow: 0 18px 40px rgba(148, 163, 184, 0.25);
+  overflow: hidden;
+  transition:
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.feature-slide-card:hover {
+  border-color: #c7d2fe;
+  box-shadow: 0 26px 60px rgba(79, 70, 229, 0.35);
+}
+
+/* Top section */
+.feature-slide-top {
+  padding: 1.6rem;
+}
+
+/* Icon */
+.feature-slide-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+/* Text */
+.feature-slide-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.35rem;
+}
+
+.feature-slide-text {
+  font-size: 0.9rem;
+  color: #4b5563;
+  line-height: 1.55;
+}
+
+/* Bottom sliding section */
+.feature-slide-bottom {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0 1.6rem;
+  border-top: 1px solid #e5e7eb;
+
+  transition:
+    max-height 0.45s ease,
+    opacity 0.25s ease,
+    padding 0.25s ease;
+}
+
+/* Expand on hover */
+.feature-slide-card:hover .feature-slide-bottom {
+  max-height: 400px; /* adjust if needed */
+  opacity: 1;
+  padding: 1.2rem 1.6rem 1.6rem;
+}
+
+/* Inner items */
+.feature-slide-item + .feature-slide-item {
+  margin-top: 0.9rem;
+}
+
+.feature-slide-item strong {
+  display: block;
+  font-size: 0.88rem;
+  color: #111827;
+  margin-bottom: 0.15rem;
+}
+
+.feature-slide-item p {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #4b5563;
+  line-height: 1.45;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 </style>
