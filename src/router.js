@@ -12,26 +12,10 @@ import GlobalPayouts from "./views/GlobalPayouts.vue";
 import FXConversionAndAcceptance from "./views/FXConversionAndAcceptance.vue";
 
 const routes = [
-  {
-    path: "/",
-    name: "landing",
-    component: LandingView,
-  },
-  {
-    path: "/login",
-    name: "login",
-    component: LoginView,
-  },
-  {
-    path: "/dashboard",
-    name: "dashboard",
-    component: DashboardView,
-  },
-  {
-    path: "/payroll",
-    name: "payroll",
-    component: PayrollView,
-  },
+  { path: "/", name: "landing", component: LandingView },
+  { path: "/login", name: "login", component: LoginView },
+  { path: "/dashboard", name: "dashboard", component: DashboardView },
+  { path: "/payroll", name: "payroll", component: PayrollView },
   {
     path: "/rental-collection",
     name: "rental-collection",
@@ -57,11 +41,7 @@ const routes = [
     name: "GlobalCardIssuance",
     component: GlobalCardIssuance,
   },
-  {
-    path: "/global-payouts",
-    name: "GlobalPayouts",
-    component: GlobalPayouts,
-  },
+  { path: "/global-payouts", name: "GlobalPayouts", component: GlobalPayouts },
   {
     path: "/fx-conversion-and-acceptance",
     name: "FXConversionAndAcceptance",
@@ -72,13 +52,33 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+
+  // ✅ Always reset scroll to top on route change
+  scrollBehavior(to, from, savedPosition) {
+    // back/forward browser buttons keep their position
+    if (savedPosition) return savedPosition;
+
+    // if you navigate to a hash like /page#contact, scroll to that element
+    if (to.hash) return { el: to.hash, behavior: "smooth" };
+
+    // default: top of page
+    return { top: 0, left: 0 };
+  },
 });
 
 // 30 minutes inactivity limit (you can change this)
 const INACTIVITY_LIMIT_MS = 30 * 60 * 1000;
 
 router.beforeEach((to, from, next) => {
-  const publicPaths = ["/", "/login", "/rental-collection-summary", "/global-multi-currency-account", "/global-card-issuance", "/global-payouts", "/fx-conversion-and-acceptance"]; // landing + login are public
+  const publicPaths = [
+    "/",
+    "/login",
+    "/rental-collection-summary",
+    "/global-multi-currency-account",
+    "/global-card-issuance",
+    "/global-payouts",
+    "/fx-conversion-and-acceptance",
+  ];
   const authRequired = !publicPaths.includes(to.path);
 
   const loggedIn = sessionStorage.getItem("novago_loggedIn") === "true";

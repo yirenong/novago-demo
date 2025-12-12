@@ -28,6 +28,7 @@ import { useRoute } from 'vue-router'
 import Sidebar from './components/Sidebar.vue'
 import Navbar from './components/Navbar.vue'
 
+
 const isCollapsed = ref(false)
 const route = useRoute()
 

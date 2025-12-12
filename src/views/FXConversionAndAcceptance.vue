@@ -21,6 +21,13 @@
                             Learn more
                         </button>
                     </div>
+                    <div class="hero-nav">
+                        <button class="hero-nav-btn" type="button"
+                            @click="scrollToSection('overview')">Overview</button>
+                        <button class="hero-nav-btn" type="button"
+                            @click="scrollToSection('features')">Features</button>
+                        <button class="hero-nav-btn" type="button" @click="scrollToSection('contact')">Contact</button>
+                    </div>
                 </div>
 
                 <div class="hero-right">
@@ -255,13 +262,26 @@
                 </div>
             </div>
         </footer>
+
+        <button class="fab fab--top" type="button" aria-label="Scroll to top" :class="{ 'is-visible': showTop }"
+            @click="scrollToTop">
+            ↑
+        </button>
+
+        <a class="fab fab--whatsapp" aria-label="Chat with us on WhatsApp" href="https://wa.me/6591234567"
+            target="_blank" rel="noopener">
+            <img :src="whatsappIcon" alt="" class="fab-whatsapp-img" />
+        </a>
+
     </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import NavBar from '../components/MainscreenNavBar.vue'
+import whatsappIcon from '../assets/whatsapp_icon.png'
+
 
 const router = useRouter()
 const token = ref(localStorage.getItem('access_token') || null)
@@ -283,6 +303,19 @@ const scrollToSection = (id) => {
 const fakeSubmit = () => {
     alert('Demo request submitted. (Placeholder action)')
 }
+
+const showTop = ref(false)
+
+const onScroll = () => {
+    showTop.value = window.scrollY > 400
+}
+
+const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
+onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 
 /* -------------------------------
    Overview
@@ -2087,6 +2120,94 @@ const rightFeatureCards = computed(() => {
 @media (max-width: 960px) {
     .fx-how-split {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Hero nav buttons (under hero actions) */
+.hero-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+}
+
+.hero-nav-btn {
+    border-radius: 999px;
+    border: 1px solid #d1d5db;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.36rem 0.9rem;
+    font-size: 0.84rem;
+    cursor: pointer;
+    color: #334155;
+    transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+.hero-nav-btn:hover {
+    transform: translateY(-1px);
+    background: #ffffff;
+    border-color: #c7d2fe;
+    box-shadow: 0 10px 22px rgba(148, 163, 184, 0.25);
+}
+
+/* Floating buttons */
+.fab {
+    position: fixed;
+    right: 24px;
+    width: 54px;
+    height: 54px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(209, 213, 219, 0.9);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+    z-index: 60;
+    cursor: pointer;
+    text-decoration: none;
+    background: #ffffff;
+    color: #111827;
+}
+
+.fab--whatsapp {
+    bottom: 24px;
+    background: #25d366;
+    border-color: rgba(0, 0, 0, 0.06);
+}
+
+.fab-whatsapp-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.fab--top {
+    bottom: 90px;
+    /* above WhatsApp */
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(6px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.fab--top.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* Responsive FAB */
+@media (max-width: 960px) {
+    .fab {
+        right: 16px;
+        width: 48px;
+        height: 48px;
+    }
+
+    .fab--whatsapp {
+        bottom: 16px;
+    }
+
+    .fab--top {
+        bottom: 76px;
     }
 }
 </style>

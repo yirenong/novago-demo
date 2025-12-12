@@ -10,23 +10,31 @@
                     <p class="hero-pill">NovaGO • Global Payouts</p>
                     <h1 class="hero-title-text">Global Payouts, Without The Drag</h1>
                     <p class="hero-subtitle">
-                        Turn mass payouts into a seamless, lightning-fast, highly precise operation.<br></br>
+                        Turn mass payouts into a seamless, lightning-fast, highly precise operation.<br />
                         Move funds across borders with confidence—at scale, in minutes, and with full visibility from
-                        initiation to delivery.
+                        initiation to
+                        delivery.
                     </p>
+
                     <div class="hero-actions">
-                        <button class="btn-primary" @click="scrollToSection('contact')">
-                            Talk to our team
-                        </button>
-                        <button class="btn-secondary" @click="scrollToSection('overview')">
-                            See how it works
-                        </button>
+                        <button class="btn-primary" @click="scrollToSection('contact')">Talk to our team</button>
+                        <button class="btn-secondary" @click="scrollToSection('overview')">See how it works</button>
+                    </div>
+
+                    <!-- NEW: Section navigation buttons right under hero actions -->
+                    <div class="hero-nav">
+                        <button class="hero-nav-btn" type="button"
+                            @click="scrollToSection('overview')">Overview</button>
+                        <button class="hero-nav-btn" type="button" @click="scrollToSection('how-it-works')">How it
+                            works</button>
+                        <button class="hero-nav-btn" type="button" @click="scrollToSection('features')">Key
+                            Features</button>
+                        <button class="hero-nav-btn" type="button" @click="scrollToSection('contact')">Contact</button>
                     </div>
                 </div>
 
                 <div class="hero-right">
                     <div class="gp-hero-visual">
-
                         <!-- Central payout orb -->
                         <div class="gp-orb">
                             <div class="gp-orb-inner">
@@ -38,21 +46,11 @@
                         </div>
 
                         <!-- Floating stats -->
-                        <div class="gp-chip gp-chip--left">
-                            190+ Countries
-                        </div>
-
-                        <div class="gp-chip gp-chip--right">
-                            95% fewer failures
-                        </div>
-
-                        <div class="gp-chip gp-chip--bottom">
-                            Minutes, not days
-                        </div>
-
+                        <div class="gp-chip gp-chip--left">190+ Countries</div>
+                        <div class="gp-chip gp-chip--right">95% fewer failures</div>
+                        <div class="gp-chip gp-chip--bottom">Minutes, not days</div>
                     </div>
                 </div>
-
             </div>
         </section>
 
@@ -62,10 +60,9 @@
                 <h2 class="section-title section-title--left">Overview</h2>
                 <p class="section-text section-text--left">
                     NovaGo’s Global Payout transforms mass payments into a seamless, lightning-fast, highly precise
-                    operation.
-                    Move funds across borders with absolute confidence - every single time.
+                    operation. Move
+                    funds across borders with absolute confidence - every single time.
                 </p>
-
 
                 <div class="card-grid card-grid--3 overview-grid">
                     <div v-for="pill in overviewPillars" :key="pill.title" class="info-card overview-card">
@@ -77,20 +74,15 @@
                         <p>{{ pill.text }}</p>
                     </div>
                 </div>
-
             </div>
         </section>
 
-        <!-- How it works (interactive summary) -->
+        <!-- How it works -->
         <section id="how-it-works" class="section">
             <div class="section-inner">
                 <h2 class="section-title section-title--left">How it works</h2>
-                <p class="section-text section-text--left">
-                    Mass payouts, simplified into six core advantages.
-                </p>
+                <p class="section-text section-text--left">Mass payouts, simplified into six core advantages.</p>
 
-
-                <!-- Pills row -->
                 <div class="how-tabs">
                     <button v-for="item in howItems" :key="item.id" type="button" class="how-tab"
                         :class="{ 'how-tab--active': item.id === activeHowId }" @click="activeHowId = item.id">
@@ -98,16 +90,13 @@
                     </button>
                 </div>
 
-                <!-- Detail panel -->
                 <div v-if="activeHow" class="how-panel">
                     <div class="how-panel-body">
-                        <!-- Left side: main copy -->
                         <div class="how-panel-main">
                             <span class="how-panel-badge">{{ activeHow.badge }}</span>
                             <h3 class="how-panel-title">{{ activeHow.title }}</h3>
                         </div>
 
-                        <!-- Right side: points list -->
                         <div class="how-panel-points">
                             <div v-for="(point, idx) in activeHow.points" :key="point.highlight" class="how-point-row"
                                 :class="{ 'how-point-row--last': idx === activeHow.points.length - 1 }">
@@ -122,7 +111,6 @@
                 </div>
             </div>
         </section>
-
 
         <!-- Features -->
         <section id="features" class="section section-muted">
@@ -144,8 +132,9 @@
             <div class="section-inner narrow">
                 <h2 class="section-title">Interested? Demo with Us Now</h2>
                 <p class="section-text">
-                    Ready to streamline mass payouts across 190+ countries?
-                    Share a few details and our team will reach out with a personalized walkthrough.
+                    Ready to streamline mass payouts across 190+ countries? Share a few details and our team will reach
+                    out with a
+                    personalized walkthrough.
                 </p>
 
                 <form class="contact-form" @submit.prevent="fakeSubmit">
@@ -183,9 +172,7 @@
                             placeholder="e.g. Mass vendor payouts, creator payments, gig worker disbursements, real-time cross-border payroll..."></textarea>
                     </div>
 
-                    <button type="submit" class="btn-primary form-submit">
-                        Submit interest
-                    </button>
+                    <button type="submit" class="btn-primary form-submit">Submit interest</button>
                 </form>
             </div>
         </section>
@@ -200,13 +187,25 @@
                 </div>
             </div>
         </footer>
+
+        <!-- NEW: Floating action buttons -->
+        <button class="fab fab--top" type="button" aria-label="Scroll to top" :class="{ 'is-visible': showTop }"
+            @click="scrollToTop">
+            ↑
+        </button>
+
+        <a class="fab fab--whatsapp" aria-label="Chat with us on WhatsApp" href="https://wa.me/6591234567"
+            target="_blank" rel="noopener">
+            <img :src="whatsappIcon" alt="" class="fab-whatsapp-img" />
+        </a>
     </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import NavBar from '../components/MainscreenNavBar.vue'
+import whatsappIcon from '../assets/whatsapp_icon.png'
 
 const router = useRouter()
 const token = ref(localStorage.getItem('access_token') || null)
@@ -220,171 +219,78 @@ const handleLogout = () => {
 
 const scrollToSection = (id) => {
     const el = document.getElementById(id)
-    if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
-const fakeSubmit = () => {
-    alert('Demo request submitted. (Placeholder action)')
+const fakeSubmit = () => alert('Demo request submitted. (Placeholder action)')
+
+/** NEW: scroll-to-top visibility + action */
+const showTop = ref(false)
+const onScroll = () => {
+    showTop.value = window.scrollY > 400
+}
+const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
-/** Overview – high-level pillars (less wordy) */
+onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
+onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
+
+/** Overview */
 const overviewPillars = [
-    {
-        title: 'Massive Cost Savings',
-        text: 'Reduce FX and intermediary fees by leveraging local rails and intelligent routing.',
-        accent: 'save',
-        icon: 'fa-solid fa-piggy-bank'
-    },
-    {
-        title: 'Blazing Fast Delivery',
-        text: 'Deliver funds in minutes or hours—not days—with real-time, adaptive routing.',
-        accent: 'speed',
-        icon: 'fa-solid fa-bolt'
-    },
-    {
-        title: 'Precision & Visibility',
-        text: 'Minimize errors and track every payout with smart validation and live status updates.',
-        accent: 'control',
-        icon: 'fa-solid fa-crosshairs'
-    }
+    { title: 'Massive Cost Savings', text: 'Reduce FX and intermediary fees by leveraging local rails and intelligent routing.', accent: 'save', icon: 'fa-solid fa-piggy-bank' },
+    { title: 'Blazing Fast Delivery', text: 'Deliver funds in minutes or hours—not days—with real-time, adaptive routing.', accent: 'speed', icon: 'fa-solid fa-bolt' },
+    { title: 'Precision & Visibility', text: 'Minimize errors and track every payout with smart validation and live status updates.', accent: 'control', icon: 'fa-solid fa-crosshairs' }
 ]
 
 const howItems = [
     {
-        id: 'cost',
-        label: 'Massive Cost Savings',
-        badge: 'Massive Cost Savings',
-        title: 'Massive Cost Savings',
-        lede: 'Reduce FX fees and intermediary fees by leveraging local payment networks',
-        points: [
-            {
-                highlight: 'Save up to 70%',
-                text: 'Save up to 70% on traditional transfer expenses through intelligent routing and localized payout rails'
-            },
-            {
-                highlight: 'Reduce FX fees and intermediary fees',
-                text: 'Reduce FX fees and intermediary fees by leveraging local payment networks'
-            }
+        id: 'cost', label: 'Massive Cost Savings', badge: 'Massive Cost Savings', title: 'Massive Cost Savings', points: [
+            { highlight: 'Save up to 70%', text: 'Save up to 70% on traditional transfer expenses through intelligent routing and localized payout rails' },
+            { highlight: 'Reduce FX fees and intermediary fees', text: 'Reduce FX fees and intermediary fees by leveraging local payment networks' }
         ]
     },
     {
-        id: 'speed',
-        label: 'Blazing Fast Delivery',
-        badge: 'Blazing Fast Delivery',
-        title: 'Blazing Fast Delivery',
-        lede: 'Deliver funds to recipients in minutes or hours, not days',
-        points: [
-            {
-                highlight: 'Delivering funds',
-                text: 'Deliver funds to recipients in minutes or hours, not days.'
-            },
-            {
-                highlight: 'Real-time routing',
-                text: 'Real-time processing and adaptive routing ensure the fastest possible payout times.'
-            }
+        id: 'speed', label: 'Blazing Fast Delivery', badge: 'Blazing Fast Delivery', title: 'Blazing Fast Delivery', points: [
+            { highlight: 'Delivering funds', text: 'Deliver funds to recipients in minutes or hours, not days.' },
+            { highlight: 'Real-time routing', text: 'Real-time processing and adaptive routing ensure the fastest possible payout times.' }
         ]
     },
     {
-        id: 'precision',
-        label: 'Unrivaled Precision',
-        badge: 'Unrivaled Precision',
-        title: 'Unrivaled Precision',
-        lede: 'Minimize errors and failed payments with smart routing and verification',
-        points: [
-            {
-                highlight: 'Minimize errors and failed payments',
-                text: 'Minimize errors and failed payments with smart routing and verification.'
-            },
-            {
-                highlight: '95% fewer failures',
-                text: 'Advanced validation and smart routing reduces failed payments by 95%.'
-            }
+        id: 'precision', label: 'Unrivaled Precision', badge: 'Unrivaled Precision', title: 'Unrivaled Precision', points: [
+            { highlight: 'Minimize errors and failed payments', text: 'Minimize errors and failed payments with smart routing and verification.' },
+            { highlight: '95% fewer failures', text: 'Advanced validation and smart routing reduces failed payments by 95%.' }
         ]
     },
     {
-        id: 'automation',
-        label: 'Effortless Automation',
-        badge: 'Effortless Automation',
-        title: 'Effortless Automation',
-        lede: 'Automate complex payment workflows and reclaim hours of manual effort',
-        points: [
-            {
-                highlight: 'Automated complex payment',
-                text: 'Automate complex payment workflows and reclaim hours of manual effort.'
-            },
-            {
-                highlight: 'Set it and forget it',
-                text: 'Set it and forget it - automated workflows handle everything from initiation to reconciliation.'
-            }
+        id: 'automation', label: 'Effortless Automation', badge: 'Effortless Automation', title: 'Effortless Automation', points: [
+            { highlight: 'Automated complex payment', text: 'Automate complex payment workflows and reclaim hours of manual effort.' },
+            { highlight: 'Set it and forget it', text: 'Set it and forget it - automated workflows handle everything from initiation to reconciliation.' }
         ]
     },
     {
-        id: 'scale',
-        label: 'Global Scalability',
-        badge: 'Global Scalability',
-        title: 'Global Scalability',
-        lede: 'Confidently expand into new markets with a payout engine built to scale.',
-        points: [
-            {
-                highlight: 'Expand into new markets',
-                text: 'Confidently expand into new markets with a payout engine built to scale.'
-            },
-            {
-                highlight: '190+ countries',
-                text: 'Handle millions of transactions across 190+ countries without breaking a sweat.'
-            }
+        id: 'scale', label: 'Global Scalability', badge: 'Global Scalability', title: 'Global Scalability', points: [
+            { highlight: 'Expand into new markets', text: 'Confidently expand into new markets with a payout engine built to scale.' },
+            { highlight: '190+ countries', text: 'Handle millions of transactions across 190+ countries without breaking a sweat.' }
         ]
     },
     {
-        id: 'transparency',
-        label: 'Enhanced Transparency',
-        badge: 'Enhanced Transparency',
-        title: 'Enhanced Transparency',
-        lede: 'Track every payment in real-time, from initiation to delivery',
-        points: [
-            {
-                highlight: 'Track payments',
-                text: 'Track every payment in real-time, from initiation to delivery.'
-            },
-            {
-                highlight: 'Full visibility',
-                text: 'Gain full visibility with detailed reporting, live status updates, and audit-ready trails.'
-            }
+        id: 'transparency', label: 'Enhanced Transparency', badge: 'Enhanced Transparency', title: 'Enhanced Transparency', points: [
+            { highlight: 'Track payments', text: 'Track every payment in real-time, from initiation to delivery.' },
+            { highlight: 'Full visibility', text: 'Gain full visibility with detailed reporting, live status updates, and audit-ready trails.' }
         ]
     }
 ]
 
 const activeHowId = ref(howItems[0].id)
-
-const activeHow = computed(() =>
-    howItems.find((i) => i.id === activeHowId.value)
-)
+const activeHow = computed(() => howItems.find((i) => i.id === activeHowId.value))
 
 const featureHighlights = [
-  {
-    tag: 'Speed',
-    title: 'Lightning speed',
-    text: 'Global transfers completed in minutes, not days'
-  },
-  {
-    tag: 'Accuracy',
-    title: 'Precision targeting',
-    text: 'intelligent routing for optimal, error free delivery'
-  },
-  {
-    tag: 'Visibility',
-    title: 'Complete transparency',
-    text: 'End to end, real time tracking for every transaction'
-  },
-  {
-    tag: 'Reach',
-    title: 'Global reach',
-    text: 'payout to 190+ countries at your fingertips'
-  }
+    { tag: 'Speed', title: 'Lightning speed', text: 'Global transfers completed in minutes, not days' },
+    { tag: 'Accuracy', title: 'Precision targeting', text: 'Intelligent routing for optimal, error free delivery' },
+    { tag: 'Visibility', title: 'Complete transparency', text: 'End to end, real time tracking for every transaction' },
+    { tag: 'Reach', title: 'Global reach', text: 'Payout to 190+ countries at your fingertips' }
 ]
-
 </script>
 
 <style scoped>
@@ -436,23 +342,41 @@ const featureHighlights = [
     color: #111827;
 }
 
-.hero-tagline {
-    font-size: 1.1rem;
-    font-weight: 500;
-    margin-bottom: 0.7rem;
-    color: #111827;
-}
-
 .hero-subtitle {
     font-size: 0.98rem;
     color: #4b5563;
-    margin-bottom: 1.8rem;
+    margin-bottom: 1.2rem;
 }
 
 .hero-actions {
     display: flex;
     gap: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.9rem;
+}
+
+/* NEW: hero nav buttons */
+.hero-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+}
+
+.hero-nav-btn {
+    border-radius: 999px;
+    border: 1px solid #d1d5db;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.36rem 0.9rem;
+    font-size: 0.84rem;
+    cursor: pointer;
+    color: #334155;
+    transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+.hero-nav-btn:hover {
+    transform: translateY(-1px);
+    background: #ffffff;
+    border-color: #c7d2fe;
+    box-shadow: 0 10px 22px rgba(148, 163, 184, 0.25);
 }
 
 /* Buttons */
@@ -463,11 +387,7 @@ const featureHighlights = [
     font-size: 0.92rem;
     cursor: pointer;
     border: 1px solid transparent;
-    transition:
-        transform 0.12s ease,
-        box-shadow 0.12s ease,
-        background 0.12s ease,
-        color 0.12s ease;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease, color 0.12s ease;
 }
 
 .btn-primary {
@@ -492,129 +412,10 @@ const featureHighlights = [
     background: #e5edff;
 }
 
-/* Hero right art */
+/* Hero right */
 .hero-right {
     display: flex;
     justify-content: center;
-}
-
-.hero-art {
-    position: relative;
-    width: 100%;
-    max-width: 380px;
-    height: 260px;
-}
-
-.hero-art-card {
-    position: absolute;
-    border-radius: 1.1rem;
-    background: #ffffff;
-    border: 1px solid #dbe3ff;
-    box-shadow: 0 18px 40px rgba(148, 163, 184, 0.4);
-    padding: 1rem 1.1rem;
-}
-
-.hero-art-card--one {
-    top: 0;
-    left: 0;
-    right: 70px;
-}
-
-.hero-art-card--two {
-    bottom: 0;
-    right: 0;
-    left: 120px;
-    padding: 0.9rem 1rem;
-}
-
-.hero-art-header {
-    display: flex;
-    gap: 0.25rem;
-    margin-bottom: 0.6rem;
-}
-
-.hero-art-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 999px;
-    background: #e5e7eb;
-}
-
-.hero-art-bars {
-    margin-bottom: 0.5rem;
-}
-
-.hero-art-bar {
-    height: 8px;
-    border-radius: 999px;
-    background: linear-gradient(90deg, #2563eb, #38bdf8);
-    margin-bottom: 0.3rem;
-}
-
-.hero-art-bar--1 {
-    width: 70%;
-}
-
-.hero-art-bar--2 {
-    width: 50%;
-}
-
-.hero-art-bar--3 {
-    width: 35%;
-}
-
-.hero-art-badge {
-    display: inline-flex;
-    margin-top: 0.2rem;
-    padding: 0.25rem 0.7rem;
-    border-radius: 999px;
-    background: #e0ebff;
-    font-size: 0.76rem;
-    color: #1d4ed8;
-}
-
-.hero-art-pill {
-    width: 46px;
-    height: 46px;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #2563eb, #38bdf8);
-    margin-bottom: 0.5rem;
-}
-
-.hero-art-meta {
-    display: flex;
-    flex-direction: column;
-    font-size: 0.8rem;
-    color: #4b5563;
-}
-
-.hero-art-meta-value {
-    font-weight: 600;
-    color: #1d4ed8;
-}
-
-/* Glows */
-.hero-art-glow {
-    position: absolute;
-    border-radius: 999px;
-    filter: blur(24px);
-    opacity: 0.8;
-}
-
-.hero-art-glow--a {
-    width: 140px;
-    height: 140px;
-    background: radial-gradient(circle, rgba(96, 165, 250, 0.55), transparent 60%);
-    top: -40px;
-    right: -30px;
-}
-
-.hero-art-glow--b {
-    width: 120px;
-    height: 120px;
-    background: radial-gradient(circle, rgba(147, 197, 253, 0.6), transparent 60%);
-    bottom: -30px;
-    left: -20px;
 }
 
 /* Sections */
@@ -674,11 +475,7 @@ const featureHighlights = [
     padding: 1.3rem 1.2rem;
     border: 1px solid #e5e7eb;
     box-shadow: 0 12px 30px rgba(148, 163, 184, 0.3);
-    transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease,
-        border-color 0.15s ease,
-        background 0.15s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 
 .info-card:hover {
@@ -701,12 +498,10 @@ const featureHighlights = [
 }
 
 /* Overview cards */
-/* Overview cards – same style as Global Card Issuance */
 .overview-grid {
     margin-top: 2rem;
 }
 
-/* main card */
 .overview-card {
     position: relative;
     padding-top: 1.6rem;
@@ -717,7 +512,6 @@ const featureHighlights = [
     overflow: hidden;
 }
 
-/* subtle top highlight bar */
 .overview-card::before {
     content: '';
     position: absolute;
@@ -728,7 +522,6 @@ const featureHighlights = [
     pointer-events: none;
 }
 
-/* icon bubble */
 .overview-icon {
     width: 34px;
     height: 34px;
@@ -737,43 +530,32 @@ const featureHighlights = [
     align-items: center;
     justify-content: center;
     margin-bottom: 0.7rem;
-}
-
-/* default gradient (if no accent class is applied) */
-.overview-icon {
     background: linear-gradient(135deg, #2563eb, #38bdf8);
 }
 
-/* accent variations, reusing your old colours */
-.overview-icon--save {
-    background: radial-gradient(circle, #22c55e, #15803d);
+.overview-icon[data-v-a254fc6f] {
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #2563eb, #38bdf8);
+    color: #ffffff;
+    font-size: 0.9rem;
+    margin-bottom: 0.7rem;
 }
 
-.overview-icon--speed {
-    background: radial-gradient(circle, #38bdf8, #0ea5e9);
+.overview-icon i {
+    color: #fff;
+    font-size: 0.95rem;
 }
 
-.overview-icon--control {
-    background: radial-gradient(circle, #a855f7, #7e22ce);
-}
-
-/* tighten text inside these cards */
-.overview-card .info-card-title {
-    margin-bottom: 0.35rem;
-}
-
-.overview-card p {
-    font-size: 0.85rem;
-    line-height: 1.5;
-}
-
-/* stronger hover like GCI */
 .overview-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 22px 52px rgba(79, 70, 229, 0.5);
     border-color: #818cf8;
 }
-
 
 /* How it works */
 .how-tabs {
@@ -793,11 +575,7 @@ const featureHighlights = [
     font-size: 0.86rem;
     cursor: pointer;
     color: #4b5563;
-    transition:
-        background 0.15s ease,
-        border-color 0.15s ease,
-        color 0.15s ease,
-        box-shadow 0.15s ease;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .how-tab--active {
@@ -808,35 +586,70 @@ const featureHighlights = [
 }
 
 .how-panel {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 1.8rem auto 0;
-    padding: 1.6rem 1.6rem 1.8rem;
-    border-radius: 1.1rem;
-    background: #eef2ff;
+    padding: 1.6rem 1.8rem 1.8rem;
+    border-radius: 1rem;
+    background: #eef3ff;
     border: 1px solid #c7d2fe;
+    box-shadow: 0 18px 40px rgba(148, 163, 184, 0.22);
+}
+
+.how-panel-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr);
+    column-gap: 2.4rem;
+    row-gap: 1.4rem;
+}
+
+.how-panel-badge {
+    display: inline-flex;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.18rem 0.6rem;
+    border-radius: 999px;
+    background: #e0ecff;
+    color: #1d4ed8;
+    margin-bottom: 0.6rem;
 }
 
 .how-panel-title {
     font-size: 1.1rem;
     font-weight: 600;
-    margin-bottom: 0.4rem;
     color: #111827;
+    margin-bottom: 0.4rem;
 }
 
-.how-panel-lede {
-    font-size: 0.94rem;
-    color: #4b5563;
-    margin-bottom: 1.1rem;
+.how-panel-points {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 }
 
-.how-panel-grid {
+.how-point-row {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 0.8rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.how-point-row--last {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.how-point-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    background: #2563eb;
+    margin-top: 0.4rem;
 }
 
 .how-point-title {
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     font-weight: 600;
     margin-bottom: 0.25rem;
     color: #111827;
@@ -845,6 +658,8 @@ const featureHighlights = [
 .how-point-text {
     font-size: 0.88rem;
     color: #4b5563;
+    margin: 0;
+    line-height: 1.55;
 }
 
 /* Features */
@@ -925,11 +740,6 @@ const featureHighlights = [
     color: #111827;
 }
 
-.field input::placeholder,
-.field textarea::placeholder {
-    color: #9ca3af;
-}
-
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
@@ -973,6 +783,52 @@ const featureHighlights = [
     color: #1d4ed8;
 }
 
+/* NEW: Floating buttons */
+.fab {
+    position: fixed;
+    right: 24px;
+    width: 54px;
+    height: 54px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(209, 213, 219, 0.9);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+    z-index: 60;
+    cursor: pointer;
+    text-decoration: none;
+    background: #ffffff;
+    color: #111827;
+}
+
+.fab--whatsapp {
+    bottom: 24px;
+    background: #25d366;
+    border-color: rgba(0, 0, 0, 0.06);
+}
+
+.fab-whatsapp-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.fab--top {
+    bottom: 90px;
+    /* sits above WhatsApp */
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(6px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.fab--top.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
 /* Responsive */
 @media (max-width: 1100px) {
     .card-grid--3 {
@@ -1003,10 +859,6 @@ const featureHighlights = [
         grid-template-columns: 1fr;
     }
 
-    .how-panel-grid {
-        grid-template-columns: 1fr;
-    }
-
     .section {
         padding-inline: 1rem;
     }
@@ -1024,222 +876,30 @@ const featureHighlights = [
         align-items: flex-start;
         gap: 0.5rem;
     }
+
+    .fab {
+        right: 16px;
+        width: 48px;
+        height: 48px;
+    }
+
+    .fab--whatsapp {
+        bottom: 16px;
+    }
+
+    .fab--top {
+        bottom: 76px;
+    }
 }
 
-.how-panel {
-    max-width: 1100px;
-    margin: 1.8rem auto 0;
-    padding: 1.6rem 1.8rem 1.8rem;
-    border-radius: 1rem;
-    background: #eef3ff;
-    border: 1px solid #c7d2fe;
-    box-shadow: 0 18px 40px rgba(148, 163, 184, 0.25);
-}
-
-/* Title + lede spacing */
-.how-panel-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #111827;
-    margin-bottom: 0.5rem;
-}
-
-.how-panel-lede {
-    font-size: 0.95rem;
-    color: #4b5563;
-    margin: 0 0 1.3rem;
-    /* <-- adds breathing room before the two columns */
-    line-height: 1.6;
-}
-
-/* Two-column layout */
-.how-panel-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 2.5rem;
-    /* more gap between left/right */
-    row-gap: 0.9rem;
-}
-
-/* Each bullet block */
-.how-point-title {
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-bottom: 0.3rem;
-    /* space from title to paragraph */
-    color: #111827;
-}
-
-.how-point-text {
-    font-size: 0.88rem;
-    color: #4b5563;
-    margin: 0;
-    line-height: 1.55;
-    /* looser line spacing */
-}
-
-/* Stack on mobile */
 @media (max-width: 768px) {
-    .how-panel {
-        padding: 1.3rem 1.3rem 1.5rem;
-    }
-
-    .how-panel-grid {
-        grid-template-columns: 1fr;
-        row-gap: 0.8rem;
-    }
-}
-
-/* How it works */
-.how-tabs {
-    margin: 2rem auto 0;
-    max-width: 1200px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    justify-content: center;
-}
-
-.how-tab {
-    border-radius: 999px;
-    border: 1px solid #e5e7eb;
-    background: #ffffff;
-    padding: 0.35rem 1.2rem;
-    font-size: 0.86rem;
-    cursor: pointer;
-    color: #4b5563;
-    transition:
-        background 0.15s ease,
-        border-color 0.15s ease,
-        color 0.15s ease,
-        box-shadow 0.15s ease;
-}
-
-.how-tab--active {
-    background: #2563eb;
-    border-color: #2563eb;
-    color: #ffffff;
-    box-shadow: 0 10px 22px rgba(37, 99, 235, 0.45);
-}
-
-.how-panel {
-    max-width: 1100px;
-    margin: 1.8rem auto 0;
-    padding: 1.6rem 1.8rem 1.8rem;
-    border-radius: 1rem;
-    background: #eef3ff;
-    border: 1px solid #c7d2fe;
-    box-shadow: 0 18px 40px rgba(148, 163, 184, 0.22);
-}
-
-/* two-column body */
-.how-panel-body {
-    display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr);
-    column-gap: 2.4rem;
-    row-gap: 1.4rem;
-}
-
-/* left side */
-.how-panel-badge {
-    display: inline-flex;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 0.18rem 0.6rem;
-    border-radius: 999px;
-    background: #e0ecff;
-    color: #1d4ed8;
-    margin-bottom: 0.6rem;
-}
-
-.how-panel-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #111827;
-    margin-bottom: 0.4rem;
-}
-
-.how-panel-lede {
-    font-size: 0.95rem;
-    color: #4b5563;
-    margin: 0;
-    line-height: 1.6;
-}
-
-/* right side: point list */
-.how-panel-points {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-}
-
-.how-point-row {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    column-gap: 0.8rem;
-    padding-bottom: 0.7rem;
-    border-bottom: 1px solid rgba(148, 163, 184, 0.4);
-}
-
-.how-point-row--last {
-    border-bottom: none;
-    padding-bottom: 0;
-}
-
-.how-point-dot {
-    width: 9px;
-    height: 9px;
-    border-radius: 999px;
-    background: #2563eb;
-    margin-top: 0.4rem;
-}
-
-.how-point-title {
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-    color: #111827;
-}
-
-.how-point-text {
-    font-size: 0.88rem;
-    color: #4b5563;
-    margin: 0;
-    line-height: 1.55;
-}
-
-/* Stack columns on smaller screens */
-@media (max-width: 768px) {
-    .how-panel {
-        padding: 1.4rem 1.3rem 1.6rem;
-    }
-
     .how-panel-body {
         grid-template-columns: 1fr;
         row-gap: 1.1rem;
     }
 }
 
-.overview-icon i {
-    color: #ffffff;
-    font-size: 0.95rem;
-}
-
-.overview-icon {
-    width: 34px;
-    height: 34px;
-    border-radius: 999px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #2563eb, #38bdf8);
-    color: #ffffff;
-    font-size: 0.9rem;
-    margin-bottom: 0.7rem;
-}
-
-/* GP Hero visual (same language as GCI) */
+/* GP Hero visual */
 .gp-hero-visual {
     position: relative;
     width: 100%;
@@ -1255,19 +915,6 @@ const featureHighlights = [
     overflow: hidden;
 }
 
-/* Logo */
-.gp-logo {
-    position: absolute;
-    top: 22px;
-    left: 22px;
-}
-
-.gp-logo img {
-    height: 28px;
-    opacity: 0.95;
-}
-
-/* Orb */
 .gp-orb {
     position: absolute;
     left: 50%;
@@ -1301,7 +948,6 @@ const featureHighlights = [
     color: #4b5563;
 }
 
-/* Orb ring */
 .gp-orb-ring {
     position: absolute;
     inset: -16px;
@@ -1324,7 +970,6 @@ const featureHighlights = [
     }
 }
 
-/* Floating chips */
 .gp-chip {
     position: absolute;
     padding: 0.45rem 0.8rem;
@@ -1354,7 +999,6 @@ const featureHighlights = [
     transform: translateX(-50%);
 }
 
-/* Responsive */
 @media (max-width: 960px) {
     .gp-hero-visual {
         height: 360px;
@@ -1366,15 +1010,4 @@ const featureHighlights = [
     }
 }
 
-/* Logo */
-.gp-logo {
-    position: absolute;
-    top: 22px;
-    left: 22px;
-}
-
-.gp-logo img {
-    height: 28px;
-    opacity: 0.95;
-}
 </style>
