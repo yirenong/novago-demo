@@ -92,7 +92,7 @@
             </div>
         </section>
 
-        <!-- How it works -->
+        <!-- How it works (styled like GCI Overview) -->
         <section id="how-it-works" class="section">
             <div class="section-inner">
                 <h2 class="section-title section-title--left">How it works</h2>
@@ -100,46 +100,70 @@
                     A unified platform that supports you from setup to day-to-day operations.
                 </p>
 
-                <div class="how-grid">
-                    <div v-for="item in howItems" :key="item.title" class="how-card">
-                        <span class="how-pill">{{ item.category }}</span>
-                        <h3 class="how-card-title">{{ item.title }}</h3>
-                        <p class="how-card-text">
-                            {{ item.text }}
-                        </p>
+                <div class="card-grid card-grid--4">
+                    <div v-for="item in howItems" :key="item.title" class="info-card overview-card">
+                        <div class="overview-icon">
+                            <i :class="item.icon" aria-hidden="true"></i>
+                        </div>
+
+                        <h3 class="info-card-title">{{ item.title }}</h3>
+                        <p>{{ item.text }}</p>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Features -->
-        <section id="features" class="section section-muted">
-            <div class="section-inner">
-                <h2 class="section-title section-title--left">Key Features</h2>
 
-                <!-- Tabs -->
-                <div class="feature-tabs">
-                    <button v-for="tab in featureTabs" :key="tab.id" type="button" class="feature-tab"
-                        :class="{ 'feature-tab--active': tab.id === activeFeatureTab }"
-                        @click="activeFeatureTab = tab.id">
-                        {{ tab.label }}
-                    </button>
+        <!-- Features (same layout as Global Card Issuance) -->
+        <section id="features" class="section features-section section-muted">
+            <div class="section-inner features-inner">
+                <!-- Left: list of feature types -->
+                <div class="features-left">
+                    <h2 class="section-title section-title--left">
+                        Features
+                    </h2>
+
+                    <div class="feature-list">
+                        <button v-for="(tab, index) in featureTabs" :key="tab.id" type="button"
+                            class="feature-list-item"
+                            :class="{ 'feature-list-item--active': tab.id === activeFeatureTab }"
+                            @click="activeFeatureTab = tab.id">
+                            <div class="feature-list-main">
+                                <div class="feature-list-label">{{ tab.label }}</div>
+                            </div>
+                            <div class="feature-list-number">
+                                {{ (index + 1).toString().padStart(2, '0') }}
+                            </div>
+                        </button>
+                    </div>
                 </div>
 
-                <!-- Active panel -->
-                <div v-if="activeFeature" class="feature-panel">
-                    <h3 class="feature-heading">
-                        {{ activeFeature.heading }}
-                    </h3>
+                <!-- Right: active feature card -->
+                <div class="features-right" v-if="activeFeature">
+                    <div class="feature-detail-card">
+                        <div class="feature-detail-pill">
+                            {{ (activeFeatureIndex + 1).toString().padStart(2, '0') }}
+                        </div>
 
-                    <div class="card-grid card-grid--2">
-                        <div v-for="card in activeFeature.cards" :key="card.subtitle" class="info-card">
-                            <h4 class="info-card-subtitle">{{ card.subtitle }}</h4>
-                            <p>{{ card.text }}</p>
+                        <h3 class="feature-detail-title">
+                            {{ activeFeature.heading }}
+                        </h3>
+
+                        <div class="feature-detail-grid">
+                            <div v-for="card in activeFeature.cards" :key="card.subtitle"
+                                class="feature-detail-mini-card">
+                                <h4 class="feature-detail-mini-title">
+                                    {{ card.subtitle }}
+                                </h4>
+                                <p class="feature-detail-mini-text">
+                                    {{ card.text }}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
 
 
         <!-- Contact / Demo -->
@@ -281,30 +305,35 @@ const activeChallenge = computed(() =>
 
 const howItems = [
     {
+        icon: 'fa-solid fa-globe',
         category: 'Global finances',
         title: 'Simplify Global Finances',
         text:
             'Use a single platform equipped with everything you need to manage, simplify, and scale your international operations.'
     },
     {
+        icon: 'fa-solid fa-sliders',
         category: 'Control & Pricing',
         title: 'Better Rates, Better Control',
         text:
             'Accept payments in local currencies, make fast transfers, and protect margins with interbank FX rates and zero hidden fees.'
     },
     {
+        icon: 'fa-solid fa-wand-magic-sparkles',
         category: 'Workflows',
         title: 'AI-Powered Workflows',
         text:
             'Remove repetitive manual tasks so your team saves hours each week on bookkeeping, approvals, and reconciliation.'
     },
     {
+        icon: 'fa-solid fa-bolt',
         category: 'Operations',
         title: 'Seamless Global Operations',
         text:
             'Access local payment networks worldwide so you can open accounts and move money at high speed, operating like a local anywhere you go.'
     }
 ]
+
 
 const featureTabs = ref([
     {
@@ -364,6 +393,10 @@ const activeFeatureTab = ref(featureTabs.value[0].id)
 
 const activeFeature = computed(() =>
     featureTabs.value.find((t) => t.id === activeFeatureTab.value)
+)
+
+const activeFeatureIndex = computed(() =>
+    featureTabs.value.findIndex((t) => t.id === activeFeatureTab.value)
 )
 
 </script>
@@ -1016,4 +1049,331 @@ const activeFeature = computed(() =>
         max-width: 100%;
     }
 }
+
+/* KEY FEATURES – upgraded modern cards */
+.feature-panel .info-card {
+    border-radius: 1.2rem;
+    padding: 1.5rem 1.4rem;
+    background: rgba(255, 255, 255, 0.95);
+    /* soft white glassy */
+    border: 1px solid rgba(209, 213, 219, 0.75);
+    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.15);
+    backdrop-filter: blur(10px);
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+
+    transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease,
+        border-color 0.16s ease,
+        background 0.16s ease;
+}
+
+.feature-panel .info-card:hover {
+    transform: translateY(-4px);
+    background: #ffffff;
+    border-color: rgba(129, 140, 248, 0.8);
+    box-shadow: 0 20px 48px rgba(79, 70, 229, 0.25);
+}
+
+/* Title inside each feature card */
+.feature-panel .info-card-subtitle {
+    font-size: 0.98rem;
+    font-weight: 600;
+    margin-bottom: 0.1rem;
+    color: #1e293b;
+    /* very readable dark navy */
+}
+
+/* Body text */
+.feature-panel .info-card p {
+    font-size: 0.9rem;
+    color: #4b5563;
+    /* soft gray, readable */
+    line-height: 1.5;
+}
+
+/* === Features section – same layout as Global Card Issuance === */
+.features-section {
+    padding-top: 3.4rem;
+}
+
+.features-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+    gap: 2.5rem;
+    align-items: stretch;
+}
+
+.features-left .section-title--left {
+    text-align: center;
+}
+
+/* Left list */
+.feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.feature-list-item {
+    width: 100%;
+    text-align: left;
+    border-radius: 1rem;
+    border: 1px solid #e5e7eb;
+    padding: 0.95rem 1.2rem;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    cursor: pointer;
+    transition:
+        background 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.12s ease;
+}
+
+.feature-list-item--active {
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+    border-color: #4f46e5;
+    box-shadow: 0 18px 40px rgba(99, 102, 241, 0.55);
+    transform: translateY(-2px);
+}
+
+.feature-list-main {
+    flex: 1;
+}
+
+.feature-list-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.feature-list-item--active .feature-list-label {
+    color: #f9fafb;
+}
+
+.feature-list-number {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 999px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    font-size: 1rem;
+    font-weight: 600;
+    color: #4f46e5;
+    background: #f9fafb;
+}
+
+.feature-list-item--active .feature-list-number {
+    background: #f9fafb;
+    color: #4f46e5;
+    border-color: #f9fafb;
+}
+
+/* Right detail panel */
+.features-right {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.feature-detail-card {
+    position: relative;
+    width: 100%;
+    border-radius: 1.8rem;
+    padding: 2.2rem 2.4rem 2.3rem;
+    background: radial-gradient(circle at 0% 0%, #6d4aff, #5036f4 45%, #3b2ac4 85%);
+    color: #f9fafb;
+    box-shadow: 0 28px 70px rgba(15, 23, 42, 0.85);
+    overflow: hidden;
+}
+
+/* soft spotlight + arc */
+.feature-detail-card::before,
+.feature-detail-card::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+}
+
+.feature-detail-card::before {
+    width: 280px;
+    height: 280px;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.18), transparent 60%);
+    top: -90px;
+    left: -80px;
+    opacity: 0.9;
+}
+
+.feature-detail-card::after {
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    bottom: -260px;
+    right: -160px;
+}
+
+/* pill + heading */
+.feature-detail-pill {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem 1rem;
+    border-radius: 999px;
+    background: rgba(6, 8, 20, 0.9);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+}
+
+.feature-detail-title {
+    position: relative;
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin-bottom: 1.6rem;
+}
+
+/* inner feature cards – light boxes */
+.feature-detail-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
+}
+
+.feature-detail-mini-card {
+    border-radius: 1.3rem;
+    padding: 1.15rem 1.3rem;
+    background: rgba(249, 250, 251, 0.96);
+    border: 1px solid rgba(209, 213, 219, 0.9);
+    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.3);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    transform: translateY(0);
+    transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease,
+        border-color 0.16s ease,
+        background 0.16s ease;
+}
+
+.feature-detail-mini-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 44px rgba(15, 23, 42, 0.45);
+    border-color: rgba(129, 140, 248, 0.9);
+    background: #ffffff;
+}
+
+.feature-detail-mini-title {
+    font-size: 0.94rem;
+    font-weight: 600;
+    margin-bottom: 0.1rem;
+    color: #111827;
+}
+
+.feature-detail-mini-text {
+    font-size: 0.86rem;
+    color: #4b5563;
+    line-height: 1.5;
+}
+
+/* responsive */
+@media (max-width: 960px) {
+    .features-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .features-right {
+        order: -1;
+    }
+
+    .feature-detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Overview-style cards (reuse from GCI) */
+.overview-card {
+  position: relative;
+  padding-top: 1.6rem;
+  padding-bottom: 1.4rem;
+  background: radial-gradient(circle at top left, #eef2ff, #ffffff 60%);
+  border: 1px solid #dbeafe;
+  box-shadow: 0 18px 42px rgba(129, 140, 248, 0.3);
+  overflow: hidden;
+  min-height: 160px;
+}
+
+.overview-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border-top: 3px solid #2563eb;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.overview-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  color: #ffffff;
+  font-size: 0.9rem;
+  margin-bottom: 0.7rem;
+}
+
+.overview-card .info-card-title {
+  margin-bottom: 0.35rem;
+}
+
+.overview-card p {
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.overview-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 22px 52px rgba(79, 70, 229, 0.5);
+  border-color: #818cf8;
+}
+
+.card-grid--4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 1200px) {
+  .card-grid--4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .card-grid--4 {
+    grid-template-columns: 1fr;
+  }
+}
+
 </style>

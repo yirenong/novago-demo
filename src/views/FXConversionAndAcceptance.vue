@@ -8,7 +8,7 @@
             <div class="hero-inner">
                 <div class="hero-left">
                     <p class="hero-pill">NovaGO • FX Conversion & Global Acceptance</p>
-                    <h1 class="hero-title-text">FX and payments built for global scale</h1>
+                    <h1 class="hero-title-text">FX & Payments Built For Global Scale</h1>
                     <p class="hero-subtitle">
                         Give customers their preferred local payment methods, reduce FX costs, and streamline treasury
                         operations across every market you serve.
@@ -103,16 +103,6 @@
                                     <p class="fx-how-point-text">{{ point.text }}</p>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="fx-how-aside">
-                            <h4 class="fx-how-aside-title">What this helps you do</h4>
-                            <ul class="fx-how-aside-list">
-                                <li v-for="item in activeFxMode.benefits" :key="item">
-                                    <span class="fx-check-dot"></span>
-                                    <span>{{ item }}</span>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -289,7 +279,7 @@ const fxModes = [
     {
         id: 'global-fx',
         label: 'Global FX',
-        title: 'Global FX – make every conversion work harder',
+        title: 'Global FX',
         lede: 'Turn FX into a controlled lever: save on cost, protect margins, and keep currency exposure visible.',
         points: [
             {
@@ -820,22 +810,38 @@ const rightFeatureCards = computed(() => {
 
 .fx-how-main {
     display: grid;
-    grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr);
     gap: 1.8rem;
 }
 
 .fx-how-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #111827;
-    margin-bottom: 0.45rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1d4ed8;
+    /* tie in to your brand blue */
+    margin-bottom: 0.7rem;
+}
+
+.fx-how-title::before {
+    content: '';
+    width: 6px;
+    height: 24px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #2563eb, #38bdf8);
+    flex-shrink: 0;
 }
 
 .fx-how-lede {
-    font-size: 0.95rem;
-    color: #4b5563;
-    margin-bottom: 1.2rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    color: #111827;
+    margin-bottom: 1.4rem;
+    line-height: 1.7;
+    padding: 0.75rem 0.95rem;
+    border-radius: 0.8rem;
+    background: #f9fafb;
+    border-left: 3px solid #2563eb;
 }
 
 .fx-how-grid {
@@ -864,6 +870,49 @@ const rightFeatureCards = computed(() => {
     border-radius: 0.9rem;
     padding: 1rem 1rem 1.1rem;
     border: 1px solid #e5e7eb;
+}
+
+.fx-how-aside-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    font-size: 0.84rem;
+    color: #4b5563;
+    flex: 1;
+    /* use remaining height */
+}
+
+.fx-how-aside-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.45rem;
+    padding: 0.55rem 0.65rem;
+    border-radius: 0.7rem;
+    background: #f9fafb;
+    /* subtle fill so it doesn’t look empty */
+    border: 1px solid transparent;
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        transform 0.12s ease;
+}
+
+.fx-how-aside-list li:hover {
+    background: #eef2ff;
+    border-color: #c7d2fe;
+    transform: translateY(-1px);
+}
+
+.fx-check-dot {
+    margin-top: 0.25rem;
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: #22c55e;
+    flex-shrink: 0;
 }
 
 .fx-how-aside-title {
@@ -1187,5 +1236,90 @@ const rightFeatureCards = computed(() => {
         flex-wrap: wrap;
         max-width: 100%;
     }
+}
+
+.fx-how-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 2.2rem;
+    row-gap: 1.1rem;
+    /* slightly more breathing room */
+}
+
+.fx-how-point {
+    background: #f9fafb;
+    border-radius: 0.8rem;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 6px 14px rgba(148, 163, 184, 0.15);
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        transform 0.12s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.fx-how-point::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background: radial-gradient(circle at top left, rgba(129, 140, 248, 0.12), transparent 55%);
+    transition: opacity 0.18s ease;
+}
+
+.fx-how-point:hover {
+    background: #ffffff;
+    border-color: #c7d2fe;
+    box-shadow: 0 10px 22px rgba(148, 163, 184, 0.3);
+    transform: translateY(-2px);
+}
+
+.fx-how-point:hover::before {
+    opacity: 1;
+}
+
+.fx-how-point-label {
+    position: relative;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #111827;
+}
+
+.fx-how-point-text {
+    position: relative;
+    font-size: 0.86rem;
+    color: #4b5563;
+    line-height: 1.55;
+}
+
+/* Remove box styles entirely */
+.fx-how-point {
+    padding-left: 1rem;
+    border-left: 3px solid #00978b;
+    border-radius: 0;
+    background: none;
+    transition: border-color 0.2s ease, transform 0.15s ease;
+}
+
+.fx-how-point:hover {
+    border-color: #00978b;
+    transform: translateX(3px);
+}
+
+.fx-how-point-label {
+    font-size: 0.92rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #111827;
+}
+
+.fx-how-point-text {
+    font-size: 0.86rem;
+    color: #4b5563;
+    line-height: 1.55;
 }
 </style>

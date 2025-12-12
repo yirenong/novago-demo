@@ -8,11 +8,9 @@
             <div class="hero-inner">
                 <div class="hero-left">
                     <p class="hero-pill">NovaGO • Global Payouts</p>
-                    <h1 class="hero-title-text">Global payouts, without the drag</h1>
-                    <p class="hero-tagline">
-                        Turn mass payouts into a seamless, lightning-fast, highly precise operation.
-                    </p>
+                    <h1 class="hero-title-text">Global Payouts, Without The Drag</h1>
                     <p class="hero-subtitle">
+                        Turn mass payouts into a seamless, lightning-fast, highly precise operation.<br></br>
                         Move funds across borders with confidence—at scale, in minutes, and with full visibility from
                         initiation to delivery.
                     </p>

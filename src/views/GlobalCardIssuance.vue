@@ -8,7 +8,7 @@
             <div class="hero-inner">
                 <div class="hero-left">
                     <p class="hero-pill">NovaGO • Global Card Issuance</p>
-                    <h1 class="hero-title-text">Build card programs that move your business</h1>
+                    <h1 class="hero-title-text">Issue Your Own Branded Cards</h1>
                     <p class="hero-subtitle">
                         Our Global Card Issuance platform gives you control of your payment ecosystem, letting you
                         design card programs that boost loyalty, streamline payouts, and unlock new revenue.
@@ -76,30 +76,50 @@
         </section>
 
 
-        <!-- Features (tabs) -->
-        <section id="features" class="section">
-            <div class="section-inner">
-                <h2 class="section-title section-title--left">Key Features</h2>
+        <!-- Features (split layout like screenshot) -->
+        <section id="features" class="section features-section">
+            <div class="section-inner features-inner">
+                <!-- Left: list of feature types -->
+                <div class="features-left">
+                    <h2 class="section-title section-title--left">
+                        Features
+                    </h2>
 
-                <!-- Tabs -->
-                <div class="feature-tabs">
-                    <button v-for="tab in featureTabs" :key="tab.id" type="button" class="feature-tab"
-                        :class="{ 'feature-tab--active': tab.id === activeFeatureTab }"
-                        @click="activeFeatureTab = tab.id">
-                        {{ tab.label }}
-                    </button>
+                    <div class="feature-list">
+                        <button v-for="(tab, index) in featureTabs" :key="tab.id" type="button"
+                            class="feature-list-item"
+                            :class="{ 'feature-list-item--active': tab.id === activeFeatureTab }"
+                            @click="activeFeatureTab = tab.id">
+                            <div class="feature-list-main">
+                                <div class="feature-list-label">{{ tab.label }}</div>
+                            </div>
+                            <div class="feature-list-number">
+                                {{ (index + 1).toString().padStart(2, '0') }}
+                            </div>
+                        </button>
+                    </div>
                 </div>
 
-                <!-- Active feature panel -->
-                <div v-if="activeFeature" class="feature-panel">
-                    <h3 class="feature-heading">
-                        {{ activeFeature.heading }}
-                    </h3>
+                <!-- Right: active feature details -->
+                <div class="features-right" v-if="activeFeature">
+                    <div class="feature-detail-card">
+                        <div class="feature-detail-pill">
+                            {{ (activeFeatureIndex + 1).toString().padStart(2, '0') }}
+                        </div>
 
-                    <div class="card-grid card-grid--2">
-                        <div v-for="card in activeFeature.cards" :key="card.subtitle" class="info-card">
-                            <h4 class="info-card-subtitle">{{ card.subtitle }}</h4>
-                            <p>{{ card.text }}</p>
+                        <h3 class="feature-detail-title">
+                            {{ activeFeature.heading }}
+                        </h3>
+                        <div class="feature-detail-grid">
+                            <div v-for="card in activeFeature.cards" :key="card.subtitle"
+                                class="feature-detail-mini-card">
+                                <h4 class="feature-detail-mini-title">
+                                    {{ card.subtitle }}
+                                </h4>
+                                <p class="feature-detail-mini-text">
+                                    {{ card.text }}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -221,21 +241,21 @@ const overviewPillars = [
     }
 ]
 
-
-/** Features – tabbed */
+/** Features – Virtual / Physical / Multi-currency / Controls */
 const featureTabs = ref([
     {
         id: 'virtual',
         label: 'Virtual Cards',
         heading: 'Virtual Cards',
+        lead: 'Instant, digital cards you can issue on demand for payouts, subscriptions, and controlled online spend.',
         cards: [
             {
                 subtitle: 'Instant issuance',
-                text: 'Generate secure digital cards in seconds for immediate use—perfect for on-demand payouts and fast onboarding.'
+                text: 'Generate secure digital cards in seconds for immediate use.'
             },
             {
                 subtitle: 'Online purchases',
-                text: 'Ideal for e-commerce and digital transactions, with tight controls over where and how cards are used.'
+                text: 'Ideal for e-commerce and digital transactions.'
             }
         ]
     },
@@ -243,54 +263,58 @@ const featureTabs = ref([
         id: 'physical',
         label: 'Physical Cards',
         heading: 'Physical Cards',
+        lead: 'Custom plastic cards your customers and teams can use at stores and ATMs.',
         cards: [
             {
                 subtitle: 'Branded cards',
-                text: 'Issue custom plastic cards with your brand identity, designed for in-store purchases and ATM withdrawals.'
-            },
-            {
-                subtitle: 'Team & employee spend',
-                text: 'Equip employees, contractors, or drivers with physical cards to simplify everyday operational spending.'
+                text: 'Custom plastic cards suited for in-store purchases and ATM transactions.'
             }
         ]
     },
     {
         id: 'multi-currency',
-        label: 'Multi-currency & FX',
+        label: 'Multi-currency support',
         heading: 'Multi-currency support',
+        lead: 'Let users spend in local currencies while you keep FX costs predictable.',
         cards: [
             {
                 subtitle: 'Global currencies',
-                text: 'Support major world currencies and local payment methods for smoother cross-border spending.'
+                text: 'Support major world currencies and local payment methods.'
             },
             {
                 subtitle: 'Minimized FX fees',
-                text: 'Benefit from competitive exchange rates and reduced foreign transaction costs to protect your margins.'
+                text: 'Benefit from competitive exchange rates and reduced foreign transaction costs.'
             }
         ]
     },
     {
         id: 'controls',
-        label: 'Controls & Policies',
+        label: 'Customizable controls',
         heading: 'Customizable controls',
+        lead: 'Configure limits and rules so every card stays aligned to your policies.',
         cards: [
             {
                 subtitle: 'Spending limits',
-                text: 'Set daily, monthly, or transaction-specific spending caps so every card stays within budget.'
+                text: 'Set daily, monthly, or transaction-specific spending caps.'
             },
             {
                 subtitle: 'Category control',
-                text: 'Restrict spending by merchant category or type, aligning card usage with your internal policies.'
+                text: 'Restrict spending on specific merchant categories or types.'
             }
         ]
     }
 ])
 
-const activeFeatureTab = ref(featureTabs.value[0].id)
+const activeFeatureTab = ref('virtual')
 
 const activeFeature = computed(() =>
     featureTabs.value.find((t) => t.id === activeFeatureTab.value)
 )
+
+const activeFeatureIndex = computed(() =>
+    featureTabs.value.findIndex((t) => t.id === activeFeatureTab.value)
+)
+
 </script>
 
 <style scoped>
@@ -860,21 +884,268 @@ const activeFeature = computed(() =>
 .feature-panel .info-card {
     /* override the generic card size */
     min-height: auto;
-    padding: 2.1rem 1.4rem 2.1rem; /* a bit less padding, more compact */
+    padding: 2.1rem 1.4rem 2.1rem;
+    /* a bit less padding, more compact */
     display: flex;
     flex-direction: column;
-    gap: 0.45rem; /* consistent spacing between subtitle & text */
+    gap: 0.45rem;
+    /* consistent spacing between subtitle & text */
 }
 
 /* Slightly larger gap under the subtitle */
 .feature-panel .info-card-subtitle {
-    margin-bottom: 0.2rem; /* was 0.3 but gap is now handled by `gap` */
+    margin-bottom: 0.2rem;
+    /* was 0.3 but gap is now handled by `gap` */
 }
 
 /* Optional: slightly smaller body text so it feels lighter */
 .feature-panel .info-card p {
     font-size: 0.86rem;
     line-height: 1.5;
+}
+
+/* Features section – two-column layout like reference */
+.features-section {
+    padding-top: 3.4rem;
+}
+
+.features-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+    gap: 2.5rem;
+    align-items: stretch;
+}
+
+.features-left .section-title--left {
+    text-align: center;
+}
+
+.features-left .section-text--left {
+    text-align: left;
+    max-width: 540px;
+}
+
+.features-intro {
+    margin-bottom: 1.8rem;
+}
+
+/* Left list */
+.feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.feature-list-item {
+    width: 100%;
+    text-align: left;
+    border-radius: 1rem;
+    border: 1px solid #e5e7eb;
+    padding: 0.95rem 1.2rem;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    cursor: pointer;
+    transition:
+        background 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.12s ease;
+}
+
+.feature-list-item--active {
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+    border-color: #4f46e5;
+    box-shadow: 0 18px 40px rgba(99, 102, 241, 0.55);
+    transform: translateY(-2px);
+}
+
+.feature-list-main {
+    flex: 1;
+}
+
+.feature-list-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.feature-list-summary {
+    margin-top: 0.2rem;
+    font-size: 0.86rem;
+    color: #6b7280;
+}
+
+.feature-list-item--active .feature-list-label,
+.feature-list-item--active .feature-list-summary {
+    color: #f9fafb;
+}
+
+.feature-list-number {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 999px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    font-size: 1rem;
+    font-weight: 600;
+    color: #4f46e5;
+    background: #f9fafb;
+}
+
+.feature-list-item--active .feature-list-number {
+    background: #f9fafb;
+    color: #4f46e5;
+    border-color: #f9fafb;
+}
+/* Right detail panel */
+.features-right {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.feature-detail-card {
+    position: relative;
+    width: 100%;
+    border-radius: 1.8rem;
+    padding: 2.2rem 2.4rem 2.3rem;
+    background: radial-gradient(circle at 0% 0%, #6d4aff, #5036f4 45%, #3b2ac4 85%);
+    color: #f9fafb;
+    box-shadow: 0 28px 70px rgba(15, 23, 42, 0.85);
+    overflow: hidden;
+}
+
+/* soft spotlight + arc in background */
+.feature-detail-card::before,
+.feature-detail-card::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+}
+
+.feature-detail-card::before {
+    width: 280px;
+    height: 280px;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.18), transparent 60%);
+    top: -90px;
+    left: -80px;
+    opacity: 0.9;
+}
+
+.feature-detail-card::after {
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    bottom: -260px;
+    right: -160px;
+}
+
+/* small pill top-left */
+.feature-detail-pill {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem 1rem;
+    border-radius: 999px;
+    background: rgba(6, 8, 20, 0.9);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+}
+
+/* main heading */
+.feature-detail-title {
+    position: relative;
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin-bottom: 1.6rem;
+}
+
+/* inner cards */
+.feature-detail-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1.2rem;
+}
+
+/* lighter mini cards inside purple panel */
+.feature-detail-mini-card {
+    border-radius: 1.3rem;
+    padding: 1.15rem 1.3rem;
+    background: rgba(249, 250, 251, 0.96); /* very light */
+    border: 1px solid rgba(209, 213, 219, 0.9);
+    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.3);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    transform: translateY(0);
+    transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease,
+        border-color 0.16s ease,
+        background 0.16s ease;
+}
+
+.feature-detail-mini-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 44px rgba(15, 23, 42, 0.45);
+    border-color: rgba(129, 140, 248, 0.9);
+    background: #ffffff;
+}
+
+.feature-detail-mini-title {
+    font-size: 0.94rem;
+    font-weight: 600;
+    margin-bottom: 0.1rem;
+    color: #111827; /* dark title for readability */
+}
+
+.feature-detail-mini-text {
+    font-size: 0.86rem;
+    color: #4b5563;  /* mid-grey body text */
+    line-height: 1.5;
+}
+
+
+/* CTA button inside panel (if you add one later) */
+.feature-detail-cta {
+    position: relative;
+    margin-top: 1.6rem;
+    box-shadow: 0 14px 32px rgba(129, 212, 250, 0.9);
+}
+
+.feature-detail-card .btn-primary {
+    border-color: transparent;
+}
+
+/* responsive tweaks */
+@media (max-width: 960px) {
+    .features-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .features-right {
+        order: -1;
+    }
+
+    .feature-detail-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 </style>

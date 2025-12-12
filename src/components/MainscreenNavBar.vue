@@ -101,7 +101,8 @@
                                         <span>Send payouts to 190+ countries via local currencies and methods.</span>
                                     </router-link>
 
-                                    <router-link class="mega-link" to="/fx-conversion-and-acceptance" @click="closeAllNav">
+                                    <router-link class="mega-link" to="/fx-conversion-and-acceptance"
+                                        @click="closeAllNav">
                                         FX Conversion &amp; Acceptance
                                         <span>Multi-currency, borderless transactions.</span>
                                     </router-link>
@@ -228,10 +229,11 @@
                 <!-- Mobile actions (inside nav) -->
                 <div class="nav-right-actions nav-right-actions--inline">
                     <template v-if="!isLoggedIn">
-                        <button class="nav-link login-link" @click="handleLoginClick">
-                            Log in
+                        <button class="nav-link login-link" @click="handleLoginClick" aria-label="Log in">
+                            <img :src="loginIcon" alt="Log in" class="login-icon" />
                         </button>
                     </template>
+
 
                     <template v-else>
                         <button class="nav-link login-link" @click="handlePortalClick">
@@ -247,10 +249,11 @@
             <!-- Desktop actions -->
             <div class="nav-right-actions nav-right-actions--desktop">
                 <template v-if="!isLoggedIn">
-                    <button class="nav-link login-link" @click="handleLoginClick">
-                        Log in
+                    <button class="nav-link login-link" @click="handleLoginClick" aria-label="Log in">
+                        <img :src="loginIcon" alt="Log in" class="login-icon" />
                     </button>
                 </template>
+
 
                 <template v-else>
                     <button class="nav-link login-link" @click="handlePortalClick">
@@ -275,6 +278,8 @@ import transtarLogo from '../assets/partners/transtar.png'
 import shellLogo from '../assets/partners/shell.png'
 import bestPetrolLogo from '../assets/partners/best-petrol.png'
 import zoqqLogo from '../assets/partners/zoqq.png'
+import loginIcon from '../assets/login_icon.png'
+
 
 const props = defineProps({
     isLoggedIn: {
@@ -807,5 +812,12 @@ const handleLogoutClick = () => {
         margin-top: 0.4rem;
         justify-content: flex-start;
     }
+}
+
+.login-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    display: block;
 }
 </style>
