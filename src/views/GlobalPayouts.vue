@@ -25,33 +25,34 @@
                 </div>
 
                 <div class="hero-right">
-                    <div class="hero-art">
-                        <div class="hero-art-card hero-art-card--one">
-                            <div class="hero-art-header">
-                                <span class="hero-art-dot"></span>
-                                <span class="hero-art-dot"></span>
-                                <span class="hero-art-dot"></span>
+                    <div class="gp-hero-visual">
+
+                        <!-- Central payout orb -->
+                        <div class="gp-orb">
+                            <div class="gp-orb-inner">
+                                <div class="gp-orb-title">Payouts</div>
+                                <div class="gp-orb-sub">Global Engine</div>
                             </div>
-                            <div class="hero-art-bars">
-                                <div class="hero-art-bar hero-art-bar--1"></div>
-                                <div class="hero-art-bar hero-art-bar--2"></div>
-                                <div class="hero-art-bar hero-art-bar--3"></div>
-                            </div>
-                            <div class="hero-art-badge">95% fewer failed payouts</div>
+                            <div class="gp-orb-ring"></div>
+                            <div class="gp-orb-glow"></div>
                         </div>
 
-                        <div class="hero-art-card hero-art-card--two">
-                            <div class="hero-art-pill"></div>
-                            <div class="hero-art-meta">
-                                <span>Payout volume this month</span>
-                                <span class="hero-art-meta-value">1.8M+ transactions</span>
-                            </div>
+                        <!-- Floating stats -->
+                        <div class="gp-chip gp-chip--left">
+                            190+ Countries
                         </div>
 
-                        <div class="hero-art-glow hero-art-glow--a"></div>
-                        <div class="hero-art-glow hero-art-glow--b"></div>
+                        <div class="gp-chip gp-chip--right">
+                            95% fewer failures
+                        </div>
+
+                        <div class="gp-chip gp-chip--bottom">
+                            Minutes, not days
+                        </div>
+
                     </div>
                 </div>
+
             </div>
         </section>
 
@@ -66,11 +67,15 @@
 
                 <div class="card-grid card-grid--3 overview-grid">
                     <div v-for="pill in overviewPillars" :key="pill.title" class="info-card overview-card">
-                        <div class="pill-icon" :class="'pill-icon--' + pill.accent"></div>
+                        <div class="overview-icon" :class="'overview-icon--' + pill.accent">
+                            <i :class="pill.icon" aria-hidden="true"></i>
+                        </div>
+
                         <h3 class="info-card-title">{{ pill.title }}</h3>
                         <p>{{ pill.text }}</p>
                     </div>
                 </div>
+
             </div>
         </section>
 
@@ -228,19 +233,23 @@ const overviewPillars = [
     {
         title: 'Massive Cost Savings',
         text: 'Reduce FX and intermediary fees by leveraging local rails and intelligent routing.',
-        accent: 'save'
+        accent: 'save',
+        icon: 'fa-solid fa-piggy-bank'
     },
     {
         title: 'Blazing Fast Delivery',
         text: 'Deliver funds in minutes or hours—not days—with real-time, adaptive routing.',
-        accent: 'speed'
+        accent: 'speed',
+        icon: 'fa-solid fa-bolt'
     },
     {
         title: 'Precision & Visibility',
         text: 'Minimize errors and track every payout with smart validation and live status updates.',
-        accent: 'control'
+        accent: 'control',
+        icon: 'fa-solid fa-crosshairs'
     }
 ]
+
 
 /** How it works – interactive pills with grouped concepts */
 const howItems = [
@@ -693,34 +702,79 @@ const featureHighlights = [
 }
 
 /* Overview cards */
+/* Overview cards – same style as Global Card Issuance */
 .overview-grid {
     margin-top: 2rem;
 }
 
+/* main card */
 .overview-card {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
+    position: relative;
+    padding-top: 1.6rem;
+    padding-bottom: 1.4rem;
+    background: radial-gradient(circle at top left, #eef2ff, #ffffff 60%);
+    border: 1px solid #dbeafe;
+    box-shadow: 0 18px 42px rgba(129, 140, 248, 0.3);
+    overflow: hidden;
 }
 
-.pill-icon {
-    width: 24px;
-    height: 24px;
+/* subtle top highlight bar */
+.overview-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border-top: 3px solid #2563eb;
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+/* icon bubble */
+.overview-icon {
+    width: 34px;
+    height: 34px;
     border-radius: 999px;
-    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.7rem;
 }
 
-.pill-icon--save {
+/* default gradient (if no accent class is applied) */
+.overview-icon {
+    background: linear-gradient(135deg, #2563eb, #38bdf8);
+}
+
+/* accent variations, reusing your old colours */
+.overview-icon--save {
     background: radial-gradient(circle, #22c55e, #15803d);
 }
 
-.pill-icon--speed {
+.overview-icon--speed {
     background: radial-gradient(circle, #38bdf8, #0ea5e9);
 }
 
-.pill-icon--control {
+.overview-icon--control {
     background: radial-gradient(circle, #a855f7, #7e22ce);
 }
+
+/* tighten text inside these cards */
+.overview-card .info-card-title {
+    margin-bottom: 0.35rem;
+}
+
+.overview-card p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* stronger hover like GCI */
+.overview-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 22px 52px rgba(79, 70, 229, 0.5);
+    border-color: #818cf8;
+}
+
 
 /* How it works */
 .how-tabs {
@@ -1168,4 +1222,160 @@ const featureHighlights = [
     }
 }
 
+.overview-icon i {
+    color: #ffffff;
+    font-size: 0.95rem;
+}
+
+.overview-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #2563eb, #38bdf8);
+    color: #ffffff;
+    font-size: 0.9rem;
+    margin-bottom: 0.7rem;
+}
+
+/* GP Hero visual (same language as GCI) */
+.gp-hero-visual {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    height: 420px;
+    border-radius: 28px;
+    background:
+        radial-gradient(circle at 30% 25%, rgba(56, 189, 248, 0.18), transparent 55%),
+        radial-gradient(circle at 70% 65%, rgba(99, 102, 241, 0.18), transparent 55%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.35));
+    border: 1px solid rgba(199, 210, 254, 0.75);
+    box-shadow: 0 24px 60px rgba(148, 163, 184, 0.45);
+    overflow: hidden;
+}
+
+/* Logo */
+.gp-logo {
+    position: absolute;
+    top: 22px;
+    left: 22px;
+}
+
+.gp-logo img {
+    height: 28px;
+    opacity: 0.95;
+}
+
+/* Orb */
+.gp-orb {
+    position: absolute;
+    left: 50%;
+    top: 52%;
+    transform: translate(-50%, -50%);
+    width: 210px;
+    height: 210px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 30% 25%, #ffffff, #eef2ff 60%, #dbeafe);
+    border: 1px solid #c7d2fe;
+    box-shadow: 0 20px 55px rgba(37, 99, 235, 0.25);
+}
+
+.gp-orb-inner {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    z-index: 2;
+}
+
+.gp-orb-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1d4ed8;
+}
+
+.gp-orb-sub {
+    font-size: 0.85rem;
+    color: #4b5563;
+}
+
+/* Orb ring */
+.gp-orb-ring {
+    position: absolute;
+    inset: -16px;
+    border-radius: 999px;
+    border: 2px dashed rgba(37, 99, 235, 0.35);
+    animation: gpSpin 18s linear infinite;
+}
+
+.gp-orb-glow {
+    position: absolute;
+    inset: -36px;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.22), transparent 60%);
+    filter: blur(10px);
+}
+
+@keyframes gpSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Floating chips */
+.gp-chip {
+    position: absolute;
+    padding: 0.45rem 0.8rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #e5e7eb;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #111827;
+    box-shadow: 0 12px 28px rgba(148, 163, 184, 0.3);
+    backdrop-filter: blur(8px);
+}
+
+.gp-chip--left {
+    left: 24px;
+    top: 120px;
+}
+
+.gp-chip--right {
+    right: 24px;
+    top: 90px;
+}
+
+.gp-chip--bottom {
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%);
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+    .gp-hero-visual {
+        height: 360px;
+    }
+
+    .gp-orb {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+/* Logo */
+.gp-logo {
+    position: absolute;
+    top: 22px;
+    left: 22px;
+}
+
+.gp-logo img {
+    height: 28px;
+    opacity: 0.95;
+}
 </style>

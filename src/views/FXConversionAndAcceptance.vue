@@ -24,33 +24,47 @@
                 </div>
 
                 <div class="hero-right">
-                    <div class="hero-art">
-                        <div class="hero-art-card hero-art-card--one">
-                            <div class="hero-art-header">
-                                <span class="hero-art-dot"></span>
-                                <span class="hero-art-dot"></span>
-                                <span class="hero-art-dot"></span>
+                    <div class="hero-visual">
+                        <!-- Big FX Orb -->
+                        <div class="fx-orb">
+                            <div class="fx-orb-inner">
+                                <div class="fx-orb-title">FX</div>
+                                <div class="fx-orb-sub">Conversion Engine</div>
                             </div>
-                            <div class="hero-art-bars">
-                                <div class="hero-art-bar hero-art-bar--1"></div>
-                                <div class="hero-art-bar hero-art-bar--2"></div>
-                                <div class="hero-art-bar hero-art-bar--3"></div>
-                            </div>
-                            <div class="hero-art-badge">150+ currencies supported</div>
+                            <div class="fx-orb-ring"></div>
+                            <div class="fx-orb-glow"></div>
                         </div>
 
-                        <div class="hero-art-card hero-art-card--two">
-                            <div class="hero-art-pill"></div>
-                            <div class="hero-art-meta">
-                                <span>Global coverage</span>
-                                <span class="hero-art-meta-value">190+ payout & acceptance markets</span>
-                            </div>
-                        </div>
+                        <!-- Currency chips -->
+                        <div class="fx-chip fx-chip--usd">$ USD</div>
+                        <div class="fx-chip fx-chip--eur">€ EUR</div>
+                        <div class="fx-chip fx-chip--gbp">£ GBP</div>
+                        <div class="fx-chip fx-chip--jpy">¥ JPY</div>
 
-                        <div class="hero-art-glow hero-art-glow--a"></div>
-                        <div class="hero-art-glow hero-art-glow--b"></div>
+                        <!-- Route line -->
+                        <svg class="fx-route" viewBox="0 0 520 240" fill="none" aria-hidden="true">
+                            <path d="M30 170 C 140 60, 240 220, 330 120 C 380 65, 430 85, 490 40" stroke="url(#grad)"
+                                stroke-width="4" stroke-linecap="round" stroke-dasharray="8 10" />
+                            <circle cx="30" cy="170" r="7" fill="#2563eb" />
+                            <circle cx="490" cy="40" r="7" fill="#38bdf8" />
+                            <defs>
+                                <linearGradient id="grad" x1="30" y1="170" x2="490" y2="40"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#2563eb" />
+                                    <stop offset="1" stop-color="#38bdf8" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+
+                        <!-- Stat pill -->
+                        <div class="fx-stat">
+                            <div class="fx-stat-top">Global coverage</div>
+                            <div class="fx-stat-big">190+</div>
+                            <div class="fx-stat-bottom">markets supported</div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
@@ -65,7 +79,10 @@
 
                 <div class="card-grid overview-grid">
                     <div v-for="pill in overviewPillars" :key="pill.title" class="info-card overview-card">
-                        <div class="overview-icon" :class="'overview-icon--' + pill.accent"></div>
+                        <div class="overview-icon" :class="'overview-icon--' + pill.accent">
+                            <i :class="pill.icon" aria-hidden="true"></i>
+                        </div>
+
                         <h3 class="info-card-title">{{ pill.title }}</h3>
                         <p class="info-card-text">{{ pill.text }}</p>
                     </div>
@@ -77,37 +94,53 @@
         <section id="how-it-works" class="section">
             <div class="section-inner">
                 <h2 class="section-title section-title--left">How it works</h2>
-                <p class="section-text section-text--left">
-                    Two engines working together: one for smarter FX, one for global payment acceptance.
-                </p>
-
-                <!-- Toggle pills -->
-                <div class="fx-how-toggle">
-                    <button v-for="mode in fxModes" :key="mode.id" type="button" class="fx-how-pill"
-                        :class="{ 'fx-how-pill--active': mode.id === activeFxModeId }"
-                        @click="activeFxModeId = mode.id">
-                        {{ mode.label }}
-                    </button>
-                </div>
-
-                <!-- Detail panel -->
                 <div v-if="activeFxMode" class="fx-how-panel">
-                    <div class="fx-how-main">
-                        <div class="fx-how-text">
-                            <h3 class="fx-how-title">{{ activeFxMode.title }}</h3>
-                            <p class="fx-how-lede">{{ activeFxMode.lede }}</p>
+                    <div class="fx-how-split">
+                        <!-- Left: 2 mode cards -->
+                        <div class="fx-how-side">
+                            <button v-for="mode in fxModes" :key="mode.id" type="button" class="fx-mode-card"
+                                :class="{ 'fx-mode-card--active': mode.id === activeFxModeId }"
+                                @click="activeFxModeId = mode.id">
+                                <div class="fx-mode-card-top">
+                                    <span class="fx-mode-dot"></span>
+                                    <span class="fx-mode-label">{{ mode.label }}</span>
+                                </div>
 
-                            <div class="fx-how-grid">
-                                <div v-for="point in activeFxMode.points" :key="point.label" class="fx-how-point">
-                                    <h4 class="fx-how-point-label">{{ point.label }}</h4>
-                                    <p class="fx-how-point-text">{{ point.text }}</p>
+                                <div class="fx-mode-hint">View processes →</div>
+                            </button>
+                        </div>
+
+                        <!-- Right: mode details -->
+                        <div class="fx-how-content">
+                            <h3 class="fx-how-title">{{ activeFxMode.title }}</h3>
+
+                            <!-- Processes header -->
+                            <div class="fx-process-header">
+                                <div class="fx-process-label">Processes</div>
+                                <div class="fx-process-count">
+                                    {{ activeFxMode.points.length }} total
+                                </div>
+                            </div>
+
+                            <!-- Process list -->
+                            <div class="fx-process-list">
+                                <div v-for="point in activeFxMode.points" :key="point.label" class="fx-process-item">
+                                    <div class="fx-process-mark"></div>
+
+                                    <div class="fx-process-copy">
+                                        <h4 class="fx-process-title">{{ point.label }}</h4>
+                                        <p class="fx-process-text">{{ point.text }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- /right -->
                     </div>
                 </div>
             </div>
         </section>
+
+
 
         <!-- Key Features -->
         <section id="features" class="section section-muted">
@@ -258,19 +291,23 @@ const overviewPillars = [
     {
         title: 'Global Acceptance',
         text: 'Accept payments in 150+ currencies and support preferred local payment methods worldwide.',
-        accent: 'accept'
+        accent: 'accept',
+        icon: 'fa-solid fa-credit-card'
     },
     {
         title: 'Unified FX Control',
         text: 'Centralize FX, reduce costs, and gain command over currency exposures in one place.',
-        accent: 'fx'
+        accent: 'fx',
+        icon: 'fa-solid fa-arrow-right-arrow-left'
     },
     {
         title: 'Global Reach',
         text: 'Process and settle payments from customers in new geographies without extra complexity.',
-        accent: 'reach'
+        accent: 'reach',
+        icon: 'fa-solid fa-globe'
     }
 ]
+
 
 /* -------------------------------
    How it works – FX + Processing
@@ -280,7 +317,6 @@ const fxModes = [
         id: 'global-fx',
         label: 'Global FX',
         title: 'Global FX',
-        lede: 'Turn FX into a controlled lever: save on cost, protect margins, and keep currency exposure visible.',
         points: [
             {
                 label: 'Maximise savings',
@@ -312,8 +348,7 @@ const fxModes = [
     {
         id: 'global-processing',
         label: 'Global Processing',
-        title: 'Global processing – more approvals, less complexity',
-        lede: 'Process payments worldwide, offer local methods, and keep everything aligned for finance and ops.',
+        title: 'Global processing',
         points: [
             {
                 label: 'Reduce cost',
@@ -353,6 +388,8 @@ const activeFxModeId = ref(fxModes[0].id)
 const activeFxMode = computed(() =>
     fxModes.find((m) => m.id === activeFxModeId.value)
 )
+
+const openHowIdx = ref(0) // first item open by default
 
 /* -------------------------------
    Features – tabs
@@ -844,13 +881,6 @@ const rightFeatureCards = computed(() => {
     border-left: 3px solid #2563eb;
 }
 
-.fx-how-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 2.2rem;
-    row-gap: 0.9rem;
-}
-
 .fx-how-point-label {
     font-size: 0.9rem;
     font-weight: 600;
@@ -1246,20 +1276,70 @@ const rightFeatureCards = computed(() => {
     /* slightly more breathing room */
 }
 
-.fx-how-point {
-    background: #f9fafb;
-    border-radius: 0.8rem;
-    padding: 0.75rem 0.9rem;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 6px 14px rgba(148, 163, 184, 0.15);
-    transition:
-        background 0.15s ease,
-        border-color 0.15s ease,
-        box-shadow 0.15s ease,
-        transform 0.12s ease;
+/* New HOW IT WORKS flow */
+.fx-how-flow {
+    margin-top: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
     position: relative;
-    overflow: hidden;
+    padding-left: 2.2rem;
 }
+
+/* Vertical guide line */
+.fx-how-flow::before {
+    content: '';
+    position: absolute;
+    left: 0.75rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg,
+            rgba(0, 151, 139, 0.15),
+            rgba(0, 151, 139, 0.6),
+            rgba(0, 151, 139, 0.15));
+}
+
+/* Each step */
+.fx-how-step {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+}
+
+/* Number marker */
+.fx-how-step-index {
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    background: #00978b;
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    box-shadow: 0 6px 14px rgba(0, 151, 139, 0.35);
+}
+
+/* Text content */
+.fx-how-step-content {
+    max-width: 720px;
+}
+
+.fx-how-step-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.25rem;
+}
+
+.fx-how-step-text {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: #4b5563;
+}
+
 
 .fx-how-point::before {
     content: '';
@@ -1321,5 +1401,692 @@ const rightFeatureCards = computed(() => {
     font-size: 0.86rem;
     color: #4b5563;
     line-height: 1.55;
+}
+
+.overview-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.7rem;
+}
+
+.overview-icon i {
+    color: #ffffff;
+    font-size: 0.95rem;
+}
+
+/* HERO bigger */
+.hero.hero--fx {
+    padding: 0.2rem 1.25rem 6rem;
+    /* bigger */
+}
+
+.hero-inner {
+    min-height: 560px;
+    /* gives hero presence */
+    align-items: center;
+}
+
+.hero-left {
+    max-width: 620px;
+    /* more breathing room */
+}
+
+.hero-title-text {
+    font-size: 2rem;
+    /* bigger title */
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    max-width: 560px;
+}
+
+/* Hero visual area (replaces boxes) */
+.hero-visual {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    height: 420px;
+    border-radius: 28px;
+    background: radial-gradient(circle at 30% 25%, rgba(56, 189, 248, 0.18), transparent 55%),
+        radial-gradient(circle at 70% 65%, rgba(99, 102, 241, 0.18), transparent 55%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.35));
+    border: 1px solid rgba(199, 210, 254, 0.75);
+    box-shadow: 0 24px 60px rgba(148, 163, 184, 0.45);
+    overflow: hidden;
+}
+
+/* FX Orb */
+.fx-orb {
+    position: absolute;
+    left: 50%;
+    top: 52%;
+    transform: translate(-50%, -50%);
+    width: 220px;
+    height: 220px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 30% 25%, #ffffff, #eef2ff 55%, #dbeafe 100%);
+    border: 1px solid rgba(199, 210, 254, 0.9);
+    box-shadow: 0 20px 55px rgba(37, 99, 235, 0.25);
+}
+
+.fx-orb-inner {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 0 1.2rem;
+    z-index: 2;
+}
+
+.fx-orb-title {
+    font-weight: 800;
+    font-size: 3rem;
+    color: #1d4ed8;
+    line-height: 1;
+}
+
+.fx-orb-sub {
+    margin-top: 0.35rem;
+    font-size: 0.9rem;
+    color: #4b5563;
+}
+
+.fx-orb-ring {
+    position: absolute;
+    inset: -18px;
+    border-radius: 999px;
+    border: 2px dashed rgba(37, 99, 235, 0.35);
+    animation: fxSpin 18s linear infinite;
+}
+
+.fx-orb-glow {
+    position: absolute;
+    inset: -40px;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.22), transparent 60%);
+    filter: blur(10px);
+    z-index: 1;
+}
+
+@keyframes fxSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Currency chips */
+.fx-chip {
+    position: absolute;
+    padding: 0.45rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(203, 213, 225, 0.9);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #111827;
+    box-shadow: 0 12px 28px rgba(148, 163, 184, 0.3);
+    backdrop-filter: blur(8px);
+}
+
+.fx-chip--usd {
+    top: 42px;
+    left: 36px;
+}
+
+.fx-chip--eur {
+    top: 88px;
+    right: 38px;
+}
+
+.fx-chip--gbp {
+    bottom: 72px;
+    left: 56px;
+}
+
+.fx-chip--jpy {
+    bottom: 46px;
+    right: 52px;
+}
+
+/* Route line */
+.fx-route {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 520px;
+    height: 240px;
+    opacity: 0.9;
+    pointer-events: none;
+    transform: translate(0, 90px);
+}
+
+/* Stat pill */
+.fx-stat {
+    position: absolute;
+    right: 26px;
+    top: 26px;
+    padding: 0.75rem 0.9rem;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(199, 210, 254, 0.75);
+    box-shadow: 0 18px 38px rgba(148, 163, 184, 0.35);
+    backdrop-filter: blur(8px);
+    min-width: 160px;
+}
+
+.fx-stat-top {
+    font-size: 0.78rem;
+    color: #6b7280;
+}
+
+.fx-stat-big {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1d4ed8;
+    line-height: 1.1;
+    margin-top: 0.15rem;
+}
+
+.fx-stat-bottom {
+    font-size: 0.78rem;
+    color: #4b5563;
+}
+
+/* Responsive hero sizing */
+@media (max-width: 960px) {
+    .hero.hero--fx {
+        padding: 4.2rem 1rem 4rem;
+    }
+
+    .hero-title-text {
+        font-size: 2.3rem;
+    }
+
+    .hero-visual {
+        max-width: 520px;
+        height: 360px;
+    }
+
+    .fx-orb {
+        width: 190px;
+        height: 190px;
+    }
+
+    .fx-route {
+        width: 520px;
+        transform: translate(0, 70px);
+    }
+}
+
+.fx-how-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-top: 0.6rem;
+}
+
+.fx-how-item {
+    width: 100%;
+    text-align: left;
+    border: none;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(199, 210, 254, 0.65);
+    border-radius: 14px;
+    padding: 0.85rem 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 10px 22px rgba(148, 163, 184, 0.14);
+    transition: transform .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease;
+}
+
+.fx-how-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 30px rgba(148, 163, 184, 0.20);
+}
+
+.fx-how-item--open {
+    background: #ffffff;
+    border-color: #c7d2fe;
+}
+
+.fx-how-item-head {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.fx-how-item-bar {
+    width: 10px;
+    height: 18px;
+    border-radius: 999px;
+    background: #00978b;
+    /* uses your accent */
+    flex-shrink: 0;
+}
+
+.fx-how-chevron {
+    font-size: 1.4rem;
+    color: #2563eb;
+    transform: rotate(90deg);
+    transition: transform .15s ease;
+    line-height: 1;
+}
+
+.fx-how-item--open .fx-how-chevron {
+    transform: rotate(-90deg);
+}
+
+.fx-how-item-body {
+    margin-top: 0.55rem;
+    padding-left: 1.7rem;
+    /* lines up with bar */
+}
+
+/* Panel container (keep your existing if you already like it) */
+.fx-how-panel {
+    max-width: 1100px;
+    margin: 2rem auto 0;
+    padding: 1.8rem 1.8rem 1.9rem;
+    border-radius: 1.1rem;
+    background: #eef3ff;
+    border: 1px solid #c7d2fe;
+    box-shadow: 0 18px 40px rgba(148, 163, 184, 0.25);
+}
+
+/* Layout: left selector + right detail */
+.fx-how-split {
+    display: grid;
+    grid-template-columns: 320px minmax(0, 1fr);
+    gap: 1.6rem;
+    align-items: start;
+}
+
+/* Left side */
+.fx-how-side {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+/* Selectable “mode cards” */
+.fx-mode-card {
+    width: 100%;
+    text-align: left;
+    border: none;
+    cursor: pointer;
+    border-radius: 16px;
+    padding: 1rem 1rem 1.05rem;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(199, 210, 254, 0.75);
+    box-shadow: 0 12px 26px rgba(148, 163, 184, 0.18);
+    transition: transform .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease;
+}
+
+.fx-mode-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 34px rgba(148, 163, 184, 0.24);
+}
+
+.fx-mode-card--active {
+    background: #ffffff;
+    border-color: rgba(0, 151, 139, 0.55);
+    box-shadow: 0 18px 40px rgba(0, 151, 139, 0.12);
+}
+
+.fx-mode-card-top {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-bottom: 0.6rem;
+}
+
+.fx-mode-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background: #00978b;
+    box-shadow: 0 6px 14px rgba(0, 151, 139, 0.35);
+}
+
+.fx-mode-label {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #64748b;
+    font-weight: 650;
+}
+
+.fx-mode-title {
+    font-size: 1rem;
+    font-weight: 750;
+    color: #111827;
+    line-height: 1.25;
+}
+
+.fx-mode-preview {
+    margin-top: 0.45rem;
+    font-size: 0.86rem;
+    line-height: 1.55;
+    color: #4b5563;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.fx-mode-hint {
+    margin-top: 0.7rem;
+    font-size: 0.86rem;
+    color: #2563eb;
+    opacity: 0.9;
+}
+
+/* Right content */
+.fx-how-content {
+    padding-top: 0.1rem;
+}
+
+.fx-how-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #1d4ed8;
+    margin-bottom: 0.7rem;
+}
+
+.fx-how-title::before {
+    content: '';
+    width: 6px;
+    height: 24px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #2563eb, #38bdf8);
+    flex-shrink: 0;
+}
+
+.fx-how-lede {
+    font-size: 1rem;
+    color: #111827;
+    margin-bottom: 1.2rem;
+    line-height: 1.7;
+    padding: 0.75rem 0.95rem;
+    border-radius: 0.8rem;
+    background: rgba(255, 255, 255, 0.75);
+    border-left: 3px solid #2563eb;
+}
+
+/* Flow list */
+.fx-how-flow {
+    margin-top: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.35rem;
+    position: relative;
+    padding-left: 2.2rem;
+}
+
+.fx-how-flow::before {
+    content: '';
+    position: absolute;
+    left: 0.75rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg,
+            rgba(0, 151, 139, 0.15),
+            rgba(0, 151, 139, 0.6),
+            rgba(0, 151, 139, 0.15));
+}
+
+.fx-how-step {
+    display: flex;
+    gap: 1.1rem;
+    align-items: flex-start;
+}
+
+.fx-how-step-index {
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    background: #00978b;
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 800;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    box-shadow: 0 6px 14px rgba(0, 151, 139, 0.35);
+}
+
+.fx-how-step-content {
+    max-width: 760px;
+}
+
+.fx-how-step-title {
+    font-size: 0.95rem;
+    font-weight: 750;
+    color: #111827;
+    margin-bottom: 0.25rem;
+}
+
+.fx-how-step-text {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: #4b5563;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+    .fx-how-split {
+        grid-template-columns: 1fr;
+    }
+}
+
+.fx-how-panel {
+    max-width: 1100px;
+    margin: 2rem auto 0;
+    padding: 1.8rem 1.8rem 1.9rem;
+    border-radius: 1.1rem;
+    background: #eef3ff;
+    border: 1px solid #c7d2fe;
+    box-shadow: 0 18px 40px rgba(148, 163, 184, 0.25);
+}
+
+.fx-how-split {
+    display: grid;
+    grid-template-columns: 320px minmax(0, 1fr);
+    gap: 1.6rem;
+    align-items: start;
+}
+
+/* Left cards */
+.fx-how-side {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.fx-mode-card {
+    width: 100%;
+    text-align: left;
+    border: none;
+    cursor: pointer;
+    border-radius: 16px;
+    padding: 1rem 1rem 1.05rem;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(199, 210, 254, 0.75);
+    box-shadow: 0 12px 26px rgba(148, 163, 184, 0.18);
+    transition: transform .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease;
+}
+
+.fx-mode-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 34px rgba(148, 163, 184, 0.24);
+}
+
+.fx-mode-card--active {
+    background: #ffffff;
+    border-color: rgba(0, 151, 139, 0.55);
+    box-shadow: 0 18px 40px rgba(0, 151, 139, 0.12);
+}
+
+.fx-mode-card-top {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-bottom: 0.6rem;
+}
+
+.fx-mode-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background: #00978b;
+    box-shadow: 0 6px 14px rgba(0, 151, 139, 0.35);
+}
+
+.fx-mode-label {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #64748b;
+    font-weight: 650;
+}
+
+.fx-mode-title {
+    font-size: 1rem;
+    font-weight: 750;
+    color: #111827;
+    line-height: 1.25;
+}
+
+.fx-mode-preview {
+    margin-top: 0.45rem;
+    font-size: 0.86rem;
+    line-height: 1.55;
+    color: #4b5563;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.fx-mode-hint {
+    margin-top: 0.7rem;
+    font-size: 0.86rem;
+    color: #2563eb;
+    opacity: 0.9;
+}
+
+/* Right content */
+.fx-how-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #1d4ed8;
+    margin-bottom: 0.7rem;
+}
+
+.fx-how-title::before {
+    content: '';
+    width: 6px;
+    height: 24px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #2563eb, #38bdf8);
+    flex-shrink: 0;
+}
+
+.fx-how-lede {
+    font-size: 1rem;
+    color: #111827;
+    margin-bottom: 1.2rem;
+    line-height: 1.7;
+    padding: 0.75rem 0.95rem;
+    border-radius: 0.8rem;
+    background: rgba(255, 255, 255, 0.75);
+    border-left: 3px solid #2563eb;
+}
+
+/* Processes header */
+.fx-process-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(199, 210, 254, 0.8);
+}
+
+.fx-process-label {
+    font-size: 0.9rem;
+    font-weight: 750;
+    color: #111827;
+}
+
+.fx-process-count {
+    font-size: 0.82rem;
+    color: #64748b;
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(199, 210, 254, 0.8);
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+}
+
+/* Process list (no boxes) */
+.fx-process-list {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.95rem;
+}
+
+.fx-process-item {
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+    padding: 0.2rem 0;
+}
+
+.fx-process-mark {
+    width: 10px;
+    height: 18px;
+    border-radius: 999px;
+    background: #00978b;
+    box-shadow: 0 6px 14px rgba(0, 151, 139, 0.25);
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+}
+
+.fx-process-title {
+    font-size: 0.95rem;
+    font-weight: 750;
+    color: #111827;
+    margin-bottom: 0.25rem;
+}
+
+.fx-process-text {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: #4b5563;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+    .fx-how-split {
+        grid-template-columns: 1fr;
+    }
 }
 </style>

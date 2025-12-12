@@ -26,33 +26,38 @@
                 </div>
 
                 <div class="hero-right">
-                    <div class="hero-art">
-                        <div class="hero-art-card hero-art-card--one">
-                            <div class="hero-art-header">
-                                <span class="hero-art-dot"></span>
-                                <span class="hero-art-dot"></span>
-                                <span class="hero-art-dot"></span>
+                    <div class="gmc-account-stack">
+                        <!-- Main account -->
+                        <div class="gmc-account-card gmc-account-card--primary">
+                            <div class="gmc-account-header">
+                                <span class="gmc-brand">NovaGO</span>
+                                <span class="gmc-badge">Multi-Currency</span>
                             </div>
-                            <div class="hero-art-bars">
-                                <div class="hero-art-bar hero-art-bar--1"></div>
-                                <div class="hero-art-bar hero-art-bar--2"></div>
-                                <div class="hero-art-bar hero-art-bar--3"></div>
-                            </div>
-                            <div class="hero-art-badge">Multi-currency balances</div>
-                        </div>
 
-                        <div class="hero-art-card hero-art-card--two">
-                            <div class="hero-art-pill"></div>
-                            <div class="hero-art-meta">
-                                <span>FX savings this month</span>
-                                <span class="hero-art-meta-value">+2.4% margin protected</span>
+                            <div class="gmc-balance">
+                                <span class="gmc-currency">USD</span>
+                                <span class="gmc-amount">$128,420.50</span>
+                            </div>
+
+                            <div class="gmc-meta">
+                                <span>Local account • US</span>
+                                <span>Available balance</span>
                             </div>
                         </div>
 
-                        <div class="hero-art-glow hero-art-glow--a"></div>
-                        <div class="hero-art-glow hero-art-glow--b"></div>
+                        <!-- Secondary balances -->
+                        <div class="gmc-account-card gmc-account-card--secondary">
+                            <span class="gmc-currency">EUR</span>
+                            <span class="gmc-amount">€42,180.10</span>
+                        </div>
+
+                        <div class="gmc-account-card gmc-account-card--secondary gmc-account-card--alt">
+                            <span class="gmc-currency">SGD</span>
+                            <span class="gmc-amount">S$63,900.00</span>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
@@ -113,58 +118,43 @@
             </div>
         </section>
 
-        <!-- Features (same layout as Global Card Issuance) -->
-        <section id="features" class="section features-section section-muted">
-            <div class="section-inner features-inner">
-                <!-- Left: list of feature types -->
-                <div class="features-left">
-                    <h2 class="section-title section-title--left">
-                        Features
-                    </h2>
+        <!-- Features -->
+        <section id="features" class="section section-muted">
+            <div class="section-inner">
+                <h2 class="section-title section-title--left">Features</h2>
+                <p class="section-text section-text--left">
+                    Powerful capabilities designed to help you operate globally with confidence.
+                </p>
 
-                    <div class="feature-list">
-                        <button v-for="(tab, index) in featureTabs" :key="tab.id" type="button"
-                            class="feature-list-item"
-                            :class="{ 'feature-list-item--active': tab.id === activeFeatureTab }"
-                            @click="activeFeatureTab = tab.id">
-                            <div class="feature-list-main">
-                                <div class="feature-list-label">{{ tab.label }}</div>
-                            </div>
-                            <div class="feature-list-number">
+                <div class="feature-grid">
+                    <div v-for="(tab, index) in featureTabs" :key="tab.id" class="feature-card"
+                        :class="{ 'feature-card--open': openFeatureId === tab.id }" @click="toggleFeature(tab.id)">
+
+                        <!-- Top row -->
+                        <div class="feature-card-header">
+                            <span class="feature-card-number">
                                 {{ (index + 1).toString().padStart(2, '0') }}
-                            </div>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Right: active feature card -->
-                <div class="features-right" v-if="activeFeature">
-                    <div class="feature-detail-card">
-                        <div class="feature-detail-pill">
-                            {{ (activeFeatureIndex + 1).toString().padStart(2, '0') }}
+                            </span>
+                            <h3 class="feature-card-title">{{ tab.label }}</h3>
                         </div>
 
-                        <h3 class="feature-detail-title">
-                            {{ activeFeature.heading }}
-                        </h3>
+                        <!-- Hidden expandable content -->
+                        <div class="feature-expand">
+                            <h4 class="feature-expand-heading">
+                                {{ tab.heading }}
+                            </h4>
 
-                        <div class="feature-detail-grid">
-                            <div v-for="card in activeFeature.cards" :key="card.subtitle"
-                                class="feature-detail-mini-card">
-                                <h4 class="feature-detail-mini-title">
-                                    {{ card.subtitle }}
-                                </h4>
-                                <p class="feature-detail-mini-text">
-                                    {{ card.text }}
-                                </p>
+                            <div class="feature-expand-grid">
+                                <div v-for="card in tab.cards" :key="card.subtitle" class="feature-expand-item">
+                                    <strong>{{ card.subtitle }}</strong>
+                                    <p>{{ card.text }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
-
 
         <!-- Contact / Demo -->
         <section id="contact" class="section">
@@ -255,6 +245,12 @@ const scrollToSection = (id) => {
 
 const fakeSubmit = () => {
     alert('Demo request submitted. (Placeholder action)')
+}
+
+const openFeatureId = ref(null)
+
+const toggleFeature = (id) => {
+    openFeatureId.value = openFeatureId.value === id ? null : id
 }
 
 // --- Interactive Challenges ---
@@ -388,16 +384,6 @@ const featureTabs = ref([
         ]
     }
 ])
-
-const activeFeatureTab = ref(featureTabs.value[0].id)
-
-const activeFeature = computed(() =>
-    featureTabs.value.find((t) => t.id === activeFeatureTab.value)
-)
-
-const activeFeatureIndex = computed(() =>
-    featureTabs.value.findIndex((t) => t.id === activeFeatureTab.value)
-)
 
 </script>
 
@@ -1312,68 +1298,394 @@ const activeFeatureIndex = computed(() =>
 
 /* Overview-style cards (reuse from GCI) */
 .overview-card {
-  position: relative;
-  padding-top: 1.6rem;
-  padding-bottom: 1.4rem;
-  background: radial-gradient(circle at top left, #eef2ff, #ffffff 60%);
-  border: 1px solid #dbeafe;
-  box-shadow: 0 18px 42px rgba(129, 140, 248, 0.3);
-  overflow: hidden;
-  min-height: 160px;
+    position: relative;
+    padding-top: 1.6rem;
+    padding-bottom: 1.4rem;
+    background: radial-gradient(circle at top left, #eef2ff, #ffffff 60%);
+    border: 1px solid #dbeafe;
+    box-shadow: 0 18px 42px rgba(129, 140, 248, 0.3);
+    overflow: hidden;
+    min-height: 160px;
 }
 
 .overview-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  border-top: 3px solid #2563eb;
-  opacity: 0.9;
-  pointer-events: none;
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border-top: 3px solid #2563eb;
+    opacity: 0.9;
+    pointer-events: none;
 }
 
 .overview-icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #2563eb, #38bdf8);
-  color: #ffffff;
-  font-size: 0.9rem;
-  margin-bottom: 0.7rem;
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #2563eb, #38bdf8);
+    color: #ffffff;
+    font-size: 0.9rem;
+    margin-bottom: 0.7rem;
 }
 
 .overview-card .info-card-title {
-  margin-bottom: 0.35rem;
+    margin-bottom: 0.35rem;
 }
 
 .overview-card p {
-  font-size: 0.85rem;
-  line-height: 1.5;
+    font-size: 0.85rem;
+    line-height: 1.5;
 }
 
 .overview-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 22px 52px rgba(79, 70, 229, 0.5);
-  border-color: #818cf8;
+    transform: translateY(-5px);
+    box-shadow: 0 22px 52px rgba(79, 70, 229, 0.5);
+    border-color: #818cf8;
 }
 
 .card-grid--4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 @media (max-width: 1200px) {
-  .card-grid--4 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+    .card-grid--4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 640px) {
-  .card-grid--4 {
-    grid-template-columns: 1fr;
-  }
+    .card-grid--4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Stack container */
+.gmc-account-stack {
+    position: relative;
+    width: 380px;
+    height: 260px;
+}
+
+/* Base account card */
+.gmc-account-card {
+    position: absolute;
+    border-radius: 1.4rem;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 24px 56px rgba(15, 23, 42, 0.25);
+    padding: 1.3rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Primary account */
+.gmc-account-card--primary {
+    width: 300px;
+    height: 185px;
+    z-index: 3;
+    background: linear-gradient(135deg, #2563eb, #38bdf8);
+    color: #ffffff;
+}
+
+/* Header */
+.gmc-account-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gmc-brand {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.gmc-badge {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Balance */
+.gmc-balance {
+    margin-top: auto;
+}
+
+.gmc-currency {
+    font-size: 0.75rem;
+    opacity: 0.9;
+}
+
+.gmc-amount {
+    font-size: 1.45rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+/* Meta */
+.gmc-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    opacity: 0.85;
+}
+
+/* Secondary cards */
+.gmc-account-card--secondary {
+    width: 220px;
+    height: 90px;
+    background: #ffffff;
+    z-index: 2;
+    top: 110px;
+    left: 130px;
+    padding: 0.9rem 1rem;
+}
+
+.gmc-account-card--alt {
+    top: 160px;
+    left: 40px;
+    z-index: 1;
+    opacity: 0.95;
+}
+
+/* Secondary text */
+.gmc-account-card--secondary .gmc-currency {
+    font-size: 0.7rem;
+    color: #6b7280;
+}
+
+.gmc-account-card--secondary .gmc-amount {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* Hover polish */
+.gmc-account-stack:hover .gmc-account-card--primary {
+    transform: translateY(-6px);
+    box-shadow: 0 32px 70px rgba(37, 99, 235, 0.45);
+}
+
+.gmc-account-stack:hover .gmc-account-card--secondary {
+    transform: translateY(-3px);
+}
+
+/* Wrapper */
+.feature-accordion {
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+/* Hidden by default */
+.feature-expand {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0 1.2rem;
+    background: #f9fafb;
+    border-left: 3px solid #6366f1;
+    transition:
+        max-height 0.4s ease,
+        opacity 0.25s ease,
+        padding 0.25s ease;
+}
+
+/* Reveal on hover */
+.feature-accordion:hover .feature-expand {
+    max-height: 500px;
+    opacity: 1;
+    padding: 1rem 1.2rem 1.4rem;
+}
+
+/* Heading */
+.feature-expand-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: #1e293b;
+}
+
+/* Grid inside */
+.feature-expand-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+}
+
+/* Mini cards */
+.feature-expand-card {
+    background: #ffffff;
+    border-radius: 0.9rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 10px 24px rgba(148, 163, 184, 0.25);
+}
+
+.feature-expand-card strong {
+    display: block;
+    font-size: 0.85rem;
+    color: #111827;
+    margin-bottom: 0.25rem;
+}
+
+.feature-expand-card p {
+    font-size: 0.82rem;
+    color: #4b5563;
+    line-height: 1.45;
+}
+
+/* Mobile: stack cards */
+@media (max-width: 640px) {
+    .feature-expand-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Feature grid */
+.feature-grid {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.6rem;
+}
+
+/* Feature card */
+.feature-card {
+    background: #ffffff;
+    border-radius: 1.4rem;
+    padding: 1.4rem 1.4rem 1.2rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 16px 36px rgba(148, 163, 184, 0.3);
+    cursor: pointer;
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease;
+}
+
+/* Header */
+.feature-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.feature-card-number {
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #2563eb, #38bdf8);
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* Expandable content (hidden) */
+.feature-expand {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin-top: 0;
+    transition:
+        max-height 0.4s ease,
+        opacity 0.25s ease,
+        margin-top 0.25s ease;
+}
+
+/* Reveal on hover */
+.feature-card:hover .feature-expand {
+    max-height: 420px;
+    opacity: 1;
+    margin-top: 1rem;
+}
+
+/* Inner content */
+.feature-expand-heading {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.7rem;
+}
+
+.feature-expand-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+}
+
+.feature-expand-item {
+    background: #f9fafb;
+    border-radius: 0.9rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid #e5e7eb;
+}
+
+.feature-expand-item strong {
+    display: block;
+    font-size: 0.85rem;
+    color: #111827;
+    margin-bottom: 0.25rem;
+}
+
+.feature-expand-item p {
+    font-size: 0.82rem;
+    color: #4b5563;
+    line-height: 1.45;
+}
+
+/* Hover polish */
+.feature-card:hover {
+    transform: translateY(-5px);
+    border-color: #818cf8;
+    box-shadow: 0 22px 52px rgba(79, 70, 229, 0.45);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-expand-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* the container that holds the 3 feature cards */
+.feature-grid {
+  align-items: start;         /* key line */
+  grid-auto-rows: min-content;/* prevents forced equal row height */
+}
+
+.feature-card {
+  align-self: start;          /* extra safety */
+  height: fit-content;        /* optional */
+}
+
+.feature-grid {
+  align-items: flex-start;
 }
 
 </style>

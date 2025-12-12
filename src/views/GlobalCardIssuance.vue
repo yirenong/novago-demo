@@ -24,33 +24,30 @@
                 </div>
 
                 <div class="hero-right">
-                    <div class="hero-art">
-                        <div class="hero-art-card hero-art-card--one">
-                            <div class="hero-art-header">
-                                <span class="hero-art-dot"></span>
-                                <span class="hero-art-dot"></span>
-                                <span class="hero-art-dot"></span>
-                            </div>
-                            <div class="hero-art-bars">
-                                <div class="hero-art-bar hero-art-bar--1"></div>
-                                <div class="hero-art-bar hero-art-bar--2"></div>
-                                <div class="hero-art-bar hero-art-bar--3"></div>
-                            </div>
-                            <div class="hero-art-badge">Active cards: 4,382</div>
+                    <div class="gci-card-stack">
+                        <div class="gci-card gci-card--front">
+                            <div class="gci-card-brand">NovaGO</div>
+                            <div class="gci-card-chip"></div>
+                            <div class="gci-card-number">•••• 4821</div>
+                            <div class="gci-card-type">Virtual Card</div>
                         </div>
 
-                        <div class="hero-art-card hero-art-card--two">
-                            <div class="hero-art-pill"></div>
-                            <div class="hero-art-meta">
-                                <span>Spend this month</span>
-                                <span class="hero-art-meta-value">$1.2M processed</span>
-                            </div>
+                        <div class="gci-card gci-card--middle">
+                            <div class="gci-card-brand">NovaGO</div>
+                            <div class="gci-card-chip"></div>
+                            <div class="gci-card-number">•••• 9024</div>
+                            <div class="gci-card-type">Corporate</div>
                         </div>
 
-                        <div class="hero-art-glow hero-art-glow--a"></div>
-                        <div class="hero-art-glow hero-art-glow--b"></div>
+                        <div class="gci-card gci-card--back">
+                            <div class="gci-card-brand">NovaGO</div>
+                            <div class="gci-card-chip"></div>
+                            <div class="gci-card-number">•••• 1176</div>
+                            <div class="gci-card-type">Physical</div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
@@ -1005,6 +1002,7 @@ const activeFeatureIndex = computed(() =>
     color: #4f46e5;
     border-color: #f9fafb;
 }
+
 /* Right detail panel */
 .features-right {
     display: flex;
@@ -1086,7 +1084,8 @@ const activeFeatureIndex = computed(() =>
 .feature-detail-mini-card {
     border-radius: 1.3rem;
     padding: 1.15rem 1.3rem;
-    background: rgba(249, 250, 251, 0.96); /* very light */
+    background: rgba(249, 250, 251, 0.96);
+    /* very light */
     border: 1px solid rgba(209, 213, 219, 0.9);
     box-shadow: 0 14px 32px rgba(15, 23, 42, 0.3);
     backdrop-filter: blur(10px);
@@ -1112,12 +1111,14 @@ const activeFeatureIndex = computed(() =>
     font-size: 0.94rem;
     font-weight: 600;
     margin-bottom: 0.1rem;
-    color: #111827; /* dark title for readability */
+    color: #111827;
+    /* dark title for readability */
 }
 
 .feature-detail-mini-text {
     font-size: 0.86rem;
-    color: #4b5563;  /* mid-grey body text */
+    color: #4b5563;
+    /* mid-grey body text */
     line-height: 1.5;
 }
 
@@ -1146,6 +1147,96 @@ const activeFeatureIndex = computed(() =>
     .feature-detail-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* Card stack container */
+.gci-card-stack {
+    position: relative;
+    width: 380px;
+    height: 260px;
+}
+
+/* Base card */
+.gci-card {
+    position: absolute;
+    width: 280px;
+    height: 175px;
+    border-radius: 18px;
+    padding: 1.2rem 1.4rem;
+    background: linear-gradient(135deg, #2563eb, #38bdf8);
+    color: #ffffff;
+    box-shadow: 0 26px 60px rgba(37, 99, 235, 0.45);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Card layers */
+.gci-card--front {
+    z-index: 3;
+    transform: translateY(0) rotate(-2deg);
+}
+
+.gci-card--middle {
+    z-index: 2;
+    background: linear-gradient(135deg, #6366f1, #818cf8);
+    transform: translate(40px, 30px) rotate(3deg);
+    opacity: 0.95;
+}
+
+.gci-card--back {
+    z-index: 1;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    transform: translate(80px, 60px) rotate(-4deg);
+    opacity: 0.9;
+}
+
+/* Brand */
+.gci-card-brand {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* Chip */
+.gci-card-chip {
+    width: 42px;
+    height: 30px;
+    border-radius: 6px;
+    background: linear-gradient(
+        135deg,
+        #facc15,
+        #fde047
+    );
+    margin-top: 1rem;
+}
+
+/* Number */
+.gci-card-number {
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    margin-top: auto;
+}
+
+/* Type */
+.gci-card-type {
+    font-size: 0.75rem;
+    opacity: 0.85;
+}
+
+/* Hover lift (optional but nice) */
+.gci-card-stack:hover .gci-card--front {
+    transform: translateY(-6px) rotate(-2deg);
+}
+
+.gci-card-stack:hover .gci-card--middle {
+    transform: translate(40px, 22px) rotate(3deg);
+}
+
+.gci-card-stack:hover .gci-card--back {
+    transform: translate(80px, 52px) rotate(-4deg);
 }
 
 </style>
