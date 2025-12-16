@@ -361,7 +361,7 @@ const activeFeatureIndex = computed(() =>
 /* Hero */
 .hero {
     padding: 4.2rem 1.25rem 4rem;
-    background: radial-gradient(circle at top left, #e0ecff, #f9fafb 55%);
+    background: radial-gradient(circle at top left, #cbdfff, #f9fafb 55%);
 }
 
 .hero-inner {

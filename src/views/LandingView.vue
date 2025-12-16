@@ -24,20 +24,6 @@
                         <button class="btn-primary" @click="scrollToSection('contact')">Get Started</button>
                         <button class="btn-secondary" @click="scrollToSection('contact')">Book a Demo</button>
                     </div>
-
-                    <!-- Quick nav buttons right below -->
-                    <div class="hero-quicknav">
-                        <button class="hero-quicknav-btn" type="button" @click="scrollToSection('showcase')">
-                            Showcase
-                        </button>
-                        <button class="hero-quicknav-btn" type="button" @click="scrollToSection('offer')">
-                            Offer
-                        </button>
-                        <button class="hero-quicknav-btn" type="button" @click="scrollToSection('contact')">
-                            Contact
-                        </button>
-                    </div>
-
                 </div>
 
                 <!-- Right: abstract “dashboard” art -->
@@ -482,7 +468,7 @@ onBeforeUnmount(() => {
 /* Hero */
 .hero {
     padding: 4.2rem 1.25rem 4rem;
-    background: radial-gradient(circle at top left, #e0ecff, #f9fafb 55%);
+    background: radial-gradient(circle at top left, #cbdfff, #f9fafb 55%);
 }
 
 .hero-inner {
