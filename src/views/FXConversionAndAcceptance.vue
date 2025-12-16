@@ -21,6 +21,7 @@
                             Learn more
                         </button>
                     </div>
+                    <br></br>
                     <div class="hero-nav">
                         <button class="hero-nav-btn" type="button"
                             @click="scrollToSection('overview')">Overview</button>
