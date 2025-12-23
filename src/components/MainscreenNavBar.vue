@@ -146,7 +146,7 @@
                 <div class="nav-item has-mega" @mouseenter="openMenuDesktop('benefits')">
                     <button class="nav-link" :class="{ active: activeMenu === 'benefits' }" type="button"
                         @click="toggleDropdown('benefits')">
-                        Benefits
+                        Rewards
                     </button>
 
                     <div v-if="activeMenu === 'benefits'" class="mega-wrapper" @mouseleave="closeMenuDesktop">
@@ -186,8 +186,7 @@
 
                                     <p class="partnership-text">
                                         Bundle NovaGO with your product or offer Shell fuel benefits to your users. Talk
-                                        to our partnership
-                                        department to explore co-created solutions.
+                                        to our partnership team to explore co-created solutions.
                                     </p>
 
                                     <button class="btn-primary partnership-btn" type="button"

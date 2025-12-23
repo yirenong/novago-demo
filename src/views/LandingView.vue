@@ -272,16 +272,16 @@
                                     <div class="info-card-header">
                                         <div class="card-icon" aria-hidden="true"><i
                                                 class="fa-solid fa-table-columns"></i></div>
-                                        <h4>CMS</h4>
+                                        <h4>Content Management System</h4>
                                     </div>
-                                    <p>Customize your very own web design with our CMS.</p>
+                                    <p>Customize your very own web design with our Content Management System (CMS).</p>
                                 </div>
 
                                 <div class="info-card">
                                     <div class="info-card-header">
                                         <div class="card-icon" aria-hidden="true"><i class="fa-solid fa-gears"></i>
                                         </div>
-                                        <h4>TOMs</h4>
+                                        <h4>Transport Operator Management System</h4>
                                     </div>
                                     <p>
                                         Track, assign, and oversee vehicles, drivers, and jobs seamlessly — reducing
@@ -943,7 +943,7 @@ onBeforeUnmount(() => {
 .card-grid--processes {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 310px));
-    gap: 1.4rem;
+    gap: 0.5rem;
     justify-content: center;
 }
 
