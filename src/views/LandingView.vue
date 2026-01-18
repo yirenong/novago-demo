@@ -15,7 +15,7 @@
                 <div class="hero-left hero-left--ref">
                     <p class="hero-pill hero-pill--ref">
                         <span class="hero-pill-icon">
-                            <i class="fas fa-sparkles fas-ico" aria-hidden="true"></i>
+                            <i class="fas fa-bolt fas-ico"></i>
                         </span>
                         Unified operations + banking
                     </p>
@@ -32,7 +32,7 @@
                     </p>
 
                     <div class="hero-actions hero-actions--ref">
-                        <button class="btn-primary btn-primary--dark" @click="scrollToSection('contact')">
+                        <button class="btn-primary btn-primary" @click="scrollToSection('contact')">
                             Book a demo <span class="btn-arrow">→</span>
                         </button>
                         <button class="btn-secondary btn-secondary--light" @click="scrollToSection('operate')">
@@ -140,10 +140,13 @@
 
                         <div class="acc-body" v-show="openAcc === 'industry'">
                             <div class="pill-grid">
-                                <div v-for="(item, idx) in industryPoints" :key="`ind-${idx}`" class="pill">
-                                    {{ item }}
+                                <div v-for="(item, idx) in industryPoints" :key="`ind-${idx}`"
+                                    class="pill pill--detail">
+                                    <div class="pill-title">{{ item.title }}</div>
+                                    <div class="pill-desc">{{ item.desc }}</div>
                                 </div>
                             </div>
+
 
                             <div class="mini-glass">
                                 <div class="mini-title">Why this matters</div>
@@ -168,10 +171,12 @@
 
                         <div class="acc-body" v-show="openAcc === 'sme'">
                             <div class="pill-grid">
-                                <div v-for="(item, idx) in smePoints" :key="`sme-${idx}`" class="pill">
-                                    {{ item }}
+                                <div v-for="(item, idx) in smePoints" :key="`sme-${idx}`" class="pill pill--detail">
+                                    <div class="pill-title">{{ item.title }}</div>
+                                    <div class="pill-desc">{{ item.desc }}</div>
                                 </div>
                             </div>
+
 
                             <div class="mini-glass">
                                 <div class="mini-title">Fast setup</div>
@@ -193,26 +198,25 @@
         </section>
 
         <!-- =========================
-         SECTION 3: BUSINESS BANKING (REVAMP)
-    ========================== -->
+ SECTION 3: BUSINESS BANKING (CLEAN)
+========================== -->
         <section id="banking" class="section banking-v3">
+            <!-- background layers intentionally kept but made transparent via CSS -->
             <div class="banking-v3-bg" aria-hidden="true"></div>
             <div class="banking-v3-grid" aria-hidden="true"></div>
 
             <div class="section-inner">
+                <!-- Header -->
                 <header class="banking-v3-head">
-                    <div class="banking-v3-kicker">
-                        <span class="k-dot"></span>
-                        Business banking
-                    </div>
-                    <h2 class="banking-v3-title">Business Banking, Simplified</h2>
-                    <p class="banking-v3-sub">
+                    <h2 class="section-title">Business Banking, Simplified</h2>
+                    <p class="section-text">
                         With NovaGo, you can now transact with ease — and get rewarded as you bank.
                     </p>
                 </header>
 
+                <!-- Main shell -->
                 <div class="banking-v3-shell">
-                    <!-- Left: selector -->
+                    <!-- Left: modules nav -->
                     <aside class="banking-v3-nav">
                         <div class="nav-top">
                             <div class="nav-title">Explore modules</div>
@@ -224,30 +228,32 @@
                             <div class="nav-ico">
                                 <i :class="['fas', f.icon, 'fas-ico']" aria-hidden="true"></i>
                             </div>
+
                             <div class="nav-main">
                                 <div class="nav-h">{{ f.title }}</div>
                                 <div class="nav-t">{{ f.tag }}</div>
                             </div>
+
                             <div class="nav-arrow">→</div>
                         </button>
 
                         <div class="nav-footer">
                             <div class="footer-pill">
                                 <span class="fp-dot"></span>
-                                Simple, scalable, clean
+                                Simple, scalable, modular
                             </div>
                             <div class="footer-note">
-                                Modular features — adopt what you need, when you need it.
+                                Enable only what you need — expand anytime.
                             </div>
                         </div>
                     </aside>
 
-                    <!-- Right: feature display -->
+                    <!-- Right: detail panel -->
                     <div class="banking-v3-show">
                         <div class="show-top">
                             <div class="show-badge">
                                 <span class="sb-dot"></span>
-                                Highlight
+                                Selected module
                             </div>
 
                             <button class="show-btn" type="button" @click="scrollToSection('contact')">
@@ -255,13 +261,13 @@
                             </button>
                         </div>
 
+                        <!-- Feature card -->
                         <div class="feature-card">
-                            <div class="feature-glow" aria-hidden="true"></div>
-
                             <div class="feature-head">
                                 <div class="feature-ico">
-                                    <i :class="['fas', activeFeature.icon, 'fas-ico']" aria-hidden="true"></i>
+                                    <i :class="['fas', activeFeature.icon, 'fas-ico']"></i>
                                 </div>
+
                                 <div>
                                     <div class="feature-title">{{ activeFeature.title }}</div>
                                     <div class="feature-sub">{{ activeFeature.sub }}</div>
@@ -280,30 +286,25 @@
                                     <div class="mini-k">What you get</div>
                                     <div class="mini-v">{{ activeFeature.benefit }}</div>
                                 </div>
+
                                 <div class="mini-block">
                                     <div class="mini-k">Best for</div>
                                     <div class="mini-v">{{ activeFeature.bestFor }}</div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="support-strip">
-                            <div class="strip-left">
-                                <div class="strip-h">Automated Reconciliation</div>
-                                <div class="strip-t">
-                                    Achieve instant, accurate reconciliation with automated matching and live data
-                                    syncing,
-                                    streamlining your financial workflows end-to-end.
-                                </div>
+                            <div class="feature-actions">
+                                <button class="feature-link-btn" type="button"
+                                    @click="router.push(activeFeature.route)">
+                                    Learn more →
+                                </button>
                             </div>
-                            <button class="strip-cta" type="button" @click="scrollToSection('rewards')">
-                                See rewards flow →
-                            </button>
+
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
 
         <!-- =========================
          SECTION 4: REWARDS
@@ -349,9 +350,7 @@
                                 <span>{{ p }}</span>
                             </li>
                         </ul>
-                        <div class="hint">
-                            Benefits may overlap with driver rewards
-                        </div>
+                        <div class="hint">Benefits may overlap with driver rewards</div>
                     </div>
 
                     <div class="reward-box glass">
@@ -386,7 +385,7 @@
         <!-- =========================
          Contact / Demo
     ========================== -->
-        <section id="contact" class="section section-muted">
+        <section id="contact" class="section">
             <div class="section-inner narrow">
                 <h2 class="section-title">Interested? Demo with Us Now</h2>
                 <p class="section-text">
@@ -504,16 +503,35 @@ const toggleAcc = (key) => {
 }
 
 const industryPoints = ref([
-    'Transport Operator Management System (TOMs)',
-    'Rental collection'
+    {
+        title: 'Transport Operator Management System (TOMs)',
+        desc: 'Track, assign, and oversee vehicles, drivers, and jobs seamlessly — reducing operational friction.'
+    },
+    {
+        title: 'Rental Collection',
+        desc: 'Track all rental payments in one place and generate invoices with ease.'
+    }
 ])
 
 const smePoints = ref([
-    'Transport Expense Management System (TEMs)',
-    'Expense Management',
-    'Payroll',
-    'Content Management System (CMS)'
+    {
+        title: 'Transport Expense Management System (TEMs)',
+        desc: 'Seamlessly book corporate rides from your portal.'
+    },
+    {
+        title: 'Expense Management',
+        desc: 'Track and manage business expenses with ease.'
+    },
+    {
+        title: 'Payroll',
+        desc: 'Run payroll with approvals, automated payouts, and better cost visibility.'
+    },
+    {
+        title: 'Content Management System (CMS)',
+        desc: 'Customize your very own web design with our Content Management System (CMS).'
+    }
 ])
+
 
 /**
  * Banking modules:
@@ -529,7 +547,8 @@ const bankingFeatures = ref([
         sub: 'Streamline cross-border finance, helping your business move with agility and act locally anywhere.',
         keywords: ['Cross-border', 'Multi-currency', 'Hold funds', 'Local agility'],
         benefit: 'Multi-currency holding and smoother cross-border operations.',
-        bestFor: 'Businesses operating across regions and vendors.'
+        bestFor: 'Businesses operating across regions and vendors.',
+        route: '/global-multi-currency-account'
     },
     {
         id: 'cards',
@@ -539,7 +558,8 @@ const bankingFeatures = ref([
         sub: 'Transform your expense management and empower your teams with a flexible card issuance platform.',
         keywords: ['Expense control', 'Team spend', 'Issuance', 'Visibility'],
         benefit: 'Issue cards with clearer controls and tracking.',
-        bestFor: 'Teams managing business spend and expenses.'
+        bestFor: 'Teams managing business spend and expenses.',
+        route: '/global-card-issuance'
     },
     {
         id: 'payouts',
@@ -549,7 +569,8 @@ const bankingFeatures = ref([
         sub: 'Simplify your entire payout process with automated, accurate, and globally scalable payments.',
         keywords: ['Automated', 'Accurate', 'Global scale', 'Batch payouts'],
         benefit: 'Automate payout workflows with fewer manual steps.',
-        bestFor: 'Companies paying drivers, vendors, or partners.'
+        bestFor: 'Companies paying drivers, vendors, or partners.',
+        route: '/global-payouts'
     },
     {
         id: 'fx',
@@ -559,38 +580,21 @@ const bankingFeatures = ref([
         sub: 'Enjoy seamless currency conversion with low fees, live rates, and multi-currency holding. Accept international payments with ease and simplify your global operations.',
         keywords: ['Live rates', 'Low fees', 'Conversion', 'International payments'],
         benefit: 'Convert currencies with less friction and clearer rates.',
-        bestFor: 'Businesses with frequent FX and overseas payments.'
+        bestFor: 'Businesses with frequent FX and overseas payments.',
+        route: '/fx-conversion-and-acceptance'
     },
-    {
-        id: 'recon',
-        icon: 'fa-file-invoice-dollar',
-        title: 'Automated Reconciliation',
-        tag: 'Instant matching',
-        sub: 'Achieve instant, accurate reconciliation with automated matching and live data syncing, streamlining your financial workflows end-to-end.',
-        keywords: ['Automated matching', 'Live sync', 'Accurate', 'End-to-end'],
-        benefit: 'Speed up reconciliation with automated matching.',
-        bestFor: 'Finance teams closing faster with cleaner records.'
-    }
 ])
+
 
 const activeBankFeature = ref('multi')
 const activeFeature = computed(() => {
-    return bankingFeatures.value.find(x => x.id === activeBankFeature.value) || bankingFeatures.value[0]
+    return bankingFeatures.value.find((x) => x.id === activeBankFeature.value) || bankingFeatures.value[0]
 })
 
 /** Rewards */
-const driverRewards = ref([
-    'Fuel discounts',
-    'Rental promotions',
-    'Job opportunities',
-    'Workshop & maintenance discounts',
-    'And more (upcoming)'
-])
+const driverRewards = ref(['Fuel discounts', 'Rental promotions', 'Job opportunities', 'Workshop & maintenance discounts', 'And more (upcoming)'])
 
-const employeeRewards = ref([
-    'Exclusive partner offers (including Woogi benefits)'
-
-])
+const employeeRewards = ref(['Exclusive partner offers (including Woogi benefits)'])
 </script>
 
 <style scoped>
@@ -857,7 +861,7 @@ const employeeRewards = ref([
     border-radius: 1.5rem;
     border: 1px solid rgba(226, 232, 240, 0.95);
     background: rgba(255, 255, 255, 0.85);
-    box-shadow: 0 22px 60px rgba(15, 23, 42, 0.10);
+    box-shadow: 0 22px 60px rgba(15, 23, 42, 0.1);
     padding: 1.2rem;
     backdrop-filter: blur(8px);
 }
@@ -1013,7 +1017,7 @@ const employeeRewards = ref([
 .shape-b {
     top: -140px;
     right: -180px;
-    background: rgba(56, 189, 248, 0.20);
+    background: rgba(56, 189, 248, 0.2);
 }
 
 .shape-c {
@@ -1048,7 +1052,7 @@ const employeeRewards = ref([
 .acc-card {
     border-radius: 1.35rem;
     border: 1px solid rgba(226, 232, 240, 0.95);
-    background: rgba(255, 255, 255, 0.80);
+    background: rgba(255, 255, 255, 0.8);
     box-shadow: 0 16px 40px rgba(15, 23, 42, 0.07);
     overflow: hidden;
 }
@@ -1103,7 +1107,7 @@ const employeeRewards = ref([
 }
 
 .pill {
-    border-radius: 999px;
+    border-radius: 12px;
     padding: 0.62rem 0.85rem;
     border: 1px solid rgba(37, 99, 235, 0.18);
     background: rgba(239, 246, 255, 0.85);
@@ -1143,50 +1147,35 @@ const employeeRewards = ref([
 }
 
 /* =========================
-   BANKING V3 (nicer background + no steps)
+   BANKING REFINED (NEW)
 ========================= */
-.banking-v3 {
-    /* background: radial-gradient(circle at 10% 0%, rgba(37, 99, 235, 0.14), transparent 45%),
-        radial-gradient(circle at 85% 10%, rgba(56, 189, 248, 0.13), transparent 45%),
-        linear-gradient(180deg, #f7f9ff 0%, #ffffff 58%, #f7f8ff 100%); */
+.banking-refined {
     overflow: hidden;
-}
-
-.banking-v3-bg {
-    position: absolute;
-    inset: -220px -240px auto -240px;
-    height: 640px;
     background:
-        radial-gradient(circle at 18% 22%, rgba(37, 99, 235, 0.24), transparent 58%),
-        radial-gradient(circle at 50% 25%, rgba(99, 102, 241, 0.18), transparent 62%),
-        radial-gradient(circle at 78% 26%, rgba(56, 189, 248, 0.20), transparent 60%);
-    filter: blur(14px);
-    opacity: 0.75;
-    pointer-events: none;
-    z-index: 0;
+        radial-gradient(circle at 15% 10%, rgba(37, 99, 235, 0.14), transparent 45%),
+        radial-gradient(circle at 85% 0%, rgba(56, 189, 248, 0.14), transparent 45%),
+        linear-gradient(180deg, #f7f9ff, #ffffff 60%);
 }
 
-.banking-v3-grid {
+.banking-bg {
     position: absolute;
     inset: 0;
     background-image:
         linear-gradient(rgba(15, 23, 42, 0.035) 1px, transparent 1px),
         linear-gradient(90deg, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
-    background-size: 42px 42px;
-    mask-image: radial-gradient(circle at 50% 20%, rgba(0, 0, 0, 0.9), transparent 62%);
-    opacity: 0.65;
+    background-size: 56px 56px;
+    opacity: 0.32;
     pointer-events: none;
-    z-index: 0;
 }
 
-.banking-v3-head {
+.banking-head {
+    max-width: 920px;
+    margin-bottom: 1.35rem;
     position: relative;
     z-index: 1;
-    max-width: 900px;
-    margin-bottom: 1.25rem;
 }
 
-.banking-v3-kicker {
+.banking-pill {
     display: inline-flex;
     align-items: center;
     gap: 0.55rem;
@@ -1200,45 +1189,48 @@ const employeeRewards = ref([
     color: #0f172a;
 }
 
-.k-dot {
+.dot {
     width: 8px;
     height: 8px;
     border-radius: 999px;
     background: var(--fasColor);
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.14);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
 }
 
-.banking-v3-title {
+.banking-title {
     margin: 0.75rem 0 0.55rem;
     font-size: clamp(2.1rem, 3.2vw, 2.55rem);
     line-height: 1.1;
     color: #0f172a;
-    font-weight: 750;
+    font-weight: 600;
     letter-spacing: -0.03em;
 }
 
-.banking-v3-sub {
+.banking-sub {
     margin: 0;
     max-width: 70ch;
     color: #64748b;
     font-size: 1.02rem;
     line-height: 1.65;
+    font-weight: 400;
 }
 
-.banking-v3-shell {
+.banking-shell {
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: 420px 1fr;
-    gap: 1rem;
+    grid-template-columns: 380px 1fr;
+    gap: 1.2rem;
     max-width: 1180px;
+    align-items: start;
 }
 
-.banking-v3-nav {
-    border-radius: 1.6rem;
+/* Left nav */
+.banking-nav {
+    border-radius: 1.75rem;
     border: 1px solid rgba(226, 232, 240, 0.85);
-    background: rgba(255, 255, 255, 0.78);
-    box-shadow: 0 18px 60px rgba(15, 23, 42, 0.10);
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.1);
     backdrop-filter: blur(10px);
     padding: 1rem;
     display: grid;
@@ -1246,66 +1238,84 @@ const employeeRewards = ref([
     align-content: start;
 }
 
-.nav-top {
+.nav-head {
     padding: 0.35rem 0.35rem 0.85rem;
     border-bottom: 1px solid rgba(226, 232, 240, 0.75);
 }
 
 .nav-title {
+    margin: 0;
     color: #0f172a;
-    font-weight: 650;
+    font-weight: 600;
     letter-spacing: -0.02em;
 }
 
 .nav-sub {
-    margin-top: 0.2rem;
+    margin: 0.25rem 0 0;
     color: #64748b;
     font-size: 0.9rem;
 }
 
 .nav-item {
+    position: relative;
     border: none;
     cursor: pointer;
     width: 100%;
     display: grid;
-    grid-template-columns: 44px 1fr auto;
+    grid-template-columns: 4px 44px 1fr auto;
     gap: 0.85rem;
     align-items: center;
-    padding: 0.85rem 0.85rem;
+    padding: 0.8rem 0.85rem;
     border-radius: 1.2rem;
-    background: rgba(248, 250, 252, 0.55);
-    border: 1px solid rgba(226, 232, 240, 0.70);
+    background: rgba(248, 250, 252, 0.5);
+    border: 1px solid rgba(226, 232, 240, 0.7);
     transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease, background 0.12s ease;
     text-align: left;
 }
 
 .nav-item:hover {
     transform: translateY(-1px);
-    border-color: rgba(37, 99, 235, 0.25);
-    box-shadow: 0 16px 34px rgba(37, 99, 235, 0.10);
-    background: rgba(239, 246, 255, 0.55);
+    border-color: rgba(37, 99, 235, 0.22);
+    box-shadow: 0 18px 40px rgba(37, 99, 235, 0.1);
+    background: rgba(239, 246, 255, 0.52);
 }
 
 .nav-item.active {
-    background: linear-gradient(180deg, rgba(239, 246, 255, 0.82), rgba(255, 255, 255, 0.70));
-    border-color: rgba(37, 99, 235, 0.28);
-    box-shadow: 0 20px 50px rgba(37, 99, 235, 0.12);
+    background: linear-gradient(180deg, rgba(239, 246, 255, 0.92), rgba(255, 255, 255, 0.7));
+    border-color: rgba(37, 99, 235, 0.3);
+    box-shadow: 0 22px 55px rgba(37, 99, 235, 0.14);
 }
 
-.nav-ico {
+.nav-indicator {
+    width: 4px;
+    height: 100%;
+    border-radius: 999px;
+    background: transparent;
+}
+
+.nav-item.active .nav-indicator {
+    background: linear-gradient(180deg, rgba(37, 99, 235, 0.95), rgba(56, 189, 248, 0.95));
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.nav-icon {
     width: 44px;
     height: 44px;
-    border-radius: 14px;
+    border-radius: 16px;
     display: grid;
     place-items: center;
     font-size: 1.05rem;
-    background: rgba(255, 255, 255, 0.88);
-    border: 1px solid rgba(226, 232, 240, 0.80);
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.nav-text {
+    min-width: 0;
 }
 
 .nav-h {
     color: #0f172a;
-    font-weight: 650;
+    font-weight: 600;
     letter-spacing: -0.01em;
     font-size: 0.98rem;
 }
@@ -1846,25 +1856,30 @@ const employeeRewards = ref([
 ========================= */
 
 .banking-v3-title {
-    font-weight: 550; /* was 750 */
+    font-weight: 550;
+    /* was 750 */
 }
 
 .banking-v3-sub {
-    font-weight: 400; /* keep normal */
+    font-weight: 400;
+    /* keep normal */
 }
 
 .banking-v3-kicker,
 .show-badge {
-    font-weight: 500; /* was 650 */
+    font-weight: 500;
+    /* was 650 */
 }
 
 /* Left nav */
 .nav-title {
-    font-weight: 550; /* was 650 */
+    font-weight: 550;
+    /* was 650 */
 }
 
 .nav-h {
-    font-weight: 500; /* was 650 */
+    font-weight: 500;
+    /* was 650 */
 }
 
 .nav-t {
@@ -1873,7 +1888,8 @@ const employeeRewards = ref([
 
 /* Feature card */
 .feature-title {
-    font-weight: 600; /* was 800 */
+    font-weight: 600;
+    /* was 800 */
 }
 
 .feature-sub {
@@ -1882,25 +1898,522 @@ const employeeRewards = ref([
 
 /* Keyword chips */
 .keyword-chip {
-    font-weight: 500; /* was 650 */
+    font-weight: 500;
+    /* was 650 */
 }
 
 /* Mini blocks */
 .mini-k {
-    font-weight: 500; /* was 650 */
+    font-weight: 500;
+    /* was 650 */
 }
 
 .mini-v {
-    font-weight: 550; /* was 750 */
+    font-weight: 550;
+    /* was 750 */
 }
 
 /* Support strip */
 .strip-h {
-    font-weight: 600; /* was 800 */
+    font-weight: 600;
+    /* was 800 */
 }
 
 .strip-t {
     font-weight: 400;
 }
 
+/* =========================
+   BANKING V3 – CLEAN / NO BACKGROUND
+========================= */
+
+.banking-v3 {
+    position: relative;
+    background: transparent;
+    /* ✅ removed section background */
+}
+
+/* disable background layers */
+.banking-v3-bg,
+.banking-v3-grid {
+    display: none;
+}
+
+/* Header */
+.banking-v3-head {
+    max-width: 900px;
+    margin-bottom: 1.4rem;
+}
+
+.banking-v3-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid #e5e7eb;
+    background: transparent;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+}
+
+.k-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--fasColor);
+}
+
+.banking-v3-title {
+    margin: 0.75rem 0 0.45rem;
+    font-size: clamp(2rem, 3vw, 2.6rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+}
+
+.banking-v3-sub {
+    color: #64748b;
+    max-width: 70ch;
+}
+
+/* Layout */
+.banking-v3-shell {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 1.2rem;
+}
+
+/* =========================
+   LEFT NAV – BORDER ONLY
+========================= */
+.banking-v3-nav {
+    border-radius: 1.4rem;
+    border: 1px solid #e5e7eb;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.82);
+    /* ✅ removed card background */
+}
+
+.nav-top {
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.nav-item {
+    margin-top: 0.75rem;
+    border-radius: 1rem;
+    border: 1px solid #e5e7eb;
+    padding: 0.75rem;
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    gap: 0.75rem;
+    background: transparent;
+    cursor: pointer;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.nav-item:hover {
+    border-color: #2563eb;
+    transform: translateY(-1px);
+}
+
+.nav-item.active {
+    border-color: #2563eb;
+}
+
+.nav-ico {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    border: 1px solid #e5e7eb;
+    display: grid;
+    place-items: center;
+}
+
+.nav-h {
+    font-weight: 550;
+}
+
+.nav-t {
+    font-size: 0.86rem;
+    color: #64748b;
+}
+
+.nav-footer {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* =========================
+   RIGHT SIDE – CLEAN PANEL
+========================= */
+.banking-v3-show {
+    display: grid;
+    gap: 1rem;
+}
+
+.show-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.show-badge {
+    font-size: 0.85rem;
+    color: #475569;
+}
+
+.show-btn {
+    border: 1px solid #0f172a;
+    background: transparent;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Feature card – border only */
+.feature-card {
+    border-radius: 1.4rem;
+    border: 1px solid #e5e7eb;
+    padding: 1.2rem;
+    background: rgba(255, 255, 255, 0.72);
+    /* ✅ removed background */
+}
+
+/* Feature content */
+.feature-head {
+    display: flex;
+    gap: 0.85rem;
+}
+
+.feature-ico {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    display: grid;
+    place-items: center;
+}
+
+.feature-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.feature-sub {
+    margin-top: 0.35rem;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+/* Chips */
+.keyword-row {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.keyword-chip {
+    border-radius: 999px;
+    border: 1px solid #e5e7eb;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.85rem;
+    background: transparent;
+}
+
+/* What you get / Best for */
+.feature-mini {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+.mini-block {
+    border-radius: 1rem;
+    border: 1px solid #e5e7eb;
+    padding: 1.75rem;
+}
+
+.mini-k {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    color: #64748b;
+}
+
+.mini-v {
+    margin-top: 0.25rem;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+    .banking-v3-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-mini {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================
+   Limit height of selected module (right side)
+========================= */
+
+/* Right column container */
+.banking-v3-show {
+    max-height: 520px;
+    /* adjust as needed */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Keep header + CTA fixed */
+.show-top {
+    flex-shrink: 0;
+}
+
+/* Scroll only the content card */
+.feature-card {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+/* Optional: nicer scrollbar */
+.feature-card::-webkit-scrollbar {
+    width: 6px;
+}
+
+.feature-card::-webkit-scrollbar-thumb {
+    background: rgba(15, 23, 42, 0.25);
+    border-radius: 999px;
+}
+
+.feature-card::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* =========================
+   Make right feature card feel filled (no empty bottom)
+========================= */
+
+.feature-card {
+    /* keep your existing border/radius */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* important */
+    min-height: 360px;
+    /* adjust: makes card visually tall enough */
+}
+
+/* Keep top section normal */
+.feature-head {
+    flex: 0 0 auto;
+}
+
+/* Chips stay under text */
+.keyword-row {
+    flex: 0 0 auto;
+}
+
+/* Push mini blocks to bottom */
+.feature-mini {
+    margin-top: auto;
+    /* THIS is the key */
+    padding-top: 1rem;
+    /* gives breathing room before bottom row */
+}
+
+.feature-mini {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+/* =========================
+   Fill the middle: make chips area expand + look intentional
+========================= */
+
+/* Ensure the card is a column layout */
+.feature-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 420px;
+    /* adjust */
+}
+
+/* Make keyword row take remaining space */
+.keyword-row {
+    flex: 1;
+    /* 👈 fills the middle */
+    align-content: start;
+    /* keep chips at top of that region */
+    margin-top: 1rem;
+
+    /* nicer layout so it doesn't look sparse */
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* 2 columns */
+    gap: 0.6rem 0.75rem;
+    padding: 0.9rem;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.35);
+    /* very light, optional */
+}
+
+/* Chips become full-width rows inside grid */
+.keyword-chip {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 0.45rem 0.7rem;
+    font-size: 0.86rem;
+}
+
+/* Bottom stays anchored */
+.feature-mini {
+    margin-top: 1rem;
+    /* no longer auto because keyword-row expands */
+}
+
+/* =========================
+   Pill with subtext (Operate & Bank)
+========================= */
+
+.pill--detail {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.75rem 0.9rem;
+}
+
+.pill-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #0f172a;
+    line-height: 1.3;
+}
+
+.pill-desc {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: #64748b;
+}
+
+/* =========================
+   SME boxes – 2x2 grid
+========================= */
+
+/* Target only SME section */
+.acc-card .pill-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* 2x2 */
+    gap: 0.75rem;
+}
+
+/* Make pills fill grid cells evenly */
+.pill--detail {
+    height: 100%;
+    justify-content: flex-start;
+    padding: 0.85rem 0.95rem;
+    border-radius: 0.85rem;
+}
+
+/* Slightly tighten text so grid feels balanced */
+.pill-title {
+    font-size: 0.88rem;
+}
+
+.pill-desc {
+    font-size: 0.8rem;
+    line-height: 1.45;
+}
+
+@media (max-width: 640px) {
+    .acc-card .pill-grid {
+        grid-template-columns: 1fr;
+        /* 1x4 on mobile */
+    }
+}
+
+/* Reduce the right column height slightly */
+.banking-v3-show {
+    max-height: 480px;
+    /* was 520px */
+}
+
+/* Keep the card scroll if needed */
+.feature-card {
+    min-height: 98%;
+    /* was 420px */
+}
+
+/* Button area pinned at bottom */
+.feature-actions {
+    margin-top: 0.9rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid rgba(226, 232, 240, 0.9);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.feature-link-btn {
+    border: 1px solid #2563eb;
+    background: transparent;
+    color: #2563eb;
+    padding: 0.5rem 0.95rem;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.feature-link-btn:hover {
+    background: rgba(37, 99, 235, 0.08);
+}
+
+/* Mobile: let the right panel expand normally (no inner scrollbar) */
+@media (max-width: 640px) {
+    .banking-v3-show {
+        max-height: none;
+        /* remove your 520px clamp */
+        display: block;
+    }
+
+    .feature-card {
+        max-height: none;
+        /* remove scroll container sizing */
+        overflow: visible;
+        /* no inner scroll */
+        min-height: auto;
+        /* stop forcing tall card */
+    }
+
+    /* Make chips not look cramped */
+    .keyword-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        /* 1 column on mobile */
+        padding: 0.75rem;
+    }
+
+    /* Fix the huge padding on mini blocks for mobile */
+    .mini-block {
+        padding: 0.9rem;
+        /* was 3.75rem */
+    }
+
+    .feature-mini {
+        grid-template-columns: 1fr;
+        /* stack "What you get" and "Best for" */
+    }
+}
 </style>

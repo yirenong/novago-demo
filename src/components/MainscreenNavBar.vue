@@ -47,7 +47,7 @@
                                     <p class="mega-heading">For SMEs</p>
 
                                     <router-link class="mega-link" to="/dashboard" @click="closeAllNav">
-                                        Transport Expense Management  System (TEMs)
+                                        Transport Expense Management System (TEMs)
                                         <span>Seamlessly book corporate rides from your portal.</span>
                                     </router-link>
 
@@ -130,6 +130,11 @@
                                     <router-link class="mega-link" to="/payouts" @click="closeAllNav">
                                         Payouts
                                         <span>Programmatic, cost-effective global payouts.</span>
+                                    </router-link>
+
+                                    <router-link class="mega-link" to="/remittance" @click="closeAllNav">
+                                        Remittance
+                                        <span>Cross-border payments.</span>
                                     </router-link>
                                 </div>
                             </div>
