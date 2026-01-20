@@ -10,8 +10,8 @@
                     <p class="hero-pill">NovaGO • FX Conversion & Global Acceptance</p>
                     <h1 class="hero-title-text">FX & Payments Built For Global Scale</h1>
                     <p class="hero-subtitle">
-                        Give customers their preferred local payment methods, reduce FX costs, and streamline treasury
-                        operations across every market you serve.
+                        Accept payments in 150+ currencies, process transactions worldwide, and provide your customers
+                        with their preferred local payment methods – all under one unified platform
                     </p>
                     <div class="hero-actions">
                         <button class="btn-primary" @click="scrollToSection('contact')">
@@ -184,7 +184,13 @@
                                 <span class="feature-row-dot"></span>
                                 <div class="feature-row-copy">
                                     <h4 class="feature-row-title">{{ card.subtitle }}</h4>
-                                    <p class="feature-row-text">{{ card.text }}</p>
+                                    <ul class="feature-row-list">
+                                        <li v-for="p in card.points" :key="p" class="feature-row-li">
+                                            <span class="feature-li-dot"></span>
+                                            <span class="feature-li-text">{{ p }}</span>
+                                        </li>
+                                    </ul>
+
                                 </div>
                             </div>
                         </div>
@@ -193,7 +199,13 @@
                                 <span class="feature-row-dot"></span>
                                 <div class="feature-row-copy">
                                     <h4 class="feature-row-title">{{ card.subtitle }}</h4>
-                                    <p class="feature-row-text">{{ card.text }}</p>
+                                    <ul class="feature-row-list">
+                                        <li v-for="p in card.points" :key="p" class="feature-row-li">
+                                            <span class="feature-li-dot"></span>
+                                            <span class="feature-li-text">{{ p }}</span>
+                                        </li>
+                                    </ul>
+
                                 </div>
                             </div>
                         </div>
@@ -353,31 +365,26 @@ const fxModes = [
         title: 'Global FX',
         points: [
             {
-                label: 'Maximise savings',
-                text: 'Reduce FX cost versus traditional banks by leveraging real-time rates and smarter execution paths.'
+                label: 'Maximize savings',
+                text: 'Reduce FX cost compared to traditional banking.'
             },
             {
                 label: 'Minimise risk',
-                text: 'Protect margins from currency fluctuations with better timing and optional rate strategies.'
+                text: 'Protect margins from currency fluctuations.'
             },
             {
                 label: 'Accelerate operations',
-                text: 'Convert and move funds quickly so treasury and ops teams aren’t waiting on slow FX cycles.'
+                text: 'Fast conversions and transfers.'
             },
             {
                 label: 'Gain control',
-                text: 'Get full visibility and command over currency exposures instead of scattered bank portals.'
+                text: 'Full visibility and command over currency exposures.'
             },
             {
                 label: 'Simplified treasury',
-                text: 'Consolidate FX and payment management into one platform for easier decision-making.'
+                text: 'Consolidate FX and payment management in one platform.'
             }
         ],
-        benefits: [
-            'Lower FX and intermediary fees',
-            'Clearer view of multi-currency cash',
-            'Faster decision-making for treasury'
-        ]
     },
     {
         id: 'global-processing',
@@ -386,33 +393,28 @@ const fxModes = [
         points: [
             {
                 label: 'Reduce cost',
-                text: 'Lower transaction fees and optimise FX on cross-border payments with smarter routing.'
+                text: 'Lower transaction fees and optimize FX on cross-border payments.'
             },
             {
                 label: 'Increase conversions',
-                text: 'Offer preferred local payment methods and currencies to reduce checkout drop-off.'
+                text: 'Offer preferred local payment methods to boost sales.'
             },
             {
                 label: 'Expand market reach',
-                text: 'Accept payments from customers in new geographies without rebuilding your stack.'
+                text: 'Process payment from customers in new geographies.'
             },
             {
                 label: 'Streamline operations',
-                text: 'Consolidate processing, reporting, and reconciliation in one place for your teams.'
+                text: 'Consolidate processing, reporting, and reconciliation.'
             },
             {
                 label: 'Minimise fraud',
-                text: 'Use built-in fraud prevention and compliance controls across markets.'
+                text: 'Benefit from advanced fraud prevention and compliance.'
             },
             {
                 label: 'Accelerate growth',
-                text: 'Spend less time fixing payment issues and more time launching in new markets.'
+                text: 'Focus on business expansion, not payment complexities.'
             }
-        ],
-        benefits: [
-            'Higher payment approval rates',
-            'Simpler reporting across regions',
-            'Faster launches in new markets'
         ]
     }
 ]
@@ -441,22 +443,38 @@ const featureDetails = {
         cards: [
             {
                 subtitle: 'Real-time rates',
-                text: 'Access live, interbank FX rates with no hidden markups.'
+                points: [
+                    'Access live, interbank FX rates',
+                    'No hidden markups'
+                ]
             },
             {
                 subtitle: 'Global reach',
-                text: 'Leverage an extensive payment network across 150+ currencies and 190+ countries.'
+                points: [
+                    'Leverage our extensive global payment network',
+                    'Support 150+ currencies',
+                    'Send funds to over 190+ countries'
+                ]
             },
             {
                 subtitle: 'Flexible options',
-                text: 'Execute immediate conversions or lock in rates to hedge against volatility.'
+                points: [
+                    'Execute immediate currency conversions',
+                    'Lock in rates for future transactions to hedge against volatility',
+                    'Tailor FX strategy to business needs'
+                ]
             },
             {
                 subtitle: 'API-driven FX',
-                text: 'Integrate FX directly into your systems and automate treasury workflows.'
+                points: [
+                    'Integrate FX capabilities directly into your systems',
+                    'Automate currency conversions and treasury workflows',
+                    'Built for high volume, programmatic FX'
+                ]
             }
         ]
     },
+
     processing: {
         title: 'Global processing features',
         tagline: 'Make every checkout feel local while keeping risk, reporting, and settlement under control.',
@@ -464,19 +482,34 @@ const featureDetails = {
         cards: [
             {
                 subtitle: 'Multi-currency support',
-                text: 'Handle, convert, settle, or hold funds in 150+ currencies as needed.'
+                points: [
+                    'Handle transactions in 150+ currencies',
+                    'Convert, settle, or hold funds as required',
+                    'Offer local currency options to global customers'
+                ]
             },
             {
                 subtitle: 'Global payment methods',
-                text: 'Support major cards, local payment methods, and bank transfers with intelligent routing.'
+                points: [
+                    'Support major credit/debit cards, local payment methods, and bank transfers',
+                    'Intelligent routing for higher authorization rates',
+                    'Cater to diverse customer preferences globally'
+                ]
             },
             {
                 subtitle: 'Real-time processing & insights',
-                text: 'Instant processing paired with real-time reporting and settlement visibility.'
+                points: [
+                    'Instantaneous transaction processing – minimise delays and ensure accurate settlement',
+                    'Real-time insights and reporting'
+                ]
             },
             {
                 subtitle: 'Advanced risk & compliance',
-                text: 'PCI DSS infrastructure, integrated fraud detection, and global AML/KYC standards.'
+                points: [
+                    'PCI DSS compliant infrastructure',
+                    'Integrated fraud detection and prevention',
+                    'Adherence to global AML/KYC standards and local regulations'
+                ]
             }
         ]
     }
@@ -2210,5 +2243,36 @@ const rightFeatureCards = computed(() => {
     .fab--top {
         bottom: 76px;
     }
+}
+
+.feature-row-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.feature-row-li {
+    display: flex;
+    gap: 0.55rem;
+    align-items: flex-start;
+}
+
+.feature-li-dot {
+    margin-top: 0.45rem;
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: #64748b;
+    /* subtle grey dot */
+    flex-shrink: 0;
+}
+
+.feature-li-text {
+    font-size: 0.86rem;
+    color: #4b5563;
+    line-height: 1.6;
 }
 </style>

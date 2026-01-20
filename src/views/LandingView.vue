@@ -1,7 +1,9 @@
 <template>
     <div class="landing">
         <!-- Modular nav -->
-        <NavBar :is-logged-in="isLoggedIn" @scrollTo="scrollToSection" @logout="handleLogout" />
+        <NavBar :is-logged-in="isLoggedIn" @scrollTo="scrollToSection" @scrollOperate="scrollToOperateAndOpen"
+            @logout="handleLogout" />
+
 
         <!-- =========================
          SECTION 1: HERO
@@ -122,7 +124,7 @@
                 <header class="section-head">
                     <h2 class="section-title">Operate and Bank in One Control Centre</h2>
                     <p class="section-text">
-                        NovaGo allow you to run your daily operations seamlessly from a single platform.
+                        NovaGo allows you to run your daily operations seamlessly from a single platform.
                     </p>
                 </header>
 
@@ -132,7 +134,8 @@
                             <div class="acc-left">
                                 <div class="acc-title">Unique to Transport, Travel, &amp; Automotive Industry</div>
                                 <div class="acc-subtitle">
-                                    Purpose-built tools designed to keep your fleet, bookings, and cash flow moving.
+                                    Built for the realities of transport and travel operations, from fleet management to
+                                    finance.
                                 </div>
                             </div>
                             <span class="chev" :class="{ open: openAcc === 'industry' }">⌄</span>
@@ -143,7 +146,12 @@
                                 <div v-for="(item, idx) in industryPoints" :key="`ind-${idx}`"
                                     class="pill pill--detail">
                                     <div class="pill-title">{{ item.title }}</div>
-                                    <div class="pill-desc">{{ item.desc }}</div>
+                                    <ul class="pill-points">
+                                        <li v-for="(p, i) in item.points" :key="i">
+                                            <span class="pill-tick">✓</span>
+                                            <span>{{ p }}</span>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
 
@@ -151,8 +159,9 @@
                             <div class="mini-glass">
                                 <div class="mini-title">Why this matters</div>
                                 <div class="mini-text">
-                                    Reduce manual coordination. Keep rental, fleet, and ops workflows connected to your
-                                    cash flow.
+                                    Transport businesses run on tight margins and fast-moving operations. By connecting
+                                    fleet, rentals, and payments in one system, you reduce friction, improve
+                                    accountability, and strengthen cash flow control.
                                 </div>
                             </div>
                         </div>
@@ -163,7 +172,8 @@
                             <div class="acc-left">
                                 <div class="acc-title">For SME</div>
                                 <div class="acc-subtitle">
-                                    Essential business tools to simplify operations and financial management.
+                                    Essential tools that simplify daily operations while giving SMEs better visibility
+                                    and control over finances.
                                 </div>
                             </div>
                             <span class="chev" :class="{ open: openAcc === 'sme' }">⌄</span>
@@ -173,15 +183,22 @@
                             <div class="pill-grid">
                                 <div v-for="(item, idx) in smePoints" :key="`sme-${idx}`" class="pill pill--detail">
                                     <div class="pill-title">{{ item.title }}</div>
-                                    <div class="pill-desc">{{ item.desc }}</div>
+                                    <ul class="pill-points">
+                                        <li v-for="(p, i) in item.points" :key="i">
+                                            <span class="pill-tick">✓</span>
+                                            <span>{{ p }}</span>
+                                        </li>
+                                    </ul>
+
                                 </div>
                             </div>
 
 
                             <div class="mini-glass">
-                                <div class="mini-title">Fast setup</div>
+                                <div class="mini-title">Why this matters</div>
                                 <div class="mini-text">
-                                    Start with the essentials (payroll + expenses) and expand modules as you grow.
+                                    Start with essential modules like payroll and expenses, and expand as your business
+                                    needs evolve.
                                 </div>
                             </div>
                         </div>
@@ -322,6 +339,7 @@
                 </header>
 
                 <div class="rewards-grid">
+                    <!-- Drivers -->
                     <div class="reward-box glass">
                         <div class="reward-top">
                             <div class="reward-ico">
@@ -329,14 +347,21 @@
                             </div>
                             <div class="reward-h">For Drivers</div>
                         </div>
+
+                        <p class="reward-subtext">{{ driverRewardsIntro }}</p>
+
                         <ul class="bullet-list">
-                            <li v-for="(p, idx) in driverRewards" :key="`dr-${idx}`">
-                                <span class="check">✓</span>
-                                <span>{{ p }}</span>
+                            <li v-for="(p, idx) in driverRewards" :key="`dr-${idx}`" class="reward-li">
+                                <span class="tick-badge" aria-hidden="true">✓</span>
+                                <div class="bullet-text">
+                                    <div class="bullet-title">{{ p.title }}</div>
+                                    <div class="bullet-desc">{{ p.desc }}</div>
+                                </div>
                             </li>
                         </ul>
                     </div>
 
+                    <!-- Employees -->
                     <div class="reward-box glass">
                         <div class="reward-top">
                             <div class="reward-ico">
@@ -344,32 +369,40 @@
                             </div>
                             <div class="reward-h">For Employees</div>
                         </div>
+
+                        <p class="reward-subtext">{{ employeeRewardsIntro }}</p>
+
                         <ul class="bullet-list">
-                            <li v-for="(p, idx) in employeeRewards" :key="`er-${idx}`">
+                            <li v-for="(p, idx) in employeeRewards" :key="`er-${idx}`" class="reward-li">
                                 <span class="check">✓</span>
-                                <span>{{ p }}</span>
+                                <div class="bullet-text">
+                                    <div class="bullet-title">{{ p.title }}</div>
+                                    <div class="bullet-desc">{{ p.desc }}</div>
+                                </div>
                             </li>
                         </ul>
-                        <div class="hint">Benefits may overlap with driver rewards</div>
                     </div>
 
+                    <!-- Team -->
                     <div class="reward-box glass">
                         <div class="reward-top">
                             <div class="reward-ico">
                                 <i class="fas fa-gift fas-ico" aria-hidden="true"></i>
                             </div>
-                            <div class="reward-h">For Your Team (curated rewards)</div>
+                            <div class="reward-h">For Your Team</div>
                         </div>
-                        <p class="reward-desc">
-                            Provide employees with a variety of curated perks and rewards, conveniently in one platform.
-                        </p>
 
-                        <div class="mini-glass mini-glass--tight">
-                            <div class="mini-title">One place to discover perks</div>
-                            <div class="mini-text">
-                                Reduce admin work and make benefits easy to find and use.
-                            </div>
-                        </div>
+                        <p class="reward-subtext">{{ teamRewardsIntro }}</p>
+
+                        <ul class="bullet-list">
+                            <li v-for="(p, idx) in teamRewards" :key="`tr-${idx}`" class="reward-li">
+                                <span class="check">✓</span>
+                                <div class="bullet-text">
+                                    <div class="bullet-title">{{ p.title }}</div>
+                                    <div class="bullet-desc">{{ p.desc }}</div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
@@ -447,7 +480,7 @@
             ↑
         </button>
 
-        <a href="https://wa.me/6591234567" class="whatsapp-float" target="_blank" rel="noopener">
+        <a href="https://wa.me/6589112217" class="whatsapp-float" target="_blank" rel="noopener">
             <img :src="whatsappIcon" alt="Chat with us on WhatsApp" class="whatsapp-icon-img" />
         </a>
     </div>
@@ -455,11 +488,14 @@
 
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
-import { useRouter } from 'vue-router'
 import NavBar from '../components/MainscreenNavBar.vue'
 import whatsappIcon from '../assets/whatsapp_icon.png'
+import { useRoute, useRouter } from 'vue-router'
+import { watch } from 'vue'
 
+const route = useRoute()
 const router = useRouter()
+
 
 const token = ref(localStorage.getItem('access_token') || null)
 const isLoggedIn = computed(() => !!token.value)
@@ -502,36 +538,66 @@ const toggleAcc = (key) => {
     openAcc.value = openAcc.value === key ? '' : key
 }
 
+const scrollToOperateAndOpen = (key) => {
+    const el = document.getElementById('operate')
+    if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+
+    // delay slightly so scroll finishes before state change
+    setTimeout(() => {
+        openAcc.value = key
+    }, 300)
+}
+
+
 const industryPoints = ref([
     {
         title: 'Transport Operator Management System (TOMs)',
-        desc: 'Track, assign, and oversee vehicles, drivers, and jobs seamlessly — reducing operational friction.'
+        points: [
+            'Track, assign, and oversee vehicles, drivers, and jobs seamlessly.',
+            'Reduce manual coordination while maintaining full visibility over daily operations and performance.'
+        ]
     },
     {
         title: 'Rental Collection',
-        desc: 'Track all rental payments in one place and generate invoices with ease.'
+        points: [
+            'Automate rental tracking, billing, and invoicing across your fleet.',
+            'Ensure timely collections and clearer oversight of recurring and ad-hoc rental payments.'
+        ]
     }
 ])
 
 const smePoints = ref([
     {
         title: 'Transport Expense Management System (TEMs)',
-        desc: 'Seamlessly book corporate rides from your portal.'
+        points: [
+            'Centralize corporate ride bookings and transport expenses through a single portal.',
+            'Improve tracking, approvals, and cost transparency across teams.'
+        ]
     },
     {
         title: 'Expense Management',
-        desc: 'Track and manage business expenses with ease.'
+        points: [
+            'Track, categorize, and control business spending in real time.',
+            'Eliminate manual claims and gain clearer insights into where your money goes.'
+        ]
     },
     {
         title: 'Payroll',
-        desc: 'Run payroll with approvals, automated payouts, and better cost visibility.'
+        points: [
+            'Run payroll with built-in approvals and automated payouts.',
+            'Reduce administrative workload while ensuring accurate and timely payments.'
+        ]
     },
     {
         title: 'Content Management System (CMS)',
-        desc: 'Customize your very own web design with our Content Management System (CMS).'
+        points: [
+            'Easily customize and manage your business website without technical complexity.',
+            'Maintain control over your digital presence as your business grows.'
+        ]
     }
 ])
-
 
 /**
  * Banking modules:
@@ -591,10 +657,51 @@ const activeFeature = computed(() => {
     return bankingFeatures.value.find((x) => x.id === activeBankFeature.value) || bankingFeatures.value[0]
 })
 
-/** Rewards */
-const driverRewards = ref(['Fuel discounts', 'Rental promotions', 'Job opportunities', 'Workshop & maintenance discounts', 'And more (upcoming)'])
+const driverRewardsIntro = ref('Drive smarter, earn more, and save on the road.')
 
-const employeeRewards = ref(['Exclusive partner offers (including Woogi benefits)'])
+const driverRewards = ref([
+    { title: 'Job Opportunities', desc: 'Discover new gigs directly through our partner platform.' },
+    { title: 'Fuel Discounts', desc: 'Keep more of your earnings with savings every time you fill up.' },
+    { title: 'Rental Promotions', desc: 'Enjoy exclusive deals from trusted vehicle rental partners.' },
+    { title: 'Workshop Discounts', desc: 'Cut maintenance costs with preferred rates at trusted workshops.' }
+])
+
+const employeeRewardsIntro = ref('Reward your team with perks that go beyond salary')
+
+const employeeRewards = ref([
+    { title: 'Exclusive Partner Deals', desc: 'Unlock savings on Grab rides, FairPrice groceries, Shopee vouchers, and more.' },
+    { title: 'Hassle-Free', desc: 'Benefits are seamlessly available within the platform – no manual claims or tracking required.' },
+    { title: 'Perks for Drivers', desc: 'Enjoy fuel discounts, workshop savings, and more!' }
+])
+
+const teamRewardsIntro = ref('One platform to manage and deliver meaningful employee perks')
+
+const teamRewards = ref([
+    { title: 'Centralized Perks Hub', desc: 'Provide your team with a single place hub to discover curated rewards.' },
+    { title: 'Less admin, More Impact', desc: 'Reduce paperwork while boosting visibility, usage, and overall employee satisfaction.' },
+    { title: 'Flexible and Scalable', desc: 'Seamlessly add new perks and partners as your team grows – no system changes required.' }
+])
+
+watch(
+    () => route.query,
+    (q) => {
+        // open accordion in Operate section
+        if (q.open === 'industry' || q.open === 'sme') {
+            scrollToOperateAndOpen(q.open)
+        }
+
+        // scroll to a normal section
+        if (q.section) {
+            scrollToSection(q.section)
+        }
+
+        // optional: clean the URL after handling
+        if (q.open || q.section) {
+            setTimeout(() => router.replace({ query: {} }), 600)
+        }
+    },
+    { immediate: true }
+)
 </script>
 
 <style scoped>
@@ -654,7 +761,7 @@ const employeeRewards = ref(['Exclusive partner offers (including Woogi benefits
 /* Sections */
 .section {
     position: relative;
-    padding: 3.8rem 1.25rem;
+    padding: 3.8rem 15%;
 }
 
 .section-muted {
@@ -2308,6 +2415,11 @@ const employeeRewards = ref(['Exclusive partner offers (including Woogi benefits
     color: #64748b;
 }
 
+.pill-desc {
+    white-space: pre-line;
+}
+
+
 /* =========================
    SME boxes – 2x2 grid
 ========================= */
@@ -2414,6 +2526,234 @@ const employeeRewards = ref(['Exclusive partner offers (including Woogi benefits
     .feature-mini {
         grid-template-columns: 1fr;
         /* stack "What you get" and "Best for" */
+    }
+}
+
+#operate .accordion {
+    max-width: none;
+    /* remove the limit */
+    width: 100%;
+    margin: 1.8rem auto 0;
+}
+
+.reward-subtext {
+    margin: 0 0 0.9rem;
+    color: #64748b;
+    line-height: 1.6;
+    font-size: 0.92rem;
+}
+
+.bullet-title {
+    font-weight: 650;
+    color: #0f172a;
+}
+
+.bullet-desc {
+    color: #475569;
+    font-weight: 400;
+}
+
+.pill-points {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.35rem;
+}
+
+.pill-points li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.45rem;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: #64748b;
+}
+
+.pill-tick {
+    color: #2563eb;
+    /* matches your primary blue */
+    font-size: 0.75rem;
+    line-height: 1.4;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+/* ===== Rewards section polish ===== */
+#rewards .section-head {
+    margin-bottom: 1.6rem;
+}
+
+#rewards .section-text {
+    max-width: 68ch;
+}
+
+/* Cards: equal structure */
+.rewards-grid {
+    margin-top: 1.8rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.2rem;
+    max-width: 1200px;
+    align-items: stretch;
+}
+
+.reward-box {
+    padding: 1.25rem 1.25rem 1.15rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    min-height: 320px;
+    /* makes them feel consistent */
+}
+
+/* Header row */
+.reward-top {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.1rem;
+}
+
+.reward-ico {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    border: 1px solid rgba(37, 99, 235, 0.18);
+    background: rgba(239, 246, 255, 0.95);
+    display: grid;
+    place-items: center;
+    font-size: 1rem;
+}
+
+.reward-h {
+    color: #0f172a;
+    font-size: 1rem;
+    font-weight: 650;
+}
+
+/* Subtext under title */
+.reward-subtext {
+    margin: 0;
+    color: #64748b;
+    line-height: 1.6;
+    font-size: 0.92rem;
+}
+
+/* List: clean spacing */
+.bullet-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.85rem;
+}
+
+/* Each bullet row: tick + stacked text */
+.reward-li {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 0.7rem;
+    align-items: start;
+}
+
+/* Tick badge (looks premium vs plain ✓) */
+.tick-badge {
+    width: 20px;
+    height: 20px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    font-size: 0.72rem;
+    color: #2563eb;
+    background: rgba(37, 99, 235, 0.10);
+    box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.20);
+    margin-top: 2px;
+    /* baseline align */
+}
+
+.bullet-text {
+    display: grid;
+    gap: 0.18rem;
+}
+
+.bullet-title {
+    font-weight: 650;
+    color: #0f172a;
+    line-height: 1.25;
+    font-size: 0.92rem;
+}
+
+.bullet-desc {
+    color: #475569;
+    font-weight: 400;
+    line-height: 1.55;
+    font-size: 0.90rem;
+}
+
+/* CTA row alignment (optional nicer spacing) */
+#rewards .section-cta-row {
+    margin-top: 1.8rem;
+}
+
+@media (max-width: 960px) {
+
+    /* Rewards: stack nicely on mobile */
+    .rewards-grid {
+        grid-template-columns: 1fr;
+        max-width: 560px;
+        margin-inline: auto;
+        gap: 1rem;
+    }
+
+    .reward-box {
+        min-height: auto;
+        /* ✅ remove fixed height */
+        padding: 1.05rem 1.05rem;
+        /* tighter padding */
+        gap: 0.8rem;
+    }
+
+    .reward-top {
+        gap: 0.65rem;
+    }
+
+    .reward-ico {
+        width: 40px;
+        height: 40px;
+        border-radius: 14px;
+    }
+
+    .reward-h {
+        font-size: 0.98rem;
+    }
+
+    .reward-subtext {
+        font-size: 0.9rem;
+        margin: 0;
+    }
+
+    .bullet-list {
+        gap: 0.75rem;
+    }
+
+    .reward-li {
+        grid-template-columns: 20px 1fr;
+        gap: 0.6rem;
+    }
+
+    .tick-badge {
+        width: 18px;
+        height: 18px;
+        font-size: 0.68rem;
+    }
+
+    .bullet-title {
+        font-size: 0.9rem;
+    }
+
+    .bullet-desc {
+        font-size: 0.88rem;
     }
 }
 </style>

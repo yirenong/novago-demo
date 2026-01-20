@@ -7,13 +7,11 @@
         <section class="hero hero--gp">
             <div class="hero-inner">
                 <div class="hero-left">
-                    <p class="hero-pill">NovaGO • Global Payouts</p>
-                    <h1 class="hero-title-text">Global Payouts, Without The Drag</h1>
+                    <p class="hero-pill">NovaGO • Bill Payouts</p>
+                    <h1 class="hero-title-text">Bill Payouts, Without The Drag</h1>
                     <p class="hero-subtitle">
-                        Turn mass payouts into a seamless, lightning-fast, highly precise operation.<br />
-                        Move funds across borders with confidence—at scale, in minutes, and with full visibility from
-                        initiation to
-                        delivery.
+                        NovaGo Bill Payout helps you automate bill payments end to end in one place. Upload invoices,
+                        route approvals, pay suppliers locally or globally then reconcile with fewer manual steps.
                     </p>
 
                     <div class="hero-actions">
@@ -93,7 +91,6 @@
                 <div v-if="activeHow" class="how-panel">
                     <div class="how-panel-body">
                         <div class="how-panel-main">
-                            <span class="how-panel-badge">{{ activeHow.badge }}</span>
                             <h3 class="how-panel-title">{{ activeHow.title }}</h3>
                         </div>
 
@@ -245,42 +242,97 @@ const overviewPillars = [
 
 const howItems = [
     {
-        id: 'cost', label: 'Massive Cost Savings', badge: 'Massive Cost Savings', title: 'Massive Cost Savings', points: [
-            { highlight: 'Save up to 70%', text: 'Save up to 70% on traditional transfer expenses through intelligent routing and localized payout rails' },
-            { highlight: 'Reduce FX fees and intermediary fees', text: 'Reduce FX fees and intermediary fees by leveraging local payment networks' }
+        id: 'upload',
+        label: 'Say goodbye to manual data entry',
+        title: 'Say goodbye to manual data entry',
+        points: [
+            {
+                highlight: 'Automatic bill capture',
+                text: 'Upload bills by email or file and let NovaGo capture key details automatically.'
+            },
+            {
+                highlight: 'Fewer errors',
+                text: 'Cut rekeying and reduce errors so processing stays quick and clean.'
+            }
         ]
     },
     {
-        id: 'speed', label: 'Blazing Fast Delivery', badge: 'Blazing Fast Delivery', title: 'Blazing Fast Delivery', points: [
-            { highlight: 'Delivering funds', text: 'Deliver funds to recipients in minutes or hours, not days.' },
-            { highlight: 'Real-time routing', text: 'Real-time processing and adaptive routing ensure the fastest possible payout times.' }
+        id: 'pay',
+        label: 'Pay vendors across the globe with ease',
+        title: 'Pay vendors across the globe with ease',
+        points: [
+            {
+                highlight: 'Multi-currency payouts',
+                text: 'Pay in multiple currencies using local payout rails where available.'
+            },
+            {
+                highlight: 'Predictable FX costs',
+                text: 'Schedule payments and use competitive FX so costs stay predictable.'
+            }
         ]
     },
     {
-        id: 'precision', label: 'Unrivaled Precision', badge: 'Unrivaled Precision', title: 'Unrivaled Precision', points: [
-            { highlight: 'Minimize errors and failed payments', text: 'Minimize errors and failed payments with smart routing and verification.' },
-            { highlight: '95% fewer failures', text: 'Advanced validation and smart routing reduces failed payments by 95%.' }
+        id: 'approvals',
+        label: 'Keep control with built-in approvals',
+        title: 'Keep control with built-in approvals',
+        points: [
+            {
+                highlight: 'Multi-layer approvals',
+                text: 'Set multi-layer approval workflows by role and amount.'
+            },
+            {
+                highlight: 'Real-time tracking',
+                text: 'Track status in real time and send reminders so nothing stalls.'
+            }
         ]
     },
     {
-        id: 'automation', label: 'Effortless Automation', badge: 'Effortless Automation', title: 'Effortless Automation', points: [
-            { highlight: 'Automated complex payment', text: 'Automate complex payment workflows and reclaim hours of manual effort.' },
-            { highlight: 'Set it and forget it', text: 'Set it and forget it - automated workflows handle everything from initiation to reconciliation.' }
+        id: 'reconcile',
+        label: 'Reconcile faster with accounting integrations',
+        title: 'Reconcile faster with accounting integrations',
+        points: [
+            {
+                highlight: 'Accounting sync',
+                text: 'Sync bills and payments back to your accounting software.'
+            },
+            {
+                highlight: 'Faster close',
+                text: 'Match invoices to payments faster and close the books with less effort.'
+            }
         ]
     },
     {
-        id: 'scale', label: 'Global Scalability', badge: 'Global Scalability', title: 'Global Scalability', points: [
-            { highlight: 'Expand into new markets', text: 'Confidently expand into new markets with a payout engine built to scale.' },
-            { highlight: '190+ countries', text: 'Handle millions of transactions across 190+ countries without breaking a sweat.' }
+        id: 'alerts',
+        label: 'Never miss a payment',
+        title: 'Never miss a payment',
+        points: [
+            {
+                highlight: 'Smart alerts',
+                text: 'Get alerts for pending approvals, upcoming due dates and failed payments.'
+            },
+            {
+                highlight: 'Unified dashboard',
+                text: 'Keep all bills and payment statuses in one dashboard for a clear view.'
+            }
         ]
     },
     {
-        id: 'transparency', label: 'Enhanced Transparency', badge: 'Enhanced Transparency', title: 'Enhanced Transparency', points: [
-            { highlight: 'Track payments', text: 'Track every payment in real-time, from initiation to delivery.' },
-            { highlight: 'Full visibility', text: 'Gain full visibility with detailed reporting, live status updates, and audit-ready trails.' }
+        id: 'vendors',
+        label: 'Stay organised with vendor management',
+        title: 'Stay organised with vendor management',
+        points: [
+            {
+                highlight: 'Centralised directory',
+                text: 'Store vendor details in a single directory with controlled access.'
+            },
+            {
+                highlight: 'Audit-ready trail',
+                text: 'Keep a tidy audit trail of edits, approvals and payments.'
+            }
         ]
     }
 ]
+
 
 const activeHowId = ref(howItems[0].id)
 const activeHow = computed(() => howItems.find((i) => i.id === activeHowId.value))
@@ -1010,4 +1062,29 @@ const featureHighlights = [
     }
 }
 
+/* ✅ How it works tabs: equal width on mobile */
+@media (max-width: 768px) {
+    .how-tabs {
+        display: grid;
+        /* override flex */
+        grid-template-columns: 1fr;
+        /* 1 per row */
+        gap: 0.6rem;
+        justify-content: stretch;
+        max-width: 520px;
+        /* optional: keeps it neat */
+        margin-inline: auto;
+    }
+
+    .how-tab {
+        width: 100%;
+        /* same width */
+        text-align: center;
+        padding: 0.55rem 0.9rem;
+        /* a bit taller for touch */
+        white-space: normal;
+        /* allow wrap */
+        line-height: 1.2;
+    }
+}
 </style>

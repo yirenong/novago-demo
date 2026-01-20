@@ -29,42 +29,44 @@
                                 <div class="mega-column">
                                     <p class="mega-heading">By use cases</p>
 
-                                    <router-link class="mega-link" to="/toms" @click="closeAllNav">
+                                    <button class="mega-link mega-btn" type="button" @click="goOperate('industry')">
                                         Transport Operator Management System (TOMs)
                                         <span>
                                             Simplify the management of vehicles, drivers and jobs — moving beyond manual
                                             processes.
                                         </span>
-                                    </router-link>
+                                    </button>
 
-                                    <router-link class="mega-link" to="/rental-collection-summary" @click="closeAllNav">
+                                    <button class="mega-link mega-btn" type="button" @click="goOperate('industry')">
                                         Rental collection
                                         <span>Track rental payments in one view. Invoice generation.</span>
-                                    </router-link>
+                                    </button>
                                 </div>
+
                                 <!-- For SMEs -->
                                 <div class="mega-column">
                                     <p class="mega-heading">For SMEs</p>
 
-                                    <router-link class="mega-link" to="/dashboard" @click="closeAllNav">
+                                    <button class="mega-link mega-btn" type="button" @click="goOperate('sme')">
                                         Transport Expense Management System (TEMs)
                                         <span>Seamlessly book corporate rides from your portal.</span>
-                                    </router-link>
+                                    </button>
 
-                                    <router-link class="mega-link" to="/expense-management" @click="closeAllNav">
+                                    <button class="mega-link mega-btn" type="button" @click="goOperate('sme')">
                                         Expense management
                                         <span>Track and manage business expenses with ease.</span>
-                                    </router-link>
+                                    </button>
 
-                                    <router-link class="mega-link" to="/payroll" @click="closeAllNav">
+                                    <button class="mega-link mega-btn" type="button" @click="goOperate('sme')">
                                         Payroll
                                         <span>Simplified salary-related payments in one place.</span>
-                                    </router-link>
+                                    </button>
 
-                                    <router-link class="mega-link" to="/" @click="closeAllNav">
+                                    <!-- If CMS is a real page, switch to router-link. If it's a landing section, keep button. -->
+                                    <button class="mega-link mega-btn" type="button" @click="goOperate('sme')">
                                         CMS
                                         <span>Customize your very own web design with our CMS.</span>
-                                    </router-link>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +99,7 @@
                                     </router-link>
 
                                     <router-link class="mega-link" to="/global-payouts" @click="closeAllNav">
-                                        Global Payout
+                                        Bill Payout
                                         <span>Send payouts to 190+ countries via local currencies and methods.</span>
                                     </router-link>
 
@@ -142,7 +144,7 @@
                     </div>
                 </div>
 
-                <!-- Benefits -->
+                <!-- Rewards -->
                 <div class="nav-item has-mega" @mouseenter="openMenuDesktop('benefits')">
                     <button class="nav-link" :class="{ active: activeMenu === 'benefits' }" type="button"
                         @click="toggleDropdown('benefits')">
@@ -155,14 +157,15 @@
                                 <div class="mega-column">
                                     <p class="mega-heading">Benefits marketplace</p>
 
-                                    <router-link class="mega-link" to="/benefits/shell" @click="closeAllNav">
+                                    <button class="mega-link mega-btn" type="button" @click="goSection('rewards')">
                                         Shell
                                         <span>Fuel benefits and rewards for your drivers.</span>
-                                    </router-link>
-                                    <router-link class="mega-link" to="/benefits/shell" @click="closeAllNav">
+                                    </button>
+
+                                    <button class="mega-link mega-btn" type="button" @click="goSection('rewards')">
                                         Curated Benefits
                                         <span>Customize benefits specific to your company.</span>
-                                    </router-link>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -186,7 +189,8 @@
 
                                     <p class="partnership-text">
                                         Bundle NovaGO with your product or offer Shell fuel benefits to your users. Talk
-                                        to our partnership team to explore co-created solutions.
+                                        to our partnership
+                                        team to explore co-created solutions.
                                     </p>
 
                                     <button class="btn-primary partnership-btn" type="button"
@@ -233,14 +237,9 @@
                         </button>
                     </template>
 
-
                     <template v-else>
-                        <button class="nav-link login-link" @click="handlePortalClick">
-                            Portal
-                        </button>
-                        <button class="nav-link login-link" @click="handleLogoutClick">
-                            Log out
-                        </button>
+                        <button class="nav-link login-link" @click="handlePortalClick">Portal</button>
+                        <button class="nav-link login-link" @click="handleLogoutClick">Log out</button>
                     </template>
                 </div>
             </nav>
@@ -253,14 +252,9 @@
                     </button>
                 </template>
 
-
                 <template v-else>
-                    <button class="nav-link login-link" @click="handlePortalClick">
-                        Portal
-                    </button>
-                    <button class="nav-link login-link" @click="handleLogoutClick">
-                        Log out
-                    </button>
+                    <button class="nav-link login-link" @click="handlePortalClick">Portal</button>
+                    <button class="nav-link login-link" @click="handleLogoutClick">Log out</button>
                 </template>
             </div>
         </div>
@@ -268,8 +262,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+
 import primeGroupLogo from '../assets/partners/prime-group.png'
 import veepLogo from '../assets/partners/veep.png'
 import gojekLogo from '../assets/partners/gojek.png'
@@ -279,17 +274,17 @@ import bestPetrolLogo from '../assets/partners/best-petrol.png'
 import zoqqLogo from '../assets/partners/zoqq.png'
 import loginIcon from '../assets/login_icon.png'
 
-
 const props = defineProps({
-    isLoggedIn: {
-        type: Boolean,
-        default: false
-    }
+    isLoggedIn: { type: Boolean, default: false }
 })
 
-const emit = defineEmits(['scrollTo', 'logout'])
+// ✅ includes scrollTo + scrollOperate + logout
+const emit = defineEmits(['scrollTo', 'scrollOperate', 'logout'])
 
 const router = useRouter()
+const route = useRoute()
+
+const isLanding = computed(() => route.path === '/')
 
 const activeMenu = ref(null)
 const isMobileMenuOpen = ref(false)
@@ -305,15 +300,11 @@ const partners = [
 ]
 
 const openMenuDesktop = (name) => {
-    if (window.innerWidth >= 960) {
-        activeMenu.value = name
-    }
+    if (window.innerWidth >= 960) activeMenu.value = name
 }
 
 const closeMenuDesktop = () => {
-    if (window.innerWidth >= 960) {
-        activeMenu.value = null
-    }
+    if (window.innerWidth >= 960) activeMenu.value = null
 }
 
 const toggleDropdown = (name) => {
@@ -322,9 +313,7 @@ const toggleDropdown = (name) => {
 
 const toggleMobileMenu = () => {
     isMobileMenuOpen.value = !isMobileMenuOpen.value
-    if (!isMobileMenuOpen.value) {
-        activeMenu.value = null
-    }
+    if (!isMobileMenuOpen.value) activeMenu.value = null
 }
 
 const resetNav = () => {
@@ -337,9 +326,40 @@ const closeAllNav = () => {
     isMobileMenuOpen.value = false
 }
 
-const handlePartnershipClick = () => {
-    emit('scrollTo', 'contact')
+// ✅ Cross-page scroll/open helpers
+const goSection = (id) => {
     closeAllNav()
+
+    if (isLanding.value) {
+        emit('scrollTo', id)
+        return
+    }
+
+    // redirect to landing with intent (landing watcher handles scrolling)
+    router.push({ path: '/', query: { section: id } })
+}
+
+const goOperate = (key) => {
+    closeAllNav()
+
+    if (isLanding.value) {
+        emit('scrollOperate', key) // 'industry' | 'sme'
+        return
+    }
+
+    // redirect to landing with intent (landing watcher handles open+scroll)
+    router.push({ path: '/', query: { open: key } })
+}
+
+const handlePartnershipClick = () => {
+    closeAllNav()
+
+    if (isLanding.value) {
+        emit('scrollTo', 'contact')
+        return
+    }
+
+    router.push({ path: '/', query: { section: 'contact' } })
 }
 
 const handleLoginClick = () => {
@@ -584,6 +604,11 @@ const handleLogoutClick = () => {
     background: #f3f4ff;
 }
 
+/* ✅ for button version (same look as link) */
+.mega-btn {
+    appearance: none;
+}
+
 /* Partnerships tweaks */
 .nav-item.has-mega:last-of-type .mega-left {
     grid-template-columns: 1fr;
@@ -695,8 +720,7 @@ const handleLogoutClick = () => {
     color: #ffffff;
     border-color: #2563eb;
     box-shadow: 0 14px 30px rgba(37, 99, 235, 0.3);
-    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease,
-        color 0.12s ease;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease, color 0.12s ease;
 }
 
 .btn-primary:hover {
@@ -726,7 +750,6 @@ const handleLogoutClick = () => {
         margin: 0 auto;
     }
 }
-
 
 /* ---------- MOBILE ---------- */
 @media (max-width: 960px) {
@@ -786,10 +809,8 @@ const handleLogoutClick = () => {
         justify-content: center;
         pointer-events: auto;
         margin-top: 0;
-        /* no gap by default */
         z-index: 80;
     }
-
 
     .mega {
         box-shadow: none;

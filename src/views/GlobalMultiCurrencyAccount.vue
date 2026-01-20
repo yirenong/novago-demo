@@ -287,15 +287,15 @@ const challenges = ref([
     },
     {
         id: 'reconciliation',
-        title: 'Complex Reconciliation',
-        chipLabel: 'Operations',
-        detail: 'Multiple bank accounts across markets create manual work, errors, and reconciliation headaches.'
+        title: 'Security and fraud',
+        chipLabel: 'Security',
+        detail: 'Managing payments across platforms and borders can increase the risk of unauthorised access, fraud and data leaks.'
     },
     {
         id: 'local-presence',
         title: 'Limited Local Presence',
         chipLabel: 'Market entry',
-        detail: 'Without local payment capabilities, entering new markets becomes harder and weakens customer confidence.'
+        detail: 'Without local payment capabilities, entering new markets becomes harder and weakens customer confidence.'
     }
 ])
 
@@ -308,9 +308,9 @@ const activeChallenge = computed(() =>
 const howItems = [
     {
         icon: 'fa-solid fa-globe',
-        title: 'Simplify Global Finances',
+        title: 'Skip the extra bank charges',
         text:
-            'Use a single platform equipped with everything you need to manage, simplify, and scale your international operations.'
+            'No account opening fees, no monthly maintenance charges and no minimum transaction requirements.'
     },
     {
         icon: 'fa-solid fa-sliders',
@@ -320,14 +320,14 @@ const howItems = [
     },
     {
         icon: 'fa-solid fa-wand-magic-sparkles',
-        title: 'AI-Powered Workflows',
-        text: 'Remove repetitive manual tasks so your team saves hours each week on bookkeeping, approvals, and reconciliation.'
+        title: 'Sleep easy, your funds are protected',
+        text: 'Your money is secured with end to end encryption and bank level security.'
     },
     {
         icon: 'fa-solid fa-bolt',
         title: 'Seamless Global Operations',
         text:
-            'Access local payment networks worldwide so you can open accounts and move money at high speed, operating like a local anywhere.'
+            'Access local payment networks worldwide. From opening accounts to moving money at high speed, NovaGo helps you operate like a local business anywhere you go.'
     }
 ]
 
@@ -338,14 +338,14 @@ const featureTabs = ref([
         heading: 'Competitive FX Rates & Real-time Conversions',
         cards: [
             {
-                subtitle: 'Maximize your margins',
+                subtitle: 'Keep more of every transaction',
                 text:
-                    'Access competitive interbank FX rates to minimize conversion losses and protect profitability across every transaction.'
+                    'Access competitive interbank FX rates to minimize conversion losses and protect profitability.'
             },
             {
-                subtitle: 'Instant control',
+                subtitle: 'Stay in control, instantly',
                 text:
-                    'Convert currencies in real time within your account, giving you full control over your funds and helping you hedge against volatility.'
+                    'Convert currencies in real time within your account, providing you full control over your funds and hedging against volatility.'
             }
         ]
     },
@@ -355,14 +355,14 @@ const featureTabs = ref([
         heading: 'Seamless global payments',
         cards: [
             {
-                subtitle: 'Faster settlements',
+                subtitle: 'Get paid faster',
                 text:
-                    'Receive funds quickly from global marketplaces and partners, improving your cash flow and keeping your operations moving smoothly.'
+                    'Receive funds quickly from global marketplaces.'
             },
             {
-                subtitle: 'Simplified reconciliation',
+                subtitle: 'Keep everything tidy',
                 text:
-                    'All collection flows into a single dashboard, making tracking, reporting, and reconciliation effortless for your finance team.'
+                    'All collection flows into a single dashboard, making tracking and reconciliation effortless.'
             }
         ]
     },
@@ -372,14 +372,14 @@ const featureTabs = ref([
         heading: 'Local Accounts in Key Markets',
         cards: [
             {
-                subtitle: 'Receive like a local',
+                subtitle: 'Get paid like a local',
                 text:
-                    'Collect payments as if you were a domestic business—strengthening customer trust and removing barriers to market entry.'
+                    'Collect payments as a domestic business would, building trust and removing barriers to entry.'
             },
             {
-                subtitle: 'Expand your reach',
+                subtitle: 'Grow without the extra setup',
                 text:
-                    'Establish a local presence globally without needing physical banking infrastructure in every country, so you can scale faster with less overhead.'
+                    'Establish a local presence globally without needing physical banking infrastructure in every country.'
             }
         ]
     }
@@ -1083,11 +1083,10 @@ const featureTabs = ref([
     }
 }
 
-.fab-whatsapp-img{
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
+.fab-whatsapp-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
-
 </style>

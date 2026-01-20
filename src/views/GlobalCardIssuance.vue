@@ -10,9 +10,9 @@
                     <p class="hero-pill">NovaGO • Global Card Issuance</p>
                     <h1 class="hero-title-text">Issue Your Own Branded Cards</h1>
                     <p class="hero-subtitle">
-                        NovaGo’s Global Card Issuance platform gives you full control of your payment ecosystem—enabling
-                        you to build custom card programs that strengthen customer loyalty, streamline payouts, and
-                        unlock new revenue opportunities.
+                        NovaGo Corporate Cards give you a smarter way to spend locally and globally, while putting your
+                        brand on every card. Instantly create multi currency Visa corporate cards with your logo and
+                        built in controls, then track every purchase from one dashboard in real time.
                     </p>
                     <div class="hero-actions">
                         <button class="btn-primary" @click="scrollToSection('contact')">
@@ -24,7 +24,7 @@
                     </div>
                     <div class="hero-nav">
                         <button class="hero-nav-btn" type="button"
-                            @click="scrollToSection('overview')">Overview</button>
+                            @click="scrollToSection('overview')">How it works</button>
                         <button class="hero-nav-btn" type="button"
                             @click="scrollToSection('features')">Features</button>
                         <button class="hero-nav-btn" type="button" @click="scrollToSection('contact')">Contact</button>
@@ -63,7 +63,7 @@
         <!-- Overview / Value pillars -->
         <section id="overview" class="section section-muted">
             <div class="section-inner">
-                <h2 class="section-title section-title--left">Overview</h2>
+                <h2 class="section-title section-title--left">How it works</h2>
                 <p class="section-text section-text--left">
                     Our Global Card Issuance platform gives you full control of your payment ecosystem—so you can build
                     card programs that drive loyalty, efficiency, and new revenue.
@@ -252,23 +252,23 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 /** Overview – value pillars */
 const overviewPillars = [
     {
-        title: 'Brand Elevation',
-        text: 'Place your brand logo in wallets worldwide, reinforcing your brand identity with every transaction.',
+        title: 'Brand elevation and worldwide acceptance',
+        text: 'Create cards with your brand logo, so users can spend in local currencies wherever Visa is accepted, online or in store.',
         icon: 'fa-solid fa-star'
     },
     {
-        title: 'Worldwide Acceptance',
-        text: 'Empower users to spend in local currencies wherever major card networks are accepted.',
-        icon: 'fa-solid fa-globe'
+        title: 'Smart multi currency spend',
+        text: 'Spend directly from your held balances and auto convert only when needed at competitive FX rates.',
+        icon: 'fa-solid fa-money-bill'
     },
     {
-        title: 'Expanded Revenue Streams',
-        text: 'Monetize transactions or offer premium card benefits to grow new revenue lines.',
+        title: 'Lower fees, cleaner costs',
+        text: 'Skip international transaction fees and reduce unnecessary conversion charges when your team spends overseas.',
         icon: 'fa-solid fa-arrow-trend-up'
     },
     {
-        title: 'Operational Precision',
-        text: 'Automate disbursements, manage expenses, and streamline financial flows end-to-end.',
+        title: 'Operational precision in one view',
+        text: 'Issue employee cards quickly, automate disbursements and manage expenses with real time tracking in one dashboard.',
         icon: 'fa-solid fa-sliders'
     }
 ]
@@ -286,8 +286,8 @@ const featureTabs = ref([
                 text: 'Generate secure digital cards in seconds for immediate use.'
             },
             {
-                subtitle: 'Online purchases',
-                text: 'Ideal for e-commerce and digital transactions.'
+                subtitle: 'Fast Controls',
+                text: 'Create, freeze or cancel cards instantly when plans change. '
             }
         ]
     },
@@ -300,6 +300,10 @@ const featureTabs = ref([
             {
                 subtitle: 'Branded cards',
                 text: 'Custom plastic cards suited for in-store purchases and ATM transactions.'
+            },
+            {
+                subtitle: 'Everyday usability',
+                text: 'Spend anywhere Visa is accepted, with clearer tracking per card.'
             }
         ]
     },
@@ -314,8 +318,8 @@ const featureTabs = ref([
                 text: 'Support major world currencies and local payment methods.'
             },
             {
-                subtitle: 'Minimized FX fees',
-                text: 'Benefit from competitive exchange rates and reduced foreign transaction costs.'
+                subtitle: 'Less conversion fees',
+                text: 'Reduce unnecessary conversion fees with smarter routing and auto conversion when needed.'
             }
         ]
     },
