@@ -282,7 +282,7 @@ const featureTabs = ref([
         lead: 'Instant, digital cards you can issue on demand for payouts, subscriptions, and controlled online spend.',
         cards: [
             {
-                subtitle: 'Instant issuance',
+                subtitle: 'Instant Issuance',
                 text: 'Generate secure digital cards in seconds for immediate use.'
             },
             {
@@ -298,43 +298,43 @@ const featureTabs = ref([
         lead: 'Custom plastic cards your customers and teams can use at stores and ATMs.',
         cards: [
             {
-                subtitle: 'Branded cards',
+                subtitle: 'Branded Cards',
                 text: 'Custom plastic cards suited for in-store purchases and ATM transactions.'
             },
             {
-                subtitle: 'Everyday usability',
+                subtitle: 'Everyday Usability',
                 text: 'Spend anywhere Visa is accepted, with clearer tracking per card.'
             }
         ]
     },
     {
         id: 'multi-currency',
-        label: 'Multi-currency support',
-        heading: 'Multi-currency support',
+        label: 'Multi-Currency Support',
+        heading: 'Multi-Currency Support',
         lead: 'Let users spend in local currencies while you keep FX costs predictable.',
         cards: [
             {
-                subtitle: 'Global currencies',
+                subtitle: 'Global Currencies',
                 text: 'Support major world currencies and local payment methods.'
             },
             {
-                subtitle: 'Less conversion fees',
+                subtitle: 'Less Conversion Fees',
                 text: 'Reduce unnecessary conversion fees with smarter routing and auto conversion when needed.'
             }
         ]
     },
     {
         id: 'controls',
-        label: 'Customizable controls',
-        heading: 'Customizable controls',
+        label: 'Customizable Controls',
+        heading: 'Customizable Controls',
         lead: 'Configure limits and rules so every card stays aligned to your policies.',
         cards: [
             {
-                subtitle: 'Spending limits',
+                subtitle: 'Spending Limits',
                 text: 'Set daily, monthly, or transaction-specific spending caps.'
             },
             {
-                subtitle: 'Category control',
+                subtitle: 'Category Control',
                 text: 'Restrict spending on specific merchant categories or types.'
             }
         ]

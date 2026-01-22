@@ -365,23 +365,23 @@ const fxModes = [
         title: 'Global FX',
         points: [
             {
-                label: 'Maximize savings',
+                label: 'Maximize Savings',
                 text: 'Reduce FX cost compared to traditional banking.'
             },
             {
-                label: 'Minimise risk',
+                label: 'Minimise Risk',
                 text: 'Protect margins from currency fluctuations.'
             },
             {
-                label: 'Accelerate operations',
+                label: 'Accelerate Operations',
                 text: 'Fast conversions and transfers.'
             },
             {
-                label: 'Gain control',
+                label: 'Gain Control',
                 text: 'Full visibility and command over currency exposures.'
             },
             {
-                label: 'Simplified treasury',
+                label: 'Simplified Treasury',
                 text: 'Consolidate FX and payment management in one platform.'
             }
         ],
@@ -392,27 +392,27 @@ const fxModes = [
         title: 'Global processing',
         points: [
             {
-                label: 'Reduce cost',
+                label: 'Reduce Cost',
                 text: 'Lower transaction fees and optimize FX on cross-border payments.'
             },
             {
-                label: 'Increase conversions',
+                label: 'Increase Conversions',
                 text: 'Offer preferred local payment methods to boost sales.'
             },
             {
-                label: 'Expand market reach',
+                label: 'Expand Market Reach',
                 text: 'Process payment from customers in new geographies.'
             },
             {
-                label: 'Streamline operations',
+                label: 'Streamline Operations',
                 text: 'Consolidate processing, reporting, and reconciliation.'
             },
             {
-                label: 'Minimise fraud',
+                label: 'Minimise Fraud',
                 text: 'Benefit from advanced fraud prevention and compliance.'
             },
             {
-                label: 'Accelerate growth',
+                label: 'Accelerate Growth',
                 text: 'Focus on business expansion, not payment complexities.'
             }
         ]
@@ -442,14 +442,14 @@ const featureDetails = {
         pills: ['Real-time rates', '150+ currencies', 'API-first'],
         cards: [
             {
-                subtitle: 'Real-time rates',
+                subtitle: 'Real-time Rates',
                 points: [
                     'Access live, interbank FX rates',
                     'No hidden markups'
                 ]
             },
             {
-                subtitle: 'Global reach',
+                subtitle: 'Global Reach',
                 points: [
                     'Leverage our extensive global payment network',
                     'Support 150+ currencies',
@@ -457,7 +457,7 @@ const featureDetails = {
                 ]
             },
             {
-                subtitle: 'Flexible options',
+                subtitle: 'Flexible Options',
                 points: [
                     'Execute immediate currency conversions',
                     'Lock in rates for future transactions to hedge against volatility',
@@ -465,7 +465,7 @@ const featureDetails = {
                 ]
             },
             {
-                subtitle: 'API-driven FX',
+                subtitle: 'API-Driven FX',
                 points: [
                     'Integrate FX capabilities directly into your systems',
                     'Automate currency conversions and treasury workflows',
@@ -481,7 +481,7 @@ const featureDetails = {
         pills: ['Local methods', 'Higher approvals', 'Built-in risk'],
         cards: [
             {
-                subtitle: 'Multi-currency support',
+                subtitle: 'Multi-Currency Support',
                 points: [
                     'Handle transactions in 150+ currencies',
                     'Convert, settle, or hold funds as required',
@@ -489,7 +489,7 @@ const featureDetails = {
                 ]
             },
             {
-                subtitle: 'Global payment methods',
+                subtitle: 'Global Payment Methods',
                 points: [
                     'Support major credit/debit cards, local payment methods, and bank transfers',
                     'Intelligent routing for higher authorization rates',
@@ -497,14 +497,14 @@ const featureDetails = {
                 ]
             },
             {
-                subtitle: 'Real-time processing & insights',
+                subtitle: 'Real-Time Processing & Insights',
                 points: [
                     'Instantaneous transaction processing – minimise delays and ensure accurate settlement',
                     'Real-time insights and reporting'
                 ]
             },
             {
-                subtitle: 'Advanced risk & compliance',
+                subtitle: 'Advanced Risk & Compliance',
                 points: [
                     'PCI DSS compliant infrastructure',
                     'Integrated fraud detection and prevention',

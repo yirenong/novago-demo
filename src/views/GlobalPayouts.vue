@@ -338,10 +338,10 @@ const activeHowId = ref(howItems[0].id)
 const activeHow = computed(() => howItems.find((i) => i.id === activeHowId.value))
 
 const featureHighlights = [
-    { tag: 'Speed', title: 'Lightning speed', text: 'Global transfers completed in minutes, not days' },
-    { tag: 'Accuracy', title: 'Precision targeting', text: 'Intelligent routing for optimal, error free delivery' },
-    { tag: 'Visibility', title: 'Complete transparency', text: 'End to end, real time tracking for every transaction' },
-    { tag: 'Reach', title: 'Global reach', text: 'Payout to 190+ countries at your fingertips' }
+    { tag: 'Speed', title: 'Lightning Speed', text: 'Global transfers completed in minutes, not days' },
+    { tag: 'Accuracy', title: 'Precision Targeting', text: 'Intelligent routing for optimal, error free delivery' },
+    { tag: 'Visibility', title: 'Complete Transparency', text: 'End to end, real time tracking for every transaction' },
+    { tag: 'Reach', title: 'Global Reach', text: 'Payout to 190+ countries at your fingertips' }
 ]
 </script>
 
