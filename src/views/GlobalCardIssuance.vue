@@ -252,22 +252,22 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 /** Overview – value pillars */
 const overviewPillars = [
     {
-        title: 'Brand elevation and worldwide acceptance',
+        title: 'Brand Elevation and Worldwide Acceptance',
         text: 'Create cards with your brand logo, so users can spend in local currencies wherever Visa is accepted, online or in store.',
         icon: 'fa-solid fa-star'
     },
     {
-        title: 'Smart multi currency spend',
+        title: 'Smart Multi-Currency Spend',
         text: 'Spend directly from your held balances and auto convert only when needed at competitive FX rates.',
         icon: 'fa-solid fa-money-bill'
     },
     {
-        title: 'Lower fees, cleaner costs',
+        title: 'Lower fees, Clearer Costs',
         text: 'Skip international transaction fees and reduce unnecessary conversion charges when your team spends overseas.',
         icon: 'fa-solid fa-arrow-trend-up'
     },
     {
-        title: 'Operational precision in one view',
+        title: 'Operational Precision in One View',
         text: 'Issue employee cards quickly, automate disbursements and manage expenses with real time tracking in one dashboard.',
         icon: 'fa-solid fa-sliders'
     }

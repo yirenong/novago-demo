@@ -10,8 +10,8 @@
                     <p class="hero-pill">NovaGO • Bill Payouts</p>
                     <h1 class="hero-title-text">Bill Payouts, Without The Drag</h1>
                     <p class="hero-subtitle">
-                        NovaGo Bill Payout helps you automate bill payments end to end in one place. Upload invoices,
-                        route approvals, pay suppliers locally or globally then reconcile with fewer manual steps.
+                        NovaGo Bill Payout automates bill payments in one place. Upload invoices, route approvals, pay
+                        suppliers locally or globally, and reconcile with fewer steps.
                     </p>
 
                     <div class="hero-actions">
@@ -243,7 +243,7 @@ const overviewPillars = [
 const howItems = [
     {
         id: 'upload',
-        label: 'Say goodbye to manual data entry',
+        label: 'Automated Data Entry ',
         title: 'Say goodbye to manual data entry',
         points: [
             {
@@ -258,7 +258,7 @@ const howItems = [
     },
     {
         id: 'pay',
-        label: 'Pay vendors across the globe with ease',
+        label: 'Global Bill Payments',
         title: 'Pay vendors across the globe with ease',
         points: [
             {
@@ -273,7 +273,7 @@ const howItems = [
     },
     {
         id: 'approvals',
-        label: 'Keep control with built-in approvals',
+        label: 'Approval Workflows',
         title: 'Keep control with built-in approvals',
         points: [
             {
@@ -288,7 +288,7 @@ const howItems = [
     },
     {
         id: 'reconcile',
-        label: 'Reconcile faster with accounting integrations',
+        label: 'Streamlined Reconciliation',
         title: 'Reconcile faster with accounting integrations',
         points: [
             {
@@ -303,7 +303,7 @@ const howItems = [
     },
     {
         id: 'alerts',
-        label: 'Never miss a payment',
+        label: 'Payment Monitoring',
         title: 'Never miss a payment',
         points: [
             {
@@ -318,7 +318,7 @@ const howItems = [
     },
     {
         id: 'vendors',
-        label: 'Stay organised with vendor management',
+        label: 'Vendor Management',
         title: 'Stay organised with vendor management',
         points: [
             {
@@ -958,12 +958,12 @@ const featureHighlights = [
     max-width: 420px;
     height: 420px;
     border-radius: 28px;
-    background:
+    /* background:
         radial-gradient(circle at 30% 25%, rgba(56, 189, 248, 0.18), transparent 55%),
         radial-gradient(circle at 70% 65%, rgba(99, 102, 241, 0.18), transparent 55%),
         linear-gradient(180deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.35));
     border: 1px solid rgba(199, 210, 254, 0.75);
-    box-shadow: 0 24px 60px rgba(148, 163, 184, 0.45);
+    box-shadow: 0 24px 60px rgba(148, 163, 184, 0.45); */
     overflow: hidden;
 }
 

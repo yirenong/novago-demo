@@ -437,7 +437,7 @@ const featureTabs = [
 
 const featureDetails = {
     fx: {
-        title: 'Global FX features',
+        title: 'Global FX Features',
         tagline: 'Tools that help treasury and product teams treat FX as a strategic lever, not a cost centre.',
         pills: ['Real-time rates', '150+ currencies', 'API-first'],
         cards: [
@@ -476,7 +476,7 @@ const featureDetails = {
     },
 
     processing: {
-        title: 'Global processing features',
+        title: 'Global Processing Features',
         tagline: 'Make every checkout feel local while keeping risk, reporting, and settlement under control.',
         pills: ['Local methods', 'Higher approvals', 'Built-in risk'],
         cards: [
@@ -1522,11 +1522,11 @@ const rightFeatureCards = computed(() => {
     max-width: 520px;
     height: 420px;
     border-radius: 28px;
-    background: radial-gradient(circle at 30% 25%, rgba(56, 189, 248, 0.18), transparent 55%),
+    /* background: radial-gradient(circle at 30% 25%, rgba(56, 189, 248, 0.18), transparent 55%),
         radial-gradient(circle at 70% 65%, rgba(99, 102, 241, 0.18), transparent 55%),
         linear-gradient(180deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.35));
     border: 1px solid rgba(199, 210, 254, 0.75);
-    box-shadow: 0 24px 60px rgba(148, 163, 184, 0.45);
+    box-shadow: 0 24px 60px rgba(148, 163, 184, 0.45); */
     overflow: hidden;
 }
 
@@ -2274,5 +2274,35 @@ const rightFeatureCards = computed(() => {
     font-size: 0.86rem;
     color: #4b5563;
     line-height: 1.6;
+}
+
+/* Each card: dot on the left, content on the right */
+.feature-row {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 9px 1fr;
+    column-gap: 0.6rem;
+    align-content: start;
+
+    padding: 0.7rem 0.8rem;
+    border-radius: 0.8rem;
+    background: #f9fafb;
+    border: 1px solid transparent;
+    transition: background 0.15s ease, border-color 0.15s ease, transform 0.12s ease;
+}
+
+.feature-row-dot {
+    width: 9px;
+    height: 17px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #2563eb, #38bdf8);
+    margin-top: 0.15rem;
+    /* aligns with title line */
+}
+
+.feature-row-copy {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
 }
 </style>

@@ -10,9 +10,8 @@
                     <p class="hero-pill">NovaGO • Global Multi Currency Account</p>
                     <h1 class="hero-title-text">Your Borderless Financial Hub</h1>
                     <p class="hero-subtitle">
-                        NovaGo's Multi Currency Accounts aim to unlock a new level of growth for you by simplifying
-                        global finances,
-                        protecting your margins, and helping you operate like a local in every market.
+                        NovaGo's Multi-Currency Accounts aim to unlock a new level of growth for you by simplifying
+                        global finances, protecting your margins, and helping you operate like a local in every market.
                     </p>
 
                     <div class="hero-actions">
@@ -287,7 +286,7 @@ const challenges = ref([
     },
     {
         id: 'reconciliation',
-        title: 'Security and fraud',
+        title: 'Security & Fraud',
         chipLabel: 'Security',
         detail: 'Managing payments across platforms and borders can increase the risk of unauthorised access, fraud and data leaks.'
     },
@@ -321,7 +320,7 @@ const howItems = [
     {
         icon: 'fa-solid fa-wand-magic-sparkles',
         title: 'Sleep easy, your funds are protected',
-        text: 'Your money is secured with end to end encryption and bank level security.'
+        text: 'Your money is secured with end-to-end encryption and bank level security.'
     },
     {
         icon: 'fa-solid fa-bolt',
@@ -374,7 +373,7 @@ const featureTabs = ref([
             {
                 subtitle: 'Get paid like a local',
                 text:
-                    'Collect payments as a domestic business would, building trust and removing barriers to entry.'
+                    'Collect payments as a domestic business, building trust and removing barriers to entry.'
             },
             {
                 subtitle: 'Grow without the extra setup',
