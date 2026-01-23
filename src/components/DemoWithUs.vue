@@ -142,7 +142,10 @@ const props = defineProps({
 
     // tracking + API
     source: { type: String, default: 'Landing Page' },
-    endpoint: { type: String, default: '/gs' }, // ✅ Vite proxy route
+    endpoint: {
+        type: String,
+        default: import.meta.env.VITE_LEADS_ENDPOINT || '/gs'
+    },
     successMessage: {
         type: String,
         default: 'Thanks! Our team will reach out to you shortly.'
