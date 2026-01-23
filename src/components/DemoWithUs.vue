@@ -179,46 +179,42 @@ const closeModal = () => {
 }
 
 const submitInterest = async () => {
-  submitError.value = ""
-  isSubmitting.value = true
-  openModal("loading")
+    submitError.value = ""
+    isSubmitting.value = true
+    openModal("loading")
 
-  try {
-    const body = new URLSearchParams({
-      name: form.value.name,
-      company: form.value.company,
-      email: form.value.email,
-      size: form.value.size,
-      message: form.value.message,
-      source: props.source
-    })
+    try {
+        const body = new URLSearchParams({
+            name: form.value.name,
+            company: form.value.company,
+            email: form.value.email,
+            size: form.value.size,
+            message: form.value.message,
+            source: props.source
+        })
 
-    const url = props.endpoint // ✅ use env or /gs
+        const url = props.endpoint // should be full https://script.google.com/... in production
 
-    const res = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
-      },
-      body
-    })
+        await fetch(url, {
+            method: "POST",
+            mode: "no-cors", // ✅ prevents CORS blocking
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+            },
+            body
+        })
 
-    // Expect JSON back from Apps Script
-    const json = await res.json()
-
-    if (!res.ok || !json?.success) {
-      throw new Error(json?.message || "Submission failed")
+        // ✅ cannot read response in no-cors mode, so assume success if no exception
+        form.value = { name: "", company: "", email: "", size: "", message: "" }
+        openModal("success")
+    } catch (err) {
+        submitError.value = "Submission failed"
+        openModal("error")
+    } finally {
+        isSubmitting.value = false
     }
-
-    form.value = { name: "", company: "", email: "", size: "", message: "" }
-    openModal("success")
-  } catch (err) {
-    submitError.value = err?.message || "Submission failed"
-    openModal("error")
-  } finally {
-    isSubmitting.value = false
-  }
 }
+
 
 </script>
 
