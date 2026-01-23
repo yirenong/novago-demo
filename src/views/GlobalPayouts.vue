@@ -125,54 +125,8 @@
         </section>
 
         <!-- Contact / Demo -->
-        <section id="contact" class="section">
-            <div class="section-inner narrow">
-                <h2 class="section-title">Interested? Demo with Us Now</h2>
-                <p class="section-text">
-                    Ready to streamline mass payouts across 190+ countries? Share a few details and our team will reach
-                    out with a
-                    personalized walkthrough.
-                </p>
+        <DemoWithUs section-id="contact" source="NovaGO Bill Payouts Landing" endpoint="/gs" />
 
-                <form class="contact-form" @submit.prevent="fakeSubmit">
-                    <div class="form-row">
-                        <div class="field">
-                            <label for="name">Full name</label>
-                            <input id="name" type="text" placeholder="Jane Tan" />
-                        </div>
-                        <div class="field">
-                            <label for="company">Company</label>
-                            <input id="company" type="text" placeholder="Nova Logistics Pte Ltd" />
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="field">
-                            <label for="email">Work email</label>
-                            <input id="email" type="email" placeholder="you@company.com" />
-                        </div>
-                        <div class="field">
-                            <label for="size">Company size</label>
-                            <select id="size">
-                                <option value="">Select</option>
-                                <option>1–10 employees</option>
-                                <option>11–50 employees</option>
-                                <option>51–200 employees</option>
-                                <option>200+ employees</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <label for="message">What would you like to explore?</label>
-                        <textarea id="message" rows="4"
-                            placeholder="e.g. Mass vendor payouts, creator payments, gig worker disbursements, real-time cross-border payroll..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn-primary form-submit">Submit interest</button>
-                </form>
-            </div>
-        </section>
 
         <!-- Footer -->
         <footer class="site-footer">
@@ -195,14 +149,59 @@
             target="_blank" rel="noopener">
             <img :src="whatsappIcon" alt="" class="fab-whatsapp-img" />
         </a>
+
+        <!-- ✅ Submit Modal (PASTE HERE) -->
+        <div v-if="showSubmitModal" class="modal-overlay" @click.self="closeSubmitModal">
+            <div class="modal-card" role="dialog" aria-modal="true" aria-label="Submission status">
+                <div class="modal-icon" :class="{
+                    'modal-icon--loading': submitState === 'loading',
+                    'modal-icon--ok': submitState === 'success',
+                    'modal-icon--err': submitState === 'error'
+                }">
+                    <span v-if="submitState === 'loading'">⏳</span>
+                    <span v-else-if="submitState === 'success'">✅</span>
+                    <span v-else>⚠️</span>
+                </div>
+
+                <h3 class="modal-title">
+                    <span v-if="submitState === 'loading'">Submitting…</span>
+                    <span v-else-if="submitState === 'success'">Thanks! We got your request.</span>
+                    <span v-else>Submission failed</span>
+                </h3>
+
+                <p class="modal-text">
+                    <span v-if="submitState === 'loading'">
+                        Sending your details to our team now. Please don’t close this page.
+                    </span>
+                    <span v-else-if="submitState === 'success'">
+                        Our team will reach out to you shortly with a personalised walkthrough.
+                    </span>
+                    <span v-else>
+                        Something went wrong. Please try again.
+                    </span>
+                </p>
+
+                <div class="modal-actions">
+                    <button v-if="submitState !== 'loading'" type="button" class="btn-primary"
+                        @click="closeSubmitModal">
+                        OK
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- ✅ End Modal -->
+
     </div>
 </template>
+
 
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import NavBar from '../components/MainscreenNavBar.vue'
 import whatsappIcon from '../assets/whatsapp_icon.png'
+import axios from 'axios'
+import DemoWithUs from '../components/DemoWithUs.vue'
 
 const router = useRouter()
 const token = ref(localStorage.getItem('access_token') || null)
@@ -219,7 +218,68 @@ const scrollToSection = (id) => {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
-const fakeSubmit = () => alert('Demo request submitted. (Placeholder action)')
+// ✅ Google Apps Script Web App URL (replace this after you deploy the script)
+const GOOGLE_SHEETS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzhy4TNDBr17Ax7k0-1dbjzsGDHH__6c7AGFnsOofzeUXMRnsB6GCcy3TX36SJZLTLo/exec'
+
+// ✅ Form state
+const form = ref({
+    name: '',
+    company: '',
+    email: '',
+    size: '',
+    message: ''
+})
+
+const isSubmitting = ref(false)
+const submitOk = ref(false)
+const submitError = ref('')
+
+const showSubmitModal = ref(false)
+// 'idle' | 'loading' | 'success' | 'error'
+const submitState = ref('idle')
+
+const closeSubmitModal = () => {
+    showSubmitModal.value = false
+    submitState.value = 'idle'
+}
+
+
+const submitInterest = async () => {
+    submitOk.value = false
+    submitError.value = ''
+
+    const payload = {
+        name: form.value.name,
+        company: form.value.company,
+        email: form.value.email,
+        size: form.value.size,
+        message: form.value.message,
+        source: 'NovaGO Bill Payouts Landing'
+    }
+
+    isSubmitting.value = true
+    showSubmitModal.value = true
+    submitState.value = 'loading'
+
+    try {
+        await axios.post('/gs', payload, {
+            headers: { 'Content-Type': 'application/json' }
+        })
+
+        submitOk.value = true
+        submitState.value = 'success'
+        form.value = { name: '', company: '', email: '', size: '', message: '' }
+
+        // ✅ no auto close now
+    } catch (err) {
+        submitError.value = 'Submission failed. Please try again.'
+        submitState.value = 'error'
+    } finally {
+        isSubmitting.value = false
+    }
+
+}
+
 
 /** NEW: scroll-to-top visibility + action */
 const showTop = ref(false)
@@ -1086,5 +1146,97 @@ const featureHighlights = [
         /* allow wrap */
         line-height: 1.2;
     }
+}
+
+.form-status {
+    margin-top: 12px;
+    font-size: 0.9rem;
+}
+
+.form-status--ok {
+    color: #16a34a;
+}
+
+.form-status--err {
+    color: #dc2626;
+}
+
+/* ✅ Modal */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.55);
+    display: grid;
+    place-items: center;
+    padding: 1.25rem;
+    z-index: 999;
+}
+
+.modal-card {
+    width: 100%;
+    max-width: 460px;
+    background: #ffffff;
+    border-radius: 1.2rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+    padding: 1.4rem 1.4rem 1.2rem;
+    text-align: center;
+}
+
+.modal-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    margin: 0 auto 0.8rem;
+    font-size: 1.4rem;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+}
+
+.modal-icon--loading {
+    animation: modalPulse 1.1s ease-in-out infinite;
+}
+
+@keyframes modalPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.06);
+    }
+}
+
+.modal-icon--ok {
+    background: #ecfdf5;
+    border-color: #bbf7d0;
+}
+
+.modal-icon--err {
+    background: #fef2f2;
+    border-color: #fecaca;
+}
+
+.modal-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 0.35rem;
+}
+
+.modal-text {
+    font-size: 0.92rem;
+    color: #4b5563;
+    margin: 0 0 1rem;
+    line-height: 1.55;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
 }
 </style>

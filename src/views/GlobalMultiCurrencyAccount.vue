@@ -150,50 +150,9 @@
         <!-- Contact / Demo -->
         <section id="contact" class="section">
             <div class="section-inner narrow">
-                <h2 class="section-title">Interested? Demo with Us Now</h2>
-                <p class="section-text">
-                    Ready to experience seamless SME banking and rewards integration?
-                    Fill in your details below, and our team will reach out to schedule
-                    a personalized demo.
-                </p>
+                <DemoWithUs source="NovaGO Multi-Currency Account" title="Interested? Demo with Us Now"
+                    subtitle="Ready to experience seamless SME banking and rewards integration? Fill in your details below, and our team will reach out to schedule a personalized demo." />
 
-                <form class="contact-form" @submit.prevent="fakeSubmit">
-                    <div class="form-row">
-                        <div class="field">
-                            <label for="name">Full name</label>
-                            <input id="name" type="text" placeholder="Jane Tan" />
-                        </div>
-                        <div class="field">
-                            <label for="company">Company</label>
-                            <input id="company" type="text" placeholder="Nova Logistics Pte Ltd" />
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="field">
-                            <label for="email">Work email</label>
-                            <input id="email" type="email" placeholder="you@company.com" />
-                        </div>
-                        <div class="field">
-                            <label for="size">Company size</label>
-                            <select id="size">
-                                <option value="">Select</option>
-                                <option>1–10 employees</option>
-                                <option>11–50 employees</option>
-                                <option>51–200 employees</option>
-                                <option>200+ employees</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <label for="message">What would you like to explore?</label>
-                        <textarea id="message" rows="4"
-                            placeholder="e.g. Global payouts, FX optimisation, local accounts in new markets..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn-primary form-submit">Submit interest</button>
-                </form>
             </div>
         </section>
 
@@ -231,6 +190,8 @@ import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import NavBar from '../components/MainscreenNavBar.vue'
 import whatsappIcon from '../assets/whatsapp_icon.png'
+import DemoWithUs from '../components/DemoWithUs.vue'
+
 
 const router = useRouter()
 const token = ref(localStorage.getItem('access_token') || null)
@@ -249,10 +210,6 @@ const scrollToSection = (id) => {
 
 const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
-}
-
-const fakeSubmit = () => {
-    alert('Demo request submitted. (Placeholder action)')
 }
 
 /** Show scroll-to-top only after user scrolls a bit */

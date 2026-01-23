@@ -420,49 +420,9 @@
     ========================== -->
         <section id="contact" class="section">
             <div class="section-inner narrow">
-                <h2 class="section-title">Interested? Demo with Us Now</h2>
-                <p class="section-text">
-                    Ready to experience seamless SME banking and rewards integration? Fill in your details below,
-                    and our team will reach out to schedule a personalized demo.
-                </p>
+                <DemoWithUs source="NovaGO Multi-Currency Account" title="Interested? Demo with Us Now"
+                    subtitle="Ready to experience seamless SME banking and rewards integration? Fill in your details below, and our team will reach out to schedule a personalized demo." />
 
-                <form class="contact-form" @submit.prevent="fakeSubmit">
-                    <div class="form-row">
-                        <div class="field">
-                            <label for="name">Full name</label>
-                            <input id="name" type="text" placeholder="Jane Tan" />
-                        </div>
-                        <div class="field">
-                            <label for="company">Company</label>
-                            <input id="company" type="text" placeholder="Nova Logistics Pte Ltd" />
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="field">
-                            <label for="email">Work email</label>
-                            <input id="email" type="email" placeholder="you@company.com" />
-                        </div>
-                        <div class="field">
-                            <label for="size">Company size</label>
-                            <select id="size">
-                                <option value="">Select</option>
-                                <option>1–10 employees</option>
-                                <option>11–50 employees</option>
-                                <option>51–200 employees</option>
-                                <option>200+ employees</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <label for="message">What would you like to explore?</label>
-                        <textarea id="message" rows="4"
-                            placeholder="e.g. Payroll for drivers, rental collection for car fleet, expense cards for staff..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn-primary form-submit">Submit interest</button>
-                </form>
             </div>
         </section>
 
@@ -492,6 +452,7 @@ import NavBar from '../components/MainscreenNavBar.vue'
 import whatsappIcon from '../assets/whatsapp_icon.png'
 import { useRoute, useRouter } from 'vue-router'
 import { watch } from 'vue'
+import DemoWithUs from '../components/DemoWithUs.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -509,10 +470,6 @@ const handleLogout = () => {
 const scrollToSection = (id) => {
     const el = document.getElementById(id)
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-}
-
-const fakeSubmit = () => {
-    alert('Demo request submitted. (Placeholder action)')
 }
 
 const showScrollTop = ref(false)
@@ -1484,6 +1441,7 @@ watch(
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
+    padding-bottom: 3%;
 }
 
 .show-badge {
@@ -2465,7 +2423,7 @@ watch(
 
 /* Keep the card scroll if needed */
 .feature-card {
-    min-height: 98%;
+    min-height: 100%;
     /* was 420px */
 }
 
@@ -2755,5 +2713,32 @@ watch(
     .bullet-desc {
         font-size: 0.88rem;
     }
+}
+
+/* ✅ Contact section only: remove the 15% side padding */
+#contact.section {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Optional: keep a small safe padding on mobile so it doesn't touch the edges */
+@media (max-width: 480px) {
+    #contact.section {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+}
+
+/* ✅ Business Banking (v3): remove internal scrolling */
+.banking-v3-show {
+    max-height: none !important;
+    display: block !important;
+}
+
+.feature-card {
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    min-height: auto !important;
 }
 </style>
