@@ -89,7 +89,7 @@
 
                                     <router-link class="mega-link" to="/global-multi-currency-account"
                                         @click="closeAllNav">
-                                        Global Multi Currency Account
+                                        Global Multi-Currency Account
                                         <span>Multi-currency accounts to receive funds.</span>
                                     </router-link>
 

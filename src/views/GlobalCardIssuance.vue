@@ -10,9 +10,8 @@
                     <p class="hero-pill">NovaGO • Global Card Issuance</p>
                     <h1 class="hero-title-text">Issue Your Own Branded Cards</h1>
                     <p class="hero-subtitle">
-                        NovaGo Corporate Cards give you a smarter way to spend locally and globally, while putting your
-                        brand on every card. Instantly create multi currency Visa corporate cards with your logo and
-                        built in controls, then track every purchase from one dashboard in real time.
+                        NovaGo Corporate Cards put your brand on multi-currency Visa cards, with smart spend controls
+                        and real time tracking, all managed from one simple dashboard for your team.
                     </p>
                     <div class="hero-actions">
                         <button class="btn-primary" @click="scrollToSection('contact')">
@@ -23,8 +22,8 @@
                         </button>
                     </div>
                     <div class="hero-nav">
-                        <button class="hero-nav-btn" type="button"
-                            @click="scrollToSection('overview')">How it works</button>
+                        <button class="hero-nav-btn" type="button" @click="scrollToSection('overview')">How it
+                            works</button>
                         <button class="hero-nav-btn" type="button"
                             @click="scrollToSection('features')">Features</button>
                         <button class="hero-nav-btn" type="button" @click="scrollToSection('contact')">Contact</button>

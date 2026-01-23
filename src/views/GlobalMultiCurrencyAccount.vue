@@ -7,7 +7,7 @@
         <section class="hero hero--gmc">
             <div class="hero-inner">
                 <div class="hero-left">
-                    <p class="hero-pill">NovaGO • Global Multi Currency Account</p>
+                    <p class="hero-pill">NovaGO • Global Multi-Currency Account</p>
                     <h1 class="hero-title-text">Your Borderless Financial Hub</h1>
                     <p class="hero-subtitle">
                         NovaGo's Multi-Currency Accounts aim to unlock a new level of growth for you by simplifying
