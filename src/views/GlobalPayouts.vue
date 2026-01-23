@@ -125,7 +125,7 @@
         </section>
 
         <!-- Contact / Demo -->
-        <DemoWithUs section-id="contact" source="NovaGO Bill Payouts Landing" endpoint="/gs" />
+        <DemoWithUs section-id="contact" source="NovaGo Bill Payouts" endpoint="/gs" />
 
 
         <!-- Footer -->
