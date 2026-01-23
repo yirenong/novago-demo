@@ -192,11 +192,14 @@ const submitInterest = async () => {
         params.append('message', form.value.message)
         params.append('source', props.source)
 
-        await axios.post(
-            "https://script.google.com/macros/s/AKfycbzhy4TNDBr17Ax7k0-1dbjzsGDHH__6c7AGFnsOofzeUXMRnsB6GCcy3TX36SJZLTLo/exec",
-            params
-        )
+        await fetch("https://script.google.com/macros/s/AKfycbzhy4TNDBr17Ax7k0-1dbjzsGDHH__6c7AGFnsOofzeUXMRnsB6GCcy3TX36SJZLTLo/exec", {
+            method: "POST",
+            mode: "no-cors",
+            body: params
+        })
 
+        // We can’t confirm success from response (opaque),
+        // but if no exception, we assume it was sent.
         form.value = { name: '', company: '', email: '', size: '', message: '' }
         openModal('success')
     } catch (err) {
@@ -206,7 +209,6 @@ const submitInterest = async () => {
         isSubmitting.value = false
     }
 }
-
 </script>
 
 <style scoped>
