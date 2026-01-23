@@ -179,39 +179,45 @@ const closeModal = () => {
 }
 
 const submitInterest = async () => {
-    submitError.value = ""
-    isSubmitting.value = true
-    openModal("loading")
+  submitError.value = ""
+  isSubmitting.value = true
+  openModal("loading")
 
-    try {
-        const body = new URLSearchParams({
-            name: form.value.name,
-            company: form.value.company,
-            email: form.value.email,
-            size: form.value.size,
-            message: form.value.message,
-            source: props.source
-        })
+  try {
+    const body = new URLSearchParams({
+      name: form.value.name,
+      company: form.value.company,
+      email: form.value.email,
+      size: form.value.size,
+      message: form.value.message,
+      source: props.source
+    })
 
-        await fetch(
-            "https://script.google.com/macros/s/AKfycbzhy4TNDBr17Ax7k0-1dbjzsGDHH__6c7AGFnsOofzeUXMRnsB6GCcy3TX36SJZLTLo/exec",
-            {
-                method: "POST",
-                mode: "no-cors", // 🔑 important
-                body
-            }
-        )
+    const url = props.endpoint // ✅ use env or /gs
 
-        // Assume success if no exception
-        form.value = { name: "", company: "", email: "", size: "", message: "" }
-        openModal("success")
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+      },
+      body
+    })
 
-    } catch (err) {
-        submitError.value = "Submission failed"
-        openModal("error")
-    } finally {
-        isSubmitting.value = false
+    // Expect JSON back from Apps Script
+    const json = await res.json()
+
+    if (!res.ok || !json?.success) {
+      throw new Error(json?.message || "Submission failed")
     }
+
+    form.value = { name: "", company: "", email: "", size: "", message: "" }
+    openModal("success")
+  } catch (err) {
+    submitError.value = err?.message || "Submission failed"
+    openModal("error")
+  } finally {
+    isSubmitting.value = false
+  }
 }
 
 </script>
