@@ -179,36 +179,41 @@ const closeModal = () => {
 }
 
 const submitInterest = async () => {
-    submitError.value = ''
+    submitError.value = ""
     isSubmitting.value = true
-    openModal('loading')
+    openModal("loading")
 
     try {
-        const params = new URLSearchParams()
-        params.append('name', form.value.name)
-        params.append('company', form.value.company)
-        params.append('email', form.value.email)
-        params.append('size', form.value.size)
-        params.append('message', form.value.message)
-        params.append('source', props.source)
-
-        await fetch("https://script.google.com/macros/s/AKfycbzhy4TNDBr17Ax7k0-1dbjzsGDHH__6c7AGFnsOofzeUXMRnsB6GCcy3TX36SJZLTLo/exec", {
-            method: "POST",
-            mode: "no-cors",
-            body: params
+        const body = new URLSearchParams({
+            name: form.value.name,
+            company: form.value.company,
+            email: form.value.email,
+            size: form.value.size,
+            message: form.value.message,
+            source: props.source
         })
 
-        // We can’t confirm success from response (opaque),
-        // but if no exception, we assume it was sent.
-        form.value = { name: '', company: '', email: '', size: '', message: '' }
-        openModal('success')
+        await fetch(
+            "https://script.google.com/macros/s/AKfycbzhy4TNDBr17Ax7k0-1dbjzsGDHH__6c7AGFnsOofzeUXMRnsB6GCcy3TX36SJZLTLo/exec",
+            {
+                method: "POST",
+                mode: "no-cors", // 🔑 important
+                body
+            }
+        )
+
+        // Assume success if no exception
+        form.value = { name: "", company: "", email: "", size: "", message: "" }
+        openModal("success")
+
     } catch (err) {
-        submitError.value = err?.message || 'Submission failed'
-        openModal('error')
+        submitError.value = "Submission failed"
+        openModal("error")
     } finally {
         isSubmitting.value = false
     }
 }
+
 </script>
 
 <style scoped>
