@@ -183,30 +183,30 @@ const submitInterest = async () => {
     isSubmitting.value = true
     openModal('loading')
 
-    const payload = {
-        name: form.value.name,
-        company: form.value.company,
-        email: form.value.email,
-        size: form.value.size,
-        message: form.value.message,
-        source: props.source
-    }
-
     try {
-        await axios.post(props.endpoint, payload, {
-            headers: { 'Content-Type': 'application/json' }
-        })
+        const params = new URLSearchParams()
+        params.append('name', form.value.name)
+        params.append('company', form.value.company)
+        params.append('email', form.value.email)
+        params.append('size', form.value.size)
+        params.append('message', form.value.message)
+        params.append('source', props.source)
 
-        // clear form
+        await axios.post(
+            "https://script.google.com/macros/s/AKfycbzhy4TNDBr17Ax7k0-1dbjzsGDHH__6c7AGFnsOofzeUXMRnsB6GCcy3TX36SJZLTLo/exec",
+            params
+        )
+
         form.value = { name: '', company: '', email: '', size: '', message: '' }
-        openModal('success') // ✅ stays open until user closes
+        openModal('success')
     } catch (err) {
-        submitError.value = err?.message || ''
-        openModal('error') // ✅ stays open until user closes
+        submitError.value = err?.message || 'Submission failed'
+        openModal('error')
     } finally {
         isSubmitting.value = false
     }
 }
+
 </script>
 
 <style scoped>
