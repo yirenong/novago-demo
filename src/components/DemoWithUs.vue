@@ -51,7 +51,7 @@
                         </label>
 
                         <label class="interest-option">
-                            <input type="radio" value="Benefits" v-model="form.interest" />
+                            <input type="radio" value="Benefits & Pricing" v-model="form.interest" />
                             <span>Benefits & pricing</span>
                         </label>
 
