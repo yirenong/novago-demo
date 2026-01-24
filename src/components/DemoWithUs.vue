@@ -35,6 +35,33 @@
                     </div>
                 </div>
 
+                <!-- ✅ NEW: Interest question -->
+                <div class="field">
+                    <label>What are you interested in?</label>
+
+                    <div class="interest-options">
+                        <label class="interest-option">
+                            <input type="radio" value="Demo" v-model="form.interest" required />
+                            <span>Product demo</span>
+                        </label>
+
+                        <label class="interest-option">
+                            <input type="radio" value="Partnership" v-model="form.interest" />
+                            <span>Partnership</span>
+                        </label>
+
+                        <label class="interest-option">
+                            <input type="radio" value="Benefits" v-model="form.interest" />
+                            <span>Benefits & pricing</span>
+                        </label>
+
+                        <label class="interest-option">
+                            <input type="radio" value="All" v-model="form.interest" />
+                            <span>All of the above</span>
+                        </label>
+                    </div>
+                </div>
+
                 <div class="field">
                     <label for="message">What would you like to explore?</label>
                     <textarea id="message" v-model.trim="form.message" rows="4" :placeholder="messagePlaceholder"
@@ -51,7 +78,6 @@
         <teleport to="body">
             <div v-if="modalOpen" class="modal-backdrop" @click.self="closeModal">
                 <div class="modal-card" role="dialog" aria-modal="true">
-
                     <div class="modal-top">
                         <div class="modal-iconwrap" :class="`is-${submitState}`" aria-hidden="true">
                             <!-- Loading -->
@@ -112,62 +138,60 @@
                             Hide
                         </button>
                     </div>
-
                 </div>
             </div>
         </teleport>
-
     </section>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import axios from 'axios'
+import { ref } from "vue"
+import axios from "axios"
 
 const props = defineProps({
     // UI text
-    sectionId: { type: String, default: 'contact' },
-    title: { type: String, default: 'Interested? Demo with Us Now' },
+    sectionId: { type: String, default: "contact" },
+    title: { type: String, default: "Interested? Demo with Us Now" },
     subtitle: {
         type: String,
         default:
-            'Ready to streamline mass payouts across 190+ countries? Share a few details and our team will reach out with a personalized walkthrough.'
+            "Ready to streamline mass payouts across 190+ countries? Share a few details and our team will reach out with a personalized walkthrough."
     },
-    buttonText: { type: String, default: 'Submit interest' },
+    buttonText: { type: String, default: "Submit interest" },
     messagePlaceholder: {
         type: String,
-        default:
-            'e.g. Mass vendor payouts, creator payments, gig worker disbursements, real-time cross-border payroll...'
+        default: "e.g. Mass vendor payouts, creator payments, gig worker disbursements, real-time cross-border payroll..."
     },
 
     // tracking + API
-    source: { type: String, default: 'Landing Page' },
+    source: { type: String, default: "Landing Page" },
     endpoint: {
         type: String,
-        default: import.meta.env.VITE_LEADS_ENDPOINT || '/gs'
+        default: import.meta.env.VITE_LEADS_ENDPOINT || "/gs"
     },
     successMessage: {
         type: String,
-        default: 'Thanks! Our team will reach out to you shortly.'
+        default: "Thanks! Our team will reach out to you shortly."
     },
     errorMessage: {
         type: String,
-        default: 'Submission failed. Please try again.'
+        default: "Submission failed. Please try again."
     }
 })
 
 const form = ref({
-    name: '',
-    company: '',
-    email: '',
-    size: '',
-    message: ''
+    name: "",
+    company: "",
+    email: "",
+    size: "",
+    interest: "", // ✅ NEW
+    message: ""
 })
 
 const isSubmitting = ref(false)
 const modalOpen = ref(false)
-const submitState = ref('loading') // loading | success | error
-const submitError = ref('')
+const submitState = ref("loading") // loading | success | error
+const submitError = ref("")
 
 const openModal = (state) => {
     submitState.value = state
@@ -189,6 +213,7 @@ const submitInterest = async () => {
             company: form.value.company,
             email: form.value.email,
             size: form.value.size,
+            interest: form.value.interest, // ✅ NEW
             message: form.value.message,
             source: props.source
         })
@@ -205,7 +230,7 @@ const submitInterest = async () => {
         })
 
         // ✅ cannot read response in no-cors mode, so assume success if no exception
-        form.value = { name: "", company: "", email: "", size: "", message: "" }
+        form.value = { name: "", company: "", email: "", size: "", interest: "", message: "" }
         openModal("success")
     } catch (err) {
         submitError.value = "Submission failed"
@@ -214,98 +239,38 @@ const submitInterest = async () => {
         isSubmitting.value = false
     }
 }
-
-
 </script>
 
 <style scoped>
 /* Uses your same page styles (section, section-inner, contact-form, etc.)
-   Add only modal styles here. */
+   Add only modal + interest styles here. */
 
-.modal-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(15, 23, 42, 0.55);
+/* ✅ NEW: Interest radio styles */
+.interest-options {
     display: grid;
-    place-items: center;
-    padding: 18px;
-    z-index: 9999;
-}
-
-.modal-card {
-    width: min(560px, 92vw);
-    background: #ffffff;
-    border-radius: 16px;
-    border: 1px solid rgba(229, 231, 235, 1);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
-    overflow: hidden;
-}
-
-.modal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 16px;
-    border-bottom: 1px solid #e5e7eb;
-}
-
-.modal-title {
-    font-weight: 700;
-    color: #111827;
-}
-
-.modal-x {
-    border: 0;
-    background: transparent;
-    font-size: 16px;
-    cursor: pointer;
-    color: #6b7280;
-}
-
-.modal-body {
-    padding: 16px;
-}
-
-.modal-row {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    color: #374151;
-    line-height: 1.5;
-}
-
-.modal-actions {
-    padding: 14px 16px 16px;
-    display: flex;
-    justify-content: flex-end;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
+    margin-top: 6px;
 }
 
-.spinner {
-    width: 18px;
-    height: 18px;
+.interest-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
     border-radius: 999px;
-    border: 2px solid rgba(17, 24, 39, 0.2);
-    border-top-color: rgba(37, 99, 235, 1);
-    animation: spin 0.8s linear infinite;
-}
-
-.btn-secondary {
-    border-radius: 999px;
-    padding: 0.7rem 1.2rem;
-    font-size: 0.92rem;
+    padding: 8px 12px;
     cursor: pointer;
-    border: 1px solid #2563eb;
-    background: #ffffff;
-    color: #2563eb;
+    font-size: 0.92rem;
+    color: #374151;
 }
 
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+.interest-option input {
+    accent-color: #2563eb;
 }
 
+/* Modal styles (your existing ones, kept as-is) */
 .modal-backdrop {
     position: fixed;
     inset: 0;
