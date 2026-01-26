@@ -151,7 +151,7 @@
         <section id="contact" class="section">
             <div class="section-inner narrow">
                 <DemoWithUs source="NovaGo Multi-Currency Account" title="Interested? Demo with Us Now"
-                    subtitle="Ready to experience seamless SME banking and rewards integration? Fill in your details below, and our team will reach out to schedule a personalized demo." />
+                    subtitle="Ready to experience seamless SME banking and rewards integration? Fill in your details below, and our team will schedule a time to meet with you." />
 
             </div>
         </section>

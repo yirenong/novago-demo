@@ -15,15 +15,8 @@
             <div class="hero-inner hero-inner--ref">
                 <!-- Left -->
                 <div class="hero-left hero-left--ref">
-                    <p class="hero-pill hero-pill--ref">
-                        <span class="hero-pill-icon">
-                            <i class="fas fa-bolt fas-ico"></i>
-                        </span>
-                        Unified operations + banking
-                    </p>
-
                     <h2 class="hero-headline">
-                        A Single, Unified<br />
+                        A Single Unified<br />
                         Platform
                     </h2>
 
@@ -35,7 +28,7 @@
 
                     <div class="hero-actions hero-actions--ref">
                         <button class="btn-primary btn-primary" @click="scrollToSection('contact')">
-                            Book a demo <span class="btn-arrow">→</span>
+                            Talk to our team
                         </button>
                         <button class="btn-secondary btn-secondary--light" @click="scrollToSection('operate')">
                             See solutions
@@ -274,7 +267,7 @@
                             </div>
 
                             <button class="show-btn" type="button" @click="scrollToSection('contact')">
-                                Book a demo →
+                                Talk to our team
                             </button>
                         </div>
 
@@ -408,7 +401,7 @@
 
                 <div class="section-cta-row">
                     <button class="btn-primary" @click="scrollToSection('contact')">
-                        Book a demo <span class="btn-arrow">→</span>
+                        Talk to our team
                     </button>
                     <button class="btn-secondary" @click="scrollToSection('partner')">Partnership</button>
                 </div>
@@ -420,8 +413,8 @@
     ========================== -->
         <section id="contact" class="section">
             <div class="section-inner narrow">
-                <DemoWithUs source="NovaGO Landing Page" title="Interested? Demo with Us Now"
-                    subtitle="Ready to experience seamless SME banking and rewards integration? Fill in your details below, and our team will reach out to schedule a personalized demo." />
+                <DemoWithUs source="NovaGO Landing Page" title="Interested? Book A Discussion With Us Now"
+                    subtitle="Ready to experience seamless SME banking and rewards integration? Fill in your details below, and our team will schedule a time to meet with you." />
 
             </div>
         </section>

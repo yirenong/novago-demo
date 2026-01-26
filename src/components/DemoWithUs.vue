@@ -42,7 +42,7 @@
                     <div class="interest-options">
                         <label class="interest-option">
                             <input type="radio" value="Demo" v-model="form.interest" required />
-                            <span>Product demo</span>
+                            <span>Product</span>
                         </label>
 
                         <label class="interest-option">
@@ -151,11 +151,11 @@ import axios from "axios"
 const props = defineProps({
     // UI text
     sectionId: { type: String, default: "contact" },
-    title: { type: String, default: "Interested? Demo with Us Now" },
+    title: { type: String, default: "Interested? Book A Dicussion With Us Now" },
     subtitle: {
         type: String,
         default:
-            "Ready to streamline mass payouts across 190+ countries? Share a few details and our team will reach out with a personalized walkthrough."
+            "Ready to streamline mass payouts across 190+ countries? Share a few details and our team will schedule a time to meet with you."
     },
     buttonText: { type: String, default: "Submit interest" },
     messagePlaceholder: {
